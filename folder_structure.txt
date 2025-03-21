@@ -1,0 +1,104 @@
+.
+├── README.md
+├── apphosting.yaml
+├── backend
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+├── build
+│   ├── 404.html
+│   ├── asset-manifest.json
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── robots.txt
+│   └── static
+│       ├── css
+│       │   ├── main.c70f8b9f.css
+│       │   └── main.c70f8b9f.css.map
+│       ├── js
+│       │   ├── main.5e0f96ed.js
+│       │   ├── main.5e0f96ed.js.LICENSE.txt
+│       │   └── main.5e0f96ed.js.map
+│       └── media
+│           ├── 1000_F_83739914_Xjmfwl1ciDBpvY1hWcLP3duxCjrb4ApR.f2427323d9fd9ae21165.jpg
+│           ├── 240_F_514402397_cg6glVmYSAlV6fEn9WQQw9SnTwAvnWik.07c70a898240656214d2.jpg
+│           ├── 240_F_781376730_RI9jRBXMJmAhB3PQL53J6mUEElbzYTFu.fcbab85d059cf55c685f.jpg
+│           ├── Angel-1.889f360ac5504ff499a7.png
+│           ├── Angel-2.89d0db800f84aa005bda.png
+│           ├── Angel-3.c55a39ef04144b50306d.png
+│           ├── Group-12-scaled.8f7ef478d11b98dbd8d1.png
+│           ├── Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.4290024199688cfbeeb8.png
+│           ├── Untitled-design-7-1-2.becdb16460187c91381b.png
+│           ├── right side puzzle pieces.c5846a335d1a0824276f.png
+│           ├── slick.2630a3e3eab21c607e21.svg
+│           ├── slick.295183786cd8a1389865.woff
+│           ├── slick.a4e97f5a2a64f0ab1323.eot
+│           └── slick.c94f7671dcc99dce43e2.ttf
+├── firebase.json
+├── folder_structure.txt
+├── functions
+│   ├── functions
+│   ├── lib
+│   │   ├── index.js
+│   │   └── index.js.map
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   │   ├── index.js
+│   │   └── index.ts
+│   └── tsconfig.json
+├── package-lock.json
+├── package.json
+├── public
+│   ├── 404.html
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── assets
+    │   ├── 1000_F_83739914_Xjmfwl1ciDBpvY1hWcLP3duxCjrb4ApR.jpg
+    │   ├── 240_F_514402397_cg6glVmYSAlV6fEn9WQQw9SnTwAvnWik.jpg
+    │   ├── 240_F_781376730_RI9jRBXMJmAhB3PQL53J6mUEElbzYTFu.jpg
+    │   ├── Angel-1.png
+    │   ├── Angel-2.png
+    │   ├── Angel-3.png
+    │   ├── Group-10.png
+    │   ├── Group-11.png
+    │   ├── Group-12-scaled Background Removed.png
+    │   ├── Group-12-scaled.jpg
+    │   ├── Group-12-scaled.png
+    │   ├── Group-9.png
+    │   ├── Mommy Angels Specialty Care _ Where ABA Therapy and Child care excellence come together..mhtml
+    │   ├── Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png
+    │   ├── Untitled-design-7-1-2 Background Removed.png
+    │   ├── Untitled-design-7-1-2.png
+    │   ├── hero background.png
+    │   └── right side puzzle pieces.png
+    ├── components
+    │   ├── About.js
+    │   ├── Contact.js
+    │   ├── Footer.js
+    │   ├── Hero.js
+    │   ├── HeroSlider.js
+    │   ├── HiringBanner.js
+    │   ├── Insurance.js
+    │   ├── Navbar.js
+    │   ├── Services.js
+    │   └── ui
+    │       └── buttons.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    └── setupTests.js
+
+16 directories, 86 files

@@ -19,7 +19,6 @@ module.exports = {
   ],
   plugins: [
     "import",
-    
   ],
   rules: {
     "quotes": ["error", "double"],
