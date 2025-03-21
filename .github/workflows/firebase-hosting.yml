@@ -29,4 +29,5 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live  # Use "live" for production, or change to "staging" if needed
-          projectId: your-firebase-project-id  # Replace with your Firebase project ID
+          projectId: mommy-angels-test  # Replace with your Firebase project ID
+
