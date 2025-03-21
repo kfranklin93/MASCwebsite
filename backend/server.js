@@ -1,0 +1,51 @@
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const sgMail = require("@sendgrid/mail");
+
+const app = express();
+
+// ✅ Allow requests from your frontend
+app.use(cors({
+  origin: "http://localhost:3006", // Change this to match your frontend URL
+  methods: "POST",
+  allowedHeaders: "Content-Type"
+}));
+
+app.use(bodyParser.json());
+
+sgMail.setApiKey('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');
+
+app.post("/send-email", async (req, res) => {
+  const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
+
+  const msg = {
+    to: "harlemorchid@gmail.com", // Change to your receiving email
+    from: "kfranklin93@gmail.com", // Must be verified in SendGrid
+    subject: "New Contact Form Submission",
+    text: `
+      Parent Name: ${parentName}
+      Child Name: ${childName}
+      Age: ${age}
+      Date of Birth: ${dob}
+      Email: ${email}
+      Phone: ${phone}
+      Insurance Provider: ${insuranceProvider ? insuranceProvider.label : "Not provided"}
+      Behaviors of Concern: ${behaviorsOfConcern}
+    `
+  };
+
+  try {
+    await sgMail.send(msg);
+    res.json({ success: true, message: "Email sent successfully!" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, message: "Email sending failed." });
+  }
+});
+
+// Start the server
+const PORT = 5007;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

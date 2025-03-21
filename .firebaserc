@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "MASC": "mommy-angels-test",
+    "default": "mommy-angels-test"
+  },
+  "targets": {},
+  "etags": {}
+}
