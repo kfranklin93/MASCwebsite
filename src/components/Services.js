@@ -61,13 +61,53 @@ const ServiceTitle = styled.h3`
   font-weight: bold;
 `;
 
+// const ServiceImage = styled.img`
+//   width: 100%;
+//   max-height: 150px;
+//   object-fit: cover;
+//   border-radius: 10px;
+//   cursor: pointer;
+// `;
+// Fun border for the service image
 const ServiceImage = styled.img`
   width: 100%;
-  max-height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
+  height: auto;
+  border-radius: 20px;
   cursor: pointer;
-`;
+  transition: transform 0.3s ease, border 0.3s ease;
+  border: 6px solid #FF6F61; /* Playful coral-colored border */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: #F3A847; /* Change to a yellow-orange on hover */
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Add a rainbow border effect */
+  &:hover {
+    border: 6px dashed #FFEB3B; /* Bright yellow dashed border */
+    animation: rainbow-border 1.5s infinite;
+  }
+
+  @keyframes rainbow-border {
+    0% {
+      border-color: #FF6F61;
+    }
+    25% {
+      border-color: #FFEB3B;
+    }
+    50% {
+      border-color: #4CAF50;
+    }
+    75% {
+      border-color: #2196F3;
+    }
+    100% {
+      border-color: #9C27B0;
+    }
+  }
+  `;
 
 const ServiceDescription = styled.p`
   font-size: 1.1rem;
