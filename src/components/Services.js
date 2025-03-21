@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import roomsImg from "../assets/Group-12-scaled.png";
-import stimulationFavImg from "../assets/stimulationFav.jpg";
-import manipulativesImg from "../assets/manipulatives.jpg";
-import artsImg from "../assets/arts.jpg";
-import dramaticPlayImg from "../assets/dramaticPlay.jpg";
-import transportationImg from "../assets/transportation.jpg";
-import sensoryImg from "../assets/sensory.jpg";
+import stimulationFavImg from "../assets/stimulationFav-6.jpg";
+import manipulativesImg from "../assets/manipulatives-7.jpg";
+import artsImg from "../assets/arts-5.jpg";
+import dramaticPlayImg from "../assets/dramaticPlay-2.jpg";
+import transportationImg from "../assets/transportation-3.jpg";
+import sensoryImg from "../assets/sensory-Enhanced-SR-1.jpg";
 
 const ServicesContainer = styled.section`
   text-align: center;
