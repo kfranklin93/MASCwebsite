@@ -139,7 +139,7 @@ const ContactForm = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post("http://localhost:5007/send-email", formData, {
+      const response = await axios.post("http://mommy-angels-test.firebaseapp.com/", formData, {
         headers: {
           "Content-Type": "application/json",
         },
