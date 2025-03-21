@@ -14,35 +14,41 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-sgMail.setApiKey('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');
+// sgMail.setApiKey('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');
+
+require('dotenv').config(); // Load environment variables
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Use API key from .env file
 
 app.post("/send-email", async (req, res) => {
-  const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
-
-  const msg = {
-    to: "harlemorchid@gmail.com", // Change to your receiving email
-    from: "kfranklin93@gmail.com", // Must be verified in SendGrid
-    subject: "New Contact Form Submission",
-    text: `
-      Parent Name: ${parentName}
-      Child Name: ${childName}
-      Age: ${age}
-      Date of Birth: ${dob}
-      Email: ${email}
-      Phone: ${phone}
-      Insurance Provider: ${insuranceProvider ? insuranceProvider.label : "Not provided"}
-      Behaviors of Concern: ${behaviorsOfConcern}
-    `
-  };
-
-  try {
-    await sgMail.send(msg);
-    res.json({ success: true, message: "Email sent successfully!" });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res.status(500).json({ success: false, message: "Email sending failed." });
-  }
-});
+    console.log('Received request body:', req.body); // Log the request body
+  
+    const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
+  
+    const msg = {
+      to: "harlemorchid@gmail.com", // Change to your receiving email
+      from: "kfranklin93@gmail.com", // Must be verified in SendGrid
+      subject: "New Contact Form Submission",
+      text: `
+        Parent Name: ${parentName}
+        Child Name: ${childName}
+        Age: ${age}
+        Date of Birth: ${dob}
+        Email: ${email}
+        Phone: ${phone}
+        Insurance Provider: ${insuranceProvider ? insuranceProvider.label : "Not provided"}
+        Behaviors of Concern: ${behaviorsOfConcern}
+      `
+    };
+  
+    try {
+      await sgMail.send(msg);
+      res.json({ success: true, message: "Email sent successfully!" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      res.status(500).json({ success: false, message: "Email sending failed." });
+    }
+  });
 
 // Start the server
 const PORT = 5007;
