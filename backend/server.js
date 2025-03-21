@@ -7,7 +7,7 @@ const app = express();
 
 // ✅ Allow requests from your frontend
 app.use(cors({
-  origin: "http://localhost:3006", // Change this to match your frontend URL
+  origin: "http://mommy-angels-test.web.app/", // Change this to match your frontend URL
   methods: "POST",
   allowedHeaders: "Content-Type"
 }));
@@ -36,7 +36,7 @@ app.post("/send-email", async (req, res) => {
         Date of Birth: ${dob}
         Email: ${email}
         Phone: ${phone}
-        Insurance Provider: ${insuranceProvider ? insuranceProvider.label : "Not provided"}
+        Insurance Provider: ${insuranceProvider ? insuranceProvider : "Not provided"}
         Behaviors of Concern: ${behaviorsOfConcern}
       `
     };
