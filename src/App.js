@@ -6,13 +6,15 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import HiringBanner from "./components/HiringBanner";
+import NoWaitlistBadge from "./components/NoWaitlistBadge"; 
 
 function App() {
   return (
     <>
       <Navbar />
-      <div style={{ paddingTop: "80px" }}> {/* Adjust padding to match navbar height */}
-      <HiringBanner />
+      {/* <NoWaitlistBadge /> */}
+      {/* <div style={{ paddingTop: "80px" }}> Adjust padding to match navbar height */}
+      {/* <HiringBanner /> */}
       {/* <div className="text-4xl font-bold text-red-500">
   Tailwind is working!
 </div> */}
@@ -22,7 +24,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-      </div>
+      {/* </div> */}
     </>
   );
 }
