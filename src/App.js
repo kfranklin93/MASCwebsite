@@ -5,13 +5,13 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
-import NoWaitlistBadge from "./components/NoWaitlistBadge"; // Import badge
+// import NoWaitlistBadge from "./components/NoWaitlistBadge"; // Import badge
 import Footer from "./components/Footer"; // Import Footer
 
 
 const MainContent = () => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/"; // Check if on Home page
+  // const isHomePage = location.pathname === "/"; // Check if on Home page
 
   return (
     <>

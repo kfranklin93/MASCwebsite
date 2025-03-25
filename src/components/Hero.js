@@ -8,7 +8,7 @@ import img1 from "../assets/Angel-1.png"; // Replace with your actual image path
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 
-import NoWaitlistBadge from "./NoWaitlistBadge";
+// import NoWaitlistBadge from "./NoWaitlistBadge";
 
 const HeroContainer = styled.section`
   display: flex;
