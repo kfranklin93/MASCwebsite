@@ -24,6 +24,14 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
+const Label = styled.label`
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+  text-align: left;
+  display: block;
+`;
+
 const InputField = styled.input`
   padding: 15px;
   margin: 10px 0;
@@ -99,6 +107,7 @@ const ContactForm = () => {
     phone: '',
     insuranceProvider: null,
     behaviorsOfConcern: '',
+    dateOfLastEval: '', // Added field for Date of Last Evaluation
   });
 
   const [status, setStatus] = useState(""); // ✅ For displaying success/error messages
@@ -111,40 +120,16 @@ const ContactForm = () => {
     setFormData({ ...formData, insuranceProvider: selectedOption });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setStatus("Sending...");
-
-  //   try {
-  //     const response = await axios.post("http://localhost:5000/send-email", formData);
-  //     if (response.data.success) {
-  //       setStatus("✅ Email sent successfully!");
-  //       setFormData({
-  //         parentName: '',
-  //         childName: '',
-  //         age: '',
-  //         dob: '',
-  //         email: '',
-  //         phone: '',
-  //         insuranceProvider: null,
-  //         behaviorsOfConcern: '',
-  //       }); // Reset form
-  //     }
-  //   } catch (error) {
-  //     console.error("Error sending email:", error);
-  //     setStatus("❌ Failed to send email. Please try again.");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post("http://mommy-angels-test.firebaseapp.com/", formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.data.success) {
         alert("✅ Email sent successfully!!");
       } else {
@@ -160,74 +145,113 @@ const ContactForm = () => {
     <FormContainer>
       <FormTitle>Contact Us</FormTitle>
       <Form onSubmit={handleSubmit}>
-        <InputField
-          type="text"
-          name="parentName"
-          placeholder="Name of Parent"
-          value={formData.parentName}
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          type="text"
-          name="childName"
-          placeholder="Name of Child"
-          value={formData.childName}
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          type="date"
-          name="dob"
-          placeholder="Date of Birth"
-          value={formData.dob}
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <InputField
-          type="tel"
-          name="phone"
-          placeholder="Phone"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-        />
-
-        {/* Searchable Insurance Dropdown */}
-        <InsuranceDropdown>
-          <label>Select Your Insurance Provider:</label>
-          <Select
-            options={insuranceOptions}
-            value={formData.insuranceProvider}
-            onChange={handleSelectChange}
-            isSearchable
-            placeholder="Search or select insurance..."
+        <div>
+          <Label htmlFor="parentName">Parent's Name</Label>
+          <InputField
+            type="text"
+            name="parentName"
+            placeholder="Enter Parent's Name"
+            value={formData.parentName}
+            onChange={handleChange}
+            required
           />
-        </InsuranceDropdown>
+        </div>
         
-        <TextAreaField
-          name="behaviorsOfConcern"
-          placeholder="Current Behaviors of Concern"
-          value={formData.behaviorsOfConcern}
-          onChange={handleChange}
-          required
-        />
+        <div>
+          <Label htmlFor="childName">Child's Name</Label>
+          <InputField
+            type="text"
+            name="childName"
+            placeholder="Enter Child's Name"
+            value={formData.childName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="age">Child's Age</Label>
+          <InputField
+            type="number"
+            name="age"
+            placeholder="Enter Age"
+            value={formData.age}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="dob">Child's Date of Birth</Label>
+          <InputField
+            type="date"
+            name="dob"
+            value={formData.dob}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="email">Email Address</Label>
+          <InputField
+            type="email"
+            name="email"
+            placeholder="Enter Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <Label htmlFor="phone">Phone Number</Label>
+          <InputField
+            type="tel"
+            name="phone"
+            placeholder="Enter Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* Date of Last Evaluation Field */}
+        <div>
+          <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
+          <InputField
+            type="date"
+            name="dateOfLastEval"
+            value={formData.dateOfLastEval}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* Insurance Dropdown */}
+        <div>
+          <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
+          <InsuranceDropdown>
+            <Select
+              options={insuranceOptions}
+              value={formData.insuranceProvider}
+              onChange={handleSelectChange}
+              isSearchable
+              placeholder="Search or select insurance..."
+            />
+          </InsuranceDropdown>
+        </div>
+
+        <div>
+          <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
+          <TextAreaField
+            name="behaviorsOfConcern"
+            placeholder="Describe any current behaviors of concern"
+            value={formData.behaviorsOfConcern}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <SubmitButton type="submit">Submit</SubmitButton>
 

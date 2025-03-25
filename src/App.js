@@ -1,85 +1,86 @@
-// src/App.js
-import { Routes, Route } from "react-router-dom";
+// import React from "react";
+// import { Routes, Route, useLocation } from "react-router-dom";  // No need for Router here
+// import Navbar from "./components/Navbar"; 
+// import Hero from "./components/Hero";
+// import About from "./components/About";
+// import Services from "./components/Services";
+// import Contact from "./components/Contact";
+// import NoWaitlistBadge from "./components/NoWaitlistBadge"; // Import badge
+
+// const App = () => {
+//   return (
+//     <>
+//       <MainContent />
+//     </>
+//   );
+// };
+
+// const MainContent = () => {
+//   const location = useLocation();
+//   const isHomePage = location.pathname === "/"; // Check if on Home page
+
+//   return (
+//     <>
+//       {/* Navbar is visible on all pages */}
+//       <Navbar />
+      
+//       {/* Show NoWaitlistBadge on all pages except Home */}
+//       {!isHomePage && <NoWaitlistBadge />} 
+
+//       {/* Routes */}
+//       <Routes>
+//         <Route path="/" element={<Hero />} />
+//         <Route path="/about" element={<About />} />
+//         <Route path="/services" element={<Services />} />
+//         <Route path="/contact" element={<Contact />} />
+//       </Routes>
+//     </>
+//   );
+// };
+
+// export default App;
+import React from "react";
+import { Routes, Route, useLocation } from "react-router-dom"; // No need for Router here
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
-import HiringBanner from "./components/HiringBanner";
-import NoWaitlistBadge from "./components/NoWaitlistBadge"; 
+import NoWaitlistBadge from "./components/NoWaitlistBadge"; // Import badge
+import Footer from "./components/Footer"; // Import Footer
 
-function App() {
+const App = () => {
   return (
     <>
+      <MainContent />
+    </>
+  );
+};
+
+const MainContent = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/"; // Check if on Home page
+
+  return (
+    <>
+      {/* Navbar is visible on all pages */}
       <Navbar />
-      {/* <NoWaitlistBadge /> */}
-      {/* <div style={{ paddingTop: "80px" }}> Adjust padding to match navbar height */}
-      {/* <HiringBanner /> */}
-      {/* <div className="text-4xl font-bold text-red-500">
-  Tailwind is working!
-</div> */}
+      
+      {/* Show NoWaitlistBadge on all pages except Home */}
+      {!isHomePage && <NoWaitlistBadge />} 
+
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-      {/* </div> */}
+
+      {/* Footer is appended to every page */}
+      <Footer />
     </>
   );
-}
+};
 
 export default App;
-
-// import React from 'react';
-// import Hero from './components/Hero';
-// import About from './components/About';
-// import Services from './components/Services';
-// import Contact from './components/Contact';
-// import Footer from './components/Footer';
-// import Navbar from "./components/Navbar";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-
-// <style>
-// @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
-// </style>
-
-// function App() {
-//   return (
-//       <><Navbar /><Routes>
-//       <Route path="/hero" element={<Hero />} />
-//       <Route path="/about" element={<About />} />
-//       <Route path="/services" element={<Services />} />
-//       <Route path="/contact" element={<Contact />} />
-//     </Routes></>
-//   );
-// }
-
-// export default App;
-
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;

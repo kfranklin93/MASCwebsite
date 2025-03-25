@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import HiringBadge from "./HiringBadge";
+import NoWaitlistBadge from "./NoWaitlistBadge";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,8 +13,10 @@ const Navbar = () => {
   return (
     <NavbarContainer variants={navVariants} initial="hidden" animate="visible">
       <Logo whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-        <StyledLink to="/">Mommy Angels</StyledLink>
+        <StyledLink to="/">Mommy Angels </StyledLink>
          {/* Flower Badge */}
+         {/* <HiringBadge> </HiringBadge>  */}
+
       </Logo>
 
 
@@ -44,8 +48,9 @@ const Navbar = () => {
   <NavLinkWrapper color="red">
     <NavLink to="/contact">Contact</NavLink> 
     {/* Contact Us should still be clickable */}
-    <HiringBadge /> {/* Add badge inside dropdown */}
-    {/* <DropdownIcon>▼</DropdownIcon> Optional: Add a dropdown indicator */}
+  
+    {/* Add badge inside dropdown */}
+    <DropdownIcon>▼</DropdownIcon>
   </NavLinkWrapper>
   
   <AnimatePresence>
@@ -264,46 +269,6 @@ const DropdownIcon = styled.span`
   font-size: 0.8rem;
 `;
 
-const HiringBadge = styled.div`
-  position: absolute;
-  top: -10px;
-  right: -20px;
-  background: radial-gradient(circle at center, #FFCC00, #FF6600);
-  color: white;
-  font-size: 0.9rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 10px 15px;
-  border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  text-align: center;
-  
-  /* Flower petals */
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle at center, #FFCC00, #FF6600);
-    border-radius: 50%;
-    z-index: -1;
-  }
 
-  &:before {
-    top: -30px;
-    left: 0;
-  }
-
-  &:after {
-    bottom: -30px;
-    left: 0;
-  }
-`;
 
 export default Navbar;
