@@ -39,7 +39,8 @@ const HeroContainer = styled.section`
 const HeroContent = styled.div`
   max-width: 800px;
   color: #333;
-  padding: 2rem;
+  padding: 3rem;
+  margin:1rem;
   background-color: rgba(255, 255, 255, 0.22);
   border-radius: 15px;
   z-index: 2;
@@ -52,10 +53,10 @@ const HeroTitle = styled.h1`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 `;
 const HeroTitle2 = styled.h2`
-  font-size: 3rem;
+  font-size: 4rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 `;
 
 const HeroImage = styled(motion.img)`
@@ -66,38 +67,74 @@ const HeroImage = styled(motion.img)`
 
 // ✅ Positioned images over the background
 const FloatingImage = styled.img`
-  position: absolute;
-  width: 100px; /* Adjust size as needed */
+  position: fixed;
+  width: 150px; /* Adjust size as needed */
   height: auto;
   
   &.image1 {
-    width: 200px;
-    top: 50%;
-    left: 20%;
+    width: 220px;
+    top: 55%;
+    left: 35%;
+    transform: translate(-50%, -50%);
     animation: float 3s ease-in-out infinite;
   }
   
   &.image2 {
-    width:150px;
-    top: 50%;
-    left: 45%;
+    width: 210px;
+    top: 55%;
+    left: 50%;
     transform: translate(-50%, -50%);
     animation: float 4s ease-in-out infinite;
   }
 
   &.image3 {
-    width: 180px;
-    top: 50%;
-    right: 20%;
+    width: 200px;
+    top: 55%;
+    left: 65%;
+    transform: translate(-50%, -50%);
     animation: float 3.5s ease-in-out infinite;
   }
 
   @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% { transform: translate(-50%, -50%) translateY(0px); }
+    50% { transform: translate(-50%, -50%) translateY(-10px); }
+    100% { transform: translate(-50%, -50%) translateY(0px); }
   }
 `;
+
+// const FloatingImage = styled.img`
+//   position: absolute;
+//   width: 100px; /* Adjust size as needed */
+//   height: auto;
+  
+//   &.image1 {
+//     width: 220px;
+//     top: 50%;
+//     left: 20%;
+//     animation: float 3s ease-in-out infinite;
+//   }
+  
+//   &.image2 {
+//     width:210px;
+//     top: 50%;
+//     left: 45%;
+//     transform: translate(-50%, -50%);
+//     animation: float 4s ease-in-out infinite;
+//   }
+
+//   &.image3 {
+//     width: 200px;
+//     top: 50%;
+//     right: 15%;
+//     animation: float 3.5s ease-in-out infinite;
+//   }
+
+//   @keyframes float {
+//     0% { transform: translateY(0px); }
+//     50% { transform: translateY(-10px); }
+//     100% { transform: translateY(0px); }
+//   }
+// `;
 
 const Hero = () => {
   return (
@@ -116,8 +153,8 @@ const Hero = () => {
       <FloatingImage src={img3} alt="Floating Image 3" className="image3" />
 
       <HeroContent >
-        <HeroTitle>Bridging<HeroTitle2>ABA Therapy</HeroTitle2> & Childcare for Every Milestone</HeroTitle>
-        <NoWaitlistBadge/>
+        <HeroTitle>Bridging <br /> <HeroTitle2>ABA Therapy</HeroTitle2> & Childcare <br/> for Every Milestone</HeroTitle>
+        {/* <NoWaitlistBadge/> */}
       </HeroContent>
     </HeroContainer>
   );
