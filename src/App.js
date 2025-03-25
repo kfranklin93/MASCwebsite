@@ -19,7 +19,7 @@ const MainContent = () => {
       <Navbar />
       
       {/* Show NoWaitlistBadge on all pages except Home */}
-      {!isHomePage && <NoWaitlistBadge />} 
+      {/* {!isHomePage && <NoWaitlistBadge />}  */}
 
       {/* Routes */}
       <Routes>
@@ -34,7 +34,6 @@ const MainContent = () => {
     </>
   );
 };
-
 const App = () => {
   return (
     <>
