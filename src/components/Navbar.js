@@ -12,7 +12,7 @@ const Navbar = () => {
     <NavbarContainer variants={navVariants} initial="hidden" animate="visible">
       <Logo whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
         <StyledLink to="/">Mommy Angels</StyledLink>
-        <HiringBadge/> {/* Flower Badge */}
+         {/* Flower Badge */}
       </Logo>
 
 
