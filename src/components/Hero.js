@@ -41,7 +41,7 @@ const HeroContent = styled.div`
   color: #333;
   padding: 3rem;
   margin:1rem;
-  background-color: rgba(255, 255, 255, 0.22);
+  // background-color: rgba(255, 255, 255, 0.12);
   border-radius: 15px;
   z-index: 2;
 `;
@@ -102,39 +102,6 @@ const FloatingImage = styled.img`
   }
 `;
 
-// const FloatingImage = styled.img`
-//   position: absolute;
-//   width: 100px; /* Adjust size as needed */
-//   height: auto;
-  
-//   &.image1 {
-//     width: 220px;
-//     top: 50%;
-//     left: 20%;
-//     animation: float 3s ease-in-out infinite;
-//   }
-  
-//   &.image2 {
-//     width:210px;
-//     top: 50%;
-//     left: 45%;
-//     transform: translate(-50%, -50%);
-//     animation: float 4s ease-in-out infinite;
-//   }
-
-//   &.image3 {
-//     width: 200px;
-//     top: 50%;
-//     right: 15%;
-//     animation: float 3.5s ease-in-out infinite;
-//   }
-
-//   @keyframes float {
-//     0% { transform: translateY(0px); }
-//     50% { transform: translateY(-10px); }
-//     100% { transform: translateY(0px); }
-//   }
-// `;
 
 const Hero = () => {
   return (
