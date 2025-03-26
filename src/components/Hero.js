@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
 import backgroundImg from "../assets/Untitled-design-7-1-2.png";
-import puzzleBackground from "../assets/right side puzzle pieces.png";
 import img1 from "../assets/Angel-1.png"; // Replace with your actual image paths
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
