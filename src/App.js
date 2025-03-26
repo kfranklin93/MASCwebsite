@@ -1,5 +1,7 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom"; // No need for Router here
+import { Routes, Route} from "react-router-dom"; // No need for Router here
+// import { Routes, Route, useLocation } from "react-router-dom"; // No need for Router here
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,7 +12,7 @@ import Footer from "./components/Footer"; // Import Footer
 
 
 const MainContent = () => {
-  const location = useLocation();
+  // const location = useLocation();
   // const isHomePage = location.pathname === "/"; // Check if on Home page
 
   return (

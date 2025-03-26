@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import roomsImg from "../assets/Group-12-scaled.png";
+// import roomsImg from "../assets/Group-12-scaled.png";
 import stimulationFavImg from "../assets/stimulationFav-6.jpg";
 import manipulativesImg from "../assets/manipulatives-7.jpg";
 import artsImg from "../assets/arts-5.jpg";

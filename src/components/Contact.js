@@ -110,7 +110,7 @@ const ContactForm = () => {
     dateOfLastEval: '', // Added field for Date of Last Evaluation
   });
 
-  const [status, setStatus] = useState(""); // ✅ For displaying success/error messages
+  const [status] = useState(""); // ✅ For displaying success/error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

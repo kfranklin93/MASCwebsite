@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import HiringBadge from "./HiringBadge";
-import NoWaitlistBadge from "./NoWaitlistBadge";
+// import HiringBadge from "./HiringBadge";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
