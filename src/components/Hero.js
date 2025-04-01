@@ -39,10 +39,12 @@ const HeroContent = styled.div`
   max-width: 800px;
   color: #333;
   padding: 3rem;
-  margin:1rem;
+  // margin:1rem;
   // background-color: rgba(255, 255, 255, 0.12);
   border-radius: 15px;
   z-index: 2;
+  position: relative;
+  top: 2rem; 
 `;
 
 const HeroTitle = styled.h1`

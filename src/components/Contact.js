@@ -124,11 +124,17 @@ const ContactForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://mommy-angels-test.web.app/", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      // const response = await axios.post("http://mommy-angels-test.web.app/", formData, {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
+      const response = await axios.post("http://localhost:5007/send-email", "http://mommy-angels-test.web.app/", formData, {
+  headers: {
+    "Content-Type": "application/json"
+  }
+});
+
 
       if (response.data.success) {
         alert("✅ Email sent successfully!!");

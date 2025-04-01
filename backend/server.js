@@ -67,12 +67,19 @@ const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
-// ✅ Allow requests from your frontend (ensure correct HTTPS)
+// // ✅ Allow requests from your frontend (ensure correct HTTPS)
+// app.use(cors({
+//   origin: "https://mommy-angels-test.web.app", // ✅ Corrected HTTPS URL
+//   methods: "POST",
+//   allowedHeaders: "Content-Type"
+// }));
+
 app.use(cors({
-  origin: "https://mommy-angels-test.web.app", // ✅ Corrected HTTPS URL
-  methods: "POST",
-  allowedHeaders: "Content-Type"
-}));
+    origin: ["https://mommy-angels-test.web.app", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
+    methods: "POST",
+    allowedHeaders: "Content-Type"
+  }));
+  
 
 app.use(bodyParser.json());
 
