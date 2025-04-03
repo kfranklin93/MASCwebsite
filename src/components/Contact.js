@@ -126,7 +126,7 @@ const ContactForm = () => {
 try {
   const response = await axios.post(
     "https://www.mommyangelsspecialtycare.com/send-email",
-    formData,
+    JSON.stringify(formData),
     { headers: { "Content-Type": "application/json" } }
   );
 
