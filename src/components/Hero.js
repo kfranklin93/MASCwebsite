@@ -7,7 +7,6 @@ import img1 from "../assets/Angel-1.png"; // Replace with your actual image path
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 
-// import NoWaitlistBadge from "./NoWaitlistBadge";
 
 const HeroContainer = styled.section`
   display: flex;
@@ -33,19 +32,36 @@ const HeroContainer = styled.section`
     opacity: 0.7;
     z-index: -1;
   }
+
+  @media (max-width: 768px) {
+    background-size: cover; /* Adjust background for tablets */
+  }
+
+  @media (max-width: 480px) {
+    background-size: cover;
+  }
 `;
 
 const HeroContent = styled.div`
   max-width: 800px;
   color: #333;
   padding: 3rem;
-  // margin:1rem;
-  // background-color: rgba(255, 255, 255, 0.12);
   border-radius: 15px;
   z-index: 2;
   position: relative;
-  top: 2rem; 
+  top: 2rem; /* Keeps original styling */
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+    top: 4rem; /* Moves content slightly down */
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    top: 6rem; /* Pushes further down for smaller screens */
+  }
 `;
+
 
 const HeroTitle = styled.h1`
   font-size: 2rem;
@@ -68,21 +84,21 @@ const HeroImage = styled(motion.img)`
 
 // ✅ Positioned images over the background
 const FloatingImage = styled.img`
-  position: fixed;
-  width: 150px; /* Adjust size as needed */
+  position: absolute;
+  width: 150px;
   height: auto;
-  
+
   &.image1 {
     width: 220px;
-    top: 55%;
-    left: 35%;
+    top: 50%;
+    left: 30%;
     transform: translate(-50%, -50%);
     animation: float 3s ease-in-out infinite;
   }
   
   &.image2 {
     width: 210px;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     animation: float 4s ease-in-out infinite;
@@ -90,8 +106,8 @@ const FloatingImage = styled.img`
 
   &.image3 {
     width: 200px;
-    top: 55%;
-    left: 65%;
+    top: 50%;
+    left: 70%;
     transform: translate(-50%, -50%);
     animation: float 3.5s ease-in-out infinite;
   }
@@ -101,8 +117,20 @@ const FloatingImage = styled.img`
     50% { transform: translate(-50%, -50%) translateY(-10px); }
     100% { transform: translate(-50%, -50%) translateY(0px); }
   }
-`;
 
+  /* ✅ Mobile Adjustments */
+  @media (max-width: 768px) {
+    width: 140px;
+    top: 55%;
+    left: 50%;
+  }
+
+  @media (max-width: 480px) {
+    width: 110px;
+    top: 60%;
+    left: 50%;
+  }
+`;
 
 const Hero = () => {
   return (

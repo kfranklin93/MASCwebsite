@@ -149,7 +149,7 @@ const Services = () => {
           {title: "Parent Training and Support", img: manipulativesImg, desc: "Empowering parents with ABA strategies to support their child at home."},
           {title: "Behavioral Assessments", img: artsImg, desc: "Comprehensive evaluations to track progress and tailor treatment plans."},
           {title: "Social Skills Groups", img: sensoryImg, desc: "Group therapy to improve peer interactions and build friendships."},
-          {title: "School & Community Integration", img: transportationImg, desc: "Support for smooth transitions into school and social settings."},
+          {title: "Transportation Room", img: transportationImg, desc: "Encourages developmentally appropriate play to support motor, cognitive, and social skills. Provides a structured environment for learning through hands-on activities. Facilitates sensory exploration and regulation."},
           {title: "Functional Communication Training", img: dramaticPlayImg, desc: "Helping children express their needs through structured methods."}].map((service, index) => (
           <ServiceCard key={index}>
             <ServiceImage src={service.img} alt={service.title} onClick={() => setSelectedImage(service.img)} />
