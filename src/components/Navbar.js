@@ -15,8 +15,12 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <NavLinks>
-        <NavLink href="#about" color="#FFD700">About</NavLink>
-        <NavLink href="#services" color="#4A90E2">Services</NavLink>
+        <NavLink href="#about" color="#FFD700">
+          About
+        </NavLink>
+        <NavLink href="#services" color="#4A90E2">
+          Services
+        </NavLink>
 
         {/* Contact with Dropdown */}
         <DropdownContainer
@@ -24,7 +28,9 @@ const Navbar = () => {
           onMouseLeave={() => setDropdownOpen(false)}
         >
           <NavLinkWrapper>
-            <NavLink href="#contact" color="#CD1B1B">Contact</NavLink>
+            <NavLink href="#contact" color="#CD1B1B">
+              Contact
+            </NavLink>
             <DropdownIcon>▼</DropdownIcon>
           </NavLinkWrapper>
 
@@ -35,8 +41,12 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
               >
-                <DropdownItem href="#careers" color="#FF5733">Careers</DropdownItem>
-                <DropdownItem href="#internships" color="#3f8242">Internships</DropdownItem>
+                <DropdownItem href="#careers" color="#FF5733">
+                  Careers
+                </DropdownItem>
+                <DropdownItem href="#internships" color="#3f8242">
+                  Internships
+                </DropdownItem>
               </DropdownMenu>
             )}
           </AnimatePresence>
@@ -51,18 +61,36 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-          <MobileMenu>
-          <CloseButton onClick={() => setMenuOpen(false)}>
-            <FaTimes />
-          </CloseButton>
-        
-          <MobileNavLink href="#home" color="white" bg="#ff4757" onClick={() => setMenuOpen(false)}>Home</MobileNavLink>
-          <MobileNavLink href="#about" color="white" bg="#3742fa" onClick={() => setMenuOpen(false)}>About</MobileNavLink>
-          <MobileNavLink href="#services" color="white" bg="#ff7f50" onClick={() => setMenuOpen(false)}>Services</MobileNavLink>
-          <MobileNavLink href="#contact" color="white" bg="#2ed573" onClick={() => setMenuOpen(false)}>Contact</MobileNavLink>
-          <MobileNavLink href="#careers" color="white" bg="#eccc68" onClick={() => setMenuOpen(false)}>Careers</MobileNavLink>
-          <MobileNavLink href="#internships" color="white" bg="#5352ed" onClick={() => setMenuOpen(false)}>Internships</MobileNavLink>
-        </MobileMenu>
+          <MobileMenu
+            variants={menuVariants} // Added the variants here
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <CloseButton onClick={() => setMenuOpen(false)}>
+              <FaTimes />
+            </CloseButton>
+
+            {/* Close menu when clicking a link */}
+            <NavLink href="#home" onClick={() => setMenuOpen(false)}>
+              Home
+            </NavLink>
+            <NavLink href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </NavLink>
+            <NavLink href="#services" onClick={() => setMenuOpen(false)}>
+              Services
+            </NavLink>
+            <NavLink href="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </NavLink>
+            <NavLink href="#careers" onClick={() => setMenuOpen(false)}>
+              Careers
+            </NavLink>
+            <NavLink href="#internships" onClick={() => setMenuOpen(false)}>
+              Internships
+            </NavLink>
+          </MobileMenu>
         )}
       </AnimatePresence>
     </NavbarContainer>
@@ -77,7 +105,11 @@ const navVariants = {
 
 const menuVariants = {
   hidden: { x: "-100%", opacity: 0 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.4, ease: "easeInOut" } },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: "easeInOut" },
+  },
   exit: { x: "-100%", opacity: 0, transition: { duration: 0.4 } },
 };
 
@@ -90,7 +122,7 @@ const NavbarContainer = styled(motion.nav)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #CD1B1B, #4A90E2, #FFD700);
+  background: linear-gradient(90deg, #cd1b1b, #4a90e2, #ffd700);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 `;
@@ -206,7 +238,7 @@ const MobileNavLink = styled.a`
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   color: ${({ color }) => color || "#fff"};
   background: ${({ bg }) => bg || "#222"};
-  
+
   &:hover {
     transform: scale(1.1);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
