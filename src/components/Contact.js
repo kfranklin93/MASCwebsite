@@ -125,8 +125,8 @@ const ContactForm = () => {
 
 try {
   const response = await axios.post(
-    "https://us-central1-mommy-angels-test.cloudfunctions.net/sendEmail", // ✅ Use Firebase Cloud Function URL
-    submissionData,
+    "https://www.mommyangelsspecialtycare.com/send-email",
+    formData,
     { headers: { "Content-Type": "application/json" } }
   );
 

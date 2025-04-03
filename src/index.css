@@ -1,24 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 
 
-
-/* html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden; Prevents scrolling
-  margin: 0;
-  padding: 0;
-  touch-action: none; Prevents zooming gestures
-} */
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
-
 /* below this line is new */
 html, body {
   width: 100%;
