@@ -27,7 +27,7 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MOMMY_ANGELS_TEST }}"
-          channelId: live  # Use "live" for production, or change to "staging" if needed
-          projectId: mommy-angels-test  # Replace with your Firebase project ID
-
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}  # ✅ Ensure this matches your GitHub secret
+          channelId: live
+          projectId: mommy-angels-test
+      
