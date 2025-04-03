@@ -15,8 +15,8 @@ const Navbar = () => {
 
       {/* Desktop Navigation */}
       <NavLinks>
-        <NavLink href="#about">About</NavLink>
-        <NavLink href="#services">Services</NavLink>
+        <NavLink href="#about" color="#FFD700">About</NavLink>
+        <NavLink href="#services" color="#4A90E2">Services</NavLink>
 
         {/* Contact with Dropdown */}
         <DropdownContainer
@@ -24,7 +24,7 @@ const Navbar = () => {
           onMouseLeave={() => setDropdownOpen(false)}
         >
           <NavLinkWrapper>
-            <NavLink href="#contact">Contact</NavLink>
+            <NavLink href="#contact" color="#CD1B1B">Contact</NavLink>
             <DropdownIcon>▼</DropdownIcon>
           </NavLinkWrapper>
 
@@ -35,8 +35,8 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
               >
-                <DropdownItem href="#careers">Careers</DropdownItem>
-                <DropdownItem href="#internships">Internships</DropdownItem>
+                <DropdownItem href="#careers" color="#FF5733">Careers</DropdownItem>
+                <DropdownItem href="#internships" color="#3f8242">Internships</DropdownItem>
               </DropdownMenu>
             )}
           </AnimatePresence>
@@ -51,24 +51,18 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-          <MobileMenu
-            variants={menuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <CloseButton onClick={() => setMenuOpen(false)}>
-              <FaTimes />
-            </CloseButton>
-
-            {/* Close menu when clicking a link */}
-            <NavLink href="#home" onClick={() => setMenuOpen(false)}>Home</NavLink>
-            <NavLink href="#about" onClick={() => setMenuOpen(false)}>About</NavLink>
-            <NavLink href="#services" onClick={() => setMenuOpen(false)}>Services</NavLink>
-            <NavLink href="#contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-            <NavLink href="#careers" onClick={() => setMenuOpen(false)}>Careers</NavLink>
-            <NavLink href="#internships" onClick={() => setMenuOpen(false)}>Internships</NavLink>
-          </MobileMenu>
+          <MobileMenu>
+          <CloseButton onClick={() => setMenuOpen(false)}>
+            <FaTimes />
+          </CloseButton>
+        
+          <MobileNavLink href="#home" color="white" bg="#ff4757" onClick={() => setMenuOpen(false)}>Home</MobileNavLink>
+          <MobileNavLink href="#about" color="white" bg="#3742fa" onClick={() => setMenuOpen(false)}>About</MobileNavLink>
+          <MobileNavLink href="#services" color="white" bg="#ff7f50" onClick={() => setMenuOpen(false)}>Services</MobileNavLink>
+          <MobileNavLink href="#contact" color="white" bg="#2ed573" onClick={() => setMenuOpen(false)}>Contact</MobileNavLink>
+          <MobileNavLink href="#careers" color="white" bg="#eccc68" onClick={() => setMenuOpen(false)}>Careers</MobileNavLink>
+          <MobileNavLink href="#internships" color="white" bg="#5352ed" onClick={() => setMenuOpen(false)}>Internships</MobileNavLink>
+        </MobileMenu>
         )}
       </AnimatePresence>
     </NavbarContainer>
@@ -127,7 +121,7 @@ const NavLink = styled.a`
   font-size: 1.2rem;
   font-weight: 500;
   text-decoration: none;
-  color: white;
+  color: ${({ color }) => color || "white"}; /* Accepts a color prop */
   padding: 8px 12px;
   border-radius: 8px;
   transition: background 0.3s ease;
@@ -161,7 +155,7 @@ const DropdownMenu = styled(motion.div)`
 
 const DropdownItem = styled.a`
   text-decoration: none;
-  color: #333;
+  color: ${({ color }) => color || "#333"}; /* Accepts a color prop */
   padding: 8px 12px;
   border-radius: 5px;
   transition: background 0.3s ease;
@@ -189,7 +183,7 @@ const MobileMenu = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 50vh; /* Only takes up half the screen */
-  background: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -203,6 +197,22 @@ const MobileMenu = styled(motion.div)`
   border-bottom-right-radius: 20px;
 `;
 
+const MobileNavLink = styled.a`
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 12px 18px;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  color: ${({ color }) => color || "#fff"};
+  background: ${({ bg }) => bg || "#222"};
+  
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  }
+`;
+
 const CloseButton = styled.div`
   position: absolute;
   top: 10px;
@@ -210,7 +220,6 @@ const CloseButton = styled.div`
   font-size: 2rem;
   cursor: pointer;
 `;
-
 
 const NavLinkWrapper = styled.div`
   display: flex;
