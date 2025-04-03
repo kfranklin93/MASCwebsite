@@ -75,7 +75,7 @@ const app = express();
 // }));
 
 app.use(cors({
-    origin: ["https://mommy-angels-test.web.app", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
+    origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
     methods: "POST",
     allowedHeaders: "Content-Type"
   }));
