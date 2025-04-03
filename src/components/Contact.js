@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Select from "react-select";
-import axios from "axios"; 
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Select from 'react-select';
+import axios from 'axios'; // ✅ Import Axios for API calls
 
-// Styled-components (unchanged)
+// Styled-components for the form and elements
 const FormContainer = styled.section`
   background-color: #fff;
   color: #333;
@@ -70,40 +70,47 @@ const SubmitButton = styled.button`
   }
 `;
 
+const ConsentText = styled.p`
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 20px;
+  text-align: left;
+`;
+
 const InsuranceDropdown = styled.div`
   margin: 10px 0;
   text-align: left;
 `;
 
 const insuranceOptions = [
-  { value: "aetna", label: "Aetna" },
-  { value: "ambetter", label: "Ambetter" },
-  { value: "amerigroup", label: "Amerigroup" },
-  { value: "bluecross", label: "Blue Cross Blue Shield" },
-  { value: "caresource", label: "Care Source" },
-  { value: "cigna", label: "Cigna" },
-  { value: "humana", label: "Humana" },
-  { value: "medicaid", label: "Medicaid" },
-  { value: "medicare", label: "Medicare" },
-  { value: "peachstate", label: "Peach State Health Plan" },
-  { value: "unitedhealthcare", label: "UnitedHealthcare" },
-  { value: "other", label: "Other" },
+  { value: 'aetna', label: 'Aetna' },
+  { value: 'ambetter', label: 'Ambetter' },
+  { value: 'amerigroup', label: 'Amerigroup' },
+  { value: 'bluecross', label: 'Blue Cross Blue Shield' },
+  { value: 'caresource', label: 'Care Source' },
+  { value: 'cigna', label: 'Cigna' },
+  { value: 'humana', label: 'Humana' },
+  { value: 'medicaid', label: 'Medicaid' },
+  { value: 'medicare', label: 'Medicare' },
+  { value: 'peachstate', label: 'Peach State Health Plan' },
+  { value: 'unitedhealthcare', label: 'UnitedHealthcare' },
+  { value: 'other', label: 'Other' }
 ];
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    parentName: "",
-    childName: "",
-    age: "",
-    dob: "",
-    email: "",
-    phone: "",
+    parentName: '',
+    childName: '',
+    age: '',
+    dob: '',
+    email: '',
+    phone: '',
     insuranceProvider: null,
-    behaviorsOfConcern: "",
-    dateOfLastEval: "",
+    behaviorsOfConcern: '',
+    dateOfLastEval: '', // Added field for Date of Last Evaluation
   });
 
-  const [status, setStatus] = useState(""); // ✅ Allow state updates for messages
+  const [status] = useState(""); // ✅ For displaying success/error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -114,30 +121,23 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ✅ Prevents page reload
+    e.preventDefault();
 
-    const submissionData = {
-      ...formData,
-      insuranceProvider: formData.insuranceProvider
-        ? formData.insuranceProvider.value
-        : null,
-    };
-
-    try {
-      const response = await axios.post(
-        "https://www.mommyangelsspecialtycare.com/send-email",
-        submissionData,
-        { headers: { "Content-Type": "application/json" } }
-      );
+try {
+  const response = await axios.post(
+    "https://www.mommyangelsspecialtycare.com/send-email",
+    JSON.stringify(formData),
+    { headers: { "Content-Type": "application/json" } }
+  );
 
       if (response.data.success) {
-        setStatus("✅ Email sent successfully!");
+        alert("✅ Email sent successfully!!");
       } else {
-        setStatus("❌ Failed to send email. Please try again.");
+        alert("❌ Failed to send email. Please try again.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
-      setStatus("❌ Failed to send email. Please try again.");
+      alert("❌ Failed to send email. Please try again.");
     }
   };
 
@@ -156,7 +156,7 @@ const ContactForm = () => {
             required
           />
         </div>
-
+        
         <div>
           <Label htmlFor="childName">Child's Name</Label>
           <InputField
@@ -216,6 +216,7 @@ const ContactForm = () => {
           />
         </div>
 
+        {/* Date of Last Evaluation Field */}
         <div>
           <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
           <InputField
@@ -227,6 +228,7 @@ const ContactForm = () => {
           />
         </div>
 
+        {/* Insurance Dropdown */}
         <div>
           <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
           <InsuranceDropdown>
@@ -253,7 +255,11 @@ const ContactForm = () => {
 
         <SubmitButton type="submit">Submit</SubmitButton>
 
-        <p>{status}</p>
+        <p>{status}</p> {/* ✅ Display success or error message */}
+
+        <ConsentText>
+          By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA. Please do not include sensitive health information, such as medical conditions or treatment details, as this form is not intended for secure communication of protected health information (PHI). For more secure communication, please contact us directly by phone.
+        </ConsentText>
       </Form>
     </FormContainer>
   );
