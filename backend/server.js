@@ -8,7 +8,8 @@ const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
 
 const app = express();
-
+app.use(express.json()); // ✅ Ensures JSON is parsed correctly
+app.use(bodyParser.json()); // ✅ Keeps the old method for compatibility
 // app.use(cors({
 //     origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
 //     methods: "POST",
