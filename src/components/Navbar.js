@@ -72,24 +72,24 @@ const Navbar = () => {
             </CloseButton>
 
             {/* Close menu when clicking a link */}
-            <NavLink href="#home" onClick={() => setMenuOpen(false)}>
+            <MobileNavLink href="#home" onClick={() => setMenuOpen(false)}>
               Home
-            </NavLink>
-            <NavLink href="#about" onClick={() => setMenuOpen(false)}>
+            </MobileNavLink>
+            <MobileNavLink href="#about" onClick={() => setMenuOpen(false)}>
               About
-            </NavLink>
-            <NavLink href="#services" onClick={() => setMenuOpen(false)}>
+            </MobileNavLink>
+            <MobileNavLink href="#services" onClick={() => setMenuOpen(false)}>
               Services
-            </NavLink>
-            <NavLink href="#contact" onClick={() => setMenuOpen(false)}>
+            </MobileNavLink>
+            <MobileNavLink href="#contact" onClick={() => setMenuOpen(false)}>
               Contact
-            </NavLink>
-            <NavLink href="#careers" onClick={() => setMenuOpen(false)}>
+            </MobileNavLink>
+            <MobileNavLink href="#careers" onClick={() => setMenuOpen(false)}>
               Careers
-            </NavLink>
-            <NavLink href="#internships" onClick={() => setMenuOpen(false)}>
+            </MobileNavLink>
+            {/* <NavLink href="#internships" onClick={() => setMenuOpen(false)}>
               Internships
-            </NavLink>
+            </NavLink> */}
           </MobileMenu>
         )}
       </AnimatePresence>
