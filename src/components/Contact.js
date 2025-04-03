@@ -123,18 +123,12 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      // const response = await axios.post("http://mommy-angels-test.web.app/", formData, {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const response = await axios.post("http://localhost:5007/send-email", "http://www.mommyangelsspecialtycare.com", formData, {
-  headers: {
-    "Content-Type": "application/json"
-  }
-});
-
+try {
+  const response = await axios.post(
+    "https://us-central1-mommy-angels-test.cloudfunctions.net/sendEmail", // ✅ Use Firebase Cloud Function URL
+    submissionData,
+    { headers: { "Content-Type": "application/json" } }
+  );
 
       if (response.data.success) {
         alert("✅ Email sent successfully!!");
