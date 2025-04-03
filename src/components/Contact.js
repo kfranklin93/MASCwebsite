@@ -42,17 +42,17 @@ const InputField = styled.input`
   background-color: #f9f9f9;
 `;
 
-const TextAreaField = styled.textarea`
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  width: 100%;
-  background-color: #f9f9f9;
-  resize: vertical;
-  min-height: 150px;
-`;
+// const TextAreaField = styled.textarea`
+//   padding: 15px;
+//   margin: 10px 0;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+//   font-size: 1rem;
+//   width: 100%;
+//   background-color: #f9f9f9;
+//   resize: vertical;
+//   min-height: 150px;
+// `;
 
 const SubmitButton = styled.button`
   padding: 15px;
