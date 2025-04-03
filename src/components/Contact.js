@@ -42,17 +42,17 @@ const InputField = styled.input`
   background-color: #f9f9f9;
 `;
 
-// const TextAreaField = styled.textarea`
-//   padding: 15px;
-//   margin: 10px 0;
-//   border: 1px solid #ccc;
-//   border-radius: 10px;
-//   font-size: 1rem;
-//   width: 100%;
-//   background-color: #f9f9f9;
-//   resize: vertical;
-//   min-height: 150px;
-// `;
+const TextAreaField = styled.textarea`
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 100%;
+  background-color: #f9f9f9;
+  resize: vertical;
+  min-height: 150px;
+`;
 
 const SubmitButton = styled.button`
   padding: 15px;
@@ -97,7 +97,7 @@ const insuranceOptions = [
   { value: 'other', label: 'Other' }
 ];
 
-const ContactForm = () => {
+const ContactForm = async () => {
   const [formData, setFormData] = useState({
     parentName: '',
     childName: '',
@@ -107,10 +107,10 @@ const ContactForm = () => {
     phone: '',
     insuranceProvider: null,
     behaviorsOfConcern: '',
-    dateOfLastEval: '',
+    dateOfLastEval: '', // Added field for Date of Last Evaluation
   });
 
-  const [status, setStatus] = useState(""); // ✅ Display success/error messages
+  const [status] = useState(""); // ✅ For displaying success/error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -120,46 +120,30 @@ const ContactForm = () => {
     setFormData({ ...formData, insuranceProvider: selectedOption });
   };
 
-  // ✅ Properly define the handleSubmit function
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const submissionData = {
-      ...formData,
-      insuranceProvider: formData.insuranceProvider ? formData.insuranceProvider.value : null,
-    };
-
-    try {
-      const response = await axios.post(
-        "https://www.mommyangelsspecialtycare.com/send-email",
-        submissionData,
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      if (response.data.success) {
-        alert("✅ Email sent successfully!");
-        setStatus("✅ Email sent successfully!");
-        setFormData({
-          parentName: '',
-          childName: '',
-          age: '',
-          dob: '',
-          email: '',
-          phone: '',
-          insuranceProvider: null,
-          behaviorsOfConcern: '',
-          dateOfLastEval: '',
-        });
-      } else {
-        alert("❌ Failed to send email. Please try again.");
-        setStatus("❌ Failed to send email. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
-      alert("❌ Failed to send email. Please try again.");
-      setStatus("❌ Failed to send email. Please try again.");
-    }
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  const submissionData = {
+    ...formData,
+    insuranceProvider: formData.insuranceProvider ? formData.insuranceProvider.value : null,
   };
+
+  try {
+    const response = await axios.post(
+      "https://www.mommyangelsspecialtycare.com/send-email",
+      submissionData,
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    if (response.data.success) {
+      alert("✅ Email sent successfully!!");
+    } else {
+      alert("❌ Failed to send email. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error sending email:", error);
+    alert("❌ Failed to send email. Please try again.");
+  }
+};
 
   return (
     <FormContainer>
@@ -236,6 +220,19 @@ const ContactForm = () => {
           />
         </div>
 
+        {/* Date of Last Evaluation Field */}
+        <div>
+          <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
+          <InputField
+            type="date"
+            name="dateOfLastEval"
+            value={formData.dateOfLastEval}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* Insurance Dropdown */}
         <div>
           <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
           <InsuranceDropdown>
@@ -249,16 +246,27 @@ const ContactForm = () => {
           </InsuranceDropdown>
         </div>
 
+        <div>
+          <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
+          <TextAreaField
+            name="behaviorsOfConcern"
+            placeholder="Describe any current behaviors of concern"
+            value={formData.behaviorsOfConcern}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <SubmitButton type="submit">Submit</SubmitButton>
 
         <p>{status}</p> {/* ✅ Display success or error message */}
 
         <ConsentText>
-          By submitting this form, you consent to the use and disclosure of your personal information...
+          By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA. Please do not include sensitive health information, such as medical conditions or treatment details, as this form is not intended for secure communication of protected health information (PHI). For more secure communication, please contact us directly by phone.
         </ConsentText>
       </Form>
     </FormContainer>
   );
-};
+// };
 
 export default ContactForm;
