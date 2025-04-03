@@ -20,6 +20,7 @@ const HeroContainer = styled.section`
   background: url(${backgroundImg}) no-repeat center center/cover;
   background-size: contain;
   backdrop-filter: blur(50px);
+  padding-bottom: 6rem; /* Added space below floating images */
 
   &::before {
     content: "";
@@ -34,33 +35,37 @@ const HeroContainer = styled.section`
   }
 
   @media (max-width: 768px) {
-    background-size: cover; /* Adjust background for tablets */
+    background-size: cover;
+    padding-bottom: 8rem; /* More space on mobile */
   }
 
   @media (max-width: 480px) {
     background-size: cover;
+    padding-bottom: 10rem; /* Further spacing */
   }
 `;
+
 
 const HeroContent = styled.div`
   max-width: 800px;
   color: #333;
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 15px;
   z-index: 2;
   position: relative;
-  top: 2rem; /* Keeps original styling */
+  top: 1rem; /* Bring text closer */
 
   @media (max-width: 768px) {
-    padding: 2rem;
-    top: 4rem; /* Moves content slightly down */
+    padding: 1.5rem;
+    top: 2rem; /* Reduce space above */
   }
 
   @media (max-width: 480px) {
-    padding: 1.5rem;
-    top: 6rem; /* Pushes further down for smaller screens */
+    padding: 1rem;
+    top: 1.5rem; /* Keep text tight */
   }
 `;
+
 
 
 const HeroTitle = styled.h1`
@@ -85,13 +90,12 @@ const HeroImage = styled(motion.img)`
 // ✅ Positioned images over the background
 const FloatingImage = styled.img`
   position: absolute;
-  width: 150px;
   height: auto;
 
   &.image1 {
     width: 220px;
-    top: 50%;
-    left: 30%;
+    top: 45%;
+    left: 25%;
     transform: translate(-50%, -50%);
     animation: float 3s ease-in-out infinite;
   }
@@ -106,8 +110,8 @@ const FloatingImage = styled.img`
 
   &.image3 {
     width: 200px;
-    top: 50%;
-    left: 70%;
+    top: 45%;
+    left: 75%;
     transform: translate(-50%, -50%);
     animation: float 3.5s ease-in-out infinite;
   }
@@ -120,17 +124,18 @@ const FloatingImage = styled.img`
 
   /* ✅ Mobile Adjustments */
   @media (max-width: 768px) {
-    width: 140px;
-    top: 55%;
+    width: 120px; /* Make them smaller */
+    top: 50%; /* Shift slightly lower */
     left: 50%;
   }
 
   @media (max-width: 480px) {
-    width: 110px;
-    top: 60%;
+    width: 100px; /* Further reduce size */
+    top: 55%; /* Move them down */
     left: 50%;
   }
 `;
+
 
 const Hero = () => {
   return (
