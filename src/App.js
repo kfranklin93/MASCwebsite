@@ -1,48 +1,25 @@
 import React from "react";
-import { Routes, Route} from "react-router-dom"; // No need for Router here
-// import { Routes, Route, useLocation } from "react-router-dom"; // No need for Router here
-
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
-// import NoWaitlistBadge from "./components/NoWaitlistBadge"; // Import badge
-import Footer from "./components/Footer"; // Import Footer
+import Footer from "./components/Footer";
 
-
-const MainContent = () => {
-  // const location = useLocation();
-  // const isHomePage = location.pathname === "/"; // Check if on Home page
-
+const App = () => {
   return (
     <>
-      {/* Navbar is visible on all pages */}
       <Navbar />
       
-      {/* Show NoWaitlistBadge on all pages except Home */}
-      {/* {!isHomePage && <NoWaitlistBadge />}  */}
+      {/* Assign IDs for smooth scrolling */}
+      <section id="home"><Hero /></section>
+      <section id="about"><About /></section>
+      <section id="services"><Services /></section>
+      <section id="contact"><Contact /></section>
 
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-
-      {/* Footer is appended to every page */}
       <Footer />
     </>
   );
 };
-const App = () => {
-  return (
-    <>
-      <MainContent />
-    </>
-  );
-};
-
 
 export default App;
