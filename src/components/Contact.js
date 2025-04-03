@@ -120,15 +120,26 @@ const ContactForm = () => {
     setFormData({ ...formData, insuranceProvider: selectedOption });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  const submissionData = {
+    ...formData,
+    insuranceProvider: formData.insuranceProvider ? formData.insuranceProvider.value : null,
+  };
+
+  try {
+    const response = await axios.post(
+      "https://www.mommyangelsspecialtycare.com/send-email",
+      submissionData,  // ✅ Send formatted data
+      { headers: { "Content-Type": "application/json" } }
+    );
 
 try {
-  const response = await axios.post(
-    "https://www.mommyangelsspecialtycare.com/send-email",
-    JSON.stringify(formData),
-    { headers: { "Content-Type": "application/json" } }
-  );
+  // const response = await axios.post(
+  //   "https://www.mommyangelsspecialtycare.com/send-email",
+  //   formData,
+  //   { headers: { "Content-Type": "application/json" } }
+  // );
 
       if (response.data.success) {
         alert("✅ Email sent successfully!!");

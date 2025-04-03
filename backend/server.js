@@ -1,14 +1,15 @@
-// require("dotenv").config(); // ✅ Load environment variables first
-require("dotenv").config({ path: "./.env" });
-
-
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
+require("dotenv").config({ path: "./.env" });
 
 const app = express();
 app.use(express.json());
+
+app.use(express.json());
+app.use(bodyParser.json());
+
 // app.use(cors({
 //     origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
 //     methods: "POST",
@@ -24,15 +25,6 @@ app.use(bodyParser.json());
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY); // ✅ Load API Key securely
 
-// app.post("/send-email", async (req, res) => {
-    // console.log("📩 Received request body:", req.body); // ✅ Log the request body
-    // console.log("🔑 SendGrid API Key Loaded:", process.env.SENDGRID_API_KEY ? "Yes" : "No"); // ✅ Check if API key is loaded
-
-    // const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
-
-    // if (!process.env.SENDGRID_API_KEY) {
-    //     return res.status(500).json({ success: false, message: "SendGrid API Key is missing" });
-    // }
    app.post("/send-email", async (req, res) => {
         console.log("📩 Received request headers:", req.headers); // ✅ Check headers
         console.log("📩 Received request body:", req.body); // ✅ Check request body
