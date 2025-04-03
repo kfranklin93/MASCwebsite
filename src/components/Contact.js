@@ -129,7 +129,7 @@ const ContactForm = () => {
       //     "Content-Type": "application/json",
       //   },
       // });
-      const response = await axios.post("http://localhost:5007/send-email", "http://mommy-angels-test.web.app/", formData, {
+      const response = await axios.post("http://localhost:5007/send-email", "http://www.mommyangelsspecialtycare.com", formData, {
   headers: {
     "Content-Type": "application/json"
   }
