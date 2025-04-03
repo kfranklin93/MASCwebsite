@@ -8,8 +8,7 @@ const bodyParser = require("body-parser");
 const sgMail = require("@sendgrid/mail");
 
 const app = express();
-app.use(express.json()); // ✅ Ensures JSON is parsed correctly
-app.use(bodyParser.json()); // ✅ Keeps the old method for compatibility
+app.use(express.json());
 // app.use(cors({
 //     origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
 //     methods: "POST",
@@ -25,16 +24,33 @@ app.use(bodyParser.json());
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY); // ✅ Load API Key securely
 
-app.post("/send-email", async (req, res) => {
-    console.log("📩 Received request body:", req.body); // ✅ Log the request body
-    console.log("🔑 SendGrid API Key Loaded:", process.env.SENDGRID_API_KEY ? "Yes" : "No"); // ✅ Check if API key is loaded
+// app.post("/send-email", async (req, res) => {
+    // console.log("📩 Received request body:", req.body); // ✅ Log the request body
+    // console.log("🔑 SendGrid API Key Loaded:", process.env.SENDGRID_API_KEY ? "Yes" : "No"); // ✅ Check if API key is loaded
 
-    const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
+    // const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
 
-    if (!process.env.SENDGRID_API_KEY) {
-        return res.status(500).json({ success: false, message: "SendGrid API Key is missing" });
-    }
-
+    // if (!process.env.SENDGRID_API_KEY) {
+    //     return res.status(500).json({ success: false, message: "SendGrid API Key is missing" });
+    // }
+   app.post("/send-email", async (req, res) => {
+        console.log("📩 Received request headers:", req.headers); // ✅ Check headers
+        console.log("📩 Received request body:", req.body); // ✅ Check request body
+        console.log("🔑 SendGrid API Key Loaded:", process.env.SENDGRID_API_KEY ? "Yes" : "No"); // ✅ Check if API key is loaded
+    
+        if (!req.body || Object.keys(req.body).length === 0) {
+            console.error("❌ ERROR: Request body is empty or undefined.");
+            return res.status(400).json({ success: false, message: "Request body is empty." });
+        }
+    
+        const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
+    
+        if (!process.env.SENDGRID_API_KEY) {
+            return res.status(500).json({ success: false, message: "SendGrid API Key is missing" });
+        }
+    
+        res.json({ success: true, message: "Data received!" });
+   
     const msg = {
       to: "harlemorchid@gmail.com",
       from: "kfranklin93@gmail.com", // ✅ Must be verified in SendGrid
@@ -61,36 +77,7 @@ app.post("/send-email", async (req, res) => {
     }
 });
 
-// app.post("/send-email", async (req, res) => {
-//     console.log('Received request body:', req.body); // ✅ Log for debugging
-  
-//     const { parentName, childName, age, dob, email, phone, insuranceProvider, behaviorsOfConcern } = req.body;
-  
-//     const msg = {
-//       to: "harlemorchid@gmail.com", // ✅ Change to your receiving email
-//       from: "kfranklin93@gmail.com", // ✅ Must be a verified SendGrid email
-//       subject: "New Contact Form Submission",
-//       text: `
-//         Parent Name: ${parentName}
-//         Child Name: ${childName}
-//         Age: ${age}
-//         Date of Birth: ${dob}
-//         Email: ${email}
-//         Phone: ${phone}
-//         Insurance Provider: ${insuranceProvider?.label || "Not provided"}  // ✅ Fix object issue
-//         Behaviors of Concern: ${behaviorsOfConcern}
-//       `
-//     };
-  
-//     try {
-//       await sgMail.send(msg);
-//       console.log("✅ Email sent successfully");
-//       res.json({ success: true, message: "Email sent successfully!" });
-//     } catch (error) {
-//       console.error("❌ Error sending email:", error);
-//       res.status(500).json({ success: false, message: "Email sending failed." });
-//     }
-//   });
+
 
 // Start the server
 const PORT = 5007;
