@@ -107,10 +107,10 @@ const ContactForm = () => {
     phone: '',
     insuranceProvider: null,
     behaviorsOfConcern: '',
-    dateOfLastEval: '', // Added field for Date of Last Evaluation
+    dateOfLastEval: '',
   });
 
-  const [status] = useState(""); // ✅ For displaying success/error messages
+  const [status, setStatus] = useState(""); // ✅ Display success/error messages
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -120,35 +120,44 @@ const ContactForm = () => {
     setFormData({ ...formData, insuranceProvider: selectedOption });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  const submissionData = {
-    ...formData,
-    insuranceProvider: formData.insuranceProvider ? formData.insuranceProvider.value : null,
-  };
+  // ✅ Properly define the handleSubmit function
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await axios.post(
-      "https://www.mommyangelsspecialtycare.com/send-email",
-      submissionData,  // ✅ Send formatted data
-      { headers: { "Content-Type": "application/json" } }
-    );
+    const submissionData = {
+      ...formData,
+      insuranceProvider: formData.insuranceProvider ? formData.insuranceProvider.value : null,
+    };
 
-try {
-  // const response = await axios.post(
-  //   "https://www.mommyangelsspecialtycare.com/send-email",
-  //   formData,
-  //   { headers: { "Content-Type": "application/json" } }
-  // );
+    try {
+      const response = await axios.post(
+        "https://www.mommyangelsspecialtycare.com/send-email",
+        submissionData,
+        { headers: { "Content-Type": "application/json" } }
+      );
 
       if (response.data.success) {
-        alert("✅ Email sent successfully!!");
+        alert("✅ Email sent successfully!");
+        setStatus("✅ Email sent successfully!");
+        setFormData({
+          parentName: '',
+          childName: '',
+          age: '',
+          dob: '',
+          email: '',
+          phone: '',
+          insuranceProvider: null,
+          behaviorsOfConcern: '',
+          dateOfLastEval: '',
+        });
       } else {
         alert("❌ Failed to send email. Please try again.");
+        setStatus("❌ Failed to send email. Please try again.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
       alert("❌ Failed to send email. Please try again.");
+      setStatus("❌ Failed to send email. Please try again.");
     }
   };
 
@@ -227,19 +236,6 @@ try {
           />
         </div>
 
-        {/* Date of Last Evaluation Field */}
-        <div>
-          <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
-          <InputField
-            type="date"
-            name="dateOfLastEval"
-            value={formData.dateOfLastEval}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Insurance Dropdown */}
         <div>
           <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
           <InsuranceDropdown>
@@ -253,23 +249,12 @@ try {
           </InsuranceDropdown>
         </div>
 
-        <div>
-          <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
-          <TextAreaField
-            name="behaviorsOfConcern"
-            placeholder="Describe any current behaviors of concern"
-            value={formData.behaviorsOfConcern}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
         <SubmitButton type="submit">Submit</SubmitButton>
 
         <p>{status}</p> {/* ✅ Display success or error message */}
 
         <ConsentText>
-          By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA. Please do not include sensitive health information, such as medical conditions or treatment details, as this form is not intended for secure communication of protected health information (PHI). For more secure communication, please contact us directly by phone.
+          By submitting this form, you consent to the use and disclosure of your personal information...
         </ConsentText>
       </Form>
     </FormContainer>
