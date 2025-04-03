@@ -9,12 +9,16 @@ const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
+// app.use(cors({
+//     origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
+//     methods: "POST",
+//     allowedHeaders: "Content-Type"
+//   }));
 app.use(cors({
-    origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
+    origin: "*", // 🔥 TEMP FIX: Allows all origins. Change later for security.
     methods: "POST",
     allowedHeaders: "Content-Type"
-  }));
-  
+}));
 
 app.use(bodyParser.json());
 
