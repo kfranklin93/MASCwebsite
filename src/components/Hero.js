@@ -65,19 +65,19 @@ const HeroContent = styled.div`
   }
 `;
 
-const FloatingImagesWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 2rem;
-  position: relative;
-  z-index: 2;
+// const FloatingImagesWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   gap: 20px;
+//   margin-top: 2rem;
+//   position: relative;
+//   z-index: 2;
 
-  @media (max-width: 768px) {
-    flex-direction: row;
-    gap: 15px;
-  }
-`;
+//   @media (max-width: 768px) {
+//     flex-direction: row;
+//     gap: 15px;
+//   }
+// `;
 
 // const FloatingImage = styled.img`
 //   width: 220px;
