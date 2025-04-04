@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
+// import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -16,7 +16,7 @@ const App = () => {
     
       <section id="services"><Services /></section>
       <section id="contact"><Contact /></section>
-      <section id="about"><About /></section>
+      {/* <section id="about"><About /></section> */}
 
       <Footer />
     </>

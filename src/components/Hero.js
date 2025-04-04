@@ -147,16 +147,18 @@ const HeroTitlesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 4rem; /* Push it below floating images */
-  margin-bottom: 1.5rem;
+  margin-top: 4rem;
   z-index: 2;
+  padding: 1rem;
 
   @media (max-width: 768px) {
-    margin-top: 3rem;
+    margin-top: 5rem;
+    padding: 1rem 0.5rem;
   }
 
   @media (max-width: 480px) {
-    margin-top: 4rem;
+    margin-top: 6rem;
+    padding: 0.5rem;
   }
 `;
 // const HeroTitlesWrapper = styled.div`
