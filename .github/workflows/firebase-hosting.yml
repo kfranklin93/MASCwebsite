@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - inital-commit-with-1000-changes  # Change this to your preferred branch (e.g., "staging")
+      - inital-commit-with-1000-changes  # Change this to your branch
 
 jobs:
   deploy:
@@ -23,12 +23,15 @@ jobs:
       - name: Build project (optional)
         run: npm run build
 
+      - name: Set up Firebase credentials
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > $HOME/firebase-key.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/firebase-key.json" >> $GITHUB_ENV
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          # firebaseServiceAccount: ""  # Remove this
-          firebaseToken: "${{ secrets.FIREBASE_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
           projectId: mommy-angels-test
-      
