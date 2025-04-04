@@ -26,8 +26,20 @@
     ],
     "rewrites": [
       {
-        "source": "/www",
-        "destination": "https://mommyangelsspecialtycare.com"
+        "source": "/**",
+        "destination": "/index.html"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "http://mommyangelsspecialtycare.com/**",
+        "destination": "https://mommyangelsspecialtycare.com/:splat",
+        "type": 301
+      },
+      {
+        "source": "http://www.mommyangelsspecialtycare.com/**",
+        "destination": "https://www.mommyangelsspecialtycare.com/:splat",
+        "type": 301
       }
     ],
     "headers": [
