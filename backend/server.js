@@ -9,6 +9,15 @@ const sgMail = require("@sendgrid/mail");
 
 const app = express();
 
+// Middleware to redirect HTTP to HTTPS
+app.use((req, res, next) => {
+    if (req.protocol === "http") {
+        // Redirect HTTP requests to HTTPS
+        return res.redirect(301, "https://" + req.headers.host + req.url);
+    }
+    next();
+});
+
 // app.use(cors({
 //     origin: ["http://www.mommyangelsspecialtycare.com", "http://localhost:62584"], // ✅ Allow both Firebase & Localhost
 //     methods: "POST",
@@ -19,6 +28,8 @@ app.use(cors({
     methods: "POST",
     allowedHeaders: "Content-Type"
 }));
+
+
 
 app.use(bodyParser.json());
 
