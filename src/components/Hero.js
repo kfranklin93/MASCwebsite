@@ -66,79 +66,60 @@ z-index: 2;
 `;
 
 const FloatingImage = styled.img`
-position: absolute;
-height: auto;
+  position: absolute;
+  height: auto;
 
-&.image1 {
-  width: 220px;
-  top: 40%; // Adjust as needed
-  left: 15%;  /* Shifted to the left */
-  transform: translate(-50%, -50%);
-  animation: float 3s ease-in-out infinite;
-}
+  &.image1 {
+    width: 220px;
+    top: 40%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    animation: float 3s ease-in-out infinite;
+  }
 
-&.image2 {
-  width: 210px;
-  top: 45%; // Adjust as needed
-  left: 50%;  /* Center it for balance */
-  transform: translate(-50%, -50%);
-  animation: float 4s ease-in-out infinite;
-}
+  &.image2 {
+    width: 210px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 4s ease-in-out infinite;
+  }
 
-&.image3 {
-  width: 200px;
-  top: 40%; // Adjust as needed
-  left: 85%;  /* Shifted to the right closer to the edge */
-  transform: translate(-50%, -50%);
-  animation: float 3.5s ease-in-out infinite;
-}
+  &.image3 {
+    width: 200px;
+    top: 40%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    animation: float 3.5s ease-in-out infinite;
+  }
 
-@media (max-width: 768px) {
-  width: 120px;
-  left: 35%;  /* Move more to left on mobile */
-}
+  @media (max-width: 768px) {
+    &.image1,
+    &.image3 {
+      width: 120px;
+      left: 25%; /* Shift closer to the center */
+    }
 
-@media (max-width: 480px) {
-  width: 100px;
-  left: 50%;  /* Center on very small screens */
-}
+    &.image2 {
+      width: 120px;
+      left: 50%; /* Keep centered */
+    }
+  }
+
+  @media (max-width: 480px) {
+    &.image1,
+    &.image3 {
+      width: 100px;
+      left: 30%;
+    }
+
+    &.image2 {
+      width: 100px;
+      left: 50%; /* Perfect centering */
+    }
+  }
 `;
-// const HeroContainer = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   text-align: center;
-//   min-height: 100vh;
-//   position: relative;
-//   z-index: 1;
-//   background: url(${backgroundImg}) no-repeat center center/cover;
-//   background-size: contain;
-//   backdrop-filter: blur(50px);
-//   padding-bottom: 6rem; /* Added space below floating images */
 
-//   &::before {
-//     content: "";
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background: url(${backgroundImg}) no-repeat center center/cover;
-//     opacity: 0.7;
-//     z-index: -1;
-//   }
-
-//   @media (max-width: 768px) {
-//     background-size: cover;
-//     padding-bottom: 8rem; /* More space on mobile */
-//   }
-
-//   @media (max-width: 480px) {
-//     background-size: cover;
-//     padding-bottom: 10rem; /* Further spacing */
-//   }
-// `;
 
 const HeroTitle = styled.h1`
   font-size: 2rem;
@@ -174,69 +155,6 @@ const HeroImage = styled(motion.img)`
   max-width: 100%;
   z-index: -1;
 `;
-
-// const HeroContent = styled.div`
-//   max-width: 800px;
-//   color: #333;
-//   padding: 2rem;
-//   border-radius: 15px;
-//   z-index: 2;
-//   position: relative;
-//   top: 3rem; /* Adjusted for spacing on larger screens */
-  
-//   @media (max-width: 768px) {
-//     padding: 1.5rem;
-//     top: 5rem; /* Increased top spacing on mobile to ensure content is below floating images */
-//     max-width: 90%; /* Make it a bit smaller on mobile */
-//   }
-
-//   @media (max-width: 480px) {
-//     padding: 1rem;
-//     top: 6rem; /* Further adjusted space on very small screens */
-//     max-width: 95%; /* Smaller on very small screens */
-//   }
-// `;
-
-// const FloatingImage = styled.img`
-//   position: absolute;
-//   height: auto;
-
-//   &.image1 {
-//     width: 220px;
-//     top: 40%; /* Lowered to create more space above HeroContent */
-//     left: 25%;
-//     transform: translate(-50%, -50%);
-//     animation: float 3s ease-in-out infinite;
-//   }
-  
-//   &.image2 {
-//     width: 210px;
-//     top: 45%; /* Likewise, ensuring enough space */
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     animation: float 4s ease-in-out infinite;
-//   }
-
-//   &.image3 {
-//     width: 200px;
-//     top: 40%; /* Adjusted for spacing */
-//     left: 75%;
-//     transform: translate(-50%, -50%);
-//     animation: float 3.5s ease-in-out infinite;
-//   }
-
-//   @media (max-width: 768px) {
-//     width: 120px;
-//     top: 45%; /* Adjust as needed for mobile */
-//     left: 50%;
-//   }
-
-//   @media (max-width: 480px) {
-//     width: 100px;
-//     top: 50%; /* Adjust as needed for very small screens */
-//     left: 50%;
-//   }
-// `;
 
 const Hero = () => {
   return (
