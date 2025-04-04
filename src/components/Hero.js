@@ -97,7 +97,7 @@ const HeroTitle = styled.h1`
   font-size: 2rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.2);
 
   @media (max-width: 768px) {
     font-size: 1.8rem;
@@ -112,7 +112,7 @@ const HeroTitle2 = styled.h2`
   font-size: 4rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -187,12 +187,14 @@ const Hero = () => {
       
       <FloatingImagesContainer>
         <FloatingImage src={img1} alt="Floating Image 1" className="image1" />
-        <FloatingImage src={img2} alt="Floating Image 2" className="image2" />
         <FloatingImage src={img3} alt="Floating Image 3" className="image3" />
+        <FloatingImage src={img2} alt="Floating Image 2" className="image2" />
+        
       </FloatingImagesContainer>
 
       <HeroContent>
-        <HeroTitle>Bridging <br /> <HeroTitle2>ABA Therapy</HeroTitle2> & Childcare <br/> for Every Milestone</HeroTitle>
+        {/* <HeroTitle>Bridging <br /> <HeroTitle2>ABA Therapy</HeroTitle2> & Childcare <br/> for Every Milestone</HeroTitle> */}
+        <HeroTitle>The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning</HeroTitle>
         {/* <NoWaitlistBadge/> */}
       </HeroContent>
     </HeroContainer>
