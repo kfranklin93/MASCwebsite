@@ -24,7 +24,12 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [],
+    "rewrites": [
+      {
+        "source": "/www",
+        "destination": "https://mommyangelsspecialtycare.com"
+      }
+    ],
     "headers": [
       {
         "source": "**",
