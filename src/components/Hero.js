@@ -10,8 +10,10 @@ import img3 from "../assets/Angel-3.png";
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
+  // justify-content: flex-end;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: space-between;
   text-align: center;
   min-height: 100vh;
   position: relative;
@@ -44,26 +46,26 @@ const HeroContainer = styled.section`
 `;
 
 
-const HeroContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  max-width: 800px;
-  color: #333;
-  padding: 2rem;
-  border-radius: 15px;
-  z-index: 2;
+// const HeroContent = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-end;
+//   max-width: 800px;
+//   color: #333;
+//   padding: 2rem;
+//   border-radius: 15px;
+//   z-index: 2;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
+//   @media (max-width: 768px) {
+//     padding: 1.5rem;
+//     max-width: 90%;
+//   }
 
-  @media (max-width: 480px) {
-    padding: 1rem;
-    max-width: 95%;
-  }
-`;
+//   @media (max-width: 480px) {
+//     padding: 1rem;
+//     max-width: 95%;
+//   }
+// `;
 
 // const FloatingImagesWrapper = styled.div`
 //   display: flex;
@@ -122,7 +124,56 @@ const HeroTitle2 = styled.h2`
     font-size: 2rem;
   }
 `;
+const HeroTitle3 = styled.h2`
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(220, 27, 27);
+  font-family: 'Bubblegum Sans';
+  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
+  z-index: 2;
 
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+`;
+const HeroTitlesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem; /* Push it below floating images */
+  margin-bottom: 1.5rem;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 4rem;
+  }
+`;
+// const HeroTitlesWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin-top: 4rem; /* Adjust this to control spacing between titles and footer */
+//   z-index: 2;
+
+//   @media (max-width: 768px) {
+//     margin-bottom: 3rem;
+//   }
+
+//   @media (max-width: 480px) {
+//     margin-bottom: 3.5rem;
+//   }
+// `;
 const HeroImage = styled(motion.img)`
   max-width: 100%;
   z-index: -1;
@@ -192,12 +243,20 @@ const Hero = () => {
         
       </FloatingImagesContainer>
 
-      <HeroContent>
+      <HeroTitlesWrapper>
+    <HeroTitle>
+      The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning
+    </HeroTitle>
+    </HeroTitlesWrapper>
+      {/* <HeroContent> */}
         {/* <HeroTitle>Bridging <br /> <HeroTitle2>ABA Therapy</HeroTitle2> & Childcare <br/> for Every Milestone</HeroTitle> */}
-        <HeroTitle>The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning</HeroTitle>
+        {/* <HeroTitle>The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning</HeroTitle> */}
         {/* <NoWaitlistBadge/> */}
-      </HeroContent>
+      {/* </HeroContent> */}
+      <HeroTitle3>Located in Dunwoody ,Georgia</HeroTitle3>
+
     </HeroContainer>
+    
   );
 };
 

@@ -143,7 +143,7 @@ try {
 
   return (
     <FormContainer>
-      <FormTitle>Contact Us</FormTitle>
+      <FormTitle>Intake Form</FormTitle>
       <Form onSubmit={handleSubmit}>
         <div>
           <Label htmlFor="parentName">Parent's Name</Label>

@@ -13,9 +13,10 @@ const App = () => {
       
       {/* Assign IDs for smooth scrolling */}
       <section id="home"><Hero /></section>
-      <section id="about"><About /></section>
+    
       <section id="services"><Services /></section>
       <section id="contact"><Contact /></section>
+      <section id="about"><About /></section>
 
       <Footer />
     </>
