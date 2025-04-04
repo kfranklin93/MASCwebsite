@@ -3,136 +3,108 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
 import backgroundImg from "../assets/Untitled-design-7-1-2.png";
-import img1 from "../assets/Angel-1.png"; // Replace with your actual image paths
+import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 
 const HeroContainer = styled.section`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-between; /* Use space-between to push content to the edges */
-text-align: center;
-min-height: 100vh;
-position: relative;
-z-index: 1;
-background: url(${backgroundImg}) no-repeat center center/cover;
-background-size: contain;
-backdrop-filter: blur(50px);
-padding-bottom: 6rem; /* Space below floating images */
-
-&::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  position: relative;
   background: url(${backgroundImg}) no-repeat center center/cover;
-  opacity: 0.7;
-  z-index: -1;
-}
-
-@media (max-width: 768px) {
   background-size: cover;
-  padding-bottom: 8rem; /* More space on mobile */
-}
+  backdrop-filter: blur(50px);
+  padding-bottom: 6rem;
 
-@media (max-width: 480px) {
-  background-size: cover;
-  padding-bottom: 10rem; /* Further spacing */
-}
-`;
-
-const HeroContent = styled.div`
-display: flex;                /* Set display to flex */
-flex-direction: column;        /* Stack items vertically */
-justify-content: flex-end;     /* Push content to the bottom */
-max-width: 800px;
-color: #333;
-padding: 2rem;
-border-radius: 15px;
-z-index: 2;
-
-@media (max-width: 768px) {
-  padding: 1.5rem;
-  max-width: 90%; /* Make it smaller on mobile */
-}
-
-@media (max-width: 480px) {
-  padding: 1rem;
-  max-width: 95%; /* Smaller on very small screens */
-}
-`;
-
-const FloatingImage = styled.img`
-  position: absolute;
-  height: auto;
-
-  &.image1 {
-    width: 220px;
-    top: 40%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    animation: float 3s ease-in-out infinite;
-  }
-
-  &.image2 {
-    width: 210px;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: float 4s ease-in-out infinite;
-  }
-
-  &.image3 {
-    width: 200px;
-    top: 40%;
-    left: 85%;
-    transform: translate(-50%, -50%);
-    animation: float 3.5s ease-in-out infinite;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(${backgroundImg}) no-repeat center center/cover;
+    opacity: 0.7;
+    z-index: -1;
   }
 
   @media (max-width: 768px) {
-    &.image1,
-    &.image3 {
-      width: 120px;
-      left: 25%; /* Shift closer to the center */
-    }
-
-    &.image2 {
-      width: 120px;
-      left: 50%; /* Keep centered */
-    }
+    background-size: cover;
+    padding-bottom: 8rem;
   }
 
   @media (max-width: 480px) {
-    &.image1,
-    &.image3 {
-      width: 100px;
-      left: 30%;
-    }
-
-    &.image2 {
-      width: 100px;
-      left: 50%; /* Perfect centering */
-    }
+    background-size: cover;
+    padding-bottom: 10rem;
   }
 `;
 
+
+const HeroContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-width: 800px;
+  color: #333;
+  padding: 2rem;
+  border-radius: 15px;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    max-width: 95%;
+  }
+`;
+
+const FloatingImagesWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 15px;
+  }
+`;
+
+// const FloatingImage = styled.img`
+//   width: 220px;
+//   height: auto;
+//   animation: float 3s ease-in-out infinite;
+
+//   @media (max-width: 768px) {
+//     width: 120px;
+//   }
+
+//   @media (max-width: 480px) {
+//     width: 100px;
+//   }
+// `;
 
 const HeroTitle = styled.h1`
   font-size: 2rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  
+
   @media (max-width: 768px) {
-    font-size: 1.8rem; /* Smaller title on mobile */
+    font-size: 1.8rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem; /* Even smaller title for very small screens */
+    font-size: 1.5rem;
   }
 `;
 
@@ -143,17 +115,63 @@ const HeroTitle2 = styled.h2`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 
   @media (max-width: 768px) {
-    font-size: 2.5rem; /* Smaller subtitle on mobile */
+    font-size: 2.5rem;
   }
 
   @media (max-width: 480px) {
-    font-size: 2rem; /* Even smaller on very small screens */
+    font-size: 2rem;
   }
 `;
 
 const HeroImage = styled(motion.img)`
   max-width: 100%;
   z-index: -1;
+`;
+const FloatingImagesContainer = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 40%; /* Adjust vertical alignment */
+  z-index: 1;
+  
+  & > img {
+    margin: 0 1rem;
+  }
+
+  @media (max-width: 768px) {
+    top: 50%; /* Adjust vertical position */
+  }
+
+  @media (max-width: 480px) {
+    top: 55%; /* Adjust vertical position */
+  }
+`;
+const FloatingImage = styled.img`
+  height: auto;
+
+  &.image1 {
+    width: 220px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  &.image2 {
+    width: 210px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  &.image3 {
+    width: 200px;
+    animation: float 3.5s ease-in-out infinite;
+  }
+
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+  }
 `;
 
 const Hero = () => {
@@ -167,9 +185,11 @@ const Hero = () => {
         transition={{ duration: 0.8 }}
       />
       
-      <FloatingImage src={img1} alt="Floating Image 1" className="image1" />
-      <FloatingImage src={img2} alt="Floating Image 2" className="image2" />
-      <FloatingImage src={img3} alt="Floating Image 3" className="image3" />
+      <FloatingImagesContainer>
+        <FloatingImage src={img1} alt="Floating Image 1" className="image1" />
+        <FloatingImage src={img2} alt="Floating Image 2" className="image2" />
+        <FloatingImage src={img3} alt="Floating Image 3" className="image3" />
+      </FloatingImagesContainer>
 
       <HeroContent>
         <HeroTitle>Bridging <br /> <HeroTitle2>ABA Therapy</HeroTitle2> & Childcare <br/> for Every Milestone</HeroTitle>
@@ -178,5 +198,6 @@ const Hero = () => {
     </HeroContainer>
   );
 };
+
 
 export default Hero;
