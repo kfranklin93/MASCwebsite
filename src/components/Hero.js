@@ -111,13 +111,16 @@ const HeroTitlesWrapper = styled.div`
   width: 100%;
   text-align: center;
   margin-top: auto; /* Pushes the titles to the bottom */
+  margin-bottom: calc(1vh + 50px); /* Adds space for URL bar (50px is an example) */
 
   @media (max-width: 768px) {
     padding: 1.5rem 1rem;
+    margin-bottom: calc(2vh + 40px); /* Adjust for smaller screens */
   }
 
   @media (max-width: 480px) {
     padding: 1rem 0.5rem;
+    margin-bottom: calc(3vh + 30px); /* Further adjust for mobile screens */
   }
 `;
 
@@ -153,7 +156,7 @@ const HeroTitle2 = styled.h2`
 
 const HeroTitle3 = styled.h2`
   font-size: 1.2rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   bottom: 1rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
@@ -165,7 +168,7 @@ const HeroTitle3 = styled.h2`
   }
 
   @media (max-width: 480px) {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 `;
 
@@ -190,6 +193,7 @@ const Hero = () => {
         <HeroTitle>
           The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning
         </HeroTitle>
+        <HeroTitle3>Contact us at: <strong>(678) 353-6829</strong></HeroTitle3>
         <HeroTitle3>Located in Dunwoody, Georgia</HeroTitle3>
       </HeroTitlesWrapper>
     </HeroContainer>
