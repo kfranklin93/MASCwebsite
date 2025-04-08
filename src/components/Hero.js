@@ -157,7 +157,7 @@ const HeroTitle3 = styled.h2`
   bottom: 1rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
+  // text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
   text-align: center;
 
   @media (max-width: 768px) {

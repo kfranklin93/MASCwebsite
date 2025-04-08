@@ -144,7 +144,7 @@ try {
   return (
     <FormContainer>
       <FormTitle>Intake Form</FormTitle>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} netlify>
         <div>
           <Label htmlFor="parentName">Parent's Name</Label>
           <InputField
