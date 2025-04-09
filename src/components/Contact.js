@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from '@formspree/react';
 import styled from 'styled-components';
 import Select from 'react-select';
 
@@ -56,7 +57,7 @@ const TextAreaField = styled.textarea`
 const SubmitButton = styled.button`
   padding: 15px;
   margin-top: 20px;
-  background-color: #4A90E2;
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 10px;
@@ -65,7 +66,7 @@ const SubmitButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #3B7DC4;
+    background-color: #3b7dc4;
   }
 `;
 
@@ -81,22 +82,8 @@ const InsuranceDropdown = styled.div`
   text-align: left;
 `;
 
-const insuranceOptions = [
-  { value: 'aetna', label: 'Aetna' },
-  { value: 'ambetter', label: 'Ambetter' },
-  { value: 'amerigroup', label: 'Amerigroup' },
-  { value: 'bluecross', label: 'Blue Cross Blue Shield' },
-  { value: 'caresource', label: 'Care Source' },
-  { value: 'cigna', label: 'Cigna' },
-  { value: 'humana', label: 'Humana' },
-  { value: 'medicaid', label: 'Medicaid' },
-  { value: 'medicare', label: 'Medicare' },
-  { value: 'peachstate', label: 'Peach State Health Plan' },
-  { value: 'unitedhealthcare', label: 'UnitedHealthcare' },
-  { value: 'other', label: 'Other' }
-];
-
-const ContactForm = () => {
+function ContactForm() {
+  const [state, handleSubmit] = useForm("xkgjkjng"); // Replace with your actual Formspree form ID
   const [formData, setFormData] = useState({
     parentName: '',
     childName: '',
@@ -104,51 +91,88 @@ const ContactForm = () => {
     dob: '',
     email: '',
     phone: '',
+    dateOfLastEval: '',
     insuranceProvider: null,
-    behaviorsOfConcern: '',
-    dateOfLastEval: '', // Added field for Date of Last Evaluation
+    behaviorsOfConcern: ''
   });
+  const [formErrors, setFormErrors] = useState({});
+
+  const insuranceOptions = [
+    { value: "aetna", label: "Aetna" },
+    { value: "ambetter", label: "Ambetter" },
+    { value: "amerigroup", label: "Amerigroup" },
+    { value: "bluecross", label: "Blue Cross Blue Shield" },
+    { value: "caresource", label: "Care Source" },
+    { value: "cigna", label: "Cigna" },
+    { value: "humana", label: "Humana" },
+    { value: "medicaid", label: "Medicaid" },
+    { value: "medicare", label: "Medicare" },
+    { value: "peachstate", label: "Peach State Health Plan" },
+    { value: "unitedhealthcare", label: "UnitedHealthcare" },
+    { value: "other", label: "Other" }
+  ];
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSelectChange = (selectedOption) => {
-    setFormData({ ...formData, insuranceProvider: selectedOption });
+    setFormData({
+      ...formData,
+      insuranceProvider: selectedOption
+    });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Custom validation function
+  const validateForm = () => {
+    const errors = {};
 
-    // Create a FormData object to gather form data
-    const form = e.target;
-    const formDataObj = new FormData(form);
+    // Validate required fields
+    if (!formData.parentName) errors.parentName = "Parent's name is required.";
+    if (!formData.childName) errors.childName = "Child's name is required.";
+    if (!formData.age || formData.age <= 0) errors.age = "Age must be a positive number.";
+    if (!formData.dob) errors.dob = "Date of birth is required.";
+    if (!formData.email) errors.email = "Email address is required.";
+    if (!formData.phone) errors.phone = "Phone number is required.";
+    if (!formData.dateOfLastEval) errors.dateOfLastEval = "Date of last evaluation is required.";
+    if (!formData.behaviorsOfConcern) errors.behaviorsOfConcern = "Please describe the behaviors of concern.";
 
-    // Include hidden form-name field for Netlify
-    formDataObj.append('form-name', 'contact');
+    // Simple email format validation
+    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
 
-    // Use fetch to submit the form to Netlify
-    fetch('/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams(formDataObj).toString(),
-    })
-      .then(() => alert('✅ Form submitted successfully!'))
-      .catch((error) => alert('❌ Error submitting form: ' + error));
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0; // Returns true if no errors
   };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate form data before submitting
+    if (validateForm()) {
+      handleSubmit(event);
+    }
+  };
+
+  if (state.succeeded) {
+    return <p>Thanks for submitting the form!</p>;
+  }
 
   return (
     <FormContainer>
       <FormTitle>Intake Form</FormTitle>
       <Form
-  name="contact" // The name here is important for Netlify
-  method="POST"
-  data-netlify="true" // This tells Netlify to handle the form
-  netlify-honeypot="bot-field" // Anti-bot field
-  onSubmit={handleSubmit} // Handle submission in your JS logic
->
+        name="contact" // The name here is important for Netlify
+        method="POST"
+        data-netlify="true" // This tells Netlify to handle the form
+        netlify-honeypot="bot-field" // Anti-bot field
+        onSubmit={onSubmit} // Handle submission in your JS logic
+      >
+        {/* Parent's Name */}
         <div>
           <Label htmlFor="parentName">Parent's Name</Label>
           <InputField
@@ -159,8 +183,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.parentName && <span>{formErrors.parentName}</span>}
         </div>
 
+        {/* Child's Name */}
         <div>
           <Label htmlFor="childName">Child's Name</Label>
           <InputField
@@ -171,8 +197,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.childName && <span>{formErrors.childName}</span>}
         </div>
 
+        {/* Child's Age */}
         <div>
           <Label htmlFor="age">Child's Age</Label>
           <InputField
@@ -183,8 +211,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.age && <span>{formErrors.age}</span>}
         </div>
 
+        {/* Child's Date of Birth */}
         <div>
           <Label htmlFor="dob">Child's Date of Birth</Label>
           <InputField
@@ -194,8 +224,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.dob && <span>{formErrors.dob}</span>}
         </div>
 
+        {/* Email Address */}
         <div>
           <Label htmlFor="email">Email Address</Label>
           <InputField
@@ -206,8 +238,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.email && <span>{formErrors.email}</span>}
         </div>
 
+        {/* Phone Number */}
         <div>
           <Label htmlFor="phone">Phone Number</Label>
           <InputField
@@ -218,9 +252,10 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.phone && <span>{formErrors.phone}</span>}
         </div>
 
-        {/* Date of Last Evaluation Field */}
+        {/* Date of Last Evaluation */}
         <div>
           <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
           <InputField
@@ -230,6 +265,7 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.dateOfLastEval && <span>{formErrors.dateOfLastEval}</span>}
         </div>
 
         {/* Insurance Dropdown */}
@@ -246,6 +282,7 @@ const ContactForm = () => {
           </InsuranceDropdown>
         </div>
 
+        {/* Behaviors of Concern */}
         <div>
           <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
           <TextAreaField
@@ -255,19 +292,23 @@ const ContactForm = () => {
             onChange={handleChange}
             required
           />
+          {formErrors.behaviorsOfConcern && <span>{formErrors.behaviorsOfConcern}</span>}
         </div>
 
-        <SubmitButton type="submit">Submit</SubmitButton>
+        {/* Submit Button */}
+        <SubmitButton type="submit" disabled={state.submitting}>Submit</SubmitButton>
 
         <ConsentText>
-          By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA.
+          By submitting this form, you consent to the use and disclosure of your
+          personal information as required to process your inquiry. We are
+          committed to maintaining the privacy and security of your personal
+          health information in compliance with HIPAA.
         </ConsentText>
 
-        {/* Hidden form name input for Netlify */}
         <input type="hidden" name="form-name" value="contact" />
       </Form>
     </FormContainer>
   );
-};
+}
 
 export default ContactForm;
