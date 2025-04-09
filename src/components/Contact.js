@@ -143,12 +143,12 @@ const ContactForm = () => {
     <FormContainer>
       <FormTitle>Intake Form</FormTitle>
       <Form
-        name="contact" // This form name must match the form name in the Netlify UI
-        method="POST"
-        data-netlify="true" // Netlify form detection
-        netlify-honeypot="bot-field" // Anti-spam field
-        onSubmit={handleSubmit}
-      >
+  name="contact" // The name here is important for Netlify
+  method="POST"
+  data-netlify="true" // This tells Netlify to handle the form
+  netlify-honeypot="bot-field" // Anti-bot field
+  onSubmit={handleSubmit} // Handle submission in your JS logic
+>
         <div>
           <Label htmlFor="parentName">Parent's Name</Label>
           <InputField
