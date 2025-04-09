@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import axios from 'axios'; // ✅ Import Axios for API calls (optional for extra processing)
 
 // Styled-components for the form and elements
 const FormContainer = styled.section`
