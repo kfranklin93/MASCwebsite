@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import axios from 'axios'; // ✅ Import Axios for API calls
+// import axios from 'axios'; // ✅ Import Axios for API calls
 
 // Styled-components for the form and elements
 const FormContainer = styled.section`
@@ -97,6 +97,15 @@ const insuranceOptions = [
   { value: 'other', label: 'Other' }
 ];
 
+
+const encode = (data) =>
+  Object.keys(data)
+    .map(
+      (key) =>
+        encodeURIComponent(key) + "=" + encodeURIComponent(data[key] || "")
+    )
+    .join("&");
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     parentName: '',
@@ -105,64 +114,66 @@ const ContactForm = () => {
     dob: '',
     email: '',
     phone: '',
-    insuranceProvider: null,
+    insuranceProvider: '',
     behaviorsOfConcern: '',
-    dateOfLastEval: '', // Added field for Date of Last Evaluation
+    dateOfLastEval: '',
   });
 
-  const [status] = useState(""); // ✅ For displaying success/error messages
+  const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSelectChange = (selectedOption) => {
-    setFormData({ ...formData, insuranceProvider: selectedOption });
+    setFormData({ ...formData, insuranceProvider: selectedOption?.label || '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-try {
-  const response = await axios.post(
-    "https://www.mommyangelsspecialtycare.com/send-email",
-    formData,
-    { headers: { "Content-Type": "application/json" } }
-  );
+    try {
+      const body = {
+        "form-name": "intake-fallback",
+        ...formData,
+      };
 
-      if (response.data.success) {
-        alert("✅ Email sent successfully!!");
-      } else {
-        alert("❌ Failed to send email. Please try again.");
-      }
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(body),
+      });
+
+      setStatus("✅ Thank you! Your form was submitted.");
+      // Optionally: redirect to thank-you page
+      // window.location.href = "/thank-you";
     } catch (error) {
-      console.error("Error sending email:", error);
-      alert("❌ Failed to send email. Please try again.");
+      console.error("Form submission error:", error);
+      setStatus("❌ Something went wrong. Please try again.");
     }
   };
 
   return (
     <FormContainer>
       <FormTitle>Intake Form</FormTitle>
-      <Form onSubmit={handleSubmit} netlify>
+      <Form onSubmit={handleSubmit} data-netlify="true" name="intake-fallback">
+        <input type="hidden" name="form-name" value="intake-fallback" />
         <div>
           <Label htmlFor="parentName">Parent's Name</Label>
           <InputField
             type="text"
             name="parentName"
-            placeholder="Enter Parent's Name"
             value={formData.parentName}
             onChange={handleChange}
             required
           />
         </div>
-        
+
         <div>
           <Label htmlFor="childName">Child's Name</Label>
           <InputField
             type="text"
             name="childName"
-            placeholder="Enter Child's Name"
             value={formData.childName}
             onChange={handleChange}
             required
@@ -174,7 +185,6 @@ try {
           <InputField
             type="number"
             name="age"
-            placeholder="Enter Age"
             value={formData.age}
             onChange={handleChange}
             required
@@ -197,7 +207,6 @@ try {
           <InputField
             type="email"
             name="email"
-            placeholder="Enter Email Address"
             value={formData.email}
             onChange={handleChange}
             required
@@ -209,14 +218,12 @@ try {
           <InputField
             type="tel"
             name="phone"
-            placeholder="Enter Phone Number"
             value={formData.phone}
             onChange={handleChange}
             required
           />
         </div>
 
-        {/* Date of Last Evaluation Field */}
         <div>
           <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
           <InputField
@@ -228,13 +235,11 @@ try {
           />
         </div>
 
-        {/* Insurance Dropdown */}
         <div>
-          <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
+          <Label htmlFor="insuranceProvider">Insurance Provider</Label>
           <InsuranceDropdown>
             <Select
               options={insuranceOptions}
-              value={formData.insuranceProvider}
               onChange={handleSelectChange}
               isSearchable
               placeholder="Search or select insurance..."
@@ -246,7 +251,6 @@ try {
           <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
           <TextAreaField
             name="behaviorsOfConcern"
-            placeholder="Describe any current behaviors of concern"
             value={formData.behaviorsOfConcern}
             onChange={handleChange}
             required
@@ -255,14 +259,216 @@ try {
 
         <SubmitButton type="submit">Submit</SubmitButton>
 
-        <p>{status}</p> {/* ✅ Display success or error message */}
+        {status && <p>{status}</p>}
 
         <ConsentText>
-          By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA. Please do not include sensitive health information, such as medical conditions or treatment details, as this form is not intended for secure communication of protected health information (PHI). For more secure communication, please contact us directly by phone.
+          By submitting this form, you consent to the use and disclosure of your personal information...
         </ConsentText>
       </Form>
+
+      {/* Hidden form fallback for Netlify to parse fields during build */}
+      <form
+  name="intake-fallback"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value="intake-fallback" />
+  <input type="hidden" name="bot-field" />
+        <input type="text" name="childName" />
+        <input type="number" name="age" />
+        <input type="date" name="dob" />
+        <input type="email" name="email" />
+        <input type="tel" name="phone" />
+        <input type="text" name="insuranceProvider" />
+        <input type="text" name="behaviorsOfConcern" />
+        <input type="date" name="dateOfLastEval" />
+      </form>
     </FormContainer>
   );
 };
 
 export default ContactForm;
+
+// const ContactForm = () => {
+//   const [formData, setFormData] = useState({
+//     parentName: '',
+//     childName: '',
+//     age: '',
+//     dob: '',
+//     email: '',
+//     phone: '',
+//     insuranceProvider: null,
+//     behaviorsOfConcern: '',
+//     dateOfLastEval: '', // Added field for Date of Last Evaluation
+//   });
+
+//   const [status] = useState(""); // ✅ For displaying success/error messages
+
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSelectChange = (selectedOption) => {
+//     setFormData({ ...formData, insuranceProvider: selectedOption });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+// try {
+//   const response = await axios.post(
+//     "https://www.mommyangelsspecialtycare.com/send-email",
+//     formData,
+//     { headers: { "Content-Type": "application/json" } }
+//   );
+
+//       if (response.data.success) {
+//         alert("✅ Email sent successfully!!");
+//       } else {
+//         alert("❌ Failed to send email. Please try again.");
+//       }
+//     } catch (error) {
+//       console.error("Error sending email:", error);
+//       alert("❌ Failed to send email. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <FormContainer>
+//       <FormTitle>Intake Form</FormTitle>
+//       <Form onSubmit={handleSubmit} netlify>
+//         <div>
+//           <Label htmlFor="parentName">Parent's Name</Label>
+//           <InputField
+//             type="text"
+//             name="parentName"
+//             placeholder="Enter Parent's Name"
+//             value={formData.parentName}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+        
+//         <div>
+//           <Label htmlFor="childName">Child's Name</Label>
+//           <InputField
+//             type="text"
+//             name="childName"
+//             placeholder="Enter Child's Name"
+//             value={formData.childName}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         <div>
+//           <Label htmlFor="age">Child's Age</Label>
+//           <InputField
+//             type="number"
+//             name="age"
+//             placeholder="Enter Age"
+//             value={formData.age}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         <div>
+//           <Label htmlFor="dob">Child's Date of Birth</Label>
+//           <InputField
+//             type="date"
+//             name="dob"
+//             value={formData.dob}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         <div>
+//           <Label htmlFor="email">Email Address</Label>
+//           <InputField
+//             type="email"
+//             name="email"
+//             placeholder="Enter Email Address"
+//             value={formData.email}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         <div>
+//           <Label htmlFor="phone">Phone Number</Label>
+//           <InputField
+//             type="tel"
+//             name="phone"
+//             placeholder="Enter Phone Number"
+//             value={formData.phone}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         {/* Date of Last Evaluation Field */}
+//         <div>
+//           <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
+//           <InputField
+//             type="date"
+//             name="dateOfLastEval"
+//             value={formData.dateOfLastEval}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         {/* Insurance Dropdown */}
+//         <div>
+//           <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
+//           <InsuranceDropdown>
+//             <Select
+//               options={insuranceOptions}
+//               value={formData.insuranceProvider}
+//               onChange={handleSelectChange}
+//               isSearchable
+//               placeholder="Search or select insurance..."
+//             />
+//           </InsuranceDropdown>
+//         </div>
+
+//         <div>
+//           <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
+//           <TextAreaField
+//             name="behaviorsOfConcern"
+//             placeholder="Describe any current behaviors of concern"
+//             value={formData.behaviorsOfConcern}
+//             onChange={handleChange}
+//             required
+//           />
+//         </div>
+
+//         <SubmitButton type="submit">Submit</SubmitButton>
+
+//         <p>{status}</p> {/* ✅ Display success or error message */}
+
+//         <ConsentText>
+//           By submitting this form, you consent to the use and disclosure of your personal information as required to process your inquiry. We are committed to maintaining the privacy and security of your personal health information in compliance with HIPAA. Please do not include sensitive health information, such as medical conditions or treatment details, as this form is not intended for secure communication of protected health information (PHI). For more secure communication, please contact us directly by phone.
+//         </ConsentText>
+//       </Form>
+//     </FormContainer>
+    
+//     <form name="intake-fallback" netlify netlify-honeypot="bot-field" hidden>
+//     <input type="text" name="parentName" />
+//     <input type="text" name="childName" />
+//     <input type="number" name="age" />
+//     <input type="date" name="dob" />
+//     <input type="email" name="email" />
+//     <input type="tel" name="phone" />
+//     <input type="text" name="insuranceProvider" />
+//     <input type="text" name="behaviorsOfConcern" />
+//     <input type="date" name="dateOfLastEval" />
+//   </form>
+
+//   );
+// };
+
+// export default ContactForm;
