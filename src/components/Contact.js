@@ -120,19 +120,23 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Create a FormData object to gather form data
     const form = e.target;
-    const formData = new FormData(form);
+    const formDataObj = new FormData(form);
 
-    // Use the fetch API to submit the form
-    fetch("/", {
-      method: "POST",
+    // Include hidden form-name field for Netlify
+    formDataObj.append('form-name', 'contact');
+
+    // Use fetch to submit the form to Netlify
+    fetch('/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams(formData).toString(),
+      body: new URLSearchParams(formDataObj).toString(),
     })
-      .then(() => alert("✅ Form submitted successfully!"))
-      .catch((error) => alert("❌ Error submitting form: " + error));
+      .then(() => alert('✅ Form submitted successfully!'))
+      .catch((error) => alert('❌ Error submitting form: ' + error));
   };
 
   return (
@@ -142,7 +146,7 @@ const ContactForm = () => {
         name="contact" // This form name must match the form name in the Netlify UI
         method="POST"
         data-netlify="true" // Netlify form detection
-        netlify-honeypot="bot-field" // Anti-spam
+        netlify-honeypot="bot-field" // Anti-spam field
         onSubmit={handleSubmit}
       >
         <div>
@@ -156,7 +160,7 @@ const ContactForm = () => {
             required
           />
         </div>
-        
+
         <div>
           <Label htmlFor="childName">Child's Name</Label>
           <InputField
