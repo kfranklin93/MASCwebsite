@@ -128,7 +128,7 @@ const HeroTitle = styled.h1`
   font-size: 2rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.2);
+  // text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.2);
 
   @media (max-width: 768px) {
     font-size: 1.8rem;
@@ -143,7 +143,7 @@ const HeroTitle2 = styled.h2`
   font-size: 4rem;
   color: rgb(220, 27, 27);
   font-family: 'Bubblegum Sans';
-  text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
+  // text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -171,7 +171,23 @@ const HeroTitle3 = styled.h2`
     font-size: 1rem;
   }
 `;
+const HeroTitle4 = styled.h2`
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  bottom: 1rem;
+  color: black;
+  font-family: 'Bubblegum Sans';
+  // text-shadow: 2px 2px 4px rgba(220, 27, 27, 0.6);
+  text-align: center;
 
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
+`;
 const Hero = () => {
   return (
     <HeroContainer>
@@ -193,8 +209,8 @@ const Hero = () => {
         <HeroTitle>
           The Bridge Between <HeroTitle2> ABA Therapy</HeroTitle2> & Everyday Learning
         </HeroTitle>
-        <HeroTitle3>Contact us at: <strong>(678) 353-6829</strong></HeroTitle3>
-        <HeroTitle3>Located in Dunwoody, Georgia</HeroTitle3>
+        <HeroTitle4>Contact us at: <HeroTitle3> <strong>(678) 353-6829</strong></HeroTitle3></HeroTitle4>
+        <HeroTitle4>Located in Dunwoody, Georgia</HeroTitle4>
       </HeroTitlesWrapper>
     </HeroContainer>
   );
