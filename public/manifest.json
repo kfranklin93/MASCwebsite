@@ -3,17 +3,17 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "apple-touch-icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png",
       "type": "image/png",
       "sizes": "512x512"
     }

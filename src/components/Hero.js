@@ -6,6 +6,8 @@ import backgroundImg from "../assets/Untitled-design-7-1-2.png";
 import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
+import { Helmet } from "react-helmet-async";
+
 
 const HeroContainer = styled.section`
   display: flex;
@@ -190,6 +192,29 @@ const HeroTitle4 = styled.h2`
 `;
 const Hero = () => {
   return (
+    <>
+    <Helmet>
+  <title>Mommy Angel’s Specialty Care | ABA Therapy, Autism Support & Pre-K Readiness</title>
+  <meta
+    name="description"
+    content="Mommy Angel’s Specialty Care and Autism Center in Dunwoody, GA offers compassionate ABA therapy, speech therapy, and Pre-K readiness programs for children with autism. Socialization, not isolation."
+  />
+  <meta
+    name="keywords"
+    content="ABA therapy Dunwoody, autism center Georgia, special needs daycare, speech therapy for toddlers, Pre-K readiness, early intervention, autism support Georgia, inclusive childcare, RBT, BCBA, autism therapy near me"
+  />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Mommy Angel’s Specialty Care & Autism Center" />
+  <meta
+    property="og:description"
+    content="A loving space where your child can grow through ABA therapy, early learning, and social inclusion. Located in Dunwoody, GA."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://yourwebsite.com/path-to-image.jpg" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+</Helmet>
+
     <HeroContainer>
       <HeroImage 
         src={heroImage} 
@@ -213,6 +238,7 @@ const Hero = () => {
         <HeroTitle4>Located in Dunwoody, Georgia</HeroTitle4>
       </HeroTitlesWrapper>
     </HeroContainer>
+    </>
   );
 };
 

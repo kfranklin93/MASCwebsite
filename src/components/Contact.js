@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from '@formspree/react';
 import styled from 'styled-components';
 import Select from 'react-select';
+import { Helmet } from 'react-helmet-async';
 
 // Styled-components for the form and elements
 const FormContainer = styled.section`
@@ -163,6 +164,18 @@ function ContactForm() {
   }
 
   return (
+    <>
+    <Helmet>
+  <title>Contact Mommy Angel's Specialty Care | ABA Therapy & Autism Support</title>
+  <meta
+    name="description"
+    content="Reach out to Mommy Angel's Specialty Care and Autism Center for compassionate, specialized ABA therapy, speech therapy, and Pre-K readiness for children with autism in Georgia."
+  />
+  <meta
+    name="keywords"
+    content="ABA therapy, autism support, early childhood autism care, contact Mommy Angel's, Pre-K readiness, speech therapy Georgia, inclusive autism center"
+  />
+</Helmet>
     <FormContainer>
       <FormTitle>Intake Form</FormTitle>
       <Form
@@ -308,6 +321,7 @@ function ContactForm() {
         <input type="hidden" name="form-name" value="contact" />
       </Form>
     </FormContainer>
+    </>
   );
 }
 

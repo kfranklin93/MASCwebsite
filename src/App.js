@@ -5,10 +5,24 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import { Helmet } from "react-helmet-async";
 
 const App = () => {
   return (
     <>
+    <Helmet>
+    <title>Mommy Anels Specialty Care ABA Therapy Services in Georgia | Home</title>
+    <meta name="description" content="Expert ABA therapy services for children in Georgia. Contact us today for a personalized intake." />
+    <meta name="keywords" content="ABA therapy, autism, behavioral therapy, Georgia, child development" />
+    <link rel="canonical" href="https://mommyangelsspecialtycare.com/" />
+    
+    {/* Social (Open Graph) Tags */}
+    <meta property="og:title" content="Your ABA Therapy Services in Georgia" />
+    <meta property="og:description" content="Supporting children and families with compassionate, evidence-based ABA therapy." />
+    <meta property="og:image" content="https://yourdomain.com/social-preview.jpg" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </Helmet>
       <Navbar />
       
       {/* Assign IDs for smooth scrolling */}
