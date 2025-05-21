@@ -12,6 +12,8 @@ import musicImg from "../assets/music-4.jpg";
 import grassroomFrontImg from "../assets/grassroomFront.jpg";
 import leappadImg from "../assets/stimulationFav-6.jpg";
 
+
+
 const ServicesContainer = styled.section`
   text-align: center;
   padding: 4rem 2rem;
@@ -34,6 +36,10 @@ const ServiceList = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
 `;
 
 const ServiceCard = styled.div`
@@ -55,6 +61,11 @@ const ServiceCard = styled.div`
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
   }
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 15px;
+  }
 `;
 
 const ServiceTitle = styled.h3`
@@ -62,16 +73,11 @@ const ServiceTitle = styled.h3`
   color: #00670e;
   margin-bottom: 15px;
   font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 
-// const ServiceImage = styled.img`
-//   width: 100%;
-//   max-height: 150px;
-//   object-fit: cover;
-//   border-radius: 10px;
-//   cursor: pointer;
-// `;
-// Fun border for the service image
 const ServiceImage = styled.img`
   width: 100%;
   height: auto;
@@ -120,6 +126,11 @@ const ServiceDescription = styled.p`
   max-height: 200px;
   overflow-y: auto;
   padding-right: 10px;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    max-height: none;
+  }
 `;
 
 const EnlargedImageOverlay = styled(motion.div)`
@@ -141,12 +152,148 @@ const EnlargedImage = styled.img`
   border-radius: 10px;
 `;
 
+const GeneralServicesSection = styled.section`
+  margin: 4rem 0;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #e8fdf5, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  scroll-margin-top: 100px; /* Avoids header overlay when scrolled into view */
+  transition: all 0.3s ease;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+`;
+
+const GeneralServiceTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00670e;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    color: #00b894;
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const GeneralServiceList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  transition: all 0.3s ease;
+
+  li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    position: relative;
+    
+    &:before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      font-size: 1.5rem;
+      color: #00aaff;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  li strong {
+    font-weight: bold;
+    color: #00670e;
+  }
+`;
+
 const Services = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [openSections, setOpenSections] = useState({
+    general: true,
+    autism: false,
+  });
+
+  const toggleSection = (section) => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
 
   return (
     <ServicesContainer>
       <ServicesTitle>Our Services</ServicesTitle>
+      <GeneralServicesSection id="general-services">
+      <GeneralServiceTitle onClick={() => toggleSection("general")}>
+        Behavioral & Educational Services {openSections.general ? "▲" : "▼"}
+      </GeneralServiceTitle>
+      <AnimatePresence>
+        {openSections.general && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <GeneralServiceList>
+              <li>Autism Diagnostic Services</li>
+              <li>Occupational Therapy</li>
+              <li>Speech Therapy</li>
+              <li>1:1 Therapy Tailored to Your Child’s Needs</li>
+              <li>Center-Based ABA Therapy</li>
+              <li>Parent Training</li>
+              <li>Pre-K Readiness Programs</li>
+              <li>Daily Progress Monitoring and Goal Tracking</li>
+            </GeneralServiceList>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </GeneralServicesSection>
+
+    <GeneralServicesSection id="autism-diagnostic">
+      <GeneralServiceTitle onClick={() => toggleSection("autism")}>
+        Autism Diagnostic Services {openSections.autism ? "▲" : "▼"}
+      </GeneralServiceTitle>
+      <AnimatePresence>
+        {openSections.autism && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <GeneralServiceList>
+              <li>
+                <strong>Empathetic Assessments:</strong> We provide thorough and accurate evaluations in a supportive environment, understanding the emotional journey families undertake when seeking autism testing.
+              </li>
+              <li>
+                <strong>Experienced Team:</strong> Our services are led by a highly qualified psychologist, combining compassion with clinical expertise to guide families toward a clear path forward.
+              </li>
+              <li>
+                <strong>Personalized Approach:</strong> Recognizing that every child is unique, we tailor our evaluations to reflect individual needs and developmental stages.
+              </li>
+              <li>
+                <strong>Comprehensive Process:</strong> Our diagnostic process includes developmental monitoring, screening tools, clinical interviews, and history-taking to ensure a holistic understanding of your child's needs.
+              </li>
+            </GeneralServiceList>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </GeneralServicesSection>
       <ServiceList>
         {[
            {

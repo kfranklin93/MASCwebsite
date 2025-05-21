@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-// import About from "./components/About";
+import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { Helmet } from "react-helmet-async";
+import CTAButton from "./components/ui/ctabutton";
 
 const App = () => {
   return (
@@ -26,8 +27,11 @@ const App = () => {
       <Navbar />
       
       {/* Assign IDs for smooth scrolling */}
-      <section id="home"><Hero /></section>
-    
+      <section id="home">
+        <Hero />
+        {/* <CTAButton text="Schedule A Tour" to="/contact" /> Button inside Hero */}
+      </section>
+    <section id="about"><About/></section>
       <section id="services"><Services /></section>
       <section id="contact"><Contact /></section>
       {/* <section id="about"><About /></section> */}

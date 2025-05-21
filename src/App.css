@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 768px) {
+  body {
+    background-image: url('/src/assets/Untitled-design-7-1-2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
