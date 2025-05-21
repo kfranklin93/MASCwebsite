@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import HeroSlider from "./HeroSlider"; // Ensure to import your HeroSlider component
+// import HeroSlider from "./HeroSlider"; // Ensure to import your HeroSlider component
 import { motion } from "framer-motion";
 // ...imports remain unchanged
 import placeholderImg from "../assets/IMG_6867.png"; // Add your placeholder image
@@ -87,31 +87,31 @@ const Tooltip = styled.div`
 `;
 
 // Behavior Item Styled Component (With Tooltip Hover Functionality)
-const BehaviorItem = styled.li`
-  ffont-size: 1.5rem;
-  color: #333;
-  padding: 0.5rem 1rem;
-  background: rgba(0, 35, 142, 0.2); /* Soft blue */
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-  cursor: pointer;
+// const BehaviorItem = styled.li`
+//   ffont-size: 1.5rem;
+//   color: #333;
+//   padding: 0.5rem 1rem;
+//   background: rgba(0, 35, 142, 0.2); /* Soft blue */
+//   border-radius: 8px;
+//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+//   position: relative;
+//   cursor: pointer;
 
-  &:hover ${Tooltip} {
-    visibility: visible;
-    opacity: 1;
-  }
-`;
+//   &:hover ${Tooltip} {
+//     visibility: visible;
+//     opacity: 1;
+//   }
+// `;
 
-const BehaviorList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-`;
+// const BehaviorList = styled.ul`
+//   list-style-type: none;
+//   padding: 0;
+//   margin: 0;
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 2rem;
+//   justify-content: center;
+// `;
 
 // const BehaviorsSection = styled.section`
 // display: flex;
@@ -123,44 +123,44 @@ const BehaviorList = styled.ul`
 // border-radius: 8px;
 // `;
 
-const TestimonialContainer = styled.section`
-  margin-top: 3rem;
-  padding: 2rem;
-  // background-color: #F1F9FF; /* Light grey-blue background */
-  background-color: rgba(255, 255, 255, 0.8); /* Light grey-blue background */
+// const TestimonialContainer = styled.section`
+//   margin-top: 3rem;
+//   padding: 2rem;
+//   // background-color: #F1F9FF; /* Light grey-blue background */
+//   background-color: rgba(255, 255, 255, 0.8); /* Light grey-blue background */
 
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
-`;
+//   border-radius: 8px;
+//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+// `;
 
-const TestimonialCard = styled.div`
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
-  max-width: 600px;
-  margin: 1rem auto;
-  font-family: "Poppins", sans-serif;
-  border-left: 5px solid #00897b; /* Calming teal border */
-`;
+// const TestimonialCard = styled.div`
+//   background-color: #fff;
+//   padding: 1.5rem;
+//   border-radius: 8px;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+//   margin-bottom: 1.5rem;
+//   max-width: 600px;
+//   margin: 1rem auto;
+//   font-family: "Poppins", sans-serif;
+//   border-left: 5px solid #00897b; /* Calming teal border */
+// `;
 
-const TestimonialQuote = styled.p`
-  font-style: italic;
-  color: #333;
-  margin-bottom: 1rem;
-`;
+// const TestimonialQuote = styled.p`
+//   font-style: italic;
+//   color: #333;
+//   margin-bottom: 1rem;
+// `;
 
-const TestimonialAuthor = styled.h4`
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #8bc34a; /* Soft green color */
-`;
+// const TestimonialAuthor = styled.h4`
+//   font-size: 1.2rem;
+//   font-weight: 600;
+//   color: #8bc34a; /* Soft green color */
+// `;
 
-const TestimonialRole = styled.p`
-  color: #777;
-  font-size: 1rem;
-`;
+// const TestimonialRole = styled.p`
+//   color: #777;
+//   font-size: 1rem;
+// `;
 
 const Section = styled.section`
   padding: 4rem 2rem;
@@ -187,13 +187,13 @@ const SectionTitle = styled.h2`
   text-align: center;
 `;
 
-const SectionSubtext = styled.p`
-  font-size: 1.25rem;
-  color: #444;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 2.5rem;
-`;
+// const SectionSubtext = styled.p`
+//   font-size: 1.25rem;
+//   color: #444;
+//   text-align: center;
+//   max-width: 800px;
+//   margin: 0 auto 2.5rem;
+// `;
 
 const SplitLayout = styled.div`
   display: flex;

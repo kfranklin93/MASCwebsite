@@ -7,8 +7,8 @@ import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import Contact from "../components/Contact";
+// import { Link } from "react-router-dom";
+// import Contact from "../components/Contact";
 import CTAButton from './ui/ctabutton'; // Import CTAButton component
 
 const HeroContainer = styled.section`

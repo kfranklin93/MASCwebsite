@@ -302,15 +302,15 @@ const navVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const menuVariants = {
-  hidden: { x: "-100%", opacity: 0 },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: { duration: 0.4, ease: "easeInOut" },
-  },
-  exit: { x: "-100%", opacity: 0, transition: { duration: 0.4 } },
-};
+// const menuVariants = {
+//   hidden: { x: "-100%", opacity: 0 },
+//   visible: {
+//     x: 0,
+//     opacity: 1,
+//     transition: { duration: 0.4, ease: "easeInOut" },
+//   },
+//   exit: { x: "-100%", opacity: 0, transition: { duration: 0.4 } },
+// };
 
 const NavbarContainer = styled(motion.nav)`
   position: fixed;
