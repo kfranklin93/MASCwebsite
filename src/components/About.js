@@ -68,23 +68,23 @@ const textAnimation = {
 };
 
 // Tooltip Styled Component (Defined First)
-const Tooltip = styled.div`
-  visibility: hidden;
-  position: absolute;
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: 1rem;
-  width: 150px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-`;
+// const Tooltip = styled.div`
+//   visibility: hidden;
+//   position: absolute;
+//   background-color: #333;
+//   color: white;
+//   text-align: center;
+//   padding: 5px;
+//   border-radius: 5px;
+//   z-index: 1;
+//   opacity: 0;
+//   transition: opacity 0.3s;
+//   font-size: 1rem;
+//   width: 150px;
+//   bottom: 100%;
+//   left: 50%;
+//   transform: translateX(-50%);
+// `;
 
 // Behavior Item Styled Component (With Tooltip Hover Functionality)
 // const BehaviorItem = styled.li`
