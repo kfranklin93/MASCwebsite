@@ -253,7 +253,7 @@ const About = () => (
     </Section>
 
     {/* WHAT IS ABA THERAPY Section */}
-    <Section>
+    <Section border="20px solid yellow">
       <SplitLayout>
         <TextColumn>
           <SectionTitle>What is ABA Therapy?</SectionTitle>

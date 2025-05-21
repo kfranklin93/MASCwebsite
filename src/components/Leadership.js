@@ -124,20 +124,20 @@ const Leadership = () => {
 
         <LeaderCard>
           <LeaderImage src={placeholderImage} alt="Clinical Director Headshot" />
-          <LeaderName>Tereva Ruffin</LeaderName>
-          <LeaderTitle>Clinical Director</LeaderTitle>
+          <LeaderName>Tereva</LeaderName>
+          <LeaderTitle>Speech Pathologist</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
           <LeaderImage src={placeholderImage} alt="Program Manager Headshot" />
           <LeaderName>Shruthi</LeaderName>
-          <LeaderTitle>ABA Program Manager</LeaderTitle>
+          <LeaderTitle>Specialty Care Supervisor</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
           <LeaderImage src={placeholderImage} alt="Operations Headshot" />
-          <LeaderName>Karen</LeaderName>
-          <LeaderTitle>Director of Operations</LeaderTitle>
+          <LeaderName>Anthony</LeaderName>
+          <LeaderTitle>ABA Tech Lead</LeaderTitle>
         </LeaderCard>
       </LeadersGrid>
     </LeadershipSection>
