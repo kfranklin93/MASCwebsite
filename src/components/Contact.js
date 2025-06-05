@@ -176,7 +176,8 @@ function ContactForm() {
     content="ABA therapy, autism support, early childhood autism care, contact Mommy Angel's, Pre-K readiness, speech therapy Georgia, inclusive autism center"
   />
 </Helmet>
-    <FormContainer>
+{/* <section id="contact"> */}
+    <FormContainer >
       <FormTitle>Intake Form</FormTitle>
       <Form
         name="contact" // The name here is important for Netlify
@@ -321,6 +322,7 @@ function ContactForm() {
         <input type="hidden" name="form-name" value="contact" />
       </Form>
     </FormContainer>
+    {/* </section> */}
     </>
   );
 }

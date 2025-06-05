@@ -14,13 +14,34 @@ import leappadImg from "../assets/stimulationFav-6.jpg";
 
 
 
+// const ServicesContainer = styled.section`
+//   text-align: center;
+//   padding: 4rem 2rem;
+//   max-width: 1200px;
+//   margin: auto;
+//   background: #f3f9f9;
+//   border-radius: 20px;
+// `;
+// const ServicesContainer = styled.section`
+//   text-align: center;
+//   padding: 4rem 2rem;
+//   width: 100vw;
+//   background: #f3f9f9;
+//   border-radius: 0; /* Optional: match your hero section style */
+//   overflow-x: hidden;
+// `;
 const ServicesContainer = styled.section`
-  text-align: center;
-  padding: 4rem 2rem;
+width: 100%;
+max-width: 100vw;
+  background: linear-gradient(to right, #f3f9f9, #ffffff);
+  padding: 4rem 0;
+  overflow-x: hidden;
+`;
+
+const ContentWrapper = styled.div`
   max-width: 1200px;
-  margin: auto;
-  background: #f3f9f9;
-  border-radius: 20px;
+  margin: 0 auto;
+  padding: 0 2rem;
 `;
 
 const ServicesTitle = styled.h2`
@@ -236,6 +257,7 @@ const Services = () => {
 
   return (
     <ServicesContainer>
+      <ContentWrapper>
       <ServicesTitle>Our Services</ServicesTitle>
       <GeneralServicesSection id="general-services">
       <GeneralServiceTitle onClick={() => toggleSection("general")}>
@@ -427,6 +449,7 @@ const Services = () => {
           </EnlargedImageOverlay>
         )}
       </AnimatePresence>
+      </ContentWrapper>
     </ServicesContainer>
   );
 };

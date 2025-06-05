@@ -223,7 +223,7 @@ const About = () => (
     <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid green">
       <SplitLayout>
         <ImageColumn>
-          <img src={placeholderImg} alt="Our story" />
+          <img src={placeholderImg} alt="Our story" style={{ width: "50vh", height: "50vh" }} />
         </ImageColumn>
         <TextColumn>
           <SectionTitle>Our Story</SectionTitle>
@@ -275,7 +275,7 @@ const About = () => (
           </AboutText>
         </TextColumn>
         <ImageColumn>
-          <img src={placeholderImg2} alt="ABA Therapy" />
+          <img src={placeholderImg2} alt="ABA Therapy" style={{ width: "50vh", height: "50vh" }}/>
         </ImageColumn>
       </SplitLayout>
     </Section>
