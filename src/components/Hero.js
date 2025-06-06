@@ -15,79 +15,6 @@ import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
 import { Helmet } from "react-helmet-async";
 import CTAButton from './ui/ctabutton';
 
-// const HeroContainer = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   text-align: center;
-//   position: relative;
-//   min-height: 100vh;
-//   background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-//               url(${backgroundImg}) center center / cover no-repeat;
-//   backdrop-filter: blur(50px);
-//   padding: 2rem 1rem 6rem;
-//   margin-top: calc(60px + 1rem);
-//   border: 20px solid #4a90e2;
-//   border-radius: 10px;
-//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-//   overflow: visible;
-
-//   &::before,
-//   &::after {
-//     content: "";
-//     position: absolute;
-//     // width: 300px;
-//     width: 30vw;
-//     // height: 300px;
-//     height: 40vh;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     background-position: center;
-//     opacity: 0.8;
-//     z-index: 1;
-//     pointer-events: none;
-//     mask-repeat: no-repeat;
-//     mask-size: cover;
-//     mask-position: center;
-//     -webkit-mask-repeat: no-repeat;
-//     -webkit-mask-size: contain;
-//     -webkit-mask-position: center;
-//   }
-
-//   &::before {
-//     top: 10%;
-//     left: 5%;
-//     transform: rotate(15deg); 
-//     transform-origin: 50% 50%;
-//     background-image: url(${bk1});
-//     mask-image: url(${rotatedpuzzleMask});
-//     -webkit-mask-image: url(${rotatedpuzzleMask});
-//   }
-
-//   &::after {
-//     bottom: 10%;
-//     right: 5%;
-//     background-image: url(${bk2});
-//     mask-image: url(${rotatedpuzzleMask});
-//     -webkit-mask-image: url(${rotatedpuzzleMask});
-//   }
-
-//   @media (max-width: 768px) {
-//     background: linear-gradient(to bottom, #ffffff, #eafaf1);
-//     border: none;
-//     padding: 4rem 1rem 8rem;
-
-//     &::before,
-//     &::after {
-//       display: none;
-//     }
-//   }
-
-//   @media (max-width: 480px) {
-//     padding: 2rem 1rem 10rem;
-//   }
-// `;
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -230,20 +157,6 @@ const HeroContainer = styled.section`
   }
 `;
 
-
-
-
-
-
-// const FloatingImagesContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   flex-wrap: wrap;
-//   gap: 1rem;
-//   z-index: 1;
-//   margin: 1rem 0;
-// `;
-
 const FloatingImagesContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -259,12 +172,29 @@ const FloatingImage = styled.img`
   animation: float 3s ease-in-out infinite;
 `;
 
+// const HeroImage = styled(motion.img)`
+//   width: clamp(200px, 40vw, 500px);
+//   height: auto;
+//   z-index: 1;
+// `;
 const HeroImage = styled(motion.img)`
-  width: clamp(200px, 40vw, 500px);
-  height: auto;
-  z-index: 1;
-`;
+  // width: min(60vw, 500px);
+  width: 60vw;
 
+  height: 30vh;
+  object-fit: contain;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    width: 60vw;
+    height: auto;
+  }
+
+  @media (max-width: 480px) {
+    width: 70vw;
+    height: auto;
+  }
+`;
 const HeroTitlesWrapper = styled.div`
   display: flex;
   flex-direction: column;
