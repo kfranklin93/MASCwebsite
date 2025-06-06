@@ -1,12 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import placeholderImage from "../assets/IMG_8895.png"; // Add placeholder headshot
+import anthony from "../assets/IMG_1060.png";
+import shruthi from "../assets/IMG_9536.png";
+import ruffin from "../assets/ruffin.png";
+
 
 const LeadershipSection = styled.section`
   background-color: #fff9e6;
   padding: 4rem 2rem;
   text-align: center;
-  border: 20px solid red;
+  // border: 20px solid red;
+  border: 20px solid rgba(255, 0, 0, 0.5);
+
 `;
 
 const Title = styled.h2`
@@ -123,19 +129,19 @@ const Leadership = () => {
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={placeholderImage} alt="Clinical Director Headshot" />
+          <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
           <LeaderName>Tereva</LeaderName>
           <LeaderTitle>Speech Pathologist</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={placeholderImage} alt="Program Manager Headshot" />
+          <LeaderImage src={shruthi} alt="Program Manager Headshot" />
           <LeaderName>Shruthi</LeaderName>
           <LeaderTitle>Specialty Care Supervisor</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={placeholderImage} alt="Operations Headshot" />
+          <LeaderImage src={anthony} alt="Operations Headshot" />
           <LeaderName>Anthony</LeaderName>
           <LeaderTitle>ABA Tech Lead</LeaderTitle>
         </LeaderCard>

@@ -8,106 +8,250 @@ import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 import bk1 from "../assets/IMG_7213.png";
 import bk2 from "../assets/IMG_7205.png";
-import puzzleMask from "../assets/puzzle-mask.svg";
+// import puzzleMask from "../assets/puzzle-mask.svg";
 import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
 
 
 import { Helmet } from "react-helmet-async";
 import CTAButton from './ui/ctabutton';
 
+// const HeroContainer = styled.section`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   text-align: center;
+//   position: relative;
+//   min-height: 100vh;
+//   background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+//               url(${backgroundImg}) center center / cover no-repeat;
+//   backdrop-filter: blur(50px);
+//   padding: 2rem 1rem 6rem;
+//   margin-top: calc(60px + 1rem);
+//   border: 20px solid #4a90e2;
+//   border-radius: 10px;
+//   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+//   overflow: visible;
+
+//   &::before,
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     // width: 300px;
+//     width: 30vw;
+//     // height: 300px;
+//     height: 40vh;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center;
+//     opacity: 0.8;
+//     z-index: 1;
+//     pointer-events: none;
+//     mask-repeat: no-repeat;
+//     mask-size: cover;
+//     mask-position: center;
+//     -webkit-mask-repeat: no-repeat;
+//     -webkit-mask-size: contain;
+//     -webkit-mask-position: center;
+//   }
+
+//   &::before {
+//     top: 10%;
+//     left: 5%;
+//     transform: rotate(15deg); 
+//     transform-origin: 50% 50%;
+//     background-image: url(${bk1});
+//     mask-image: url(${rotatedpuzzleMask});
+//     -webkit-mask-image: url(${rotatedpuzzleMask});
+//   }
+
+//   &::after {
+//     bottom: 10%;
+//     right: 5%;
+//     background-image: url(${bk2});
+//     mask-image: url(${rotatedpuzzleMask});
+//     -webkit-mask-image: url(${rotatedpuzzleMask});
+//   }
+
+//   @media (max-width: 768px) {
+//     background: linear-gradient(to bottom, #ffffff, #eafaf1);
+//     border: none;
+//     padding: 4rem 1rem 8rem;
+
+//     &::before,
+//     &::after {
+//       display: none;
+//     }
+//   }
+
+//   @media (max-width: 480px) {
+//     padding: 2rem 1rem 10rem;
+//   }
+// `;
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100vh;
   position: relative;
-  background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-              url(${backgroundImg}) center center / cover no-repeat;
-  backdrop-filter: blur(50px);
-  padding: 2rem 1rem;
+  min-height: 100dvh;
+  width: 100%;
+  padding: 2rem 1rem 6rem;
   margin-top: calc(60px + 1rem);
   border: 20px solid #4a90e2;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 
-  &::before, &::after {
-    content: "";
-  position: absolute;
+  background-color: rgba(255, 255, 255, 0.85);
+  // background-image: url(${backgroundImg});
+  background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(${backgroundImg});
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 1;
-  z-index: 0;
-  background-color: transparent; /* or any visible content */
+  background-position: center;
 
-  mask-image: url(${puzzleMask});
-  
-  mask-mode: alpha;
-  mask-size: cover;
-  mask-repeat: no-repeat;
+  @supports (backdrop-filter: blur(50px)) {
+    backdrop-filter: blur(50px);
+  }
 
-  -webkit-mask-image: url(${puzzleMask});
-  -webkit-mask-mode: alpha;
-  -webkit-mask-size: cover;
-  -webkit-mask-repeat: no-repeat;
+  /* iPad Pro Portrait and similar tall screens */
+  @media (min-device-width: 1024px) and (max-device-height: 1366px) and (orientation: portrait) {
+    background-size: contain;
+    background-position: center top;
+  }
+
+  /* Floating Puzzle Background Shapes */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    // opacity: 0.8;
+    z-index: 1;
+    pointer-events: none;
+
+    mask-repeat: no-repeat;
+    mask-size: cover;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
   }
 
   &::before {
-    background-image: url(${bk1});
     top: 10%;
     left: 5%;
-    width: 300px;
-    height: 300px;
-    // background-color: red; /* required for visibility */
-    // mask-image: url('../assets/puzzle-mask.svg');
-    mask-image: url(${rotatedpuzzleMask});s
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    // -webkit-mask-image: url(${puzzleMask}););
-    -webkit-mask-size: cover;
-    -webkit-mask-repeat: no-repeat;
-    opacity: 0.8;
-    z-index: 1;
+    width: 25vw;
+    height: 30vh;
+    transform: rotate(15deg);
+    background-image: url(${bk1});
+    mask-image: url(${rotatedpuzzleMask});
+    -webkit-mask-image: url(${rotatedpuzzleMask});
   }
 
   &::after {
-    // background-color: red;
-    // transform: rotate(180deg);
-    // transform-origin: 50% 50%;
-    background-image: url(${bk2});
-    bottom: 10%;
+    bottom: 8%;
     right: 5%;
-    width: 300px;
-    height: 300px;
-    // mask-image: url('../assets/puzzle-mask.svg');
-    mask-image: url(${rotatedpuzzleMask});  
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    // -webkit-mask-image: url(${rotatedpuzzleMask});
-    -webkit-mask-size: cover;
-    -webkit-mask-repeat: no-repeat;
-    opacity: 1;
-    z-index: 1;
+    width: 25vw;
+    height: 30vh;
+    background-image: url(${bk2});
+    mask-image: url(${rotatedpuzzleMask});
+    -webkit-mask-image: url(${rotatedpuzzleMask});
+  }
+
+  /* Responsive resizing for puzzle masks */
+  @media (max-width: 1024px) {
+    &::before,
+    &::after {
+      width: 30vw;
+      height: 25vh;
+    }
+
+    &::before {
+      top: 8%;
+      left: 4%;
+    }
+
+    &::after {
+      bottom: 6%;
+      right: 4%;
+    }
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 1rem 4rem;
+    background-image: none;
+    background: linear-gradient(to bottom, #ffffff, #eafaf1);
+    border: none;
+    padding: 4rem 1rem 8rem;
+
+    &::before,
+    &::after {
+      width: 35vw;
+      height: 20vh;
+    }
+
+    &::before {
+      top: 6%;
+      left: 2%;
+    }
+
+    &::after {
+      bottom: 4%;
+      right: 2%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    &::before,
+    &::after {
+      width: 40vw;
+      height: 18vh;
+    }
+
+    &::before {
+      top: 4%;
+      left: 1%;
+    }
+
+    &::after {
+      bottom: 2%;
+      right: 1%;
+    }
   }
 
   @media (max-width: 480px) {
-    padding: 2rem 0.5rem 6rem;
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 `;
+
+
+
+
+
+
+// const FloatingImagesContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   flex-wrap: wrap;
+//   gap: 1rem;
+//   z-index: 1;
+//   margin: 1rem 0;
+// `;
 
 const FloatingImagesContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  z-index: 1;
-  margin: 1rem 0;
+  z-index: 3; /* Increased to be above pseudo-elements */
+  margin: 1.5rem 0;
+  position: relative;
 `;
 
 const FloatingImage = styled.img`
@@ -129,6 +273,7 @@ const HeroTitlesWrapper = styled.div`
   padding: 2rem 1rem;
   max-width: 90%;
   text-align: center;
+  padding-bottom: 3rem;
 `;
 
 const HeroTitle = styled.h1`

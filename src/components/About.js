@@ -173,7 +173,7 @@ const ImageWrapper = styled.div`
   height: auto;
   margin-bottom: 2rem;
   img {
-    width: 100%;
+    width: 50dvw;
     border-radius: 10px;
     object-fit: cover;
   }
@@ -220,10 +220,10 @@ const About = () => (
     {/* <HeroSlider /> */}
 
     {/* OUR STORY Section */}
-    <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid green">
+    <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid rgba(0, 128, 0, 0.5)">
       <SplitLayout>
         <ImageColumn>
-          <img src={placeholderImg} alt="Our story" style={{ width: "50vh", height: "50vh" }} />
+          <img src={placeholderImg} alt="Our story" />
         </ImageColumn>
         <TextColumn>
           <SectionTitle>Our Story</SectionTitle>
@@ -253,7 +253,7 @@ const About = () => (
     </Section>
 
     {/* WHAT IS ABA THERAPY Section */}
-    <Section border="20px solid yellow">
+    <Section border="20px solid rgba(255, 255, 0, 0.5)">
       <SplitLayout>
         <TextColumn>
           <SectionTitle>What is ABA Therapy?</SectionTitle>
@@ -275,7 +275,7 @@ const About = () => (
           </AboutText>
         </TextColumn>
         <ImageColumn>
-          <img src={placeholderImg2} alt="ABA Therapy" style={{ width: "50vh", height: "50vh" }}/>
+          <img src={placeholderImg2} alt="ABA Therapy" />
         </ImageColumn>
       </SplitLayout>
     </Section>
