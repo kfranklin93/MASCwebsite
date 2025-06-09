@@ -386,14 +386,15 @@ const MobileMenu = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #fefefe; /* Light neutral background */
+  background: #fefefe;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.5rem 4rem; /* Add bottom padding */
   z-index: 999;
   overflow-y: auto;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 `;
+
 
 
 
