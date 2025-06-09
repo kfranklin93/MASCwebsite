@@ -395,9 +395,6 @@ const MobileMenu = styled(motion.div)`
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-
-
-
 const CloseButton = styled.div`
   position: absolute;
   top: 1rem;
