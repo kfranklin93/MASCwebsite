@@ -54,40 +54,40 @@ const HeroContainer = styled.section`
     content: "";
     position: absolute;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain; /* changed from cover */
     background-position: center;
-    // opacity: 0.8;
     z-index: 1;
     pointer-events: none;
-
+  
     mask-repeat: no-repeat;
-    mask-size: cover;
+    mask-size: contain; /* changed from cover */
     mask-position: center;
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
+    -webkit-mask-size: contain; /* changed from cover */
     -webkit-mask-position: center;
   }
-
+  
   &::before {
     top: 10%;
     left: 5%;
-    width: 25vw;
-    height: 30vh;
+    width: 30vw; /* increased */
+    height: 35vh; /* increased */
     transform: rotate(15deg);
     background-image: url(${bk1});
     mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
   }
-
+  
   &::after {
     bottom: 8%;
     right: 5%;
-    width: 25vw;
-    height: 30vh;
+    width: 30vw; /* increased */
+    height: 35vh; /* increased */
     background-image: url(${bk2});
     mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
   }
+  
 
   /* Responsive resizing for puzzle masks */
   @media (max-width: 1024px) {

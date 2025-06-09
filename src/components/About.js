@@ -55,112 +55,18 @@ import Leadership from "../components/Leadership";  // Adjust the path if necess
 // `;
 
 const AboutText = styled(motion.p)`
-  font-size: 1.3rem;
-  color: #444; /* Slightly darker grey for better readability */
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  color: #444;
   max-width: 800px;
   margin: 0 auto 3rem;
   font-family: "Poppins", sans-serif;
 `;
 
+
 const textAnimation = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 1 } },
 };
-
-// Tooltip Styled Component (Defined First)
-// const Tooltip = styled.div`
-//   visibility: hidden;
-//   position: absolute;
-//   background-color: #333;
-//   color: white;
-//   text-align: center;
-//   padding: 5px;
-//   border-radius: 5px;
-//   z-index: 1;
-//   opacity: 0;
-//   transition: opacity 0.3s;
-//   font-size: 1rem;
-//   width: 150px;
-//   bottom: 100%;
-//   left: 50%;
-//   transform: translateX(-50%);
-// `;
-
-// Behavior Item Styled Component (With Tooltip Hover Functionality)
-// const BehaviorItem = styled.li`
-//   ffont-size: 1.5rem;
-//   color: #333;
-//   padding: 0.5rem 1rem;
-//   background: rgba(0, 35, 142, 0.2); /* Soft blue */
-//   border-radius: 8px;
-//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-//   position: relative;
-//   cursor: pointer;
-
-//   &:hover ${Tooltip} {
-//     visibility: visible;
-//     opacity: 1;
-//   }
-// `;
-
-// const BehaviorList = styled.ul`
-//   list-style-type: none;
-//   padding: 0;
-//   margin: 0;
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 2rem;
-//   justify-content: center;
-// `;
-
-// const BehaviorsSection = styled.section`
-// display: flex;
-// flex-direction: column;
-// align-items: center;
-// margin-top: 3rem;
-// // background-color: #E8F7FE; /* Soft light blue background */
-// padding: 2rem;
-// border-radius: 8px;
-// `;
-
-// const TestimonialContainer = styled.section`
-//   margin-top: 3rem;
-//   padding: 2rem;
-//   // background-color: #F1F9FF; /* Light grey-blue background */
-//   background-color: rgba(255, 255, 255, 0.8); /* Light grey-blue background */
-
-//   border-radius: 8px;
-//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
-// `;
-
-// const TestimonialCard = styled.div`
-//   background-color: #fff;
-//   padding: 1.5rem;
-//   border-radius: 8px;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-//   margin-bottom: 1.5rem;
-//   max-width: 600px;
-//   margin: 1rem auto;
-//   font-family: "Poppins", sans-serif;
-//   border-left: 5px solid #00897b; /* Calming teal border */
-// `;
-
-// const TestimonialQuote = styled.p`
-//   font-style: italic;
-//   color: #333;
-//   margin-bottom: 1rem;
-// `;
-
-// const TestimonialAuthor = styled.h4`
-//   font-size: 1.2rem;
-//   font-weight: 600;
-//   color: #8bc34a; /* Soft green color */
-// `;
-
-// const TestimonialRole = styled.p`
-//   color: #777;
-//   font-size: 1rem;
-// `;
 
 const Section = styled.section`
   padding: 4rem 2rem;
@@ -169,15 +75,28 @@ const Section = styled.section`
 `;
 
 const ImageWrapper = styled.div`
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-bottom: 2rem;
+
   img {
-    width: 50dvw;
+    width: 100%;
+    max-width: 400px; /* Limit image size on large screens */
+    height: auto;
     border-radius: 10px;
     object-fit: cover;
+
+    @media (min-width: 1024px) {
+      max-width: 350px;
+    }
+
+    @media (min-width: 1440px) {
+      max-width: 300px;
+    }
   }
 `;
+
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
@@ -209,6 +128,21 @@ const SplitLayout = styled.div`
 
 const TextColumn = styled.div`
   flex: 1;
+  max-width: 600px; /* Prevents text from stretching too wide */
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    max-width: 550px;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+    max-width: 100%;
+  }
 `;
 
 const ImageColumn = styled(ImageWrapper)`
@@ -280,77 +214,6 @@ const About = () => (
       </SplitLayout>
     </Section>
     <Leadership />
-    {/* BEHAVIORS WE HELP WITH Section */}
-    {/* <Section bg="#E8F7FE">
-      <SectionTitle>What Behaviors Can ABA Therapy Help With?</SectionTitle>
-      <BehaviorList>
-        <BehaviorItem>
-          Communication Skills
-          <Tooltip>
-            Improves verbal and non-verbal communication skills.
-          </Tooltip>
-        </BehaviorItem>
-        <BehaviorItem>
-          Social Skills
-          <Tooltip>
-            Helps with understanding social cues and interactions.
-          </Tooltip>
-        </BehaviorItem>
-        <BehaviorItem>
-          Self-Regulation
-          <Tooltip>Supports emotional control and behavior regulation.</Tooltip>
-        </BehaviorItem>
-        <BehaviorItem>
-          Daily Living Skills
-          <Tooltip>Teaches essential skills for everyday independence.</Tooltip>
-        </BehaviorItem>
-        <BehaviorItem>
-          Emotional Management
-          <Tooltip>Helps children recognize and manage emotions.</Tooltip>
-        </BehaviorItem>
-        <BehaviorItem>
-          Focus & Attention
-          <Tooltip>Improves the ability to focus and stay engaged.</Tooltip>
-        </BehaviorItem>
-      </BehaviorList>
-    </Section> */}
-
-    {/* TESTIMONIALS */}
-    {/* <Section>
-      <SectionTitle>What Parents & Therapists Are Saying</SectionTitle>
-      <TestimonialContainer>
-        <TestimonialCard>
-          <TestimonialQuote>
-            "ABA therapy has been a game-changer for my child. They’ve made
-            significant progress in communication and social interactions. It’s
-            incredible to see the transformation!"
-          </TestimonialQuote>
-          <TestimonialAuthor>Jane D.</TestimonialAuthor>
-          <TestimonialRole>Parent of a child with autism</TestimonialRole>
-        </TestimonialCard>
-
-        <TestimonialCard>
-          <TestimonialQuote>
-            "As a therapist, I’ve witnessed firsthand how ABA helps children
-            become more independent, improving their social skills and emotional
-            regulation."
-          </TestimonialQuote>
-          <TestimonialAuthor>Michael S.</TestimonialAuthor>
-          <TestimonialRole>
-            Board Certified Behavior Analyst (BCBA)
-          </TestimonialRole>
-        </TestimonialCard>
-
-        <TestimonialCard>
-          <TestimonialQuote>
-            "ABA therapy gave me the tools to better understand and manage my
-            emotions. It has made a huge difference in my life."
-          </TestimonialQuote>
-          <TestimonialAuthor>Amy R.</TestimonialAuthor>
-          <TestimonialRole>Teen benefiting from ABA therapy</TestimonialRole>
-        </TestimonialCard>
-      </TestimonialContainer>
-    </Section> */}
   </main>
 );
 
