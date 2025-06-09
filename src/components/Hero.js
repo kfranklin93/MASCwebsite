@@ -83,15 +83,17 @@ const HeroContainer = styled.section`
     -webkit-mask-image: url(${rotatedpuzzleMask});
   }
 
-  &::after {
-    bottom: 8%;
-    right: 5%;
-    width: 30vw; /* increased */
-    height: 35vh; /* increased */
-    background-image: url(${bk2});
-    mask-image: url(${rotatedpuzzleMask});
-    -webkit-mask-image: url(${rotatedpuzzleMask});
-  }
+&::after {
+  // bottom: 8%;
+  right: 5%;
+  width: 30vw;
+  bottom: -5%; /* try negative values */
+height: 50vh;
+
+  background-image: url(${bk2});
+  mask-image: url(${rotatedpuzzleMask}); 
+ -webkit-mask-image: url(${rotatedpuzzleMask});
+}
 
   /* Responsive resizing for puzzle masks */
   @media (max-width: 1024px) {
@@ -256,8 +258,9 @@ const MobilePuzzleBackgroundLeft = styled.img`
   opacity: 0.15;
   z-index: 0;
   pointer-events: none;
+  object-fit: contain;
 
-  @media (min-width: 769px) {
+  @media (min-width: 1367px) {
     display: none;
   }
 `;
@@ -271,8 +274,9 @@ const MobilePuzzleBackgroundRight = styled.img`
   opacity: 0.15;
   z-index: 0;
   pointer-events: none;
+  object-fit: contain;
 
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
@@ -329,6 +333,7 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         />
+        
         <FloatingImagesContainer>
           <FloatingImage src={img1} alt="Floating Image 1" />
           <FloatingImage src={img3} alt="Floating Image 3" />

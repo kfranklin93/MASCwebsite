@@ -83,6 +83,8 @@ const LeaderImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  // object-fit: contain; /* Changed from cover */
+  object-position: center top; /* Adjusts vertical alignment */
   border-radius: 50%;
 `;
 
