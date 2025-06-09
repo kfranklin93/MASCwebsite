@@ -34,7 +34,7 @@ const ServicesContainer = styled.section`
 width: 100%;
 max-width: 100vw;
   background: linear-gradient(to right, #f3f9f9, #ffffff);
-  padding: 4rem 0;
+  padding: 3xrem 0;
   overflow-x: hidden;
 `;
 
@@ -174,7 +174,7 @@ const EnlargedImage = styled.img`
 `;
 
 const GeneralServicesSection = styled.section`
-  margin: 4rem 0;
+  margin: 2rem 0;
   padding: 3rem 2rem;
   background: linear-gradient(135deg, #e8fdf5, #ffffff);
   border-radius: 12px;
@@ -246,7 +246,7 @@ const GeneralServiceList = styled.ul`
 const Services = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [openSections, setOpenSections] = useState({
-    general: true,
+    general: false,
     autism: false,
   });
 

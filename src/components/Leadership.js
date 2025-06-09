@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import placeholderImage from "../assets/IMG_8895.png"; // Add placeholder headshot
-import anthony from "../assets/IMG_1060.png";
-import shruthi from "../assets/IMG_9536.png";
-import ruffin from "../assets/ruffin.png";
-
+import placeholderImage from "../assets/right side puzzle pieces Background Removed.png"; // Add placeholder headshot
+import anthony from "../assets/IMG_1060 Background Removed.png";
+import shruthi from "../assets/IMG_9536 Background Removed.png";
+import ruffin from "../assets/ruffin Background Removed.png";
 
 const LeadershipSection = styled.section`
   background-color: #fff9e6;
@@ -12,11 +11,10 @@ const LeadershipSection = styled.section`
   text-align: center;
   // border: 20px solid red;
   border: 20px solid rgba(255, 0, 0, 0.5);
-
 `;
 
 const Title = styled.h2`
-  font-family: 'Bubblegum Sans';
+  font-family: "Bubblegum Sans";
   font-size: 2.5rem;
   color: #dc1b1b;
   margin-bottom: 1.5rem;
@@ -34,7 +32,7 @@ const Description = styled.p`
   max-width: 800px;
   margin: 0 auto 3rem;
   font-size: 1.1rem;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #333;
 
   @media (max-width: 768px) {
@@ -75,15 +73,21 @@ const LeaderCard = styled.div`
   }
 `;
 
+// const LeaderImage = styled.img`
+//   width: 100%;
+//   height: auto;
+//   border-radius: 50%;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+// `;
 const LeaderImage = styled.img`
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const LeaderName = styled.h3`
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
   margin-top: 0.75rem;
   color: #000;
@@ -98,7 +102,7 @@ const LeaderName = styled.h3`
 `;
 
 const LeaderTitle = styled.p`
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 0.95rem;
   color: #555;
 
@@ -110,40 +114,76 @@ const LeaderTitle = styled.p`
     font-size: 0.85rem; /* Slightly smaller font on very small screens */
   }
 `;
+const ImageWrapper = styled.div`
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 50%; /* Change to 0 for square crop */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff; /* Optional: prevents transparency glitches */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+    height: 120px;
+  }
+`;
 
 const Leadership = () => {
   return (
     <LeadershipSection>
       <Title>Servant Leadership</Title>
       <Description>
-        At Mommy Angel’s Specialty Care & Autism Center, our leadership is grounded in the heart of service. 
-        We believe in leading with empathy, compassion, and a deep commitment to our families, team members, 
-        and the community. By empowering our staff, we nurture an environment where every child can thrive.
+        At Mommy Angel’s Specialty Care & Autism Center, our leadership is
+        grounded in the heart of service. We believe in leading with empathy,
+        compassion, and a deep commitment to our families, team members, and the
+        community. By empowering our staff, we nurture an environment where
+        every child can thrive.
       </Description>
 
       <LeadersGrid>
         <LeaderCard>
-          <LeaderImage src={placeholderImage} alt="CEO Headshot" />
+          <ImageWrapper>
+            <LeaderImage src={placeholderImage} alt="CEO Headshot" />
+          </ImageWrapper>
+          {/* <LeaderImage src={placeholderImage} alt="CEO Headshot" /> */}
           <LeaderName>Crissy</LeaderName>
           <LeaderTitle>Board Certified Behavior Analyst</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
+          <ImageWrapper>
+            <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
+          </ImageWrapper>
+          {/* <LeaderImage src={ruffin} alt="Clinical Director Headshot" /> */}
           <LeaderName>Tereva</LeaderName>
           <LeaderTitle>Speech Pathologist</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={shruthi} alt="Program Manager Headshot" />
+          <ImageWrapper>
+            <LeaderImage src={shruthi} alt="Program Manager Headshot" />
+          </ImageWrapper>
+          {/* <LeaderImage src={shruthi} alt="Program Manager Headshot" /> */}
           <LeaderName>Shruthi</LeaderName>
-          <LeaderTitle>Specialty Care Supervisor</LeaderTitle>
+          <LeaderTitle>Operations Manager</LeaderTitle>
         </LeaderCard>
 
         <LeaderCard>
-          <LeaderImage src={anthony} alt="Operations Headshot" />
+          <ImageWrapper>
+            <LeaderImage src={anthony} alt="Operations Headshot" />
+          </ImageWrapper>
+          {/* <LeaderImage src={anthony} alt="Operations Headshot" /> */}
           <LeaderName>Anthony</LeaderName>
-          <LeaderTitle>ABA Tech Lead</LeaderTitle>
+          <LeaderTitle>Lead RBT</LeaderTitle>
         </LeaderCard>
       </LeadersGrid>
     </LeadershipSection>
