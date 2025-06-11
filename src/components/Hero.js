@@ -7,7 +7,7 @@ import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 import bk1 from "../assets/IMG_7213.png";
-import bk2 from "../assets/IMG_7205.png";
+import bk2 from "../assets/IMG_8886.png";
 // import puzzleMask from "../assets/puzzle-mask.svg";
 import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
 import rightsidepuzzleImage from "../assets/right side puzzle pieces Background Removed.png";
@@ -62,7 +62,7 @@ const HeroContainer = styled.section`
     background-position: center;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.3; /* Reduced opacity from default 1.0 to 0.3 */
+    opacity: 0.3;
 
     mask-repeat: no-repeat;
     mask-size: contain;
@@ -73,10 +73,10 @@ const HeroContainer = styled.section`
   }
 
   &::before {
-    top: 10%;
-    left: 5%;
-    width: 30vw;
-    height: 35vh;
+    width: 45vw; /* Increased from 30vw */
+    height: 50vh; /* Increased from 35vh */
+    top: 5%; /* Adjusted position */
+    left: 2%; /* Adjusted position */
     transform: rotate(15deg);
     background-image: url(${bk1});
     mask-image: url(${rotatedpuzzleMask});
@@ -89,7 +89,7 @@ const HeroContainer = styled.section`
     bottom: -5%;
     height: 50vh;
     background-image: url(${bk2});
-    mask-image: url(${rotatedpuzzleMask}); 
+    mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
   }
 
@@ -122,7 +122,7 @@ const HeroContainer = styled.section`
     &::after {
       width: 35vw;
       height: 20vh;
-      opacity: 0.2; /* Even lower opacity for mobile */
+      opacity: 0.2;
     }
 
     &::before {
@@ -135,13 +135,29 @@ const HeroContainer = styled.section`
       right: 2%;
     }
   }
+@media (max-width: 1024px) {
+  &::before {
+    width: 40vw;    /* Adjusted for tablets */
+    height: 40vh;   /* Maintained proportion */
+    top: 6%;
+    left: 3%;
+  }
+}
 
-  @media (max-width: 600px) {
-    &::before,
-    &::after {
-      width: 40vw;
-      height: 18vh;
-    }
+@media (max-width: 768px) {
+  &::before {
+    width: 45vw;    /* Maintained larger size */
+    height: 30vh;
+    opacity: 0.2;
+  }
+}
+
+ @media (max-width: 600px) {
+  &::before {
+    width: 50vw;    /* Even larger for small devices */
+    height: 25vh;
+  }
+}
 
     &::before {
       top: 4%;
@@ -161,7 +177,6 @@ const HeroContainer = styled.section`
     }
   }
 `;
-
 const FloatingImagesContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -330,7 +345,7 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         />
-        
+
         <FloatingImagesContainer>
           <FloatingImage src={img1} alt="Floating Image 1" />
           <FloatingImage src={img3} alt="Floating Image 3" />
