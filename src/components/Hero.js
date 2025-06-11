@@ -33,7 +33,6 @@ const HeroContainer = styled.section`
   overflow: hidden;
 
   background-color: rgba(255, 255, 255, 0.85);
-  // background-image: url(${backgroundImg});
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -59,41 +58,40 @@ const HeroContainer = styled.section`
     content: "";
     position: absolute;
     background-repeat: no-repeat;
-    background-size: contain; /* changed from cover */
+    background-size: contain;
     background-position: center;
     z-index: 1;
     pointer-events: none;
+    opacity: 0.3; /* Reduced opacity from default 1.0 to 0.3 */
 
     mask-repeat: no-repeat;
-    mask-size: contain; /* changed from cover */
+    mask-size: contain;
     mask-position: center;
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: contain; /* changed from cover */
+    -webkit-mask-size: contain;
     -webkit-mask-position: center;
   }
 
   &::before {
     top: 10%;
     left: 5%;
-    width: 30vw; /* increased */
-    height: 35vh; /* increased */
+    width: 30vw;
+    height: 35vh;
     transform: rotate(15deg);
     background-image: url(${bk1});
     mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
   }
 
-&::after {
-  // bottom: 8%;
-  right: 5%;
-  width: 30vw;
-  bottom: -5%; /* try negative values */
-height: 50vh;
-
-  background-image: url(${bk2});
-  mask-image: url(${rotatedpuzzleMask}); 
- -webkit-mask-image: url(${rotatedpuzzleMask});
-}
+  &::after {
+    right: 5%;
+    width: 30vw;
+    bottom: -5%;
+    height: 50vh;
+    background-image: url(${bk2});
+    mask-image: url(${rotatedpuzzleMask}); 
+    -webkit-mask-image: url(${rotatedpuzzleMask});
+  }
 
   /* Responsive resizing for puzzle masks */
   @media (max-width: 1024px) {
@@ -124,6 +122,7 @@ height: 50vh;
     &::after {
       width: 35vw;
       height: 20vh;
+      opacity: 0.2; /* Even lower opacity for mobile */
     }
 
     &::before {
@@ -168,7 +167,7 @@ const FloatingImagesContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
-  z-index: 3; /* Increased to be above pseudo-elements */
+  z-index: 3;
   margin: 1.5rem 0;
   position: relative;
 `;
@@ -179,9 +178,7 @@ const FloatingImage = styled.img`
 `;
 
 const HeroImage = styled(motion.img)`
-  // width: min(60vw, 500px);
   width: 60vw;
-
   height: 30vh;
   object-fit: contain;
   z-index: 1;
@@ -196,6 +193,7 @@ const HeroImage = styled(motion.img)`
     height: auto;
   }
 `;
+
 const HeroTitlesWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -286,13 +284,13 @@ const Hero = () => {
     <>
       <Helmet>
         <title>
-          Mommy Angel’s Specialty Care | ABA Therapy, Autism Support & Pre-K
+          Mommy Angel's Specialty Care | ABA Therapy, Autism Support & Pre-K
           Readiness
         </title>
         <link rel="canonical" href="https://mommyangelsspecialtycare.com" />
         <meta
           name="description"
-          content="Mommy Angel’s Specialty Care and Autism Center in Dunwoody, GA offers compassionate ABA therapy, speech therapy, and Pre-K readiness programs for children with autism. Socialization, not isolation."
+          content="Mommy Angel's Specialty Care and Autism Center in Dunwoody, GA offers compassionate ABA therapy, speech therapy, and Pre-K readiness programs for children with autism. Socialization, not isolation."
         />
         <meta
           name="keywords"
@@ -301,7 +299,7 @@ const Hero = () => {
         <meta name="robots" content="index, follow" />
         <meta
           property="og:title"
-          content="Mommy Angel’s Specialty Care & Autism Center"
+          content="Mommy Angel's Specialty Care & Autism Center"
         />
         <meta
           property="og:description"
@@ -321,7 +319,6 @@ const Hero = () => {
           src={leftsidepuzzleImage}
           alt="Puzzle Left"
         />
-         {" "}
         <MobilePuzzleBackgroundRight
           src={rightsidepuzzleImage}
           alt="Puzzle Right"
