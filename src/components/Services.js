@@ -178,7 +178,7 @@ const ServiceDescription = styled.div`
   background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   font-family: "Nunito", sans-serif;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: inset  0 2px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(74, 144, 226, 0.1);
 
   ul {
@@ -366,6 +366,18 @@ const GeneralServiceList = styled.ul`
   }
 `;
 
+// New styled component for highlighting the text
+const HighlightedText = styled.span`
+  background-color: #FFD700; /* Bright yellow/gold background */
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-weight: 600; /* Extra bold */
+  color: #CD1B1B; /* Red text for contrast */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: inline-block; /* Allows padding and shadow */
+  line-height: 1.5; /* Ensures text aligns well within its line */
+`;
+
 const Services = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [openSections, setOpenSections] = useState({
@@ -398,6 +410,7 @@ const Services = () => {
             <HeaderDescription>
               Discover our comprehensive range of therapeutic and educational services designed to support your child's growth and development in a nurturing, engaging environment.
             </HeaderDescription>
+            <HighlightedText>We do not offer stand-alone speech therapy services.</HighlightedText>
           </SectionHeader>
 
           <GeneralServicesSection id="general-services">
@@ -415,7 +428,11 @@ const Services = () => {
                   <GeneralServiceList>
                     <li>Autism Diagnostic Services</li>
                     <li>Occupational Therapy</li>
-                    <li>Speech Therapy</li>
+                    <li>
+                      <p>
+                      <HighlightedText>Our Speech Therapy Services are exclusively offered as an integrated component of our comprehensive ABA Therapy programs.</HighlightedText> We believe that by combining speech therapy with ABA, we can provide a holistic approach that maximizes communication development within the broader context of your child's individualized treatment plan.
+                      </p>
+                    </li>
                     <li>1:1 Therapy Tailored to Your Child's Needs</li>
                     <li>Center-Based ABA Therapy</li>
                     <li>Parent Training</li>

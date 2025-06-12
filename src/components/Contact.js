@@ -248,9 +248,9 @@ const ContactForm = () => {
       errors.age = "Age must be a positive number.";
     } else {
       const age = parseFloat(formData.age);
-      if (age < 2 || age > 7) {
+      if (age < 2 || age > 6) {
         const confirmProceed = window.confirm(
-          "Thank you so much for your interest! Our program is specially designed for children ages 2 to 7 years old. 😊\n\n" +
+          "Thank you so much for your interest! Our program is specially designed for children ages 2 to 6 years old. 😊\n\n" +
             "If your child is a bit younger or older, no worries — we warmly recommend reaching out to our trusted partners at " +
             "Flourish Pediatrics (https://flourishpediatrics.com) for a personalized referral and support. We want to make sure your child gets the best possible care!"
         );

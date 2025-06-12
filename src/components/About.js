@@ -179,16 +179,31 @@ const OurStoryImageColumn = styled(ImageColumn)`
     }
   }
 
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   width: 50%;
+  //   height: 100%;
+  //   background: linear-gradient(to left, rgba(240, 248, 255, 0.9) 0%, rgba(240, 248, 255, 0.6) 50%, rgba(240, 248, 255, 0.3) 80%, transparent 100%);
+  //   z-index: 2;
+  //   pointer-events: none;
+  // }
   &::before {
     content: '';
     position: absolute;
     top: 0;
-    right: 0;
-    width: 50%;
+    left: 0; // ← changed from right for OurStoryImageColumn
+    width: 100%;
     height: 100%;
     background: linear-gradient(to left, rgba(240, 248, 255, 0.9) 0%, rgba(240, 248, 255, 0.6) 50%, rgba(240, 248, 255, 0.3) 80%, transparent 100%);
     z-index: 2;
     pointer-events: none;
+
+    @media (max-width: 768px) {
+      background: linear-gradient(to top, rgba(240, 248, 255, 0.9), transparent); // ← new mobile-friendly gradient
+    }
   }
 `;
 
@@ -243,12 +258,15 @@ const ABAImageColumn = styled(ImageColumn)`
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 100%;
     height: 100%;
     background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 80%, transparent 100%);
     z-index: 2;
     pointer-events: none;
-  }
+
+    @media (max-width: 768px) {
+      background: linear-gradient(to bottom, rgba(240, 248, 255, 0.9), transparent); // ← new mobile-friendly gradient
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -285,6 +303,16 @@ const Button = styled(Link)`
   }
 `;
 
+// Helper styled component for the highlighted text
+const StrongHighlight = styled.strong`
+  color: #CD1B1B; /* Use a prominent color from your palette */
+  font-weight: 800; /* Make it extra bold */
+  background-color: #FFFACD; /* A light, warm background to make it pop */
+  padding: 0 4px;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+`;
+
 const About = () => (
   <main>
     {/* OUR STORY Section */}
@@ -294,30 +322,119 @@ const About = () => (
           <img src={placeholderImg} alt="Our story" />
         </OurStoryImageColumn>
         <TextColumn>
-          <SectionTitle>Our Story</SectionTitle>
-          <AboutText
-            initial="hidden"
-            animate="visible"
-            variants={textAnimation}
-          >
-            At Mommy Angel's Specialty Care and Autism Center, we provide a
-            nurturing and supportive environment where children with autism can
-            thrive. Our mission is to meet each child where they are, while
-            offering the extra support needed to help them grow, learn, and feel
-            confident in their progress. As a proud sister program of Mommy
-            Angels Daycare, our angels spend time in both settings—strengthening
-            their social skills, engaging with peers, and enjoying outdoor play
-            in a safe, inclusive environment.
-          </AboutText>
-          <AboutText>
-            We also offer a specialized Readiness Program, featuring classrooms designed just like a Pre-K
-            setting. This helps prepare your child for a smooth and successful
-            transition into a traditional Pre-K classroom. At Mommy Angel's
-            Specialty Care and Autism Center, we believe in socialization, not
-            isolation. Your child will be supported, included, and celebrated
-            every step of the way.
-          </AboutText>
-        </TextColumn>
+  <SectionTitle>Our Story</SectionTitle>
+  <AboutText initial="hidden" animate="visible" variants={textAnimation}>
+    At Mommy Angel's Specialty Care and Autism Center, we provide a nurturing
+    and supportive environment where children with autism can thrive. Our mission
+    is to meet each child where they are, while offering the extra support needed
+    to help them grow, learn, and feel confident in their progress.
+  </AboutText>
+
+  {/* Combined and emphasized paragraph */}
+  <AboutText>
+  As a proud sister program of{" "}
+  <a
+    href="https://mommyangelsdaycare.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      color: "#CD1B1B",
+      fontWeight: "bold",
+      textDecoration: "underline",
+      backgroundColor: "#FFFACD",
+      padding: "2px 5px",
+      borderRadius: "3px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    }}
+  >
+    Mommy Angels Daycare
+  </a>
+  , our center is uniquely positioned to support the whole family. We understand
+  the daily rhythm of parenting, and we're proud to offer{" "}
+  <span
+    style={{
+      fontWeight: "bold",
+      color: "#00695c",
+    }}
+  >
+    thoughtful convenience
+  </span>{" "}
+  that makes a real difference. For families with multiple children, especially
+  those whose siblings may not need ABA therapy but still thrive in a nurturing
+  daycare setting, this connected approach can be a true{" "}
+  <span
+    style={{
+      fontWeight: "bold",
+      color: "#CD1B1B",
+    }}
+  >
+    game changer
+  </span>
+  .
+</AboutText>
+
+<AboutText>
+  Picture this: while your child receives compassionate, individualized ABA care
+  with us, their siblings are just next door at Mommy Angels Daycare—surrounded by
+  the same loving values and joyful energy. With one drop-off and pick-up
+  location, your mornings feel more manageable, your schedule feels lighter, and
+  your heart feels at ease.
+</AboutText>
+
+<AboutText>
+  This integrated care model offers more than just{" "}
+  <span
+    style={{
+      fontWeight: "bold",
+      fontStyle: "italic",
+      color: "#00695c",
+    }}
+  >
+    simplified routines
+  </span>
+  —it creates a{" "}
+  <span
+    style={{
+      fontWeight: "bold",
+      backgroundColor: "#e6f4f1",
+      padding: "2px 6px",
+      borderRadius: "4px",
+    }}
+  >
+    connected family experience
+  </span>
+  . Our angels often interact across both programs, building strong social skills,
+  developing friendships, and spending time outdoors together in a safe,
+  inclusive environment. To explore this unique blend of support and connection,
+  visit{" "}
+  <Button
+    as="a"
+    href="https://www.mommyangelsdaycare.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      padding: "0.5rem 1rem",
+      fontSize: "1rem",
+      whiteSpace: "nowrap",
+      display: "inline-flex",
+      verticalAlign: "middle",
+      marginLeft: "5px",
+    }}
+  >
+    MommyAngelsDaycare.com
+  </Button>
+  .
+</AboutText>
+
+  <AboutText>
+    We also offer a specialized Readiness Program, featuring classrooms designed just like a Pre-K
+    setting. This helps prepare your child for a smooth and successful
+    transition into a traditional Pre-K classroom. At Mommy Angel's
+    Specialty Care and Autism Center, we believe in socialization, not
+    isolation. Your child will be supported, included, and celebrated
+    every step of the way.
+  </AboutText>
+</TextColumn>
       </SplitLayout>
     </Section>
 

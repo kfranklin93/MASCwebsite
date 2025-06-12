@@ -3,7 +3,6 @@ import styled from "styled-components";
 import placeholderImage from "../assets/right side puzzle pieces Background Removed.png"; // Add placeholder headshot
 import anthony from "../assets/Anthony-edited Background Removed.png";
 import shruthi from "../assets/IMG_9536 Background Removed.png";
-import ruffin from "../assets/ruffin Background Removed.png";
 
 const LeadershipSection = styled.section`
   background-color: #fff9e6;
@@ -188,15 +187,7 @@ const Leadership = () => {
           <LeaderName>Anthony</LeaderName>
           <LeaderTitle>Lead RBT</LeaderTitle>
         </LeaderCard>
-        
-        <LeaderCard>
-          <ImageWrapper>
-            <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
-          </ImageWrapper>
-          {/* <LeaderImage src={ruffin} alt="Clinical Director Headshot" /> */}
-          <LeaderName>Tereva</LeaderName>
-          <LeaderTitle>Speech Pathologist</LeaderTitle>
-        </LeaderCard>
+
       </LeadersGrid>
     </LeadershipSection>
   );
