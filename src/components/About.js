@@ -304,14 +304,14 @@ const Button = styled(Link)`
 `;
 
 // Helper styled component for the highlighted text
-const StrongHighlight = styled.strong`
-  color: #CD1B1B; /* Use a prominent color from your palette */
-  font-weight: 800; /* Make it extra bold */
-  background-color: #FFFACD; /* A light, warm background to make it pop */
-  padding: 0 4px;
-  border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-`;
+// const StrongHighlight = styled.strong`
+//   color: #CD1B1B; /* Use a prominent color from your palette */
+//   font-weight: 800; /* Make it extra bold */
+//   background-color: #FFFACD; /* A light, warm background to make it pop */
+//   padding: 0 4px;
+//   border-radius: 3px;
+//   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+// `;
 
 const About = () => (
   <main>
