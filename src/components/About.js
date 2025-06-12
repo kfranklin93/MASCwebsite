@@ -42,6 +42,8 @@ const SplitLayout = styled.div`
   justify-content: center;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 
   @media (max-width: 1024px) {
     gap: 2rem;
@@ -60,10 +62,28 @@ const TextColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    // background: linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent);
+    z-index: -1;
+  }
 
   @media (max-width: 768px) {
     max-width: 100%;
     padding: 0 1rem;
+    
+    &::before {
+      right: 0;
+      // background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), transparent);
+    }
   }
 `;
 
@@ -75,6 +95,18 @@ const ImageColumn = styled.div`
   max-width: 600px;
   width: 100%;
   height: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    // background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.95));
+    z-index: 2;
+  }
 
   img {
     width: 100%;
@@ -97,26 +129,36 @@ const ImageColumn = styled.div`
       max-width: 100%;
     }
   }
+
+  @media (max-width: 768px) {
+    &::before {
+      left: 0;
+      top: -50%;
+      height: 100%;
+      width: 100%;
+      // background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.95));
+    }
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 1.5rem; // Increased gap for better button separation
+  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2.5rem; // Increased top margin
+  margin-top: 2rem;
 `;
 
 const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   padding: 1rem 2rem;
-  background: ${props => props.secondary ? '#00695c' : '#CD1B1B'}; // Green for secondary, Red for primary
-  color: white; // Always white text for better contrast
+  background: ${props => props.secondary ? '#00695c' : '#CD1B1B'};
+  color: white;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  border: none; // Removed border for cleaner look
+  border: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-family: "Nunito", sans-serif;
@@ -124,7 +166,7 @@ const Button = styled(Link)`
 
   &:hover {
     transform: translateY(-2px);
-    background: ${props => props.secondary ? '#008577' : '#e62020'}; // Slightly brighter on hover
+    background: ${props => props.secondary ? '#008577' : '#e62020'};
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
   }
 
