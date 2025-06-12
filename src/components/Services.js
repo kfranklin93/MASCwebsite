@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-// import roomsImg from "../assets/Group-12-scaled.png";
 import stimulationFavImg from "../assets/stimulationFav-6.jpg";
 import manipulativesImg from "../assets/manipulatives-final.jpg";
 import artsImg from "../assets/arts-5.jpg";
@@ -12,29 +11,17 @@ import musicImg from "../assets/music-4.jpg";
 import grassroomFrontImg from "../assets/grassroomFront.jpg";
 import leappadImg from "../assets/stimulationFav-6.jpg";
 
+const PageBackground = styled.div`
+  background: linear-gradient(135deg, #f3f9f9 0%, #ffffff 50%, #e8fdf5 100%);
+  padding: 2rem 0;
+  min-height: 100vh;
+`;
 
-
-// const ServicesContainer = styled.section`
-//   text-align: center;
-//   padding: 4rem 2rem;
-//   max-width: 1200px;
-//   margin: auto;
-//   background: #f3f9f9;
-//   border-radius: 20px;
-// `;
-// const ServicesContainer = styled.section`
-//   text-align: center;
-//   padding: 4rem 2rem;
-//   width: 100vw;
-//   background: #f3f9f9;
-//   border-radius: 0; /* Optional: match your hero section style */
-//   overflow-x: hidden;
-// `;
 const ServicesContainer = styled.section`
-width: 100%;
-max-width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   background: linear-gradient(to right, #f3f9f9, #ffffff);
-  padding: 3xrem 0;
+  padding: 3rem 0;
   overflow-x: hidden;
 `;
 
@@ -44,12 +31,30 @@ const ContentWrapper = styled.div`
   padding: 0 2rem;
 `;
 
-const ServicesTitle = styled.h2`
-  font-size: 3rem;
-  color: #00670e;
-  margin-bottom: 2.5rem;
+const SectionHeader = styled.div`
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+`;
+
+const HeaderTitle = styled.h1`
+  font-size: 3.5rem;
+  color: #CD1B1B;
+  margin-bottom: 1rem;
   font-family: "Bubblegum Sans", sans-serif;
-  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const HeaderDescription = styled.p`
+  font-size: 1.2rem;
+  color: #00695c;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-family: "Nunito", sans-serif;
 `;
 
 const ServiceList = styled.div`
@@ -64,11 +69,11 @@ const ServiceList = styled.div`
 `;
 
 const ServiceCard = styled.div`
-  background: #fff;
-  border-radius: 15px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 25px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,25 +82,59 @@ const ServiceCard = styled.div`
   position: relative;
   overflow: hidden;
   z-index: 1;
+  border: 1px solid rgba(74, 144, 226, 0.1);
 
   &:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: rgba(74, 144, 226, 0.3);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to right, #CD1B1B, #4A90E2, #FFD700);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
   }
 
   @media (max-width: 768px) {
     height: auto;
-    padding: 15px;
+    padding: 20px;
   }
 `;
 
 const ServiceTitle = styled.h3`
-  font-size: 1.6rem;
-  color: #00670e;
-  margin-bottom: 15px;
-  font-weight: bold;
+  font-size: 1.8rem;
+  color: #00695c;
+  margin: 1rem 0;
+  font-family: "Bubblegum Sans", sans-serif;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #FFD700;
+    border-radius: 2px;
+  }
+
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -105,52 +144,78 @@ const ServiceImage = styled.img`
   border-radius: 20px;
   cursor: pointer;
   transition: transform 0.3s ease, border 0.3s ease;
-  border: 6px solid #ff6f61; /* Playful coral-colored border */
+  border: 6px solid #ff6f61;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: scale(1.05);
-    border-color: #f3a847; /* Change to a yellow-orange on hover */
+    border-color: #f3a847;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
   }
 
-  /* Add a rainbow border effect */
   &:hover {
-    border: 6px dashed #ffeb3b; /* Bright yellow dashed border */
+    border: 6px dashed #ffeb3b;
     animation: rainbow-border 1.5s infinite;
   }
 
   @keyframes rainbow-border {
-    0% {
-      border-color: #ff6f61;
-    }
-    25% {
-      border-color: #ffeb3b;
-    }
-    50% {
-      border-color: #4caf50;
-    }
-    75% {
-      border-color: #2196f3;
-    }
-    100% {
-      border-color: #9c27b0;
-    }
+    0% { border-color: #ff6f61; }
+    25% { border-color: #ffeb3b; }
+    50% { border-color: #4caf50; }
+    75% { border-color: #2196f3; }
+    100% { border-color: #9c27b0; }
   }
 `;
 
-const ServiceDescription = styled.p`
+const ServiceDescription = styled.div`
   font-size: 1.1rem;
   color: #333;
   line-height: 1.6;
   flex-grow: 1;
   max-height: 200px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  font-family: "Nunito", sans-serif;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 0.8rem;
+      padding-left: 1.5rem;
+      position: relative;
+
+      &::before {
+        content: '•';
+        color: #4A90E2;
+        font-size: 1.2rem;
+        position: absolute;
+        left: 0;
+        top: -2px;
+      }
+    }
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;
     max-height: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(74, 144, 226, 0.3);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 
@@ -176,11 +241,17 @@ const EnlargedImage = styled.img`
 const GeneralServicesSection = styled.section`
   margin: 2rem 0;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, #e8fdf5, #ffffff);
-  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  scroll-margin-top: 100px; /* Avoids header overlay when scrolled into view */
+  border: 1px solid rgba(74, 144, 226, 0.1);
+  scroll-margin-top: 100px;
   transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
   
   @media (max-width: 768px) {
     padding: 2rem 1rem;
@@ -188,19 +259,20 @@ const GeneralServicesSection = styled.section`
 `;
 
 const GeneralServiceTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: bold;
-  color: #00670e;
+  font-size: 2.2rem;
+  font-family: "Bubblegum Sans", sans-serif;
+  color: #CD1B1B;
   margin-bottom: 1.5rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    color: #00b894;
-    transform: translateY(-5px);
+    color: #4A90E2;
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
@@ -214,32 +286,27 @@ const GeneralServiceList = styled.ul`
   margin-top: 1.5rem;
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #555;
-  transition: all 0.3s ease;
+  color: #333;
+  font-family: "Nunito", sans-serif;
 
   li {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    position: relative;
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
     
-    &:before {
-      content: " ";
-      position: absolute;
-      left: 0;
-      font-size: 1.5rem;
-      color: #00aaff;
+    &:hover {
+      transform: translateX(5px);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     
-    @media (max-width: 768px) {
-      font-size: 1rem;
+    strong {
+      color: #00695c;
+      font-weight: 600;
     }
-  }
-
-  li strong {
-    font-weight: bold;
-    color: #00670e;
   }
 `;
 
@@ -254,203 +321,208 @@ const Services = () => {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-
   return (
-    <ServicesContainer>
-      <ContentWrapper>
-      <ServicesTitle>Our Services</ServicesTitle>
-      <GeneralServicesSection id="general-services">
-      <GeneralServiceTitle onClick={() => toggleSection("general")}>
-        Behavioral & Educational Services {openSections.general ? "▲" : "▼"}
-      </GeneralServiceTitle>
-      <AnimatePresence>
-        {openSections.general && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <GeneralServiceList>
-              <li>Autism Diagnostic Services</li>
-              <li>Occupational Therapy</li>
-              <li>Speech Therapy</li>
-              <li>1:1 Therapy Tailored to Your Child’s Needs</li>
-              <li>Center-Based ABA Therapy</li>
-              <li>Parent Training</li>
-              <li>Pre-K Readiness Programs</li>
-              <li>Daily Progress Monitoring and Goal Tracking</li>
-            </GeneralServiceList>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </GeneralServicesSection>
+    <PageBackground>
+      <ServicesContainer>
+        <ContentWrapper>
+          <SectionHeader>
+            <HeaderTitle>Our Services</HeaderTitle>
+            <HeaderDescription>
+              Discover our comprehensive range of therapeutic and educational services designed to support your child's growth and development in a nurturing, engaging environment.
+            </HeaderDescription>
+          </SectionHeader>
 
-    <GeneralServicesSection id="autism-diagnostic">
-      <GeneralServiceTitle onClick={() => toggleSection("autism")}>
-        Autism Diagnostic Services {openSections.autism ? "▲" : "▼"}
-      </GeneralServiceTitle>
-      <AnimatePresence>
-        {openSections.autism && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <GeneralServiceList>
-              <li>
-                <strong>Empathetic Assessments:</strong> We provide thorough and accurate evaluations in a supportive environment, understanding the emotional journey families undertake when seeking autism testing.
-              </li>
-              <li>
-                <strong>Experienced Team:</strong> Our services are led by a highly qualified psychologist, combining compassion with clinical expertise to guide families toward a clear path forward.
-              </li>
-              <li>
-                <strong>Personalized Approach:</strong> Recognizing that every child is unique, we tailor our evaluations to reflect individual needs and developmental stages.
-              </li>
-              <li>
-                <strong>Comprehensive Process:</strong> Our diagnostic process includes developmental monitoring, screening tools, clinical interviews, and history-taking to ensure a holistic understanding of your child's needs.
-              </li>
-            </GeneralServiceList>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </GeneralServicesSection>
-      <ServiceList>
-        {[
-           {
-            title: "Rock Walls & Leap Pads",
-            img: leappadImg,
-            desc: [
-              "Builds strength, coordination, and confidence.",
-              "Improves balance and agility through fun challenges.",
-              "Encourages goal-setting and perseverance.",
-            ],
-          },
-          {
-            title: "Dramatic Play",
-            img: dramaticPlayImg,
-            desc: [
-              "Improves language and storytelling skills.",
-              "Encourages social-emotional development through pretend play.",
-              "Encourages imaginative play and creativity.",
-              "Supports social, emotional, and cognitive development.",
-              "Helps children practice problem-solving and communication skills.",
-              "Promotes teamwork and role-playing.",
-            ],
-          },
-          {
-            title: "Grass Room",
-            img: grassroomFrontImg,
-            desc: [
-              "Provides a natural environment for relaxation and play.",
-              "Supports balance, coordination, and teamwork.",
-              "Encourages outdoor exploration in a safe space.",
-            ],
-          },
-         
-          {
-            title: "Manipulatives",
-            img: manipulativesImg,
-            desc: [
-              "Teaches parents ABA strategies for home reinforcement.",
-              "Helps children generalize skills across different settings.",
-              "Improves problem-solving and independence.",
-            ],
-          },
-          {
-            title: "Arts & Crafts",
-            img: artsImg,
-            desc: [
-              "Encourages creativity and self-expression in a structured environment.",
-              "Improves fine motor skills through activities like cutting, coloring, and painting.",
-              "Enhance hand-eye coordination and spatial awareness.",
-              "Teaches patience, focus, and task completion by following step-by-step instruction.",
-              "Encourages independence and responsibility through organizing and cleaning up.",
-            ],
-          },
-          {
-            title: "Stimulation Play",
-            img: stimulationFavImg,
-            desc: [
-              "Enhances communication and social skills through structured activities.",
-              "Encourages positive behavior reinforcement.",
-              "Provides a safe and nurturing learning environment.",
-            ],
-          },
-          {
-            title: "Music",
-            img: musicImg,
-            desc: [
-              "Encourages creative and self-expression through music.",
-              "Supports cognitive development, including memory, concentration, and problem-solving.",
-              "Enhance emotional regulation and stress relief.",
-              "Improves fine and gross motor skills through instrument play.",
-              "Promotes teamwork and collaboration during music sessions.",
-              " Builds cultural awareness and appreciation for different musical styles.",
-            ],
-          },
-          
-          {
-            title: "Transportation Room",
-            img: transportationImg,
-            desc: [
-              "Encourages developmentally appropriate play to support motor, cognitive, and social skills.",
-              "Provides a structured environment for learning through hands-on activities.",
-              "Facilitates sensory exploration and regulation.",
-              "Promotes focus, attention, and problem-solving through task-oriented activities.",
-              "Support goal-oriented learning, such as improving fine motor skills or spatial awareness.",
-              "Develops motor coordination and spatial awareness.",
-              "Encourages imaginative role-playing scenarios.",
-              "Strengthens problem-solving and teamwork.",
-            ],
-          },
-         
-          {
-            title: "Sensory Play",
-            img: sensoryImg,
-            desc: [
-              "Helps children regulate sensory input in a safe and controlled environment.",
-              "Provides a calming space for de-escalation during moments of stress or overstimulation.",
-              "Improves self-regulation and emotional control.",
-              "Reduces anxiety and offers a space to decompress.",
-              "Promotes emotional well-being and builds confidence.",
-              "Teaches children to independently manage sensory needs using tools.",
-            ],
-          },
-        ].map((service, index) => (
-          <ServiceCard key={index}>
-            <ServiceImage
-              src={service.img}
-              alt={service.title}
-              onClick={() => setSelectedImage(service.img)}
-            />
-            <ServiceTitle>{service.title}</ServiceTitle>
-            <ServiceDescription>
-              <ul>
-                {service.desc.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            </ServiceDescription>
-          </ServiceCard>
-        ))}
-      </ServiceList>
+          <GeneralServicesSection id="general-services">
+            <GeneralServiceTitle onClick={() => toggleSection("general")}>
+              Behavioral & Educational Services {openSections.general ? "▲" : "▼"}
+            </GeneralServiceTitle>
+            <AnimatePresence>
+              {openSections.general && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <GeneralServiceList>
+                    <li>Autism Diagnostic Services</li>
+                    <li>Occupational Therapy</li>
+                    <li>Speech Therapy</li>
+                    <li>1:1 Therapy Tailored to Your Child's Needs</li>
+                    <li>Center-Based ABA Therapy</li>
+                    <li>Parent Training</li>
+                    <li>Pre-K Readiness Programs</li>
+                    <li>Daily Progress Monitoring and Goal Tracking</li>
+                  </GeneralServiceList>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </GeneralServicesSection>
 
-      <AnimatePresence>
-        {selectedImage && (
-          <EnlargedImageOverlay
-            onClick={() => setSelectedImage(null)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <EnlargedImage src={selectedImage} alt="Enlarged View" />
-          </EnlargedImageOverlay>
-        )}
-      </AnimatePresence>
-      </ContentWrapper>
-    </ServicesContainer>
+          <GeneralServicesSection id="autism-diagnostic">
+            <GeneralServiceTitle onClick={() => toggleSection("autism")}>
+              Autism Diagnostic Services {openSections.autism ? "▲" : "▼"}
+            </GeneralServiceTitle>
+            <AnimatePresence>
+              {openSections.autism && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <GeneralServiceList>
+                    <li>
+                      <strong>Empathetic Assessments:</strong> We provide thorough and accurate evaluations in a supportive environment, understanding the emotional journey families undertake when seeking autism testing.
+                    </li>
+                    <li>
+                      <strong>Experienced Team:</strong> Our services are led by a highly qualified psychologist, combining compassion with clinical expertise to guide families toward a clear path forward.
+                    </li>
+                    <li>
+                      <strong>Personalized Approach:</strong> Recognizing that every child is unique, we tailor our evaluations to reflect individual needs and developmental stages.
+                    </li>
+                    <li>
+                      <strong>Comprehensive Process:</strong> Our diagnostic process includes developmental monitoring, screening tools, clinical interviews, and history-taking to ensure a holistic understanding of your child's needs.
+                    </li>
+                  </GeneralServiceList>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </GeneralServicesSection>
+
+          <ServiceList>
+            {[
+              {
+                title: "Rock Walls & Leap Pads",
+                img: leappadImg,
+                desc: [
+                  "Builds strength, coordination, and confidence.",
+                  "Improves balance and agility through fun challenges.",
+                  "Encourages goal-setting and perseverance.",
+                ],
+              },
+              {
+                title: "Dramatic Play",
+                img: dramaticPlayImg,
+                desc: [
+                  "Improves language and storytelling skills.",
+                  "Encourages social-emotional development through pretend play.",
+                  "Encourages imaginative play and creativity.",
+                  "Supports social, emotional, and cognitive development.",
+                  "Helps children practice problem-solving and communication skills.",
+                  "Promotes teamwork and role-playing.",
+                ],
+              },
+              {
+                title: "Grass Room",
+                img: grassroomFrontImg,
+                desc: [
+                  "Provides a natural environment for relaxation and play.",
+                  "Supports balance, coordination, and teamwork.",
+                  "Encourages outdoor exploration in a safe space.",
+                ],
+              },
+              {
+                title: "Manipulatives",
+                img: manipulativesImg,
+                desc: [
+                  "Teaches parents ABA strategies for home reinforcement.",
+                  "Helps children generalize skills across different settings.",
+                  "Improves problem-solving and independence.",
+                ],
+              },
+              {
+                title: "Arts & Crafts",
+                img: artsImg,
+                desc: [
+                  "Encourages creativity and self-expression in a structured environment.",
+                  "Improves fine motor skills through activities like cutting, coloring, and painting.",
+                  "Enhance hand-eye coordination and spatial awareness.",
+                  "Teaches patience, focus, and task completion by following step-by-step instruction.",
+                  "Encourages independence and responsibility through organizing and cleaning up.",
+                ],
+              },
+              {
+                title: "Stimulation Play",
+                img: stimulationFavImg,
+                desc: [
+                  "Enhances communication and social skills through structured activities.",
+                  "Encourages positive behavior reinforcement.",
+                  "Provides a safe and nurturing learning environment.",
+                ],
+              },
+              {
+                title: "Music",
+                img: musicImg,
+                desc: [
+                  "Encourages creative and self-expression through music.",
+                  "Supports cognitive development, including memory, concentration, and problem-solving.",
+                  "Enhance emotional regulation and stress relief.",
+                  "Improves fine and gross motor skills through instrument play.",
+                  "Promotes teamwork and collaboration during music sessions.",
+                  "Builds cultural awareness and appreciation for different musical styles.",
+                ],
+              },
+              {
+                title: "Transportation Room",
+                img: transportationImg,
+                desc: [
+                  "Encourages developmentally appropriate play to support motor, cognitive, and social skills.",
+                  "Provides a structured environment for learning through hands-on activities.",
+                  "Facilitates sensory exploration and regulation.",
+                  "Promotes focus, attention, and problem-solving through task-oriented activities.",
+                  "Support goal-oriented learning, such as improving fine motor skills or spatial awareness.",
+                  "Develops motor coordination and spatial awareness.",
+                  "Encourages imaginative role-playing scenarios.",
+                  "Strengthens problem-solving and teamwork.",
+                ],
+              },
+              {
+                title: "Sensory Play",
+                img: sensoryImg,
+                desc: [
+                  "Helps children regulate sensory input in a safe and controlled environment.",
+                  "Provides a calming space for de-escalation during moments of stress or overstimulation.",
+                  "Improves self-regulation and emotional control.",
+                  "Reduces anxiety and offers a space to decompress.",
+                  "Promotes emotional well-being and builds confidence.",
+                  "Teaches children to independently manage sensory needs using tools.",
+                ],
+              },
+            ].map((service, index) => (
+              <ServiceCard key={index}>
+                <ServiceImage
+                  src={service.img}
+                  alt={service.title}
+                  onClick={() => setSelectedImage(service.img)}
+                />
+                <ServiceTitle>{service.title}</ServiceTitle>
+                <ServiceDescription>
+                  <ul>
+                    {service.desc.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </ServiceDescription>
+              </ServiceCard>
+            ))}
+          </ServiceList>
+
+          <AnimatePresence>
+            {selectedImage && (
+              <EnlargedImageOverlay
+                onClick={() => setSelectedImage(null)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <EnlargedImage src={selectedImage} alt="Enlarged View" />
+              </EnlargedImageOverlay>
+            )}
+          </AnimatePresence>
+        </ContentWrapper>
+      </ServicesContainer>
+    </PageBackground>
   );
 };
 

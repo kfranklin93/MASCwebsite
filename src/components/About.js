@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 import placeholderImg from "../assets/IMG_6867.png";
 import placeholderImg2 from "../assets/IMG_8886 2.png";
 import Leadership from "../components/Leadership";
@@ -11,7 +12,7 @@ const AboutText = styled(motion.p)`
   margin-bottom: 1.5rem;
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
-  text-align: center; /* Center the text */
+  text-align: center;
 `;
 
 const textAnimation = {
@@ -30,8 +31,8 @@ const SectionTitle = styled.h2`
   color: #00695c;
   margin-bottom: 1.5rem;
   font-family: "Poppins", sans-serif;
-  text-align: center; /* Always centered */
-  width: 100%; /* Ensure full width */
+  text-align: center;
+  width: 100%;
 `;
 
 const SplitLayout = styled.div`
@@ -58,8 +59,7 @@ const TextColumn = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center children horizontally */
-  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -96,6 +96,40 @@ const ImageColumn = styled.div`
       height: 300px;
       max-width: 100%;
     }
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1.5rem; // Increased gap for better button separation
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2.5rem; // Increased top margin
+`;
+
+const Button = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: ${props => props.secondary ? '#00695c' : '#CD1B1B'}; // Green for secondary, Red for primary
+  color: white; // Always white text for better contrast
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none; // Removed border for cleaner look
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: "Nunito", sans-serif;
+  font-size: 1.1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: ${props => props.secondary ? '#008577' : '#e62020'}; // Slightly brighter on hover
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -156,6 +190,14 @@ const About = () => (
             It is a structured and evidence-based approach tailored to each
             child's learning pace.
           </AboutText>
+          <ButtonContainer>
+            <Button to="/contact">
+              Contact Us
+            </Button>
+            <Button to="/what-to-expect" secondary>
+              What to Expect in ABA Therapy
+            </Button>
+          </ButtonContainer>
         </TextColumn>
         <ImageColumn>
           <img src={placeholderImg2} alt="ABA Therapy" />

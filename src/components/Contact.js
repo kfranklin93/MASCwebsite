@@ -4,87 +4,195 @@ import styled from 'styled-components';
 import Select from 'react-select';
 import { Helmet } from 'react-helmet-async';
 
-// Styled-components for the form and elements
+const PageContainer = styled.div`
+  background: linear-gradient(135deg, #f3f9f9 0%, #ffffff 50%, #e8fdf5 100%);
+  min-height: 100vh;
+  padding: 4rem 0;
+`;
+
 const FormContainer = styled.section`
-  background-color: #fff;
-  color: #333;
-  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to right, #CD1B1B, #4A90E2, #FFD700);
+  }
+`;
+
+const FormHeader = styled.div`
   text-align: center;
+  margin-bottom: 2rem;
 `;
 
 const FormTitle = styled.h2`
-  font-size: 2.5rem;
-  color: rgb(0, 0, 255);
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  color: #CD1B1B;
+  margin-bottom: 1rem;
+  font-family: "Bubblegum Sans", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const FormSubtitle = styled.p`
+  font-size: 1.2rem;
+  color: #00695c;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+  font-family: "Nunito", sans-serif;
 `;
 
 const Form = styled.form`
-  max-width: 600px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const FullWidthGroup = styled(FormGroup)`
+  grid-column: 1 / -1;
 `;
 
 const Label = styled.label`
   font-size: 1.1rem;
   color: #333;
-  margin-bottom: 5px;
-  text-align: left;
-  display: block;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
 `;
 
 const InputField = styled.input`
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
+  padding: 1rem;
+  border: 2px solid #e1e1e1;
   border-radius: 10px;
   font-size: 1rem;
-  width: 100%;
-  background-color: #f9f9f9;
+  font-family: "Nunito", sans-serif;
+  transition: all 0.3s ease;
+  background: white;
+
+  &:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+
+  &:hover {
+    border-color: #4A90E2;
+  }
 `;
 
 const TextAreaField = styled.textarea`
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
+  padding: 1rem;
+  border: 2px solid #e1e1e1;
   border-radius: 10px;
   font-size: 1rem;
-  width: 100%;
-  background-color: #f9f9f9;
-  resize: vertical;
+  font-family: "Nunito", sans-serif;
   min-height: 150px;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: white;
+
+  &:focus {
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+    outline: none;
+  }
+
+  &:hover {
+    border-color: #4A90E2;
+  }
+`;
+
+const ErrorMessage = styled.span`
+  color: #CD1B1B;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  font-family: "Nunito", sans-serif;
 `;
 
 const SubmitButton = styled.button`
-  padding: 15px;
-  margin-top: 20px;
-  background-color: #4a90e2;
+  padding: 1rem 2rem;
+  background: #CD1B1B;
   color: white;
   border: none;
   border-radius: 10px;
   font-size: 1.2rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-
+  transition: all 0.3s ease;
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  
   &:hover {
-    background-color: #3b7dc4;
+    transform: translateY(-2px);
+    background: #e62020;
+    box-shadow: 0 4px 12px rgba(205, 27, 27, 0.2);
+  }
+
+  &:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
   }
 `;
 
 const ConsentText = styled.p`
   font-size: 0.9rem;
-  color: #333;
-  margin-top: 20px;
-  text-align: left;
+  color: #666;
+  margin-top: 1.5rem;
+  text-align: center;
+  grid-column: 1 / -1;
+  font-family: "Nunito", sans-serif;
+  padding: 1rem;
+  background: rgba(74, 144, 226, 0.05);
+  border-radius: 10px;
 `;
 
-const InsuranceDropdown = styled.div`
-  margin: 10px 0;
-  text-align: left;
-`;
+const customSelectStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: '10px',
+    border: `2px solid ${state.isFocused ? '#4A90E2' : '#e1e1e1'}`,
+    padding: '0.25rem',
+    boxShadow: state.isFocused ? '0 0 0 4px rgba(74, 144, 226, 0.1)' : 'none',
+    '&:hover': {
+      borderColor: '#4A90E2'
+    }
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? '#4A90E2' : state.isFocused ? 'rgba(74, 144, 226, 0.1)' : 'white',
+    color: state.isSelected ? 'white' : '#333',
+    padding: '0.75rem 1rem',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '10px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+  })
+};
 
 function ContactForm() {
-  const [state, handleSubmit] = useForm("xkgjkjng"); // Replace with your actual Formspree form ID
+  const [state, handleSubmit] = useForm("xkgjkjng");
   const [formData, setFormData] = useState({
     parentName: '',
     childName: '',
@@ -127,11 +235,8 @@ function ContactForm() {
     });
   };
 
-  // Custom validation function
   const validateForm = () => {
     const errors = {};
-
-    // Validate required fields
     if (!formData.parentName) errors.parentName = "Parent's name is required.";
     if (!formData.childName) errors.childName = "Child's name is required.";
     if (!formData.age || formData.age <= 0) errors.age = "Age must be a positive number.";
@@ -141,188 +246,198 @@ function ContactForm() {
     if (!formData.dateOfLastEval) errors.dateOfLastEval = "Date of last evaluation is required.";
     if (!formData.behaviorsOfConcern) errors.behaviorsOfConcern = "Please describe the behaviors of concern.";
 
-    // Simple email format validation
     if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Please enter a valid email address.";
     }
 
     setFormErrors(errors);
-    return Object.keys(errors).length === 0; // Returns true if no errors
+    return Object.keys(errors).length === 0;
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-
-    // Validate form data before submitting
     if (validateForm()) {
       handleSubmit(event);
     }
   };
 
   if (state.succeeded) {
-    return <p>Thanks for submitting the form!</p>;
+    return (
+      <PageContainer>
+        <FormContainer>
+          <FormHeader>
+            <FormTitle>Thank You!</FormTitle>
+            <FormSubtitle>
+              We've received your information and will contact you soon to discuss the next steps
+              in your child's journey with us.
+            </FormSubtitle>
+          </FormHeader>
+        </FormContainer>
+      </PageContainer>
+    );
   }
 
   return (
     <>
-    <Helmet>
-  <title>Contact Mommy Angel's Specialty Care | ABA Therapy & Autism Support</title>
-  <meta
-    name="description"
-    content="Reach out to Mommy Angel's Specialty Care and Autism Center for compassionate, specialized ABA therapy, speech therapy, and Pre-K readiness for children with autism in Georgia."
-  />
-  <meta
-    name="keywords"
-    content="ABA therapy, autism support, early childhood autism care, contact Mommy Angel's, Pre-K readiness, speech therapy Georgia, inclusive autism center"
-  />
-</Helmet>
-{/* <section id="contact"> */}
-    <FormContainer >
-      <FormTitle>Intake Form</FormTitle>
-      <Form
-        name="contact" // The name here is important for Netlify
-        method="POST"
-        data-netlify="true" // This tells Netlify to handle the form
-        netlify-honeypot="bot-field" // Anti-bot field
-        onSubmit={onSubmit} // Handle submission in your JS logic
-      >
-        {/* Parent's Name */}
-        <div>
-          <Label htmlFor="parentName">Parent's Name</Label>
-          <InputField
-            type="text"
-            name="parentName"
-            placeholder="Enter Parent's Name"
-            value={formData.parentName}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.parentName && <span>{formErrors.parentName}</span>}
-        </div>
+      <Helmet>
+        <title>Contact Mommy Angel's Specialty Care | ABA Therapy & Autism Support</title>
+        <meta
+          name="description"
+          content="Reach out to Mommy Angel's Specialty Care and Autism Center for compassionate, specialized ABA therapy, speech therapy, and Pre-K readiness for children with autism in Georgia."
+        />
+        <meta
+          name="keywords"
+          content="ABA therapy, autism support, early childhood autism care, contact Mommy Angel's, Pre-K readiness, speech therapy Georgia, inclusive autism center"
+        />
+      </Helmet>
+      <PageContainer>
+        <FormContainer>
+          <FormHeader>
+            <FormTitle>Start Your Journey With Us</FormTitle>
+            <FormSubtitle>
+              We're here to support you every step of the way. Fill out this form to begin your child's
+              journey toward growth and development in our nurturing environment.
+            </FormSubtitle>
+          </FormHeader>
+          
+          <Form onSubmit={onSubmit}>
+            <FormGroup>
+              <Label htmlFor="parentName">Parent's Name</Label>
+              <InputField
+                type="text"
+                id="parentName"
+                name="parentName"
+                placeholder="Enter parent's name"
+                value={formData.parentName}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.parentName && <ErrorMessage>{formErrors.parentName}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Child's Name */}
-        <div>
-          <Label htmlFor="childName">Child's Name</Label>
-          <InputField
-            type="text"
-            name="childName"
-            placeholder="Enter Child's Name"
-            value={formData.childName}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.childName && <span>{formErrors.childName}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="childName">Child's Name</Label>
+              <InputField
+                type="text"
+                id="childName"
+                name="childName"
+                placeholder="Enter child's name"
+                value={formData.childName}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.childName && <ErrorMessage>{formErrors.childName}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Child's Age */}
-        <div>
-          <Label htmlFor="age">Child's Age</Label>
-          <InputField
-            type="number"
-            name="age"
-            placeholder="Enter Age"
-            value={formData.age}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.age && <span>{formErrors.age}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="age">Child's Age</Label>
+              <InputField
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Enter age"
+                value={formData.age}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.age && <ErrorMessage>{formErrors.age}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Child's Date of Birth */}
-        <div>
-          <Label htmlFor="dob">Child's Date of Birth</Label>
-          <InputField
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.dob && <span>{formErrors.dob}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="dob">Date of Birth</Label>
+              <InputField
+                type="date"
+                id="dob"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.dob && <ErrorMessage>{formErrors.dob}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Email Address */}
-        <div>
-          <Label htmlFor="email">Email Address</Label>
-          <InputField
-            type="email"
-            name="email"
-            placeholder="Enter Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.email && <span>{formErrors.email}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="email">Email Address</Label>
+              <InputField
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.email && <ErrorMessage>{formErrors.email}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Phone Number */}
-        <div>
-          <Label htmlFor="phone">Phone Number</Label>
-          <InputField
-            type="tel"
-            name="phone"
-            placeholder="Enter Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.phone && <span>{formErrors.phone}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="phone">Phone Number</Label>
+              <InputField
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter phone number"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.phone && <ErrorMessage>{formErrors.phone}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Date of Last Evaluation */}
-        <div>
-          <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
-          <InputField
-            type="date"
-            name="dateOfLastEval"
-            value={formData.dateOfLastEval}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.dateOfLastEval && <span>{formErrors.dateOfLastEval}</span>}
-        </div>
+            <FormGroup>
+              <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
+              <InputField
+                type="date"
+                id="dateOfLastEval"
+                name="dateOfLastEval"
+                value={formData.dateOfLastEval}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.dateOfLastEval && <ErrorMessage>{formErrors.dateOfLastEval}</ErrorMessage>}
+            </FormGroup>
 
-        {/* Insurance Dropdown */}
-        <div>
-          <Label htmlFor="insuranceProvider">Select Your Insurance Provider</Label>
-          <InsuranceDropdown>
-            <Select
-              options={insuranceOptions}
-              value={formData.insuranceProvider}
-              onChange={handleSelectChange}
-              isSearchable
-              placeholder="Search or select insurance..."
-            />
-          </InsuranceDropdown>
-        </div>
+            <FormGroup>
+              <Label htmlFor="insuranceProvider">Insurance Provider</Label>
+              <Select
+                id="insuranceProvider"
+                options={insuranceOptions}
+                value={formData.insuranceProvider}
+                onChange={handleSelectChange}
+                isSearchable
+                placeholder="Search or select insurance..."
+                styles={customSelectStyles}
+              />
+            </FormGroup>
 
-        {/* Behaviors of Concern */}
-        <div>
-          <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
-          <TextAreaField
-            name="behaviorsOfConcern"
-            placeholder="Describe any current behaviors of concern"
-            value={formData.behaviorsOfConcern}
-            onChange={handleChange}
-            required
-          />
-          {formErrors.behaviorsOfConcern && <span>{formErrors.behaviorsOfConcern}</span>}
-        </div>
+            <FullWidthGroup>
+              <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
+              <TextAreaField
+                id="behaviorsOfConcern"
+                name="behaviorsOfConcern"
+                placeholder="Please describe any behaviors or concerns you'd like to address..."
+                value={formData.behaviorsOfConcern}
+                onChange={handleChange}
+                required
+              />
+              {formErrors.behaviorsOfConcern && <ErrorMessage>{formErrors.behaviorsOfConcern}</ErrorMessage>}
+            </FullWidthGroup>
 
-        {/* Submit Button */}
-        <SubmitButton type="submit" disabled={state.submitting}>Submit</SubmitButton>
+            <SubmitButton type="submit" disabled={state.submitting}>
+              {state.submitting ? 'Sending...' : 'Submit Application'}
+            </SubmitButton>
 
-        <ConsentText>
-          By submitting this form, you consent to the use and disclosure of your
-          personal information as required to process your inquiry. We are
-          committed to maintaining the privacy and security of your personal
-          health information in compliance with HIPAA.
-        </ConsentText>
+            <ConsentText>
+              By submitting this form, you consent to the use and disclosure of your
+              personal information as required to process your inquiry. We are
+              committed to maintaining the privacy and security of your personal
+              health information in compliance with HIPAA.
+            </ConsentText>
 
-        <input type="hidden" name="form-name" value="contact" />
-      </Form>
-    </FormContainer>
-    {/* </section> */}
+            <input type="hidden" name="form-name" value="contact" />
+          </Form>
+        </FormContainer>
+      </PageContainer>
     </>
   );
 }

@@ -2,288 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
-
-const DropdownToggleButton = styled.span`
-  font-size: 1.5rem;
-  color: #4a90e2;
-  margin-left: auto; /* Aligns the button to the right */
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  padding-left: 10px;
-
-  &:hover {
-    color: #ffd700; /* Change color when hovered */
-    transform: scale(1.1);
-  }
-`;
-
-const MobileNavLink = styled.a`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #222;
-  padding: 1rem 0;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #4a90e2;
-  }
-`;
-
-
-
-const MobileDropdownItem = styled.a`
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: #333;
-  text-decoration: none;
-
-  &:hover {
-    color: #4a90e2;
-  }
-`;
-
-const MobileDropdownMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #f3f7ff;
-  border-left: 3px solid #4a90e2;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-radius: 8px;
-`;
-
-
-
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  // const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(null);
-
-  return (
-    <NavbarContainer variants={navVariants} initial="hidden" animate="visible">
-      <Logo whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-        <a href="#home">Mommy Angels</a>
-      </Logo>
-
-      {/* Desktop Navigation */}
-      <NavLinks>
-        <NavLink href="#about" color="#FFD700">
-          About Us
-        </NavLink>
-
-        <DropdownContainer
-          onMouseEnter={() => setDropdownOpen("services")}
-          onMouseLeave={() => setDropdownOpen(false)}
-        >
-          <NavLinkWrapper>
-            <NavLink href="#services" color="#4A90E2">
-              Services
-            </NavLink>
-            <DropdownIcon>▼</DropdownIcon>
-          </NavLinkWrapper>
-
-          <AnimatePresence>
-            {dropdownOpen === "services" && (
-              <DropdownMenu
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-              >
-                <DropdownItem href="/services#general-services" color="#4a90e2">
-                  ABA Therapy
-                </DropdownItem>
-                <DropdownItem href="#autism-diagnostic" color="#4a90e2">
-                  Autism Diagnostic Services
-                </DropdownItem>
-                <DropdownItem href="#speech-therapy" color="#4a90e2">
-                  Speech Therapy
-                </DropdownItem>
-                <DropdownItem href="#early-intervention" color="#4a90e2">
-                  Early Intervention
-                </DropdownItem>
-              </DropdownMenu>
-            )}
-          </AnimatePresence>
-        </DropdownContainer>
-
-        {/* Contact with Dropdown */}
-        <DropdownContainer
-          onMouseEnter={() => setDropdownOpen("contact")}
-          onMouseLeave={() => setDropdownOpen(false)}
-        >
-          <NavLinkWrapper>
-            <NavLink href="#contact" color="#CD1B1B">
-              Contact
-            </NavLink>
-            <DropdownIcon>▼</DropdownIcon>
-          </NavLinkWrapper>
-
-          <AnimatePresence>
-            {dropdownOpen === "#contact" && (
-              <DropdownMenu
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-              >
-                <DropdownItem href="#careers" color="#FF5733">
-                  Careers
-                </DropdownItem>
-                <DropdownItem href="#internships" color="#3f8242">
-                  Internships
-                </DropdownItem>
-              </DropdownMenu>
-            )}
-          </AnimatePresence>
-        </DropdownContainer>
-      </NavLinks>
-
-      {/* Mobile Menu Button */}
-      <MobileMenuButton onClick={() => setMenuOpen(true)}>
-        <FaBars />
-      </MobileMenuButton>
-
-      {/* Mobile Menu */}
-
-      <AnimatePresence>
-        {menuOpen && (
-          <MobileMenu
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3 }}
-          >
-            <CloseButton onClick={() => setMenuOpen(false)}>
-              <FaTimes />
-            </CloseButton>
-
-            <Logo style={{ marginBottom: "2rem" }}>
-                <a href="#home">Mommy Angels</a>
-            </Logo>
-
-            {/* Close menu when clicking a link */}
-            <MobileNavLink href="#home" onClick={() => setMenuOpen(false)}>
-              Home
-            </MobileNavLink>
-            <MobileNavLink href="#about" onClick={() => setMenuOpen(false)}>
-              About
-            </MobileNavLink>
-
-            {/* Services Dropdown */}
-            <DropdownContainer
-              onClick={() =>
-                setDropdownOpen(dropdownOpen === "services" ? null : "services")
-              }
-            >
-              <MobileNavLink onClick={(e) => e.preventDefault()}>
-                Services
-                <DropdownToggleButton>
-                  {dropdownOpen === "services" ? "▲" : "▼"}
-                </DropdownToggleButton>
-              </MobileNavLink>
-              {dropdownOpen === "services" && (
-                <MobileDropdownMenu>
-                  <MobileDropdownItem
-                    href="/services#general-services"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    ABA Therapy
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    href="#autism-diagnostic"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Autism Diagnostic Services
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    href="#speech-therapy"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Speech Therapy
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    href="#early-intervention"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Early Intervention
-                  </MobileDropdownItem>
-                </MobileDropdownMenu>
-              )}
-            </DropdownContainer>
-
-            {/* Contact Dropdown */}
-            <DropdownContainer
-              onClick={() =>
-                setDropdownOpen(dropdownOpen === "contact" ? null : "contact")
-              }
-            >
-              <MobileNavLink onClick={(e) => e.preventDefault()}>
-                Contact
-                <DropdownToggleButton>
-                  {dropdownOpen === "contact" ? "▲" : "▼"}
-                </DropdownToggleButton>
-              </MobileNavLink>
-              {dropdownOpen === "contact" && (
-                <MobileDropdownMenu>
-                  <MobileDropdownItem
-                    href="#careers"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Careers
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    href="#internships"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Internships
-                  </MobileDropdownItem>
-                </MobileDropdownMenu>
-              )}
-            </DropdownContainer>
-
-            <MobileNavLink href="#careers" onClick={() => setMenuOpen(false)}>
-              Careers
-            </MobileNavLink>
-            <MobileNavLink
-              href="#internships"
-              onClick={() => setMenuOpen(false)}
-            >
-              Internships
-            </MobileNavLink>
-            <CTAButton href="/contact">Enroll Now</CTAButton>
-          </MobileMenu>
-        )}
-      </AnimatePresence>
-    </NavbarContainer>
-  );
-};
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const navVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const CTAButton = styled.a`
-  margin-top: auto;
-  align-self: center;
-  background-color: #cd1b1b;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background-color: #a31414;
-  }
-`;
-
+// Styled Components
 const NavbarContainer = styled(motion.nav)`
   position: fixed;
   top: 0;
@@ -320,11 +46,11 @@ const NavLinks = styled.ul`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   font-size: 1.2rem;
   font-weight: 500;
   text-decoration: none;
-  color: ${({ color }) => color || "white"}; /* Accepts a color prop */
+  color: ${({ color }) => color || "white"};
   padding: 8px 12px;
   border-radius: 8px;
   transition: background 0.3s ease;
@@ -336,7 +62,6 @@ const NavLink = styled.a`
   }
 `;
 
-/* Dropdown Styling */
 const DropdownContainer = styled.div`
   position: relative;
 `;
@@ -356,9 +81,9 @@ const DropdownMenu = styled(motion.div)`
   z-index: 1000;
 `;
 
-const DropdownItem = styled.a`
+const DropdownItem = styled(Link)`
   text-decoration: none;
-  color: ${({ color }) => color || "#333"}; /* Accepts a color prop */
+  color: ${({ color }) => color || "#333"};
   padding: 8px 12px;
   border-radius: 5px;
   transition: background 0.3s ease;
@@ -368,7 +93,6 @@ const DropdownItem = styled.a`
   }
 `;
 
-/* Mobile Menu */
 const MobileMenuButton = styled.div`
   display: none;
   font-size: 1.8rem;
@@ -389,7 +113,7 @@ const MobileMenu = styled(motion.div)`
   background: #fefefe;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.5rem 4rem; /* Add bottom padding */
+  padding: 2rem 1.5rem 4rem;
   z-index: 999;
   overflow-y: auto;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
@@ -414,5 +138,257 @@ const NavLinkWrapper = styled.div`
 const DropdownIcon = styled.span`
   font-size: 0.8rem;
 `;
+
+const MobileNavLink = styled(Link)`
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #4a90e2;
+  }
+`;
+
+const MobileDropdownItem = styled(Link)`
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    color: #4a90e2;
+  }
+`;
+
+const MobileDropdownMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f7ff;
+  border-left: 3px solid #4a90e2;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-radius: 8px;
+`;
+
+const DropdownToggleButton = styled.span`
+  font-size: 1.5rem;
+  color: #4a90e2;
+  margin-left: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding-left: 10px;
+
+  &:hover {
+    color: #ffd700;
+    transform: scale(1.1);
+  }
+`;
+
+const CTAButton = styled(Link)`
+  margin-top: auto;
+  align-self: center;
+  background-color: #cd1b1b;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background-color: #a31414;
+  }
+`;
+
+const ScrollLink = ({ to, children, ...props }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(to);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(to);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <NavLink {...props} to={to} onClick={handleClick}>
+      {children}
+    </NavLink>
+  );
+};
+
+const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <NavbarContainer variants={navVariants} initial="hidden" animate="visible">
+      <Logo whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+        <Link to="/" onClick={handleLogoClick}>Mommy Angels</Link>
+      </Logo>
+
+      {/* Desktop Navigation */}
+      <NavLinks>
+        <ScrollLink to="#about" color="#FFD700">
+          About Us
+        </ScrollLink>
+
+        <DropdownContainer
+          onMouseEnter={() => setDropdownOpen("services")}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
+          <NavLinkWrapper>
+            <ScrollLink to="#services" color="#4A90E2">
+              Services
+            </ScrollLink>
+            <DropdownIcon>▼</DropdownIcon>
+          </NavLinkWrapper>
+
+          <AnimatePresence>
+            {dropdownOpen === "services" && (
+              <DropdownMenu
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+              >
+                <DropdownItem to="/services/aba-therapy" color="#4a90e2">
+                  ABA Therapy
+                </DropdownItem>
+                <DropdownItem to="/services/autism-diagnostic" color="#4a90e2">
+                  Autism Diagnostic Services
+                </DropdownItem>
+                <DropdownItem to="/services/speech-therapy" color="#4a90e2">
+                  Speech Therapy
+                </DropdownItem>
+                <DropdownItem to="/services/early-intervention" color="#4a90e2">
+                  Early Intervention
+                </DropdownItem>
+              </DropdownMenu>
+            )}
+          </AnimatePresence>
+        </DropdownContainer>
+
+        <ScrollLink to="#contact" color="#CD1B1B">
+          Contact
+        </ScrollLink>
+      </NavLinks>
+
+      {/* Mobile Menu Button */}
+      <MobileMenuButton onClick={() => setMenuOpen(true)}>
+        <FaBars />
+      </MobileMenuButton>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <MobileMenu
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3 }}
+          >
+            <CloseButton onClick={() => setMenuOpen(false)}>
+              <FaTimes />
+            </CloseButton>
+
+            <Logo style={{ marginBottom: "2rem" }}>
+              <Link to="/" onClick={handleLogoClick}>Mommy Angels</Link>
+            </Logo>
+
+            <MobileNavLink to="/" onClick={() => setMenuOpen(false)}>
+              Home
+            </MobileNavLink>
+
+            <ScrollLink to="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </ScrollLink>
+
+            {/* Services Dropdown */}
+            <DropdownContainer
+              onClick={() =>
+                setDropdownOpen(dropdownOpen === "services" ? null : "services")
+              }
+            >
+              <MobileNavLink as="div">
+                Services
+                <DropdownToggleButton>
+                  {dropdownOpen === "services" ? "▲" : "▼"}
+                </DropdownToggleButton>
+              </MobileNavLink>
+              {dropdownOpen === "services" && (
+                <MobileDropdownMenu>
+                  <MobileDropdownItem
+                    to="/services/aba-therapy"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    ABA Therapy
+                  </MobileDropdownItem>
+                  <MobileDropdownItem
+                    to="/services/autism-diagnostic"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Autism Diagnostic Services
+                  </MobileDropdownItem>
+                  <MobileDropdownItem
+                    to="/services/speech-therapy"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Speech Therapy
+                  </MobileDropdownItem>
+                  <MobileDropdownItem
+                    to="/services/early-intervention"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Early Intervention
+                  </MobileDropdownItem>
+                </MobileDropdownMenu>
+              )}
+            </DropdownContainer>
+
+            <ScrollLink to="#contact" onClick={() => setMenuOpen(false)}>
+              Contact
+            </ScrollLink>
+
+            <CTAButton to="/contact" onClick={() => setMenuOpen(false)}>
+              Enroll Now
+            </CTAButton>
+          </MobileMenu>
+        )}
+      </AnimatePresence>
+    </NavbarContainer>
+  );
+};
 
 export default Navbar;

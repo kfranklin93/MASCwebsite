@@ -7,12 +7,7 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatToExpect from "./components/WhatToExpect";
-import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
-import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
-import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
-import ABATherapy from "./components/ServicePages/ABATherapy";
 import VoteBanner from "./components/VoteBanner";
-import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => (
@@ -39,18 +34,14 @@ const App = () => {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <ScrollToTop />
       <Navbar />
       <VoteBanner />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
-        <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
-        <Route path="/services/early-intervention" element={<EarlyIntervention />} />
-        <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
-        <Route path="/services/aba-therapy" element={<ABATherapy />} />
       </Routes>
+
       <Footer />
     </>
   );

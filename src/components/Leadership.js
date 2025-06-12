@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import placeholderImage from "../assets/right side puzzle pieces Background Removed.png"; // Add placeholder headshot
-import anthony from "../assets/IMG_1060 Background Removed.png";
+import anthony from "../assets/Anthony-edited Background Removed.png";
 import shruthi from "../assets/IMG_9536 Background Removed.png";
 import ruffin from "../assets/ruffin Background Removed.png";
 
@@ -50,6 +50,11 @@ const LeadersGrid = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  min-width: 1024px;
+
+  @media (max-width: 1024px) {
+    min-width: auto;
+  }
 
   @media (max-width: 768px) {
     gap: 1.5rem; /* Smaller gap on mobile */
@@ -73,19 +78,15 @@ const LeaderCard = styled.div`
   }
 `;
 
-// const LeaderImage = styled.img`
-//   width: 100%;
-//   height: auto;
-//   border-radius: 50%;
-//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-// `;
 const LeaderImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  // object-fit: contain; /* Changed from cover */
-  object-position: center top; /* Adjusts vertical alignment */
+  object-position: center; /* Changed from center top to just center */
   border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const LeaderName = styled.h3`
@@ -116,17 +117,25 @@ const LeaderTitle = styled.p`
     font-size: 0.85rem; /* Slightly smaller font on very small screens */
   }
 `;
+
 const ImageWrapper = styled.div`
   width: 180px;
   height: 180px;
   overflow: hidden;
-  border-radius: 50%; /* Change to 0 for square crop */
-  margin: 0 auto;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff; /* Optional: prevents transparency glitches */
+  background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
 
   @media (max-width: 768px) {
     width: 150px;
@@ -144,7 +153,7 @@ const Leadership = () => {
     <LeadershipSection>
       <Title>Servant Leadership</Title>
       <Description>
-        At Mommy Angel’s Specialty Care & Autism Center, our leadership is
+        At Mommy Angel's Specialty Care & Autism Center, our leadership is
         grounded in the heart of service. We believe in leading with empathy,
         compassion, and a deep commitment to our families, team members, and the
         community. By empowering our staff, we nurture an environment where
