@@ -303,16 +303,6 @@ const Button = styled(Link)`
   }
 `;
 
-// Helper styled component for the highlighted text
-// const StrongHighlight = styled.strong`
-//   color: #CD1B1B; /* Use a prominent color from your palette */
-//   font-weight: 800; /* Make it extra bold */
-//   background-color: #FFFACD; /* A light, warm background to make it pop */
-//   padding: 0 4px;
-//   border-radius: 3px;
-//   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-// `;
-
 const About = () => (
   <main>
     {/* OUR STORY Section */}
@@ -338,7 +328,7 @@ const About = () => (
     target="_blank"
     rel="noopener noreferrer"
     style={{
-      color: "#CD1B1B",
+      color: "#00695c",
       fontWeight: "bold",
       textDecoration: "underline",
       backgroundColor: "#FFFACD",
@@ -365,7 +355,7 @@ const About = () => (
   <span
     style={{
       fontWeight: "bold",
-      color: "#CD1B1B",
+      color: "#00695c",
     }}
   >
     game changer
@@ -407,22 +397,22 @@ const About = () => (
   developing friendships, and spending time outdoors together in a safe,
   inclusive environment. To explore this unique blend of support and connection,
   visit{" "}
-  <Button
-    as="a"
-    href="https://www.mommyangelsdaycare.com/"
+  <a
+    href="https://mommyangelsdaycare.com"
     target="_blank"
     rel="noopener noreferrer"
     style={{
-      padding: "0.5rem 1rem",
-      fontSize: "1rem",
-      whiteSpace: "nowrap",
-      display: "inline-flex",
-      verticalAlign: "middle",
-      marginLeft: "5px",
+      color: "#00695c",
+      fontWeight: "bold",
+      textDecoration: "underline",
+      backgroundColor: "#FFFACD",
+      padding: "2px 5px",
+      borderRadius: "3px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
     }}
   >
-    MommyAngelsDaycare.com
-  </Button>
+    Mommy Angels Daycare
+  </a>
   .
 </AboutText>
 
