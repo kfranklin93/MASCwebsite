@@ -107,25 +107,52 @@ const MobileMenuButton = styled.div`
 const MobileMenu = styled(motion.div)`
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 85%;
+  max-width: 350px;
   height: 100vh;
-  background: #fefefe;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 255, 0.98) 100%);
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(74, 144, 226, 0.2);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem 4rem;
   z-index: 999;
   overflow-y: auto;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const CloseButton = styled.div`
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   right: 1.5rem;
-  font-size: 2rem;
-  color: #000;
+  font-size: 1.5rem;
+  color: #666;
   cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    color: #CD1B1B;
+    box-shadow: 0 4px 12px rgba(205, 27, 27, 0.2);
+    transform: rotate(90deg);
+  }
 `;
 
 const NavLinkWrapper = styled.div`
@@ -140,53 +167,74 @@ const DropdownIcon = styled.span`
 `;
 
 const MobileNavLink = styled(Link)`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #222;
-  padding: 1rem 0;
-  border-bottom: 1px solid #ddd;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  padding: 1rem 1.2rem;
+  margin: 0.3rem 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(74, 144, 226, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
   &:hover {
-    color: #4a90e2;
+    color: #4A90E2;
+    background: rgba(74, 144, 226, 0.1);
+    border-color: rgba(74, 144, 226, 0.3);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
   }
 `;
 
 const MobileDropdownItem = styled(Link)`
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: #333;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.95rem;
+  color: #555;
   text-decoration: none;
+  border-radius: 8px;
+  margin: 0.2rem 0;
+  background: rgba(255, 255, 255, 0.8);
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #4a90e2;
+    color: #4A90E2;
+    background: rgba(74, 144, 226, 0.08);
+    border-left-color: #4A90E2;
+    transform: translateX(4px);
   }
 `;
 
-const MobileDropdownMenu = styled.div`
+const MobileDropdownMenu = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  background-color: #f3f7ff;
-  border-left: 3px solid #4a90e2;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-radius: 8px;
+  background: rgba(248, 249, 255, 0.8);
+  border-radius: 12px;
+  margin: 0.5rem 0 1rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(74, 144, 226, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 2px 8px rgba(74, 144, 226, 0.1);
 `;
 
 const DropdownToggleButton = styled.span`
-  font-size: 1.5rem;
-  color: #4a90e2;
+  font-size: 1.2rem;
+  color: #4A90E2;
   margin-left: auto;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  padding-left: 10px;
+  transition: all 0.3s ease;
+  padding: 0.2rem;
+  border-radius: 50%;
+  background: rgba(74, 144, 226, 0.1);
 
   &:hover {
-    color: #ffd700;
+    color: #FFD700;
+    background: rgba(255, 215, 0, 0.2);
     transform: scale(1.1);
   }
 `;
@@ -194,18 +242,56 @@ const DropdownToggleButton = styled.span`
 const CTAButton = styled(Link)`
   margin-top: auto;
   align-self: center;
-  background-color: #cd1b1b;
+  background: linear-gradient(135deg, #CD1B1B 0%, #FF4444 100%);
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
+  padding: 1rem 2rem;
+  border-radius: 25px;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 600;
   text-decoration: none;
-  transition: background 0.3s ease;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(205, 27, 27, 0.3);
+  border: 2px solid transparent;
 
   &:hover {
-    background-color: #a31414;
+    background: linear-gradient(135deg, #FF4444 0%, #CD1B1B 100%);
+    box-shadow: 0 6px 20px rgba(205, 27, 27, 0.4);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
   }
+`;
+
+const MobileLogo = styled.div`
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(74, 144, 226, 0.2);
+  
+  h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-family: "Bubblegum Sans", sans-serif;
+    margin: 0;
+    
+    a {
+      text-decoration: none;
+      background: linear-gradient(135deg, #CD1B1B 0%, #4A90E2 50%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+`;
+
+const MobileMenuOverlay = styled(motion.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px);
 `;
 
 const ScrollLink = ({ to, children, ...props }) => {
@@ -313,78 +399,98 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
-          <MobileMenu
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3 }}
-          >
-            <CloseButton onClick={() => setMenuOpen(false)}>
-              <FaTimes />
-            </CloseButton>
-
-            <Logo style={{ marginBottom: "2rem" }}>
-              <Link to="/" onClick={handleLogoClick}>Mommy Angels</Link>
-            </Logo>
-
-            <MobileNavLink to="/" onClick={() => setMenuOpen(false)}>
-              Home
-            </MobileNavLink>
-
-            <ScrollLink to="#about" onClick={() => setMenuOpen(false)}>
-              About
-            </ScrollLink>
-
-            {/* Services Dropdown */}
-            <DropdownContainer
-              onClick={() =>
-                setDropdownOpen(dropdownOpen === "services" ? null : "services")
-              }
+          <>
+            <MobileMenuOverlay
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMenuOpen(false)}
+            />
+            <MobileMenu
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <MobileNavLink as="div">
-                Services
-                <DropdownToggleButton>
-                  {dropdownOpen === "services" ? "▲" : "▼"}
-                </DropdownToggleButton>
+              <CloseButton onClick={() => setMenuOpen(false)}>
+                <FaTimes />
+              </CloseButton>
+
+              <MobileLogo>
+                <h1>
+                  <Link to="/" onClick={(e) => { handleLogoClick(e); setMenuOpen(false); }}>
+                    Mommy Angels
+                  </Link>
+                </h1>
+              </MobileLogo>
+
+              <MobileNavLink to="/" onClick={() => setMenuOpen(false)}>
+                Home
               </MobileNavLink>
-              {dropdownOpen === "services" && (
-                <MobileDropdownMenu>
-                  <MobileDropdownItem
-                    to="/services/aba-therapy"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    ABA Therapy
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    to="/services/autism-diagnostic"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Autism Diagnostic Services
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    to="/services/speech-therapy"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Speech Therapy
-                  </MobileDropdownItem>
-                  <MobileDropdownItem
-                    to="/services/early-intervention"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Early Intervention
-                  </MobileDropdownItem>
-                </MobileDropdownMenu>
-              )}
-            </DropdownContainer>
 
-            <ScrollLink to="#contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </ScrollLink>
+              <MobileNavLink as={ScrollLink} to="#about" onClick={() => setMenuOpen(false)}>
+                About Us
+              </MobileNavLink>
 
-            <CTAButton to="/contact" onClick={() => setMenuOpen(false)}>
-              Enroll Now
-            </CTAButton>
-          </MobileMenu>
+              {/* Services Dropdown */}
+              <DropdownContainer
+                onClick={() =>
+                  setDropdownOpen(dropdownOpen === "services" ? null : "services")
+                }
+              >
+                <MobileNavLink as="div">
+                  Services
+                  <DropdownToggleButton>
+                    {dropdownOpen === "services" ? "▲" : "▼"}
+                  </DropdownToggleButton>
+                </MobileNavLink>
+                <AnimatePresence>
+                  {dropdownOpen === "services" && (
+                    <MobileDropdownMenu
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <MobileDropdownItem
+                        to="/services/aba-therapy"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        ABA Therapy
+                      </MobileDropdownItem>
+                      <MobileDropdownItem
+                        to="/services/autism-diagnostic"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Autism Diagnostic Services
+                      </MobileDropdownItem>
+                      <MobileDropdownItem
+                        to="/services/speech-therapy"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Speech Therapy
+                      </MobileDropdownItem>
+                      <MobileDropdownItem
+                        to="/services/early-intervention"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        Early Intervention
+                      </MobileDropdownItem>
+                    </MobileDropdownMenu>
+                  )}
+                </AnimatePresence>
+              </DropdownContainer>
+
+              <MobileNavLink as={ScrollLink} to="#contact" onClick={() => setMenuOpen(false)}>
+                Contact
+              </MobileNavLink>
+
+              <CTAButton to="/contact" onClick={() => setMenuOpen(false)}>
+                📞 Enroll Now
+              </CTAButton>
+            </MobileMenu>
+          </>
         )}
       </AnimatePresence>
     </NavbarContainer>

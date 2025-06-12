@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useForm } from '@formspree/react';
-import styled from 'styled-components';
-import Select from 'react-select';
-import { Helmet } from 'react-helmet-async';
+import React, { useState } from "react";
+import { useForm } from "@formspree/react";
+import styled from "styled-components";
+import Select from "react-select";
+import { Helmet } from "react-helmet-async";
 
 const PageContainer = styled.div`
   background: linear-gradient(135deg, #f3f9f9 0%, #ffffff 50%, #e8fdf5 100%);
@@ -21,13 +21,13 @@ const FormContainer = styled.section`
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(to right, #CD1B1B, #4A90E2, #FFD700);
+    background: linear-gradient(to right, #cd1b1b, #4a90e2, #ffd700);
   }
 `;
 
@@ -38,7 +38,7 @@ const FormHeader = styled.div`
 
 const FormTitle = styled.h2`
   font-size: 2.8rem;
-  color: #CD1B1B;
+  color: #cd1b1b;
   margin-bottom: 1rem;
   font-family: "Bubblegum Sans", sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -57,7 +57,7 @@ const Form = styled.form`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -90,13 +90,13 @@ const InputField = styled.input`
   background: white;
 
   &:focus {
-    border-color: #4A90E2;
+    border-color: #4a90e2;
     box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
     outline: none;
   }
 
   &:hover {
-    border-color: #4A90E2;
+    border-color: #4a90e2;
   }
 `;
 
@@ -112,18 +112,18 @@ const TextAreaField = styled.textarea`
   background: white;
 
   &:focus {
-    border-color: #4A90E2;
+    border-color: #4a90e2;
     box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
     outline: none;
   }
 
   &:hover {
-    border-color: #4A90E2;
+    border-color: #4a90e2;
   }
 `;
 
 const ErrorMessage = styled.span`
-  color: #CD1B1B;
+  color: #cd1b1b;
   font-size: 0.9rem;
   margin-top: 0.25rem;
   font-family: "Nunito", sans-serif;
@@ -131,7 +131,7 @@ const ErrorMessage = styled.span`
 
 const SubmitButton = styled.button`
   padding: 1rem 2rem;
-  background: #CD1B1B;
+  background: #cd1b1b;
   color: white;
   border: none;
   border-radius: 10px;
@@ -142,7 +142,7 @@ const SubmitButton = styled.button`
   transition: all 0.3s ease;
   grid-column: 1 / -1;
   margin-top: 1rem;
-  
+
   &:hover {
     transform: translateY(-2px);
     background: #e62020;
@@ -170,39 +170,43 @@ const ConsentText = styled.p`
 const customSelectStyles = {
   control: (provided, state) => ({
     ...provided,
-    borderRadius: '10px',
-    border: `2px solid ${state.isFocused ? '#4A90E2' : '#e1e1e1'}`,
-    padding: '0.25rem',
-    boxShadow: state.isFocused ? '0 0 0 4px rgba(74, 144, 226, 0.1)' : 'none',
-    '&:hover': {
-      borderColor: '#4A90E2'
-    }
+    borderRadius: "10px",
+    border: `2px solid ${state.isFocused ? "#4A90E2" : "#e1e1e1"}`,
+    padding: "0.25rem",
+    boxShadow: state.isFocused ? "0 0 0 4px rgba(74, 144, 226, 0.1)" : "none",
+    "&:hover": {
+      borderColor: "#4A90E2",
+    },
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isSelected ? '#4A90E2' : state.isFocused ? 'rgba(74, 144, 226, 0.1)' : 'white',
-    color: state.isSelected ? 'white' : '#333',
-    padding: '0.75rem 1rem',
+    backgroundColor: state.isSelected
+      ? "#4A90E2"
+      : state.isFocused
+      ? "rgba(74, 144, 226, 0.1)"
+      : "white",
+    color: state.isSelected ? "white" : "#333",
+    padding: "0.75rem 1rem",
   }),
   menu: (provided) => ({
     ...provided,
-    borderRadius: '10px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-  })
+    borderRadius: "10px",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+  }),
 };
 
-function ContactForm() {
+const ContactForm = () => {
   const [state, handleSubmit] = useForm("xkgjkjng");
   const [formData, setFormData] = useState({
-    parentName: '',
-    childName: '',
-    age: '',
-    dob: '',
-    email: '',
-    phone: '',
-    dateOfLastEval: '',
+    parentName: "",
+    childName: "",
+    age: "",
+    dob: "",
+    email: "",
+    phone: "",
+    dateOfLastEval: "",
     insuranceProvider: null,
-    behaviorsOfConcern: ''
+    behaviorsOfConcern: "",
   });
   const [formErrors, setFormErrors] = useState({});
 
@@ -218,38 +222,54 @@ function ContactForm() {
     { value: "medicare", label: "Medicare" },
     { value: "peachstate", label: "Peach State Health Plan" },
     { value: "unitedhealthcare", label: "UnitedHealthcare" },
-    { value: "other", label: "Other" }
+    { value: "other", label: "Other" },
   ];
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSelectChange = (selectedOption) => {
     setFormData({
       ...formData,
-      insuranceProvider: selectedOption
+      insuranceProvider: selectedOption,
     });
   };
 
   const validateForm = () => {
     const errors = {};
+
     if (!formData.parentName) errors.parentName = "Parent's name is required.";
     if (!formData.childName) errors.childName = "Child's name is required.";
-    if (!formData.age || formData.age <= 0) errors.age = "Age must be a positive number.";
+    if (!formData.age || formData.age <= 0) {
+      errors.age = "Age must be a positive number.";
+    } else {
+      const age = parseFloat(formData.age);
+      if (age < 2 || age > 7) {
+        const confirmProceed = window.confirm(
+          "Thank you so much for your interest! Our program is specially designed for children ages 2 to 7 years old. 😊\n\n" +
+            "If your child is a bit younger or older, no worries — we warmly recommend reaching out to our trusted partners at " +
+            "Flourish Pediatrics (https://flourishpediatrics.com) for a personalized referral and support. We want to make sure your child gets the best possible care!"
+        );
+        if (!confirmProceed) {
+          return false;
+        }
+      }
+    }
     if (!formData.dob) errors.dob = "Date of birth is required.";
-    if (!formData.email) errors.email = "Email address is required.";
-    if (!formData.phone) errors.phone = "Phone number is required.";
-    if (!formData.dateOfLastEval) errors.dateOfLastEval = "Date of last evaluation is required.";
-    if (!formData.behaviorsOfConcern) errors.behaviorsOfConcern = "Please describe the behaviors of concern.";
-
-    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+    if (!formData.email) {
+      errors.email = "Email address is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Please enter a valid email address.";
     }
-
+    if (!formData.phone) errors.phone = "Phone number is required.";
+    if (!formData.dateOfLastEval)
+      errors.dateOfLastEval = "Date of last evaluation is required.";
+    if (!formData.behaviorsOfConcern)
+      errors.behaviorsOfConcern = "Please describe the behaviors of concern.";
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -268,8 +288,8 @@ function ContactForm() {
           <FormHeader>
             <FormTitle>Thank You!</FormTitle>
             <FormSubtitle>
-              We've received your information and will contact you soon to discuss the next steps
-              in your child's journey with us.
+              We've received your information and will contact you soon to
+              discuss the next steps in your child's journey with us.
             </FormSubtitle>
           </FormHeader>
         </FormContainer>
@@ -280,7 +300,9 @@ function ContactForm() {
   return (
     <>
       <Helmet>
-        <title>Contact Mommy Angel's Specialty Care | ABA Therapy & Autism Support</title>
+        <title>
+          Contact Mommy Angel's Specialty Care | ABA Therapy & Autism Support
+        </title>
         <meta
           name="description"
           content="Reach out to Mommy Angel's Specialty Care and Autism Center for compassionate, specialized ABA therapy, speech therapy, and Pre-K readiness for children with autism in Georgia."
@@ -295,11 +317,12 @@ function ContactForm() {
           <FormHeader>
             <FormTitle>Start Your Journey With Us</FormTitle>
             <FormSubtitle>
-              We're here to support you every step of the way. Fill out this form to begin your child's
-              journey toward growth and development in our nurturing environment.
+              We're here to support you every step of the way. Fill out this
+              form to begin your child's journey toward growth and development
+              in our nurturing environment.
             </FormSubtitle>
           </FormHeader>
-          
+
           <Form onSubmit={onSubmit}>
             <FormGroup>
               <Label htmlFor="parentName">Parent's Name</Label>
@@ -312,7 +335,9 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.parentName && <ErrorMessage>{formErrors.parentName}</ErrorMessage>}
+              {formErrors.parentName && (
+                <ErrorMessage>{formErrors.parentName}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -326,7 +351,9 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.childName && <ErrorMessage>{formErrors.childName}</ErrorMessage>}
+              {formErrors.childName && (
+                <ErrorMessage>{formErrors.childName}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -367,7 +394,9 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.email && <ErrorMessage>{formErrors.email}</ErrorMessage>}
+              {formErrors.email && (
+                <ErrorMessage>{formErrors.email}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -381,7 +410,9 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.phone && <ErrorMessage>{formErrors.phone}</ErrorMessage>}
+              {formErrors.phone && (
+                <ErrorMessage>{formErrors.phone}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -394,7 +425,9 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.dateOfLastEval && <ErrorMessage>{formErrors.dateOfLastEval}</ErrorMessage>}
+              {formErrors.dateOfLastEval && (
+                <ErrorMessage>{formErrors.dateOfLastEval}</ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
@@ -411,7 +444,9 @@ function ContactForm() {
             </FormGroup>
 
             <FullWidthGroup>
-              <Label htmlFor="behaviorsOfConcern">Current Behaviors of Concern</Label>
+              <Label htmlFor="behaviorsOfConcern">
+                Current Behaviors of Concern
+              </Label>
               <TextAreaField
                 id="behaviorsOfConcern"
                 name="behaviorsOfConcern"
@@ -420,18 +455,20 @@ function ContactForm() {
                 onChange={handleChange}
                 required
               />
-              {formErrors.behaviorsOfConcern && <ErrorMessage>{formErrors.behaviorsOfConcern}</ErrorMessage>}
+              {formErrors.behaviorsOfConcern && (
+                <ErrorMessage>{formErrors.behaviorsOfConcern}</ErrorMessage>
+              )}
             </FullWidthGroup>
 
             <SubmitButton type="submit" disabled={state.submitting}>
-              {state.submitting ? 'Sending...' : 'Submit Application'}
+              {state.submitting ? "Sending..." : "Submit Application"}
             </SubmitButton>
 
             <ConsentText>
-              By submitting this form, you consent to the use and disclosure of your
-              personal information as required to process your inquiry. We are
-              committed to maintaining the privacy and security of your personal
-              health information in compliance with HIPAA.
+              By submitting this form, you consent to the use and disclosure of
+              your personal information as required to process your inquiry. We
+              are committed to maintaining the privacy and security of your
+              personal health information in compliance with HIPAA.
             </ConsentText>
 
             <input type="hidden" name="form-name" value="contact" />
@@ -440,6 +477,6 @@ function ContactForm() {
       </PageContainer>
     </>
   );
-}
+};
 
 export default ContactForm;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import stimulationFavImg from "../assets/stimulationFav-6.jpg";
@@ -170,32 +170,74 @@ const ServiceImage = styled.img`
 const ServiceDescription = styled.div`
   font-size: 1.1rem;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.8;
   flex-grow: 1;
   max-height: 200px;
   overflow-y: auto;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
   font-family: "Nunito", sans-serif;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(74, 144, 226, 0.1);
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 
     li {
-      margin-bottom: 0.8rem;
-      padding-left: 1.5rem;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 249, 255, 0.9) 100%);
+      border-radius: 12px;
+      border-left: 4px solid #4A90E2;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
       position: relative;
+      font-weight: 500;
+
+      &:hover {
+        transform: translateX(8px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(240, 248, 255, 1) 100%);
+        border-left-color: #FFD700;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+
+      &:nth-child(even) {
+        border-left-color: #CD1B1B;
+        
+        &:hover {
+          border-left-color: #4A90E2;
+        }
+      }
+
+      &:nth-child(3n) {
+        border-left-color: #FFD700;
+        
+        &:hover {
+          border-left-color: #CD1B1B;
+        }
+      }
 
       &::before {
-        content: '•';
-        color: #4A90E2;
-        font-size: 1.2rem;
+        content: '';
         position: absolute;
-        left: 0;
-        top: -2px;
+        left: -4px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+        border-radius: 2px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover::before {
+        opacity: 1;
       }
     }
   }
@@ -203,6 +245,20 @@ const ServiceDescription = styled.div`
   @media (max-width: 768px) {
     font-size: 1rem;
     max-height: none;
+    padding: 1rem;
+    overflow-y: visible;
+
+    ul {
+      gap: 0.5rem;
+
+      li {
+        padding: 0.6rem 0.8rem;
+        
+        &:hover {
+          transform: translateX(4px);
+        }
+      }
+    }
   }
 
   &::-webkit-scrollbar {
@@ -316,6 +372,18 @@ const Services = () => {
     general: false,
     autism: false,
   });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, [setIsMobile]);
 
   const toggleSection = (section) => {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
@@ -390,7 +458,7 @@ const Services = () => {
             </AnimatePresence>
           </GeneralServicesSection>
 
-          <ServiceList>
+          <ServiceList className={isMobile ? "mobile-layout" : "desktop-layout"}>
             {[
               {
                 title: "Rock Walls & Leap Pads",

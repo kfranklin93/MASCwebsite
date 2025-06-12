@@ -63,7 +63,7 @@ const TextColumn = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 3;
 
   &::before {
     content: '';
@@ -96,17 +96,7 @@ const ImageColumn = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -50%;
-    width: 100%;
-    height: 100%;
-    // background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.95));
-    z-index: 2;
-  }
+  z-index: 0;
 
   img {
     width: 100%;
@@ -115,6 +105,8 @@ const ImageColumn = styled.div`
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
 
     &:hover {
       transform: scale(1.02);
@@ -133,11 +125,129 @@ const ImageColumn = styled.div`
   @media (max-width: 768px) {
     &::before {
       left: 0;
-      top: -50%;
-      height: 100%;
+      top: -20%;
+      height: 150%;
       width: 100%;
-      // background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.95));
+      background: linear-gradient(to top, transparent 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0.8) 70%, rgba(255, 255, 255, 0.95) 100%);
     }
+  }
+`;
+
+/* Our Story Section - Image on left, fade to right */
+const OurStoryImageColumn = styled(ImageColumn)`
+  height: auto;
+  min-height: 100%;
+  align-self: stretch;
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    mask: 
+      /* Top edge fade */
+      linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),
+      /* Bottom edge fade */
+      linear-gradient(to top, transparent 0%, white 5%, white 95%, transparent 100%),
+      /* Left edge fade */
+      linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
+      /* Right edge fade */
+      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask: 
+      linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),
+      linear-gradient(to top, transparent 0%, white 5%, white 95%, transparent 100%),
+      linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
+      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+    -webkit-mask-composite: source-in;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 1024px) {
+      min-height: 450px;
+    }
+
+    @media (max-width: 768px) {
+      min-height: 400px;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(240, 248, 255, 0.9) 0%, rgba(240, 248, 255, 0.6) 50%, rgba(240, 248, 255, 0.3) 80%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+`;
+
+/* ABA Therapy Section - Image on right, fade to left */
+const ABAImageColumn = styled(ImageColumn)`
+  height: auto;
+  min-height: 100%;
+  align-self: stretch;
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    mask: 
+      /* Top edge fade */
+      linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),
+      /* Bottom edge fade */
+      linear-gradient(to top, transparent 0%, white 5%, white 95%, transparent 100%),
+      /* Left edge fade */
+      linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
+      /* Right edge fade */
+      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask: 
+      linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),
+      linear-gradient(to top, transparent 0%, white 5%, white 95%, transparent 100%),
+      linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
+      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+    -webkit-mask-composite: source-in;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 1024px) {
+      min-height: 450px;
+    }
+
+    @media (max-width: 768px) {
+      min-height: 400px;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 80%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
   }
 `;
 
@@ -180,9 +290,9 @@ const About = () => (
     {/* OUR STORY Section */}
     <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid rgba(0, 128, 0, 0.5)">
       <SplitLayout>
-        <ImageColumn>
+        <OurStoryImageColumn>
           <img src={placeholderImg} alt="Our story" />
-        </ImageColumn>
+        </OurStoryImageColumn>
         <TextColumn>
           <SectionTitle>Our Story</SectionTitle>
           <AboutText
@@ -241,9 +351,9 @@ const About = () => (
             </Button>
           </ButtonContainer>
         </TextColumn>
-        <ImageColumn>
+        <ABAImageColumn>
           <img src={placeholderImg2} alt="ABA Therapy" />
-        </ImageColumn>
+        </ABAImageColumn>
       </SplitLayout>
     </Section>
     <Leadership />
