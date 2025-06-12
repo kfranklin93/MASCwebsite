@@ -414,7 +414,7 @@ const Navbar = () => {
           onMouseLeave={() => setDropdownOpen(false)}
         >
           <NavLinkWrapper>
-            <ScrollLink to="#services" color="#4A90E2">
+            <ScrollLink to="#services" color="#3F00FF">
               Services
             </ScrollLink>
             <DropdownIcon>▼</DropdownIcon>

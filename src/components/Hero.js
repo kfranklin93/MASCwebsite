@@ -27,7 +27,7 @@ const HeroContainer = styled.section`
   padding: 2rem 1rem 6rem;
   margin-top: calc(60px + 1rem);
   border: 20px solid #4a90e2;
-  border-radius: 20px;
+  border-radius: 5px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   transition: all 0.3s ease-in-out;
@@ -138,74 +138,6 @@ const HeroContainer = styled.section`
     }
   }
 `;
-
-// const FloatingClouds = styled.div`
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   pointer-events: none;
-//   z-index: 2;
-//   overflow: hidden;
-  
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     top: 8%;
-//     left: 12%;
-//     width: 100px;
-//     height: 60px;
-//     background: radial-gradient(ellipse, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
-//     border-radius: 50%;
-//     box-shadow: 
-//       20px 10px 0 10px rgba(255, 255, 255, 0.4),
-//       -20px 10px 0 5px rgba(255, 255, 255, 0.4);
-//     animation: floatClouds 20s ease-in-out infinite;
-//   }
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     top: 18%;
-//     right: 18%;
-//     width: 80px;
-//     height: 50px;
-//     background: radial-gradient(ellipse, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
-//     border-radius: 50%;
-//     box-shadow: 
-//       15px 8px 0 8px rgba(255, 255, 255, 0.3),
-//       -15px 8px 0 4px rgba(255, 255, 255, 0.3);
-//     animation: floatClouds 25s ease-in-out infinite reverse;
-//   }
-
-//   @keyframes floatClouds {
-//     0%, 100% { transform: translateX(0) translateY(0); }
-//     25% { transform: translateX(20px) translateY(-10px); }
-//     50% { transform: translateX(-10px) translateY(-20px); }
-//     75% { transform: translateX(15px) translateY(-5px); }
-//   }
-
-//   @media (max-width: 1024px) {
-//     &::before {
-//       width: 80px;
-//       height: 48px;
-//       top: 6%;
-//       left: 10%;
-//     }
-    
-//     &::after {
-//       width: 60px;
-//       height: 36px;
-//       top: 12%;
-//       right: 15%;
-//     }
-//   }
-
-//   @media (max-width: 768px) {
-//     display: none;
-//   }
-// `;
 
 const FloatingImagesContainer = styled.div`
   display: flex;
@@ -405,7 +337,7 @@ const HeroTitle2 = styled.h2`
   color: rgb(220, 27, 27);
   font-family: "Bubblegum Sans";
   margin: 0.5rem 0;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
   background: linear-gradient(45deg, #CD1B1B, #FF4444, #CD1B1B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
