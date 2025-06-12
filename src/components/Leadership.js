@@ -170,14 +170,6 @@ const Leadership = () => {
           <LeaderTitle>Board Certified Behavior Analyst</LeaderTitle>
         </LeaderCard>
 
-        <LeaderCard>
-          <ImageWrapper>
-            <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
-          </ImageWrapper>
-          {/* <LeaderImage src={ruffin} alt="Clinical Director Headshot" /> */}
-          <LeaderName>Tereva</LeaderName>
-          <LeaderTitle>Speech Pathologist</LeaderTitle>
-        </LeaderCard>
 
         <LeaderCard>
           <ImageWrapper>
@@ -195,6 +187,15 @@ const Leadership = () => {
           {/* <LeaderImage src={anthony} alt="Operations Headshot" /> */}
           <LeaderName>Anthony</LeaderName>
           <LeaderTitle>Lead RBT</LeaderTitle>
+        </LeaderCard>
+        
+        <LeaderCard>
+          <ImageWrapper>
+            <LeaderImage src={ruffin} alt="Clinical Director Headshot" />
+          </ImageWrapper>
+          {/* <LeaderImage src={ruffin} alt="Clinical Director Headshot" /> */}
+          <LeaderName>Tereva</LeaderName>
+          <LeaderTitle>Speech Pathologist</LeaderTitle>
         </LeaderCard>
       </LeadersGrid>
     </LeadershipSection>
