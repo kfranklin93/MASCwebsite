@@ -64,6 +64,22 @@ const TextColumn = styled.div`
   align-items: center;
   position: relative;
   z-index: 3;
+  padding: 2rem;
+  max-height: 600px;
+  overflow-y: auto;
+  
+  // Custom scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #00695c;
+    border-radius: 3px;
+  }
 
   &::before {
     content: '';
@@ -72,17 +88,17 @@ const TextColumn = styled.div`
     right: -50%;
     width: 100%;
     height: 100%;
-    // background: linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent);
     z-index: -1;
   }
 
   @media (max-width: 768px) {
     max-width: 100%;
     padding: 0 1rem;
+    max-height: none;
+    overflow-y: visible;
     
     &::before {
       right: 0;
-      // background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), transparent);
     }
   }
 `;
@@ -141,9 +157,9 @@ const OurStoryImageColumn = styled(ImageColumn)`
 
   img {
     width: 100%;
-    height: 100%;
-    min-height: 500px;
-    object-fit: cover;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -155,9 +171,9 @@ const OurStoryImageColumn = styled(ImageColumn)`
       /* Bottom edge fade */
       linear-gradient(to top, transparent 0%, white 5%, white 95%, transparent 100%),
       /* Left edge fade */
-      linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
+      linear-gradient(to right, transparent 0%, white 3%, white 50%, transparent 100%),
       /* Right edge fade */
-      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+      linear-gradient(to left, transparent 0%, white 3%, white 50%, transparent 100%);
     mask-composite: intersect;
     -webkit-mask: 
       linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),
@@ -171,11 +187,11 @@ const OurStoryImageColumn = styled(ImageColumn)`
     }
 
     @media (max-width: 1024px) {
-      min-height: 450px;
+      max-height: 500px;
     }
 
     @media (max-width: 768px) {
-      min-height: 400px;
+      max-height: 400px;
     }
   }
 
@@ -215,9 +231,9 @@ const ABAImageColumn = styled(ImageColumn)`
 
   img {
     width: 100%;
-    height: 100%;
-    min-height: 500px;
-    object-fit: cover;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -231,7 +247,7 @@ const ABAImageColumn = styled(ImageColumn)`
       /* Left edge fade */
       linear-gradient(to right, transparent 0%, white 3%, white 97%, transparent 100%),
       /* Right edge fade */
-      linear-gradient(to left, transparent 0%, white 3%, white 97%, transparent 100%);
+      linear-gradient(to left, transparent 0%, white 3%, white 30%, transparent 100%);
     mask-composite: intersect;
     -webkit-mask: 
       linear-gradient(to bottom, transparent 0%, white 5%, white 95%, transparent 100%),

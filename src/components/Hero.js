@@ -620,6 +620,11 @@ const Hero = () => {
         >
           Welcome to Our Joyful Learning Adventure!
         </WelcomeText> */}
+        <FloatingImagesContainer>
+          <FloatingImage src={img1} alt="Therapeutic Activities - Children engaged in learning" />
+          <FloatingImage src={img3} alt="Child Development - Building essential skills" />
+          <FloatingImage src={img2} alt="Learning Through Play - Fun educational activities" />
+        </FloatingImagesContainer>
         
         <HeroImage
           src={heroImage}
@@ -629,11 +634,7 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
 
-        <FloatingImagesContainer>
-          <FloatingImage src={img1} alt="Therapeutic Activities - Children engaged in learning" />
-          <FloatingImage src={img3} alt="Child Development - Building essential skills" />
-          <FloatingImage src={img2} alt="Learning Through Play - Fun educational activities" />
-        </FloatingImagesContainer>
+        
         
         <HeroTitlesWrapper>
           <HeroTitle>
