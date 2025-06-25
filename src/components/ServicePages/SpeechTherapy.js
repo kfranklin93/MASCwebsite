@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { theme, mixins } from '../../styles/theme';
 import speechImage from "../../assets/sensory.jpg"; // Update with actual speech therapy image
 import terevaLogo from "../../assets/HHSLP Logo.png"; // **ASSUMPTION:** You'll have a logo for Tereva here
-import ruffin from "../../assets/ruffin Background Removed.png"; // Assuming this is Tereva's image based on your provided code
+import ruffin from "../../assets/TRuffin Background Removed.png"; // Assuming this is Tereva's image based on your provided code
 
 
 const PageContainer = styled.div`
