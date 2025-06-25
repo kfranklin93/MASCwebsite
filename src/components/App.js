@@ -7,7 +7,7 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatToExpect from "./components/WhatToExpect";
-import VoteBanner from "./components/VoteBanner";
+// import VoteBanner from "./components/VoteBanner";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => (

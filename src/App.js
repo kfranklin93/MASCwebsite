@@ -11,7 +11,7 @@ import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
-import VoteBanner from "./components/VoteBanner";
+// import VoteBanner from "./components/VoteBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
 
