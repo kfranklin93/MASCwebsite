@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors, typography, shadows, transitions, media } from '../../styles/theme';
 
 // Form Container
 export const Form = styled.form`
@@ -15,27 +14,27 @@ export const Form = styled.form`
 export const Input = styled.input`
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid ${props => props.error ? colors.error.main : colors.grey[300]};
+  border: 2px solid ${props => props.error ? '#D32F2F' : '#E0E0E0'};
   border-radius: 8px;
   font-family: "Nunito", sans-serif;
-  font-size: ${typography.body.size};
-  color: ${colors.text.primary};
-  background: ${colors.background.main};
-  transition: ${transitions.fast};
+  font-size: 1rem;
+  color: #333333;
+  background: #FFFFFF;
+  transition: all 0.2s ease;
   
   &:focus {
     outline: none;
-    border-color: ${colors.primary.main};
-    box-shadow: ${shadows.focus};
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
   }
   
   &:disabled {
-    background: ${colors.grey[100]};
+    background: #F5F5F5;
     cursor: not-allowed;
   }
   
   &::placeholder {
-    color: ${colors.text.disabled};
+    color: #9E9E9E;
   }
 `;
 
@@ -43,71 +42,30 @@ export const Input = styled.input`
 export const Textarea = styled.textarea`
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid ${props => props.error ? colors.error.main : colors.grey[300]};
+  border: 2px solid ${props => props.error ? '#D32F2F' : '#E0E0E0'};
   border-radius: 8px;
   font-family: "Nunito", sans-serif;
-  font-size: ${typography.body.size};
-  color: ${colors.text.primary};
-  background: ${colors.background.main};
-  transition: ${transitions.fast};
+  font-size: 1rem;
+  color: #333333;
+  background: #FFFFFF;
+  transition: all 0.2s ease;
   min-height: 120px;
   resize: vertical;
   
   &:focus {
     outline: none;
-    border-color: ${colors.primary.main};
-    box-shadow: ${shadows.focus};
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
   }
   
   &:disabled {
-    background: ${colors.grey[100]};
+    background: #F5F5F5;
     cursor: not-allowed;
   }
   
   &::placeholder {
-    color: ${colors.text.disabled};
+    color: #9E9E9E;
   }
-`;
-
-// Select
-export const Select = styled.select`
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid ${props => props.error ? colors.error.main : colors.grey[300]};
-  border-radius: 8px;
-  font-family: "Nunito", sans-serif;
-  font-size: ${typography.body.size};
-  color: ${colors.text.primary};
-  background: ${colors.background.main};
-  transition: ${transitions.fast};
-  cursor: pointer;
-  
-  &:focus {
-    outline: none;
-    border-color: ${colors.primary.main};
-    box-shadow: ${shadows.focus};
-  }
-  
-  &:disabled {
-    background: ${colors.grey[100]};
-    cursor: not-allowed;
-  }
-`;
-
-// Checkbox
-export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-  cursor: pointer;
-`;
-
-// Radio
-export const Radio = styled.input.attrs({ type: 'radio' })`
-  width: 20px;
-  height: 20px;
-  margin-right: 0.5rem;
-  cursor: pointer;
 `;
 
 // Form Group
@@ -121,21 +79,21 @@ export const FormGroup = styled.div`
 // Label
 export const Label = styled.label`
   font-family: "Nunito", sans-serif;
-  font-size: ${typography.body.size};
-  color: ${colors.text.primary};
+  font-size: 1rem;
+  color: #333333;
   font-weight: 600;
 `;
 
 // Error Message
 export const ErrorMessage = styled.span`
-  color: ${colors.error.main};
+  color: #D32F2F;
   font-size: 0.875rem;
   margin-top: 0.25rem;
 `;
 
 // Help Text
 export const HelpText = styled.span`
-  color: ${colors.text.secondary};
+  color: #666666;
   font-size: 0.875rem;
   margin-top: 0.25rem;
 `;
@@ -146,27 +104,9 @@ export const FormGrid = styled.div`
   grid-template-columns: repeat(${props => props.columns || 2}, 1fr);
   gap: 1.5rem;
   
-  ${media.tablet} {
-    grid-template-columns: repeat(${props => props.tabletColumns || 2}, 1fr);
-  }
-  
-  ${media.mobile} {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
-  }
-`;
-
-// Form Section
-export const FormSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  border: 1px solid ${colors.grey[200]};
-  border-radius: 8px;
-  background: ${colors.background.light};
-  
-  ${media.mobile} {
-    padding: 1rem;
+    gap: 1rem;
   }
 `;
 
@@ -177,7 +117,7 @@ export const FormActions = styled.div`
   gap: 1rem;
   margin-top: 2rem;
   
-  ${media.mobile} {
+  @media (max-width: 768px) {
     flex-direction: ${props => props.stackMobile ? 'column' : 'row'};
     gap: ${props => props.stackMobile ? '0.75rem' : '1rem'};
   }

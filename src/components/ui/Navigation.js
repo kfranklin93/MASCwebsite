@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { colors, typography, shadows, transitions, media } from '../../styles/theme';
 
 // Nav Container
 export const Nav = styled.nav`
@@ -8,16 +7,16 @@ export const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: ${colors.background.main};
-  box-shadow: ${shadows.small};
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: ${transitions.medium};
+  transition: all 0.3s ease;
   
-  ${media.mobile} {
+  @media (max-width: 768px) {
     padding: 0.75rem 1rem;
   }
 `;
@@ -27,7 +26,7 @@ export const NavBrand = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: ${colors.text.primary};
+  color: #333333;
   font-family: "Bubblegum Sans", cursive;
   font-size: 1.5rem;
   font-weight: 700;
@@ -37,7 +36,7 @@ export const NavBrand = styled(Link)`
     margin-right: 0.75rem;
   }
   
-  ${media.mobile} {
+  @media (max-width: 768px) {
     font-size: 1.25rem;
     
     img {
@@ -52,29 +51,28 @@ export const NavLinks = styled.div`
   align-items: center;
   gap: 2rem;
   
-  ${media.tablet} {
+  @media (max-width: 768px) {
     display: ${props => props.mobileMenu ? 'flex' : 'none'};
     flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: ${colors.background.main};
+    background: #FFFFFF;
     padding: 1rem;
-    box-shadow: ${shadows.medium};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     gap: 1rem;
   }
 `;
 
 // Nav Link
 export const NavLink = styled(Link)`
-  color: ${colors.text.primary};
+  color: #333333;
   text-decoration: none;
   font-family: "Nunito", sans-serif;
   font-weight: 600;
-  font-size: ${typography.body.size};
   padding: 0.5rem;
-  transition: ${transitions.fast};
+  transition: all 0.3s ease;
   position: relative;
   
   &:after {
@@ -85,19 +83,19 @@ export const NavLink = styled(Link)`
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background: ${colors.primary.main};
-    transition: ${transitions.fast};
+    background: #CD1B1B;
+    transition: all 0.3s ease;
   }
   
   &:hover, &.active {
-    color: ${colors.primary.main};
+    color: #CD1B1B;
     
     &:after {
       width: 100%;
     }
   }
   
-  ${media.tablet} {
+  @media (max-width: 768px) {
     width: 100%;
     text-align: center;
     padding: 0.75rem;
@@ -107,8 +105,8 @@ export const NavLink = styled(Link)`
     }
     
     &:hover, &.active {
-      background: ${colors.primary.main};
-      color: ${colors.primary.text};
+      background: #CD1B1B;
+      color: #FFFFFF;
       border-radius: 8px;
     }
   }
@@ -130,141 +128,13 @@ export const Hamburger = styled.button`
   span {
     width: 24px;
     height: 2px;
-    background: ${colors.text.primary};
-    transition: ${transitions.fast};
+    background: #333333;
+    transition: all 0.3s ease;
     position: relative;
     transform-origin: 1px;
   }
   
-  ${media.tablet} {
+  @media (max-width: 768px) {
     display: flex;
-  }
-`;
-
-// Dropdown
-export const Dropdown = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-export const DropdownToggle = styled.button`
-  color: ${colors.text.primary};
-  background: none;
-  border: none;
-  font-family: "Nunito", sans-serif;
-  font-weight: 600;
-  font-size: ${typography.body.size};
-  padding: 0.5rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  
-  &:after {
-    content: '▼';
-    font-size: 0.75rem;
-  }
-  
-  ${media.tablet} {
-    width: 100%;
-    text-align: center;
-    padding: 0.75rem;
-    justify-content: center;
-  }
-`;
-
-export const DropdownMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: ${colors.background.main};
-  min-width: 200px;
-  border-radius: 8px;
-  box-shadow: ${shadows.medium};
-  padding: 0.5rem;
-  display: ${props => props.show ? 'block' : 'none'};
-  z-index: 1000;
-  
-  ${media.tablet} {
-    position: static;
-    box-shadow: none;
-    background: transparent;
-    min-width: auto;
-    width: 100%;
-    padding: 0;
-    margin-top: 0.5rem;
-  }
-`;
-
-export const DropdownItem = styled(Link)`
-  display: block;
-  padding: 0.75rem 1rem;
-  color: ${colors.text.primary};
-  text-decoration: none;
-  font-family: "Nunito", sans-serif;
-  font-size: ${typography.body.size};
-  transition: ${transitions.fast};
-  border-radius: 4px;
-  
-  &:hover {
-    background: ${colors.primary.main};
-    color: ${colors.primary.text};
-  }
-  
-  ${media.tablet} {
-    text-align: center;
-    padding: 0.75rem;
-  }
-`;
-
-// Search Bar
-export const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid ${colors.grey[300]};
-  border-radius: 8px;
-  background: ${colors.background.light};
-  transition: ${transitions.fast};
-  
-  &:focus-within {
-    border-color: ${colors.primary.main};
-    box-shadow: ${shadows.focus};
-  }
-  
-  input {
-    border: none;
-    background: none;
-    font-family: "Nunito", sans-serif;
-    font-size: ${typography.body.size};
-    color: ${colors.text.primary};
-    width: 200px;
-    
-    &:focus {
-      outline: none;
-    }
-  }
-  
-  ${media.tablet} {
-    width: 100%;
-    margin: 1rem 0;
-    
-    input {
-      width: 100%;
-    }
-  }
-`;
-
-// User Menu
-export const UserMenu = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  
-  ${media.tablet} {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
   }
 `;

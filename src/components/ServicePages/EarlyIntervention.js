@@ -2,14 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { theme, mixins } from '../../styles/theme';
-import earlyIntImage from "../../assets/dramaticPlay-2.jpg"; // Using your dramatic play image for early intervention
+import earlyInterventionImage from "../../assets/IMG_7185.png";
 
-// Import all styled components from ABATherapy
 const PageContainer = styled.div`
   padding: 120px 2rem 4rem;
   min-height: 100vh;
-  background: ${theme.gradients.primary};
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   position: relative;
   
   &::before {
@@ -19,7 +17,7 @@ const PageContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${theme.colors.background.overlay};
+    background: rgba(255, 255, 255, 0.8);
   }
 `;
 
@@ -31,20 +29,20 @@ const ContentWrapper = styled.div`
 `;
 
 const Section = styled.div`
-  background: ${theme.colors.background.primary};
+  background: #FFFFFF;
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: ${mixins.cardShadow};
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
-  border-left: 4px solid ${theme.colors.primary.red};
-  border-right: 4px solid ${theme.colors.primary.blue};
+  border-left: 4px solid #CD1B1B;
+  border-right: 4px solid #4A90E2;
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
-  color: ${theme.colors.primary.green};
+  color: #00695c;
   margin-bottom: 2rem;
   text-align: center;
   font-family: "Nunito", sans-serif;
@@ -74,15 +72,15 @@ const TextContent = styled.div`
   flex: 1;
   padding: 2rem;
   border-radius: 10px;
-  background: ${theme.gradients.card};
-  box-shadow: ${mixins.cardShadow};
-  border-top: 3px solid ${theme.colors.primary.yellow};
+  background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid #FFD700;
 `;
 
 const Description = styled.p`
   font-size: 1.1rem;
   line-height: 1.6;
-  color: ${theme.colors.text.primary};
+  color: #333333;
   margin-bottom: 1.5rem;
 `;
 
@@ -94,7 +92,7 @@ const ImageContainer = styled.div`
     content: '';
     position: absolute;
     inset: -10%;
-    background: ${theme.gradients.overlay};
+    background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.4));
     pointer-events: none;
   }
 
@@ -103,8 +101,8 @@ const ImageContainer = styled.div`
     height: 400px;
     object-fit: cover;
     border-radius: 15px;
-    border: 3px solid ${theme.colors.primary.blue};
-    box-shadow: ${mixins.cardShadow};
+    border: 3px solid #4A90E2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
     @media (max-width: 1024px) {
       height: 350px;
@@ -124,12 +122,12 @@ const Features = styled.div`
 `;
 
 const FeatureCard = styled(motion.div)`
-  background: ${theme.colors.background.secondary};
+  background: #F8F9FA;
   padding: 1.5rem;
   border-radius: 10px;
-  border-left: 4px solid ${theme.colors.primary.blue};
-  box-shadow: ${mixins.cardShadow};
-  transition: ${mixins.transition};
+  border-left: 4px solid #4A90E2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
@@ -138,7 +136,7 @@ const FeatureCard = styled(motion.div)`
 `;
 
 const FeatureTitle = styled.h3`
-  color: ${theme.colors.primary.green};
+  color: #00695c;
   font-size: 1.3rem;
   margin-bottom: 1rem;
   font-family: "Nunito", sans-serif;
@@ -156,19 +154,19 @@ const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   padding: 1rem 2rem;
-  background: ${props => props.secondary ? theme.colors.secondary.lightBlue : theme.colors.primary.blue};
-  color: ${props => props.secondary ? theme.colors.primary.blue : theme.colors.text.light};
+  background: ${props => props.secondary ? '#E3F2FD' : '#4A90E2'};
+  color: ${props => props.secondary ? '#4A90E2' : '#FFFFFF'};
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  border: 2px solid ${theme.colors.primary.blue};
-  transition: ${mixins.transition};
-  box-shadow: ${mixins.buttonShadow};
+  border: 2px solid #4A90E2;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-2px);
-    background: ${props => props.secondary ? theme.colors.primary.blue : theme.colors.primary.red};
-    color: ${theme.colors.text.light};
+    background: ${props => props.secondary ? '#4A90E2' : '#CD1B1B'};
+    color: #FFFFFF;
     box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
   }
 `;
@@ -176,20 +174,20 @@ const Button = styled(Link)`
 const EarlyIntervention = () => {
   const features = [
     {
-      title: "Developmental Screening",
-      description: "Comprehensive assessments to identify potential areas for support and intervention."
+      title: "Early Assessment",
+      description: "Identify developmental needs and opportunities early for optimal outcomes."
     },
     {
-      title: "Play-Based Learning",
-      description: "Engaging activities that promote natural development and skill acquisition."
+      title: "Developmental Support",
+      description: "Target key developmental milestones through play-based interventions."
     },
     {
       title: "Parent Coaching",
-      description: "Guidance and strategies for supporting your child's development at home."
+      description: "Empower parents with strategies to support their child's development."
     },
     {
-      title: "Multi-Disciplinary Approach",
-      description: "Coordinated care across speech, behavioral, and developmental therapies."
+      title: "Integrated Approach",
+      description: "Combine multiple therapeutic approaches for comprehensive development."
     }
   ];
 
@@ -197,28 +195,28 @@ const EarlyIntervention = () => {
     <PageContainer>
       <ContentWrapper>
         <Section>
-          <Title>Early Intervention Program</Title>
+          <Title>Early Intervention Services</Title>
           
           <SplitLayout>
             <TextContent>
               <Description>
-                Early intervention is crucial for supporting children's developmental needs during their most
-                formative years. Our comprehensive program focuses on identifying and addressing developmental
-                concerns early, maximizing the potential for positive outcomes.
+                Early intervention is crucial for supporting children's developmental needs
+                and maximizing their potential. Our program focuses on identifying and
+                addressing developmental concerns as early as possible.
               </Description>
               <Description>
-                Through a combination of play-based learning and structured activities, we help children
-                develop essential skills in communication, social interaction, and daily living activities.
-                Our approach is always gentle, supportive, and tailored to each child's unique needs.
+                We use play-based interventions and evidence-based strategies to support
+                development across all domains - cognitive, social-emotional, physical,
+                and communication skills.
               </Description>
               <Description>
-                We believe in empowering families with the knowledge and tools they need to support their
-                child's development. Our team works closely with parents, providing guidance and strategies
-                for continuing developmental support at home.
+                Our team works closely with families, providing guidance and strategies
+                for supporting their child's development at home. We believe in empowering
+                parents to be active participants in their child's growth.
               </Description>
             </TextContent>
             <ImageContainer>
-              <img src={earlyIntImage} alt="Early Intervention Session" />
+              <img src={earlyInterventionImage} alt="Early Intervention Session" />
             </ImageContainer>
           </SplitLayout>
 
@@ -238,7 +236,7 @@ const EarlyIntervention = () => {
 
           <ButtonContainer>
             <Button to="/contact">
-              Schedule an Assessment
+              Start Early Intervention
             </Button>
             <Button to="/what-to-expect" secondary>
               Learn More
