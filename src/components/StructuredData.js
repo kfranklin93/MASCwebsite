@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 const StructuredData = () => {
   const businessData = {
@@ -80,14 +81,14 @@ const StructuredData = () => {
   };
 
   return (
-    <>
+    <Helmet>
       <script type="application/ld+json">
         {JSON.stringify(businessData)}
       </script>
       <script type="application/ld+json">
         {JSON.stringify(faqData)}
       </script>
-    </>
+    </Helmet>
   );
 };
 
