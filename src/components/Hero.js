@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
@@ -8,12 +8,9 @@ import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 import bk1 from "../assets/IMG_6881.png";
 import bk2 from "../assets/IMG_9520.png";
-// import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
 import rotatedpuzzleMask from "../assets/puzzle-piece-mask.svg?url";
-
 import rightsidepuzzleImage from "../assets/right side puzzle pieces Background Removed.png";
 import leftsidepuzzleImage from "../assets/left side puzzle pieces Background Removed copy.png";
-
 import { Helmet } from "react-helmet-async";
 import CTAButton from "./ui/ctabutton";
 
@@ -63,7 +60,7 @@ const HeroContainer = styled.section`
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     opacity: 0.35;
     transition: all 0.5s ease-in-out;
@@ -101,8 +98,7 @@ const HeroContainer = styled.section`
     &::before {
       width: 40vw;
       height: 40vh;
-      top: unset;
-      bottom: 10%;
+      top: 6%;
       left: 3%;
     }
   }
@@ -140,7 +136,7 @@ const FloatingImagesContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
-  z-index: 2;
+  z-index: 3;
   margin: 2rem 0;
   position: relative;
   padding: 1rem;
@@ -206,7 +202,7 @@ const PuzzleDecorations = styled.div`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
 `;
 
@@ -280,10 +276,9 @@ const HeroImage = styled(motion.img)`
   height: auto;
   max-width: 95%;
   object-fit: contain;
-  z-index: 2;
+  z-index: 1;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
   margin: 1rem 0;
-  position: relative;
   
   @media (min-width: 2000px) {
     width: clamp(400px, 50vw, 1000px);
@@ -307,7 +302,6 @@ const HeroTitlesWrapper = styled.div`
   max-width: 90%;
   text-align: center;
   padding-bottom: 3rem;
-  position: relative;
 `;
 
 const HeroTitle = styled.h1`
@@ -440,7 +434,57 @@ const Hero = () => {
         </title>
         <link rel="canonical" href="https://mommyangelsspecialtycare.com" />
         
-        {/* Meta tags... */}
+        {/* Enhanced Meta Description */}
+        <meta
+          name="description"
+          content="Top-rated ABA therapy center in Dunwoody, GA. Expert autism support, speech therapy, occupational therapy & Pre-K readiness. BCBA certified. Call (678) 353-6829. Socialization, not isolation."
+        />
+        
+        {/* Enhanced Keywords */}
+        <meta
+          name="keywords"
+          content="ABA therapy Dunwoody, autism center Georgia, BCBA certified, special needs daycare Dunwoody, speech therapy toddlers Georgia, Pre-K readiness autism, early intervention Dunwoody, autism support Georgia, inclusive childcare, RBT therapy, autism therapy near me, applied behavior analysis, autism diagnostic services, occupational therapy autism, parent training ABA, center-based ABA therapy, autism spectrum disorder, developmental delays, behavioral therapy children"
+        />
+        
+        {/* Location-based SEO */}
+        <meta name="geo.region" content="US-GA" />
+        <meta name="geo.placename" content="Dunwoody" />
+        <meta name="geo.position" content="33.9462;-84.3346" />
+        <meta name="ICBM" content="33.9462, -84.3346" />
+        
+        {/* Business Info */}
+        <meta name="author" content="Mommy Angel's Specialty Care" />
+        <meta name="contact" content="(678) 353-6829" />
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="rating" content="General" />
+        
+        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        
+        {/* Enhanced Open Graph */}
+        <meta property="og:title" content="#1 ABA Therapy Center in Dunwoody GA | Mommy Angel's Specialty Care" />
+        <meta property="og:description" content="Expert ABA therapy, autism support & Pre-K readiness in Dunwoody, GA. BCBA certified therapists. Socialization-focused approach. Call (678) 353-6829 today." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://mommyangelsspecialtycare.com/images/hero-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Mommy Angel's Specialty Care ABA Therapy Center in Dunwoody Georgia" />
+        <meta property="og:url" content="https://mommyangelsspecialtycare.com" />
+        <meta property="og:site_name" content="Mommy Angel's Specialty Care" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="#1 ABA Therapy Dunwoody GA | Expert Autism Support Center" />
+        <meta name="twitter:description" content="Top-rated ABA therapy & autism support in Dunwoody, GA. BCBA certified. Pre-K readiness programs. Call (678) 353-6829." />
+        <meta name="twitter:image" content="https://mommyangelsspecialtycare.com/images/hero-image.jpg" />
+        <meta name="twitter:image:alt" content="Mommy Angel's Specialty Care ABA Therapy Center" />
+        
+        {/* Additional SEO Tags */}
+        <meta name="theme-color" content="#CD1B1B" />
+        <meta name="msapplication-TileColor" content="#CD1B1B" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </Helmet>
 
       <HeroContainer>
