@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { PageWrapper, MainContent } from './components/layout/Layout';
 // Import your existing components
@@ -10,7 +9,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <Router>
+    <>
       <GlobalStyles />
       <PageWrapper>
         <Navbar />
@@ -21,7 +20,7 @@ function App() {
         </MainContent>
         <Footer />
       </PageWrapper>
-    </Router>
+    </>
   );
 }
 
