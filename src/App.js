@@ -1,4 +1,6 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -13,49 +15,44 @@ import NoWaitlistBadge from './components/NoWaitlistBadge';
 import HiringBadge from './components/HiringBadge';
 import VoteBanner from './components/VoteBanner';
 
-import { Routes, Route } from 'react-router-dom';
-
 // Import Service Pages
 import SpeechTherapy from './components/ServicePages/SpeechTherapy';
 import EarlyIntervention from './components/ServicePages/EarlyIntervention';
 import AutismDiagnostic from './components/ServicePages/AutismDiagnostic';
 import ABATherapyPage from './components/ServicePages/ABATherapy';
 
+const HomePage = () => (
+  <>
+    <Hero />
+    <HiringBanner />
+    <About />
+    <NoWaitlistBadge />
+    <Services />
+    <HiringBadge />
+    <Insurance />
+    <VoteBanner />
+  </>
+);
+
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <HiringBanner />
-              <About />
-              <NoWaitlistBadge />
-              <Services />
-              <HiringBadge />
-              <Insurance />
-              <VoteBanner />
-            </>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/aba-therapy" element={<ABATherapy />} />
         <Route path="/insurance" element={<Insurance />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
         <Route path="/contact" element={<Contact />} />
-
-        {/* Service Pages Routes */}
         <Route path="/speech-therapy" element={<SpeechTherapy />} />
         <Route path="/early-intervention" element={<EarlyIntervention />} />
         <Route path="/autism-diagnostic" element={<AutismDiagnostic />} />
         <Route path="/aba-therapy-page" element={<ABATherapyPage />} />
       </Routes>
       <Footer />
-    </>
+    </HelmetProvider>
   );
 }
 
