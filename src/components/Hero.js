@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
