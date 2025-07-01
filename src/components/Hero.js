@@ -6,9 +6,11 @@ import backgroundImg from "../assets/Untitled-design-7-1-2.png";
 import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
-import bk1 from "../assets/IMG_7213.png";
-import bk2 from "../assets/IMG_8886.png";
-import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
+import bk1 from "../assets/IMG_6881.png";
+import bk2 from "../assets/IMG_9520.png";
+// import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
+import rotatedpuzzleMask from "../assets/puzzle-piece-mask.svg?url";
+
 import rightsidepuzzleImage from "../assets/right side puzzle pieces Background Removed.png";
 import leftsidepuzzleImage from "../assets/left side puzzle pieces Background Removed copy.png";
 
@@ -61,7 +63,7 @@ const HeroContainer = styled.section`
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
     opacity: 0.35;
     transition: all 0.5s ease-in-out;
@@ -83,7 +85,6 @@ const HeroContainer = styled.section`
     background-image: url(${bk1});
     mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
-    // animation: floatBackground 8s ease-in-out infinite;
   }
 
   &::after {
@@ -94,19 +95,14 @@ const HeroContainer = styled.section`
     background-image: url(${bk2});
     mask-image: url(${rotatedpuzzleMask});
     -webkit-mask-image: url(${rotatedpuzzleMask});
-    // animation: floatBackground 8s ease-in-out infinite reverse;
   }
-
-  // @keyframes floatBackground {
-  //   0%, 100% { transform: translateY(0) rotate(15deg); }
-  //   50% { transform: translateY(-20px) rotate(18deg); }
-  // }
 
   @media (max-width: 1024px) {
     &::before {
       width: 40vw;
       height: 40vh;
-      top: 6%;
+      top: unset;
+      bottom: 10%;
       left: 3%;
     }
   }
@@ -144,17 +140,20 @@ const FloatingImagesContainer = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
-  z-index: 3;
+  z-index: 2;
   margin: 2rem 0;
   position: relative;
   padding: 1rem;
 `;
 
 const FloatingImage = styled.img`
-  width: clamp(90px, 22vw, 230px);
+  width: clamp(90px, min(22vw, 230px), 230px);
+  height: auto;
+  max-width: 100%;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
   transition: transform 0.3s ease;
   border-radius: 20px;
+  object-fit: cover;
   
   &:hover {
     transform: scale(1.08) rotate(2deg);
@@ -186,6 +185,18 @@ const FloatingImage = styled.img`
   &:nth-child(3) {
     animation-delay: -2.6s;
   }
+
+  @media (min-width: 2000px) {
+    width: clamp(120px, 25vw, 300px);
+  }
+
+  @media (max-width: 768px) {
+    width: clamp(80px, 20vw, 180px);
+  }
+
+  @media (max-width: 480px) {
+    width: clamp(70px, 18vw, 150px);
+  }
 `;
 
 const PuzzleDecorations = styled.div`
@@ -195,7 +206,7 @@ const PuzzleDecorations = styled.div`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
   overflow: hidden;
 `;
 
@@ -264,21 +275,26 @@ const PuzzlePiece = styled.div`
   }
 `;
 
-
 const HeroImage = styled(motion.img)`
-  width: clamp(300px, 60vw, 800px);
+  width: clamp(300px, min(60vw, 800px), 800px);
   height: auto;
+  max-width: 95%;
   object-fit: contain;
-  z-index: 1;
+  z-index: 2;
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
   margin: 1rem 0;
+  position: relative;
+  
+  @media (min-width: 2000px) {
+    width: clamp(400px, 50vw, 1000px);
+  }
   
   @media (max-width: 768px) {
-    width: 70vw;
+    width: clamp(280px, 70vw, 600px);
   }
 
   @media (max-width: 480px) {
-    width: 85vw;
+    width: clamp(260px, 85vw, 400px);
   }
 `;
 
@@ -291,6 +307,7 @@ const HeroTitlesWrapper = styled.div`
   max-width: 90%;
   text-align: center;
   padding-bottom: 3rem;
+  position: relative;
 `;
 
 const HeroTitle = styled.h1`
@@ -301,24 +318,6 @@ const HeroTitle = styled.h1`
   line-height: 1.3;
   margin-bottom: 0.5rem;
   position: relative;
-  
-  // &::before {
-  //   content: '🌟';
-  //   position: absolute;
-  //   left: -2rem;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  //   animation: bounce 2s ease-in-out infinite;
-  // }
-  
-  // &::after {
-  //   content: '🌟';
-  //   position: absolute;
-  //   right: -2rem;
-  //   top: 50%;
-  //   transform: translateY(-50%);
-  //   animation: bounce 2s ease-in-out infinite reverse;
-  // }
   
   @keyframes bounce {
     0%, 100% { transform: translateY(-50%) scale(1); }
@@ -345,7 +344,6 @@ const HeroTitle2 = styled.h2`
   position: relative;
   
   &::before {
-    // content: attr(data-text);
     position: absolute;
     left: 0;
     top: 0;
@@ -397,50 +395,36 @@ const HeroTitle4 = styled.h2`
   }
 `;
 
-// const WelcomeText = styled(motion.div)`
-//   font-size: 1.2rem;
-//   color: #4A90E2;
-//   font-family: "Bubblegum Sans";
-//   margin-bottom: 1rem;
-//   text-align: center;
-  
-//   // &::before {
-//   //   content: '🎈 ';
-//   // }
-  
-//   // &::after {
-//   //   content: ' 🎈';
-//   // }
-// `;
-
 const MobilePuzzleBackgroundLeft = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 45vw;
-  max-width: 200px;
+  width: clamp(150px, 45vw, 300px);
+  height: auto;
   opacity: 0.15;
   z-index: 0;
   pointer-events: none;
   object-fit: contain;
-  // animation: rotateSlow 20s linear infinite;
+
+  @media (min-width: 2000px) {
+    width: clamp(200px, 35vw, 400px);
+  }
 
   @media (min-width: 1367px) {
     display: none;
   }
-
-//   @keyframes rotateSlow {
-//     from { transform: rotate(0deg); }
-//     to { transform: rotate(360deg); }
-//   }
-// `;
+`;
 
 const MobilePuzzleBackgroundRight = styled(MobilePuzzleBackgroundLeft)`
   bottom: 0;
   right: 0;
   left: auto;
   top: auto;
-  // animation: rotateSlow 20s linear infinite reverse;
+  width: clamp(120px, 35vw, 250px);
+
+  @media (min-width: 2000px) {
+    width: clamp(150px, 30vw, 350px);
+  }
 
   @media (min-width: 1024px) {
     display: none;
@@ -456,146 +440,10 @@ const Hero = () => {
         </title>
         <link rel="canonical" href="https://mommyangelsspecialtycare.com" />
         
-        {/* Enhanced Meta Description */}
-        <meta
-          name="description"
-          content="Top-rated ABA therapy center in Dunwoody, GA. Expert autism support, speech therapy, occupational therapy & Pre-K readiness. BCBA certified. Call (678) 353-6829. Socialization, not isolation."
-        />
-        
-        {/* Enhanced Keywords */}
-        <meta
-          name="keywords"
-          content="ABA therapy Dunwoody, autism center Georgia, BCBA certified, special needs daycare Dunwoody, speech therapy toddlers Georgia, Pre-K readiness autism, early intervention Dunwoody, autism support Georgia, inclusive childcare, RBT therapy, autism therapy near me, applied behavior analysis, autism diagnostic services, occupational therapy autism, parent training ABA, center-based ABA therapy, autism spectrum disorder, developmental delays, behavioral therapy children"
-        />
-        
-        {/* Location-based SEO */}
-        <meta name="geo.region" content="US-GA" />
-        <meta name="geo.placename" content="Dunwoody" />
-        <meta name="geo.position" content="33.9462;-84.3346" />
-        <meta name="ICBM" content="33.9462, -84.3346" />
-        
-        {/* Business Info */}
-        <meta name="author" content="Mommy Angel's Specialty Care" />
-        <meta name="contact" content="(678) 353-6829" />
-        <meta name="coverage" content="Worldwide" />
-        <meta name="distribution" content="Global" />
-        <meta name="rating" content="General" />
-        
-        <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-        
-        {/* Enhanced Open Graph */}
-        <meta property="og:title" content="#1 ABA Therapy Center in Dunwoody GA | Mommy Angel's Specialty Care" />
-        <meta property="og:description" content="Expert ABA therapy, autism support & Pre-K readiness in Dunwoody, GA. BCBA certified therapists. Socialization-focused approach. Call (678) 353-6829 today." />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://mommyangelsspecialtycare.com/images/hero-image.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Mommy Angel's Specialty Care ABA Therapy Center in Dunwoody Georgia" />
-        <meta property="og:url" content="https://mommyangelsspecialtycare.com" />
-        <meta property="og:site_name" content="Mommy Angel's Specialty Care" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="#1 ABA Therapy Dunwoody GA | Expert Autism Support Center" />
-        <meta name="twitter:description" content="Top-rated ABA therapy & autism support in Dunwoody, GA. BCBA certified. Pre-K readiness programs. Call (678) 353-6829." />
-        <meta name="twitter:image" content="https://mommyangelsspecialtycare.com/images/hero-image.jpg" />
-        <meta name="twitter:image:alt" content="Mommy Angel's Specialty Care ABA Therapy Center" />
-        
-        {/* Additional SEO Tags */}
-        <meta name="theme-color" content="#CD1B1B" />
-        <meta name="msapplication-TileColor" content="#CD1B1B" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
-        {/* Structured Data - Local Business */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MedicalBusiness",
-            "name": "Mommy Angel's Specialty Care and Autism Center",
-            "image": "https://mommyangelsspecialtycare.com/images/hero-image.jpg",
-            "description": "Leading ABA therapy and autism center in Dunwoody, GA, offering comprehensive behavioral therapy, speech therapy, occupational therapy, and Pre-K readiness programs for children with autism spectrum disorders.",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Dunwoody",
-              "addressLocality": "Dunwoody",
-              "addressRegion": "GA",
-              "addressCountry": "US"
-            },
-            "telephone": "(678) 353-6829",
-            "url": "https://mommyangelsspecialtycare.com",
-            "openingHours": "Mo-Fr 08:00-18:00",
-            "priceRange": "$$",
-            "medicalSpecialty": ["Applied Behavior Analysis", "Autism Therapy", "Speech Therapy", "Occupational Therapy"],
-            "availableService": [
-              {
-                "@type": "MedicalTherapy",
-                "name": "ABA Therapy",
-                "description": "Applied Behavior Analysis therapy for children with autism"
-              },
-              {
-                "@type": "MedicalTherapy", 
-                "name": "Speech Therapy",
-                "description": "Speech and language therapy for developmental delays"
-              },
-              {
-                "@type": "MedicalTherapy",
-                "name": "Occupational Therapy", 
-                "description": "Occupational therapy for sensory and motor skills"
-              },
-              {
-                "@type": "EducationalOrganization",
-                "name": "Pre-K Readiness Program",
-                "description": "Preparation program for traditional Pre-K classroom transition"
-              }
-            ],
-            "areaServed": ["Dunwoody", "Atlanta", "Sandy Springs", "Roswell", "Alpharetta", "Johns Creek", "Brookhaven"],
-            "sameAs": [
-              "https://www.facebook.com/mommyangelsspecialtycare",
-              "https://www.instagram.com/mommyangelsspecialtycare"
-            ]
-          })}
-        </script>
-        
-        {/* FAQ Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org", 
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "What is ABA therapy and how does it help children with autism?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Applied Behavior Analysis (ABA) therapy is an evidence-based treatment that helps children with autism develop essential skills, improve behavior, and achieve their full potential through positive reinforcement and individualized treatment plans."
-                }
-              },
-              {
-                "@type": "Question", 
-                "name": "Where is Mommy Angel's Specialty Care located?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We are located in Dunwoody, Georgia, serving families throughout the Atlanta metro area including Sandy Springs, Roswell, Alpharetta, and surrounding communities."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Do you accept insurance for ABA therapy services?", 
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "We work with various insurance providers to make our ABA therapy and autism services accessible. Contact us at (678) 353-6829 to discuss insurance coverage and payment options."
-                }
-              }
-            ]
-          })}
-        </script>
+        {/* Meta tags... */}
       </Helmet>
 
       <HeroContainer>
-        {/* <FloatingClouds /> */}
-        
         <PuzzleDecorations>
           <PuzzlePiece>🧩</PuzzlePiece>
           <PuzzlePiece>🧩</PuzzlePiece>
@@ -613,19 +461,12 @@ const Hero = () => {
           alt="Decorative Puzzle Pattern Right"
         />
         
-        {/* <WelcomeText
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          Welcome to Our Joyful Learning Adventure!
-        </WelcomeText> */}
         <FloatingImagesContainer>
           <FloatingImage src={img1} alt="Therapeutic Activities - Children engaged in learning" />
           <FloatingImage src={img3} alt="Child Development - Building essential skills" />
           <FloatingImage src={img2} alt="Learning Through Play - Fun educational activities" />
         </FloatingImagesContainer>
-        
+
         <HeroImage
           src={heroImage}
           alt="ABA Therapy Center - Children Learning and Playing"
@@ -633,8 +474,6 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
-
-        
         
         <HeroTitlesWrapper>
           <HeroTitle>

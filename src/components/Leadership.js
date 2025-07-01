@@ -20,7 +20,6 @@ const MainLayout = styled.div`
   }
 `;
 
-// New Container for AsideImage with gradient
 const AsideImageContainer = styled.div`
   position: relative;
   width: 500px;
@@ -30,8 +29,8 @@ const AsideImageContainer = styled.div`
     content: '';
     position: absolute;
     top: 0;
-    right: 0;  // Changed from left to right
-    width: 50%;  // Changed to 50% width
+    right: 0;
+    width: 50%;
     height: 100%;
     background: linear-gradient(to left, rgba(240, 248, 255, 0.9) 0%, rgba(240, 248, 255, 0.6) 50%, rgba(240, 248, 255, 0.3) 80%, transparent 100%);
     z-index: 2;
@@ -162,15 +161,40 @@ const LeaderCard = styled.div`
   }
 `;
 
-const LeaderImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+const ImageWrapper = styled.div`
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+    height: 120px;
+  }
+`;
+
+const LeaderImage = styled.img`
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(0.75);
 `;
 
 const LeaderName = styled.h3`
@@ -199,36 +223,6 @@ const LeaderTitle = styled.p`
 
   @media (max-width: 480px) {
     font-size: 0.85rem;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  width: 180px;
-  height: 180px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 0 auto 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: relative;
-
-  &::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
-
-  @media (max-width: 768px) {
-    width: 150px;
-    height: 150px;
-  }
-
-  @media (max-width: 480px) {
-    width: 120px;
-    height: 120px;
   }
 `;
 
