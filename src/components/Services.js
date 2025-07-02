@@ -42,7 +42,7 @@ const SectionHeader = styled.div`
 
 const HeaderTitle = styled.h1`
   font-size: 3.5rem;
-  color: #CD1B1B;
+  color: #cd1b1b;
   margin-bottom: 1rem;
   font-family: "Bubblegum Sans", sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -91,13 +91,13 @@ const ServiceCard = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(to right, #CD1B1B, #4A90E2, #FFD700);
+    background: linear-gradient(to right, #cd1b1b, #4a90e2, #ffd700);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -122,14 +122,14 @@ const ServiceTitle = styled.h3`
   padding-bottom: 0.5rem;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 50px;
     height: 3px;
-    background: #FFD700;
+    background: #ffd700;
     border-radius: 2px;
   }
 
@@ -159,11 +159,21 @@ const ServiceImage = styled.img`
   }
 
   @keyframes rainbow-border {
-    0% { border-color: #ff6f61; }
-    25% { border-color: #ffeb3b; }
-    50% { border-color: #4caf50; }
-    75% { border-color: #2196f3; }
-    100% { border-color: #9c27b0; }
+    0% {
+      border-color: #ff6f61;
+    }
+    25% {
+      border-color: #ffeb3b;
+    }
+    50% {
+      border-color: #4caf50;
+    }
+    75% {
+      border-color: #2196f3;
+    }
+    100% {
+      border-color: #9c27b0;
+    }
   }
 `;
 
@@ -178,7 +188,7 @@ const ServiceDescription = styled.div`
   background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   font-family: "Nunito", sans-serif;
-  box-shadow: inset  0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(74, 144, 226, 0.1);
 
   ul {
@@ -191,9 +201,13 @@ const ServiceDescription = styled.div`
 
     li {
       padding: 0.8rem 1rem;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 249, 255, 0.9) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(248, 249, 255, 0.9) 100%
+      );
       border-radius: 12px;
-      border-left: 4px solid #4A90E2;
+      border-left: 4px solid #4a90e2;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
       position: relative;
@@ -201,36 +215,44 @@ const ServiceDescription = styled.div`
 
       &:hover {
         transform: translateX(8px);
-        background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(240, 248, 255, 1) 100%);
-        border-left-color: #FFD700;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(240, 248, 255, 1) 100%
+        );
+        border-left-color: #ffd700;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
       }
 
       &:nth-child(even) {
-        border-left-color: #CD1B1B;
-        
+        border-left-color: #cd1b1b;
+
         &:hover {
-          border-left-color: #4A90E2;
+          border-left-color: #4a90e2;
         }
       }
 
       &:nth-child(3n) {
-        border-left-color: #FFD700;
-        
+        border-left-color: #ffd700;
+
         &:hover {
-          border-left-color: #CD1B1B;
+          border-left-color: #cd1b1b;
         }
       }
 
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         left: -4px;
         top: 50%;
         transform: translateY(-50%);
         width: 4px;
         height: 20px;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.8),
+          transparent
+        );
         border-radius: 2px;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -253,7 +275,7 @@ const ServiceDescription = styled.div`
 
       li {
         padding: 0.6rem 0.8rem;
-        
+
         &:hover {
           transform: translateX(4px);
         }
@@ -303,12 +325,12 @@ const GeneralServicesSection = styled.section`
   border: 1px solid rgba(74, 144, 226, 0.1);
   scroll-margin-top: 100px;
   transition: all 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   }
-  
+
   @media (max-width: 768px) {
     padding: 2rem 1rem;
   }
@@ -317,7 +339,7 @@ const GeneralServicesSection = styled.section`
 const GeneralServiceTitle = styled.h2`
   font-size: 2.2rem;
   font-family: "Bubblegum Sans", sans-serif;
-  color: #CD1B1B;
+  color: #cd1b1b;
   margin-bottom: 1.5rem;
   cursor: pointer;
   display: flex;
@@ -327,7 +349,7 @@ const GeneralServiceTitle = styled.h2`
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    color: #4A90E2;
+    color: #4a90e2;
     transform: translateY(-2px);
   }
 
@@ -352,13 +374,13 @@ const GeneralServiceList = styled.ul`
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    
+
     &:hover {
       transform: translateX(5px);
       background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    
+
     strong {
       color: #00695c;
       font-weight: 600;
@@ -368,12 +390,12 @@ const GeneralServiceList = styled.ul`
 
 // New styled component for highlighting the text
 const HighlightedText = styled.span`
-  background-color: #FFD700; /* Bright yellow/gold background */
+  background-color: #ffd700; /* Bright yellow/gold background */
   padding: 2px 5px;
   border-radius: 5px;
   font-weight: 600; /* Extra bold */
-  color: #CD1B1B; /* Red text for contrast */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  color: #cd1b1b; /* Red text for contrast */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: inline-block; /* Allows padding and shadow */
   line-height: 1.5; /* Ensures text aligns well within its line */
 `;
@@ -392,9 +414,9 @@ const Services = () => {
     };
 
     checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
 
-    return () => window.removeEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, [setIsMobile]);
 
   const toggleSection = (section) => {
@@ -408,14 +430,19 @@ const Services = () => {
           <SectionHeader>
             <HeaderTitle>Our Services</HeaderTitle>
             <HeaderDescription>
-              Discover our comprehensive range of therapeutic and educational services designed to support your child's growth and development in a nurturing, engaging environment.
+              Discover our comprehensive range of therapeutic and educational
+              services designed to support your child's growth and development
+              in a nurturing, engaging environment.
             </HeaderDescription>
-            <HighlightedText>We do not offer stand-alone speech therapy services.</HighlightedText>
+            <HighlightedText>
+              We do not offer stand-alone speech therapy services.
+            </HighlightedText>
           </SectionHeader>
 
           <GeneralServicesSection id="general-services">
             <GeneralServiceTitle onClick={() => toggleSection("general")}>
-              Behavioral & Educational Services {openSections.general ? "▲" : "▼"}
+              Behavioral & Educational Services{" "}
+              {openSections.general ? "▲" : "▼"}
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.general && (
@@ -426,11 +453,19 @@ const Services = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <GeneralServiceList>
-                    <li>Autism Diagnostic Services</li>
+                    <li>Assessments & Referrals</li>
                     <li>Occupational Therapy</li>
                     <li>
                       <p>
-                      <HighlightedText>Our Speech Therapy Services are exclusively offered as an integrated component of our comprehensive ABA Therapy programs.</HighlightedText> We believe that by combining speech therapy with ABA, we can provide a holistic approach that maximizes communication development within the broader context of your child's individualized treatment plan.
+                        <HighlightedText>
+                          While we do not provide formal diagnostic evaluations,
+                          we offer comprehensive assessments for children who
+                          have already received a diagnosis from a licensed
+                          psychiatrist or psychologist.
+                        </HighlightedText>
+                        Our thorough assessments help us develop individualized
+                        ABA therapy plans tailored to each child's unique
+                        strengths, needs, and developmental goals.
                       </p>
                     </li>
                     <li>1:1 Therapy Tailored to Your Child's Needs</li>
@@ -446,7 +481,7 @@ const Services = () => {
 
           <GeneralServicesSection id="autism-diagnostic">
             <GeneralServiceTitle onClick={() => toggleSection("autism")}>
-              Autism Diagnostic Services {openSections.autism ? "▲" : "▼"}
+            Assessments & Referrals {openSections.autism ? "▲" : "▼"}
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.autism && (
@@ -457,17 +492,29 @@ const Services = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <GeneralServiceList>
+                  <li>
+  <strong>Compassionate Assessments:</strong> We provide in-depth, personalized 
+  assessments in a supportive environment for children who have already received 
+  an autism diagnosis. We understand the emotional journey families are on and meet
+   them with care and clarity.
+</li>
+
                     <li>
-                      <strong>Empathetic Assessments:</strong> We provide thorough and accurate evaluations in a supportive environment, understanding the emotional journey families undertake when seeking autism testing.
+                      <strong>Experienced Team:</strong> Our services are led by
+                      a highly qualified psychologist, combining compassion with
+                      clinical expertise to guide families toward a clear path
+                      forward.
                     </li>
                     <li>
-                      <strong>Experienced Team:</strong> Our services are led by a highly qualified psychologist, combining compassion with clinical expertise to guide families toward a clear path forward.
+                      <strong>Personalized Approach:</strong> Recognizing that
+                      every child is unique, we tailor our evaluations to
+                      reflect individual needs and developmental stages.
                     </li>
                     <li>
-                      <strong>Personalized Approach:</strong> Recognizing that every child is unique, we tailor our evaluations to reflect individual needs and developmental stages.
-                    </li>
-                    <li>
-                      <strong>Comprehensive Process:</strong> Our diagnostic process includes developmental monitoring, screening tools, clinical interviews, and history-taking to ensure a holistic understanding of your child's needs.
+                      <strong>Comprehensive Process:</strong> Our diagnostic
+                      process includes developmental monitoring, screening
+                      tools, clinical interviews, and history-taking to ensure a
+                      holistic understanding of your child's needs.
                     </li>
                   </GeneralServiceList>
                 </motion.div>
@@ -475,7 +522,9 @@ const Services = () => {
             </AnimatePresence>
           </GeneralServicesSection>
 
-          <ServiceList className={isMobile ? "mobile-layout" : "desktop-layout"}>
+          <ServiceList
+            className={isMobile ? "mobile-layout" : "desktop-layout"}
+          >
             {[
               {
                 title: "Rock Walls & Leap Pads",

@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import leadershipImg from "../assets/IMG_5236.png";
+import playgroundImg from "../assets/IMG_5236.png";
 import placeholderImage from "../assets/right side puzzle pieces Background Removed.png";
 import anthony from "../assets/Anthony-edited Background Removed.png";
 import shruthi from "../assets/IMG_9536 Background Removed.png";
 
 const MainLayout = styled.div`
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
-  min-height: 600px;
+  min-height: 300px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -22,7 +22,7 @@ const MainLayout = styled.div`
 
 const AsideImageContainer = styled.div`
   position: relative;
-  width: 500px;
+  width: 800px;
   height: auto;
   
   &::before {
@@ -30,7 +30,7 @@ const AsideImageContainer = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%;
+    width: 90%;
     height: 100%;
     background: linear-gradient(to left, rgba(240, 248, 255, 0.9) 0%, rgba(240, 248, 255, 0.6) 50%, rgba(240, 248, 255, 0.3) 80%, transparent 100%);
     z-index: 2;
@@ -231,7 +231,7 @@ const Leadership = () => {
     <LeadershipSection>
       <MainLayout>
         <AsideImageContainer>
-          <AsideImage src={leadershipImg} alt="Team Leadership" />
+          <AsideImage src={playgroundImg} alt="Team Leadership" />
         </AsideImageContainer>
         <MainContent>
           <TextSection>

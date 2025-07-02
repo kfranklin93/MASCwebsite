@@ -431,7 +431,7 @@ const Navbar = () => {
                   ABA Therapy
                 </DropdownItem>
                 <DropdownItem to="/services/autism-diagnostic" color="#4a90e2">
-                  Autism Diagnostic Services
+                Assessments & Referrals
                 </DropdownItem>
                 <DropdownItem to="/services/speech-therapy" color="#4a90e2">
                   Speech Therapy
@@ -530,7 +530,7 @@ const Navbar = () => {
                         to="/services/autism-diagnostic"
                         onClick={() => setMenuOpen(false)}
                       >
-                        Autism Diagnostic Services
+                        Assessments & Referrals
                       </MobileDropdownItem>
                       <MobileDropdownItem
                         to="/services/speech-therapy"

@@ -431,6 +431,37 @@ const MobilePuzzleBackgroundRight = styled(MobilePuzzleBackgroundLeft)`
   }
 `;
 
+const ScrollCue = styled(motion.div)`
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #4a90e2;
+  z-index: 50;
+  font-family: "Bubblegum Sans";
+
+  .arrow {
+    font-size: 1.75rem;
+    margin-top: 6px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    .arrow {
+      font-size: 1.4rem;
+    }
+  }
+`;
+
 const Hero = () => {
   return (
     <>
@@ -466,7 +497,6 @@ const Hero = () => {
           <FloatingImage src={img3} alt="Child Development - Building essential skills" />
           <FloatingImage src={img2} alt="Learning Through Play - Fun educational activities" />
         </FloatingImagesContainer>
-
         <HeroImage
           src={heroImage}
           alt="ABA Therapy Center - Children Learning and Playing"
@@ -474,7 +504,6 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
-        
         <HeroTitlesWrapper>
           <HeroTitle>
             The Bridge Between <HeroTitle2>ABA Therapy</HeroTitle2> & Everyday
@@ -506,6 +535,20 @@ const Hero = () => {
             🌈 "Socialization, not isolation" - Where every child thrives! ✨
           </motion.div>
         </HeroTitlesWrapper>
+        <ScrollCue
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          onClick={() => {
+            const nextSection = document.getElementById("next-section");
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+        >
+          <div>Scroll to explore</div>
+          <div className="arrow">↓</div>
+        </ScrollCue>
       </HeroContainer>
     </>
   );

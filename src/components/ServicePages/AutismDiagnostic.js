@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import diagnosticImage from "../../assets/music-4.jpg";
 
 const PageContainer = styled.div`
@@ -9,9 +9,9 @@ const PageContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   position: relative;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -29,15 +29,15 @@ const ContentWrapper = styled.div`
 `;
 
 const Section = styled.div`
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
-  border-left: 4px solid #CD1B1B;
-  border-right: 4px solid #4A90E2;
+  border-left: 4px solid #cd1b1b;
+  border-right: 4px solid #4a90e2;
 `;
 
 const Title = styled.h1`
@@ -74,7 +74,7 @@ const TextContent = styled.div`
   border-radius: 10px;
   background: linear-gradient(to bottom right, #ffffff, #f8f9fa);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-top: 3px solid #FFD700;
+  border-top: 3px solid #ffd700;
 `;
 
 const Description = styled.p`
@@ -87,12 +87,15 @@ const Description = styled.p`
 const ImageContainer = styled.div`
   flex: 1;
   position: relative;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: -10%;
-    background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.4));
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.4)
+    );
     pointer-events: none;
   }
 
@@ -101,7 +104,7 @@ const ImageContainer = styled.div`
     height: 400px;
     object-fit: cover;
     border-radius: 15px;
-    border: 3px solid #4A90E2;
+    border: 3px solid #4a90e2;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
     @media (max-width: 1024px) {
@@ -122,10 +125,10 @@ const Features = styled.div`
 `;
 
 const FeatureCard = styled(motion.div)`
-  background: #F8F9FA;
+  background: #f8f9fa;
   padding: 1.5rem;
   border-radius: 10px;
-  border-left: 4px solid #4A90E2;
+  border-left: 4px solid #4a90e2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 
@@ -154,19 +157,19 @@ const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   padding: 1rem 2rem;
-  background: ${props => props.secondary ? '#E3F2FD' : '#4A90E2'};
-  color: ${props => props.secondary ? '#4A90E2' : '#FFFFFF'};
+  background: ${(props) => (props.secondary ? "#E3F2FD" : "#4A90E2")};
+  color: ${(props) => (props.secondary ? "#4A90E2" : "#FFFFFF")};
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
-  border: 2px solid #4A90E2;
+  border: 2px solid #4a90e2;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-2px);
-    background: ${props => props.secondary ? '#4A90E2' : '#CD1B1B'};
-    color: #FFFFFF;
+    background: ${(props) => (props.secondary ? "#4A90E2" : "#CD1B1B")};
+    color: #ffffff;
     box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
   }
 `;
@@ -175,44 +178,55 @@ const AutismDiagnostic = () => {
   const features = [
     {
       title: "Comprehensive Assessment",
-      description: "Thorough evaluation using gold-standard diagnostic tools and methods."
+      description:
+        "Thorough evaluation using gold-standard diagnostic tools and methods.",
     },
     {
       title: "Expert Team",
-      description: "Experienced professionals specializing in autism spectrum disorders."
+      description:
+        "Experienced professionals specializing in autism spectrum disorders.",
     },
     {
       title: "Family-Centered",
-      description: "Support and guidance for families throughout the diagnostic process."
+      description:
+        "Support and guidance for families throughout the diagnostic process.",
     },
     {
       title: "Detailed Reporting",
-      description: "Clear, actionable reports with specific recommendations and next steps."
-    }
+      description:
+        "Clear, actionable reports with specific recommendations and next steps.",
+    },
   ];
 
   return (
     <PageContainer>
       <ContentWrapper>
         <Section>
-          <Title>Autism Diagnostic Services</Title>
-          
+          <Title>Assessments & Referrals</Title>
+
           <SplitLayout>
             <TextContent>
               <Description>
-                Our comprehensive autism diagnostic services provide thorough, professional evaluations
-                using evidence-based approaches. We understand that seeking a diagnosis can be overwhelming,
-                and we're here to support you through every step of the process.
+                <p>
+                  Our comprehensive autism assessments and referral services are
+                  grounded in evidence-based practices and designed to provide
+                  clear, actionable insights. We understand that navigating the
+                  diagnostic journey can feel overwhelming, and we’re here to
+                  support you with care, clarity, and compassion every step of
+                  the way.
+                </p>
               </Description>
               <Description>
-                Our experienced team uses a combination of standardized assessments, clinical observations,
-                and parent input to provide accurate diagnoses. We take the time to understand your child's
+                Our experienced team uses a combination of standardized
+                assessments, clinical observations, and parent input to provide
+                accurate diagnoses. We take the time to understand your child's
                 unique strengths and challenges.
               </Description>
               <Description>
-                Following the evaluation, we provide detailed recommendations and connect families with
-                appropriate resources and support services. Our goal is to help you understand your child's
-                needs and access the right interventions.
+                Following the evaluation, we provide detailed recommendations
+                and connect families with appropriate resources and support
+                services. Our goal is to help you understand your child's needs
+                and access the right interventions.
               </Description>
             </TextContent>
             <ImageContainer>
@@ -235,9 +249,7 @@ const AutismDiagnostic = () => {
           </Features>
 
           <ButtonContainer>
-            <Button to="/contact">
-              Schedule an Evaluation
-            </Button>
+            <Button to="/contact">Schedule an Evaluation</Button>
             <Button to="/what-to-expect" secondary>
               Learn More
             </Button>
