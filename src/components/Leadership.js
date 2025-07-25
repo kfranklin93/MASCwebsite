@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import playgroundImg from "../assets/IMG_5236.png";
-import placeholderImage from "../assets/right side puzzle pieces Background Removed.png";
+import placeholderImage from "../assets/JTonos Background Removed.png";
 import anthony from "../assets/Anthony-edited Background Removed.png";
 import shruthi from "../assets/IMG_9536 Background Removed.png";
 
@@ -245,11 +245,11 @@ const Leadership = () => {
             </Description>
           </TextSection>
           <LeadersGrid>
-            <LeaderCard>
+          <LeaderCard>
               <ImageWrapper>
                 <LeaderImage src={placeholderImage} alt="CEO Headshot" />
               </ImageWrapper>
-              <LeaderName>Crissy</LeaderName>
+              <LeaderName>Jordan</LeaderName>
               <LeaderTitle>Board Certified Behavior Analyst</LeaderTitle>
             </LeaderCard>
 

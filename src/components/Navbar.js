@@ -556,7 +556,7 @@ const Navbar = () => {
                   rel="noopener noreferrer" 
                   onClick={() => setMenuOpen(false)}
               >
-                  Mommy Angels Daycare
+                  Mommy Angels Daycare 
               </MobileDirectExternalNavLink>
 
               <MobileNavLink as={ScrollLink} to="#contact" onClick={() => setMenuOpen(false)}>
