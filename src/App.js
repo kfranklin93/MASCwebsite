@@ -44,6 +44,7 @@ const App = () => {
       {/* <VoteBanner /> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/aba" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
         <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
