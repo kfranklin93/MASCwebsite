@@ -28,7 +28,7 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <title>Mommy Angels Specialty Care ABA Therapy Services in Georgia | Home</title>
+        <title>Mommy Angels Autism Center ABA Therapy Services in Georgia | Home</title>
         <meta name="description" content="Expert ABA therapy services for children in Georgia. Contact us today for a personalized intake." />
         <meta name="keywords" content="ABA therapy, autism, behavioral therapy, Georgia, child development" />
         <link rel="canonical" href="https://mommyangelsspecialtycare.com/" />

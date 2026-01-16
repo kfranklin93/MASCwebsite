@@ -405,7 +405,7 @@ const About = () => (
         <TextColumn>
           <SectionTitle>Our Story</SectionTitle>
           <AboutText initial="hidden" animate="visible" variants={textAnimation}>
-            At Mommy Angel's Specialty Care and Autism Center, we provide a nurturing
+            At Mommy Angel's Autism Center, we provide a nurturing
             and supportive environment where children with autism can thrive. Our mission
             is to meet each child where they are, while offering the extra support needed
             to help them grow, learn, and feel confident in their progress.

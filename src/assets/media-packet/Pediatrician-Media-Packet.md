@@ -1,4 +1,4 @@
-# Mommy Angel's Specialty Care & Autism Center
+# Mommy Angel's Autism Center
 ## Professional Referral Information for Pediatric Healthcare Providers
 
 ---
@@ -13,7 +13,7 @@
 
 ## **About Our Center**
 
-Mommy Angel's Specialty Care and Autism Center is a premier ABA therapy and autism support facility in Dunwoody, GA, offering comprehensive behavioral, educational, and therapeutic services for children with autism spectrum disorders and developmental delays.
+Mommy Angel's Autism Center is a premier ABA therapy and autism support facility in Dunwoody, GA, offering comprehensive behavioral, educational, and therapeutic services for children with autism spectrum disorders and developmental delays.
 
 **Mission:** To provide a nurturing and supportive environment where children with autism can thrive through evidence-based interventions, while building essential life skills in a social, inclusive setting.
 

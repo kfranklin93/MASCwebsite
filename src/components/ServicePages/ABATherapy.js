@@ -210,7 +210,7 @@ const ABATherapy = () => {
                 tailored to each child's learning pace.
               </Description>
               <Description>
-                At Mommy Angel's Specialty Care, we provide top-quality ABA therapy delivered by a skilled,
+                At Mommy Angel's Autism Center, we provide top-quality ABA therapy delivered by a skilled,
                 dedicated team of board-certified behavior analysts (BCBAs) and registered behavior
                 technicians (RBTs).
               </Description>

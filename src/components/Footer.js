@@ -376,7 +376,7 @@ const Footer = () => (
       <FooterBottom>
         <Copyright>
           <FaHeart color="#CD1B1B" />
-          &copy; 2025 Mommy Angel's Specialty Care. All rights reserved.
+          &copy; 2026 Mommy Angel's Autism Center. All rights reserved.
           <PuzzleIcon />
         </Copyright>
         <Copyright>
