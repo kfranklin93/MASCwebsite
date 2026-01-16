@@ -506,7 +506,7 @@ const Hero = () => {
         />
         <HeroTitlesWrapper>
           <HeroTitle>
-            The Bridge Between <HeroTitle2>ABA Therapy</HeroTitle2> & Everyday
+            The Bridge Between <HeroTitle2>Autism</HeroTitle2> & Everyday
             Learning
           </HeroTitle>
           <motion.div
