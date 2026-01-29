@@ -467,7 +467,7 @@ const Hero = () => {
     <>
       <Helmet>
         <title>
-          #1 ABA Therapy Dunwoody GA | Mommy Angel's Specialty Care | Autism Center & Pre-K Readiness
+          #1 ABA Therapy Dunwoody GA | Mommy Angel's Specialty Care | Autism , ABA Center & Pre-K Readiness
         </title>
         <link rel="canonical" href="https://mommyangelsspecialtycare.com" />
         
@@ -506,7 +506,7 @@ const Hero = () => {
         />
         <HeroTitlesWrapper>
           <HeroTitle>
-            The Bridge Between <HeroTitle2>Autism</HeroTitle2> & Everyday
+            The Bridge Between <HeroTitle2>ABA Therapy</HeroTitle2> & Everyday
             Learning
           </HeroTitle>
           <motion.div
