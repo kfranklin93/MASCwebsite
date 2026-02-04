@@ -11,9 +11,23 @@ import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
-// import VoteBanner from "./components/VoteBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
+
+// Admin Pages
+import AdminLogin from "./pages/Admin/Login";
+import AdminDashboard from "./pages/Admin/Dashboard";
+import Registrations from "./pages/Admin/Registrations";
+import IntakeReviews from "./pages/Admin/IntakeReviews";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
+
+const PublicLayout = ({ children }) => (
+  <>
+    <Navbar />
+    {children}
+    <Footer />
+  </>
+);
 
 const Home = () => (
   <>
@@ -40,19 +54,23 @@ const App = () => {
       </Helmet>
 
       <ScrollToTop />
-      <Navbar />
-      {/* <VoteBanner /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aba" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/what-to-expect" element={<WhatToExpect />} />
-        <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
-        <Route path="/services/early-intervention" element={<EarlyIntervention />} />
-        <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
-        <Route path="/services/aba-therapy" element={<ABATherapy />} />
+        {/* Public Routes */}
+        <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+        <Route path="/aba" element={<PublicLayout><Home /></PublicLayout>} />
+        <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+        <Route path="/what-to-expect" element={<PublicLayout><WhatToExpect /></PublicLayout>} />
+        <Route path="/services/speech-therapy" element={<PublicLayout><SpeechTherapy /></PublicLayout>} />
+        <Route path="/services/early-intervention" element={<PublicLayout><EarlyIntervention /></PublicLayout>} />
+        <Route path="/services/autism-diagnostic" element={<PublicLayout><AutismDiagnostic /></PublicLayout>} />
+        <Route path="/services/aba-therapy" element={<PublicLayout><ABATherapy /></PublicLayout>} />
+
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin/registrations" element={<ProtectedRoute><Registrations /></ProtectedRoute>} />
+        <Route path="/admin/intake-reviews" element={<ProtectedRoute><IntakeReviews /></ProtectedRoute>} />
       </Routes>
-      <Footer />
     </>
   );
 };
