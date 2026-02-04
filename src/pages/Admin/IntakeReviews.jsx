@@ -367,16 +367,24 @@ const IntakeReviews = () => {
       setLoading(true);
       const response = await adminAPI.getIntakeForms({ status: statusFilter });
       if (response.success) {
-        setIntakeForms(response.data);
+        setIntakeForms(response.data || []);
+      } else {
+        setIntakeForms([]);
       }
     } catch (err) {
       setError(err.message || 'Failed to load intake forms');
+      setIntakeForms([]);
     } finally {
       setLoading(false);
     }
   };
 
   const filterForms = () => {
+    if (!intakeForms || !Array.isArray(intakeForms)) {
+      setFilteredForms([]);
+      return;
+    }
+    
     let filtered = [...intakeForms];
     
     if (statusFilter !== 'all') {
