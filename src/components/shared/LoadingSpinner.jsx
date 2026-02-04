@@ -16,16 +16,16 @@ const SpinnerContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: ${props => props.fullPage ? '100px' : '40px'} 20px;
-    min-height: ${props => props.fullPage ? '100vh' : 'auto'};
+    padding: ${props => props.$fullPage ? '100px' : '40px'} 20px;
+    min-height: ${props => props.$fullPage ? '100vh' : 'auto'};
 `;
 
 const Spinner = styled.div`
     border: 4px solid #f3f3f3;
     border-top: 4px solid #4A90E2;
     border-radius: 50%;
-    width: ${props => props.size || '50px'};
-    height: ${props => props.size || '50px'};
+    width: ${props => props.$size || '50px'};
+    height: ${props => props.$size || '50px'};
     animation: ${spin} 1s linear infinite;
 `;
 
@@ -41,8 +41,8 @@ const LoadingSpinner = ({
     fullPage = false 
 }) => {
     return (
-        <SpinnerContainer fullPage={fullPage}>
-            <Spinner size={size} />
+        <SpinnerContainer $fullPage={fullPage}>
+            <Spinner $size={size} />
             {text && <LoadingText>{text}</LoadingText>}
         </SpinnerContainer>
     );

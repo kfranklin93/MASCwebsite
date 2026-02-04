@@ -260,16 +260,24 @@ const Registrations = () => {
       setLoading(true);
       const response = await adminAPI.getContacts();
       if (response.success) {
-        setContacts(response.data);
+        setContacts(response.data || []);
+      } else {
+        setContacts([]);
       }
     } catch (err) {
       setError(err.message || 'Failed to load contacts');
+      setContacts([]);
     } finally {
       setLoading(false);
     }
   };
 
   const filterContacts = () => {
+    if (!contacts || !Array.isArray(contacts)) {
+      setFilteredContacts([]);
+      return;
+    }
+    
     let filtered = [...contacts];
 
     // Status filter
