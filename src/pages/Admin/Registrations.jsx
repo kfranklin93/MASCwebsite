@@ -258,13 +258,22 @@ const Registrations = () => {
   const fetchContacts = async () => {
     try {
       setLoading(true);
+      setError(null);
       const response = await adminAPI.getContacts();
-      if (response.success) {
-        setContacts(response.data || []);
+      
+      console.log('API Response:', response); // Debug log
+      
+      if (response.success && response.data) {
+        // Handle both old and new response formats
+        const contactsList = response.data.contacts || response.data || [];
+        console.log('Contacts received:', contactsList.length); // Debug log
+        setContacts(contactsList);
       } else {
+        console.log('No contacts in response'); // Debug log
         setContacts([]);
       }
     } catch (err) {
+      console.error('Error fetching contacts:', err); // Debug log
       setError(err.message || 'Failed to load contacts');
       setContacts([]);
     } finally {
@@ -288,12 +297,15 @@ const Registrations = () => {
     // Search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(c => 
-        c.parent_name?.toLowerCase().includes(query) ||
-        c.email?.toLowerCase().includes(query) ||
-        c.phone?.toLowerCase().includes(query) ||
-        c.child_name?.toLowerCase().includes(query)
-      );
+      filtered = filtered.filter(c => {
+        const parentName = c.parent_name || `${c.first_name || ''} ${c.last_name || ''}`.trim();
+        const childName = c.child_name || c.message || '';
+        
+        return parentName.toLowerCase().includes(query) ||
+               c.email?.toLowerCase().includes(query) ||
+               c.phone?.toLowerCase().includes(query) ||
+               childName.toLowerCase().includes(query);
+      });
     }
 
     setFilteredContacts(filtered);
@@ -321,17 +333,20 @@ const Registrations = () => {
 
   const handleExport = () => {
     // Convert to CSV
-    const headers = ['Date', 'Parent Name', 'Email', 'Phone', 'Child Name', 'Age', 'Services', 'Status'];
-    const rows = filteredContacts.map(c => [
-      new Date(c.created_at).toLocaleDateString(),
-      c.parent_name,
-      c.email,
-      c.phone,
-      c.child_name,
-      c.child_age,
-      c.services_interested?.join('; '),
-      c.status
-    ]);
+    const headers = ['Date', 'Parent Name', 'Email', 'Phone', 'Child Info', 'Status'];
+    const rows = filteredContacts.map(c => {
+      const parentName = c.parent_name || `${c.first_name || ''} ${c.last_name || ''}`.trim();
+      const childInfo = c.child_name || c.message || '';
+      
+      return [
+        new Date(c.created_at).toLocaleDateString(),
+        parentName,
+        c.email,
+        c.phone || '',
+        childInfo,
+        c.status
+      ];
+    });
 
     const csvContent = [
       headers.join(','),
@@ -355,7 +370,8 @@ const Registrations = () => {
     },
     {
       key: 'parent_name',
-      label: 'Parent Name'
+      label: 'Parent Name',
+      render: (row) => row.parent_name || `${row.first_name || ''} ${row.last_name || ''}`.trim() || 'N/A'
     },
     {
       key: 'email',
@@ -363,11 +379,19 @@ const Registrations = () => {
     },
     {
       key: 'phone',
-      label: 'Phone'
+      label: 'Phone',
+      render: (row) => row.phone || 'N/A'
     },
     {
       key: 'child_name',
-      label: 'Child Name'
+      label: 'Child Info',
+      render: (row) => {
+        // Extract child info from message if exists
+        if (row.message && row.message.includes('Child:')) {
+          return row.message.substring(0, 50) + (row.message.length > 50 ? '...' : '');
+        }
+        return row.child_name || 'N/A';
+      }
     },
     {
       key: 'status',

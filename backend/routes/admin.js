@@ -73,7 +73,20 @@ router.get('/contacts', async (req, res) => {
     try {
         const { status, search, limit = 50, offset = 0 } = req.query;
 
-        let queryText = 'SELECT * FROM contacts WHERE 1=1';
+        // Select with concatenated parent_name for frontend compatibility
+        let queryText = `SELECT 
+            id, 
+            first_name, 
+            last_name, 
+            first_name || ' ' || last_name as parent_name,
+            email, 
+            phone, 
+            message, 
+            referral_source, 
+            status, 
+            created_at, 
+            updated_at 
+        FROM contacts WHERE 1=1`;
         const values = [];
         let paramCount = 1;
 
