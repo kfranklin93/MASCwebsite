@@ -178,20 +178,33 @@ router.post('/contacts/:id/send-intake', async (req, res) => {
 
         const intakeForm = intakeResult.rows[0];
 
-        // Send email with intake link
-        const emailHtml = intakeFormRequest(`${contact.first_name} ${contact.last_name}`, token);
-        await sendEmail({
-            to: contact.email,
-            subject: 'Complete Your Intake Form - Mommy Angels Specialty Care',
-            html: emailHtml
-        });
+        // Send email with intake link (don't fail if email fails)
+        try {
+            const emailHtml = intakeFormRequest(`${contact.first_name} ${contact.last_name}`, token);
+            await sendEmail({
+                to: contact.email,
+                subject: 'Complete Your Intake Form - Mommy Angels Specialty Care',
+                html: emailHtml
+            });
 
-        // Log email
-        await query(
-            `INSERT INTO email_logs (recipient_email, email_type, subject, contact_id, intake_form_id, status, sent_by)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-            [contact.email, 'intake_request', 'Complete Your Intake Form', contact.id, intakeForm.id, 'sent', req.user.id]
-        );
+            // Log email success
+            await query(
+                `INSERT INTO email_logs (recipient_email, email_type, subject, contact_id, intake_form_id, status, sent_by)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+                [contact.email, 'intake_request', 'Complete Your Intake Form', contact.id, intakeForm.id, 'sent', req.user.id]
+            );
+        } catch (emailError) {
+            console.error('❌ Error sending email:', emailError);
+            console.error('SendGrid error response:', emailError.response?.body);
+            
+            // Log email failure
+            await query(
+                `INSERT INTO email_logs (recipient_email, email_type, subject, contact_id, intake_form_id, status, sent_by)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+                [contact.email, 'intake_request', 'Complete Your Intake Form', contact.id, intakeForm.id, 'failed', req.user.id]
+            );
+            // Don't fail the request - intake form was still created
+        }
 
         // Update contact status
         await query(
@@ -201,8 +214,11 @@ router.post('/contacts/:id/send-intake', async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Intake form sent successfully',
-            data: { intakeForm }
+            message: 'Intake form created successfully (email may not have sent - check SendGrid credits)',
+            data: { 
+                intakeForm,
+                intakeUrl: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/client-portal/intake/${token}`
+            }
         });
     } catch (error) {
         console.error('Send intake error:', error);

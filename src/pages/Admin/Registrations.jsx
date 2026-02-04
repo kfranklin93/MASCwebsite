@@ -321,12 +321,13 @@ const Registrations = () => {
       console.log('Response:', response);
       
       if (response.success) {
-        setSuccess('Intake form sent successfully! Email sent to contact.');
+        const intakeUrl = response.data?.intakeUrl || 'Token generated';
+        setSuccess(`Intake form created! URL: ${intakeUrl}`);
         setSelectedContact(null);
         fetchContacts(); // Refresh data
         
-        // Clear success message after 3 seconds
-        setTimeout(() => setSuccess(null), 3000);
+        // Clear success message after 5 seconds
+        setTimeout(() => setSuccess(null), 5000);
       } else {
         setError(response.error || 'Failed to send intake form');
       }
@@ -519,12 +520,46 @@ const Registrations = () => {
                 <div className="value">{selectedContact.phone || 'N/A'}</div>
               </div>
               
-              <div className="detail-row">
-                <div className="label">Details:</div>
-                <div className="value" style={{ whiteSpace: 'pre-wrap' }}>
-                  {selectedContact.message || 'No additional information provided'}
-                </div>
-              </div>
+              {/* Parse message field to extract child info */}
+              {selectedContact.message && (() => {
+                const msg = selectedContact.message;
+                const childMatch = msg.match(/Child:\s*([^.]+)/);
+                const ageMatch = msg.match(/Age:\s*(\d+)/);
+                const servicesMatch = msg.match(/Interested in:\s*([^.]+)/);
+                const notesMatch = msg.match(/Notes:\s*(.+)/);
+                
+                return (
+                  <>
+                    {childMatch && (
+                      <div className="detail-row">
+                        <div className="label">Child Name:</div>
+                        <div className="value">{childMatch[1].trim()}</div>
+                      </div>
+                    )}
+                    
+                    {ageMatch && (
+                      <div className="detail-row">
+                        <div className="label">Child Age:</div>
+                        <div className="value">{ageMatch[1]} years</div>
+                      </div>
+                    )}
+                    
+                    {servicesMatch && (
+                      <div className="detail-row">
+                        <div className="label">Services Interested In:</div>
+                        <div className="value">{servicesMatch[1].trim()}</div>
+                      </div>
+                    )}
+                    
+                    {notesMatch && (
+                      <div className="detail-row">
+                        <div className="label">Additional Notes:</div>
+                        <div className="value">{notesMatch[1].trim()}</div>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
               
               <div className="detail-row">
                 <div className="label">Referral Source:</div>

@@ -361,7 +361,15 @@ const Employees = () => {
       setError(null);
       console.log('Creating employee:', formData);
       
-      const response = await adminAPI.createEmployee(formData);
+      const response = await adminAPI.createEmployee({
+        firstName: formData.first_name,
+        lastName: formData.last_name,
+        email: formData.email,
+        phone: formData.phone,
+        position: formData.position,
+        hireDate: formData.hire_date,
+        status: formData.status
+      });
       console.log('Response:', response);
       
       if (response.success) {
