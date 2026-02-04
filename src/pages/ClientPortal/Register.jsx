@@ -160,14 +160,9 @@ const Register = () => {
       setSubmitting(true);
       setError(null);
 
-      // Split parent name into first and last
-      const nameParts = data.parent_name.trim().split(' ');
-      const parentFirstName = nameParts[0] || '';
-      const parentLastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
-
       const payload = {
-        parentFirstName: parentFirstName,
-        parentLastName: parentLastName,
+        parentFirstName: data.parent_first_name,
+        parentLastName: data.parent_last_name,
         email: data.email,
         phone: data.phone,
         childName: data.child_name,
@@ -227,14 +222,27 @@ const Register = () => {
             <h2>Parent/Guardian Information</h2>
             
             <FormInput
-              label="Full Name"
-              name="parent_name"
-              placeholder="John Doe"
+              label="First Name"
+              name="parent_first_name"
+              placeholder="John"
               required
-              error={errors.parent_name}
+              error={errors.parent_first_name}
               register={register}
-              {...register('parent_name', { 
-                required: 'Parent name is required',
+              {...register('parent_first_name', { 
+                required: 'First name is required',
+                minLength: { value: 2, message: 'Name must be at least 2 characters' }
+              })}
+            />
+
+            <FormInput
+              label="Last Name"
+              name="parent_last_name"
+              placeholder="Doe"
+              required
+              error={errors.parent_last_name}
+              register={register}
+              {...register('parent_last_name', { 
+                required: 'Last name is required',
                 minLength: { value: 2, message: 'Name must be at least 2 characters' }
               })}
             />
