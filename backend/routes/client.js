@@ -122,16 +122,22 @@ router.post('/register',
                 notes
             } = req.body;
 
-            // Insert registration
+            // Build message from child info if provided
+            let message = notes || '';
+            if (childName || childAge) {
+                message = `Child: ${childName || 'N/A'}, Age: ${childAge || 'N/A'}. ${notes || ''}`.trim();
+            }
+
+            // Insert into contacts table (so it appears in admin dashboard)
             const result = await query(
-                `INSERT INTO registrations 
-                 (parent_first_name, parent_last_name, email, phone, child_name, child_age, event_type, notes, status)
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                `INSERT INTO contacts 
+                 (first_name, last_name, email, phone, message, referral_source, status)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)
                  RETURNING *`,
-                [parentFirstName, parentLastName, email, phone, childName, childAge, eventType || 'new_birth_registration', notes, 'pending']
+                [parentFirstName, parentLastName, email, phone, message, eventType || 'Client Portal Registration', 'new']
             );
 
-            const registration = result.rows[0];
+            const contact = result.rows[0];
 
             // Send confirmation email
             try {
@@ -143,9 +149,9 @@ router.post('/register',
                 });
 
                 await query(
-                    `INSERT INTO email_logs (recipient_email, email_type, subject, registration_id, status)
+                    `INSERT INTO email_logs (recipient_email, email_type, subject, contact_id, status)
                      VALUES ($1, $2, $3, $4, $5)`,
-                    [email, 'contact_confirmation', 'Registration Received', registration.id, 'sent']
+                    [email, 'registration_confirmation', 'Registration Received', contact.id, 'sent']
                 );
             } catch (emailError) {
                 console.error('Error sending confirmation email:', emailError);
@@ -154,7 +160,7 @@ router.post('/register',
             res.status(201).json({
                 success: true,
                 message: 'Registration submitted successfully',
-                data: { registration }
+                data: { contact }
             });
         } catch (error) {
             console.error('Registration error:', error);

@@ -27,6 +27,9 @@ import ProtectedRoute from "./components/shared/ProtectedRoute";
 import Register from "./pages/ClientPortal/Register";
 import Intake from "./pages/ClientPortal/Intake";
 
+// Employee Portal Pages
+import DocumentUpload from "./pages/EmployeePortal/DocumentUpload";
+
 const Home = () => (
   <>
     <section id="home"><Hero /></section>
@@ -115,6 +118,9 @@ const App = () => {
         {/* Client Portal Routes - No Navbar/Footer */}
         <Route path="/client-portal/register" element={<Register />} />
         <Route path="/client-portal/intake/:token" element={<Intake />} />
+        
+        {/* Employee Portal Routes - No Navbar/Footer */}
+        <Route path="/employee-portal/upload/:token" element={<DocumentUpload />} />
         
         {/* Admin Routes - No Navbar/Footer */}
         <Route path="/admin/login" element={<AdminLogin />} />
