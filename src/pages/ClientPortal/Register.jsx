@@ -160,6 +160,14 @@ const Register = () => {
       setSubmitting(true);
       setError(null);
 
+      // Collect selected services
+      const services = [];
+      if (data.service_aba) services.push('ABA Therapy');
+      if (data.service_speech) services.push('Speech Therapy');
+      if (data.service_ot) services.push('Occupational Therapy');
+      if (data.service_daycare) services.push('Daycare Services');
+      if (data.service_other) services.push('Other Services');
+
       const payload = {
         parentFirstName: data.parent_first_name,
         parentLastName: data.parent_last_name,
@@ -167,6 +175,7 @@ const Register = () => {
         phone: data.phone,
         childName: data.child_name,
         childAge: parseInt(data.child_age),
+        servicesInterested: services,
         eventType: data.preferred_contact || 'General Inquiry',
         notes: data.message || ''
       };

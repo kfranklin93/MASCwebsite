@@ -118,15 +118,22 @@ router.post('/register',
                 phone,
                 childName,
                 childAge,
+                servicesInterested,
                 eventType,
                 notes
             } = req.body;
 
-            // Build message from child info if provided
-            let message = notes || '';
-            if (childName || childAge) {
-                message = `Child: ${childName || 'N/A'}, Age: ${childAge || 'N/A'}. ${notes || ''}`.trim();
+            // Build comprehensive message from all data
+            let messageParts = [];
+            
+            if (childName) messageParts.push(`Child: ${childName}`);
+            if (childAge) messageParts.push(`Age: ${childAge}`);
+            if (servicesInterested && servicesInterested.length > 0) {
+                messageParts.push(`Interested in: ${servicesInterested.join(', ')}`);
             }
+            if (notes) messageParts.push(`Notes: ${notes}`);
+            
+            const message = messageParts.join('. ') + '.';
 
             // Insert into contacts table (so it appears in admin dashboard)
             const result = await query(
