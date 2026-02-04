@@ -23,6 +23,10 @@ import Employees from "./pages/Admin/Employees";
 import Expirations from "./pages/Admin/Expirations";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 
+// Client Portal Pages
+import Register from "./pages/ClientPortal/Register";
+import Intake from "./pages/ClientPortal/Intake";
+
 const Home = () => (
   <>
     <section id="home"><Hero /></section>
@@ -107,6 +111,10 @@ const App = () => {
             <Footer />
           </>
         } />
+        
+        {/* Client Portal Routes - No Navbar/Footer */}
+        <Route path="/client-portal/register" element={<Register />} />
+        <Route path="/client-portal/intake/:token" element={<Intake />} />
         
         {/* Admin Routes - No Navbar/Footer */}
         <Route path="/admin/login" element={<AdminLogin />} />
