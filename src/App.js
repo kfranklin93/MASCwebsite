@@ -11,9 +11,10 @@ import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
-// import VoteBanner from "./components/VoteBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
+import AdminLogin from './pages/Admin/Login.jsx';
+
 
 const Home = () => (
   <>
@@ -41,7 +42,6 @@ const App = () => {
 
       <ScrollToTop />
       <Navbar />
-      {/* <VoteBanner /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aba" element={<Home />} />
@@ -51,6 +51,7 @@ const App = () => {
         <Route path="/services/early-intervention" element={<EarlyIntervention />} />
         <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
         <Route path="/services/aba-therapy" element={<ABATherapy />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
       </Routes>
       <Footer />
     </>
