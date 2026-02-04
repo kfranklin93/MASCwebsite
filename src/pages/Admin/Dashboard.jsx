@@ -260,8 +260,8 @@ const Dashboard = () => {
           <StatCard onClick={() => navigate('/admin/registrations')}>
             <div className="stat-header">
               <div>
-                <h3 className="stat-value">{stats?.contacts?.total || 0}</h3>
-                <p className="stat-label">Total Contacts</p>
+                <h3 className="stat-value">{stats?.stats?.new_contacts || 0}</h3>
+                <p className="stat-label">New Contacts</p>
               </div>
               <div className="stat-icon blue">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -270,14 +270,14 @@ const Dashboard = () => {
               </div>
             </div>
             <p className="stat-change positive">
-              {stats?.contacts?.new || 0} new this month
+              Click to view all
             </p>
           </StatCard>
 
           <StatCard onClick={() => navigate('/admin/intake-reviews')}>
             <div className="stat-header">
               <div>
-                <h3 className="stat-value">{stats?.intakeForms?.pending || 0}</h3>
+                <h3 className="stat-value">{stats?.stats?.pending_reviews || 0}</h3>
                 <p className="stat-label">Pending Reviews</p>
               </div>
               <div className="stat-icon yellow">

@@ -499,7 +499,7 @@ const Registrations = () => {
               
               <div className="detail-row">
                 <div className="label">Parent Name:</div>
-                <div className="value">{selectedContact.parent_name}</div>
+                <div className="value">{selectedContact.parent_name || `${selectedContact.first_name} ${selectedContact.last_name}`}</div>
               </div>
               
               <div className="detail-row">
@@ -509,22 +509,17 @@ const Registrations = () => {
               
               <div className="detail-row">
                 <div className="label">Phone:</div>
-                <div className="value">{selectedContact.phone}</div>
+                <div className="value">{selectedContact.phone || 'N/A'}</div>
               </div>
               
               <div className="detail-row">
-                <div className="label">Child Name:</div>
-                <div className="value">{selectedContact.child_name}</div>
+                <div className="label">Message/Notes:</div>
+                <div className="value">{selectedContact.message || 'N/A'}</div>
               </div>
               
               <div className="detail-row">
-                <div className="label">Child Age:</div>
-                <div className="value">{selectedContact.child_age} years</div>
-              </div>
-              
-              <div className="detail-row">
-                <div className="label">Services:</div>
-                <div className="value">{selectedContact.services_interested?.join(', ')}</div>
+                <div className="label">Referral Source:</div>
+                <div className="value">{selectedContact.referral_source || 'N/A'}</div>
               </div>
               
               <div className="detail-row">
