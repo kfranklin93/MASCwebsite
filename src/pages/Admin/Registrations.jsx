@@ -314,18 +314,25 @@ const Registrations = () => {
   const handleSendIntakeForm = async (contactId) => {
     try {
       setSendingIntake(true);
+      setError(null);
+      console.log('Sending intake form for contact:', contactId);
+      
       const response = await adminAPI.sendIntakeForm(contactId);
+      console.log('Response:', response);
       
       if (response.success) {
-        setSuccess('Intake form sent successfully!');
+        setSuccess('Intake form sent successfully! Email sent to contact.');
         setSelectedContact(null);
         fetchContacts(); // Refresh data
         
         // Clear success message after 3 seconds
         setTimeout(() => setSuccess(null), 3000);
+      } else {
+        setError(response.error || 'Failed to send intake form');
       }
     } catch (err) {
-      setError(err.message || 'Failed to send intake form');
+      console.error('Send intake error:', err);
+      setError(err.response?.data?.error || err.message || 'Failed to send intake form');
     } finally {
       setSendingIntake(false);
     }
@@ -513,8 +520,10 @@ const Registrations = () => {
               </div>
               
               <div className="detail-row">
-                <div className="label">Message/Notes:</div>
-                <div className="value">{selectedContact.message || 'N/A'}</div>
+                <div className="label">Details:</div>
+                <div className="value" style={{ whiteSpace: 'pre-wrap' }}>
+                  {selectedContact.message || 'No additional information provided'}
+                </div>
               </div>
               
               <div className="detail-row">
@@ -528,13 +537,6 @@ const Registrations = () => {
                   <StatusBadge status={selectedContact.status} />
                 </div>
               </div>
-              
-              {selectedContact.message && (
-                <div className="detail-row">
-                  <div className="label">Message:</div>
-                  <div className="value">{selectedContact.message}</div>
-                </div>
-              )}
               
               <div className="modal-actions">
                 <CloseButton onClick={() => setSelectedContact(null)}>

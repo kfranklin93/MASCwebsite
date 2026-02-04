@@ -358,7 +358,11 @@ const Employees = () => {
     
     try {
       setSubmitting(true);
+      setError(null);
+      console.log('Creating employee:', formData);
+      
       const response = await adminAPI.createEmployee(formData);
+      console.log('Response:', response);
       
       if (response.success) {
         setSuccess('Employee added successfully! Upload link sent to email.');
@@ -375,9 +379,12 @@ const Employees = () => {
         fetchEmployees();
         
         setTimeout(() => setSuccess(null), 3000);
+      } else {
+        setError(response.error || 'Failed to add employee');
       }
     } catch (err) {
-      setError(err.message || 'Failed to add employee');
+      console.error('Add employee error:', err);
+      setError(err.response?.data?.error || err.message || 'Failed to add employee');
     } finally {
       setSubmitting(false);
     }
