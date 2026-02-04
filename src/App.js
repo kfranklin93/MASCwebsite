@@ -19,6 +19,8 @@ import AdminLogin from "./pages/Admin/Login";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import Registrations from "./pages/Admin/Registrations";
 import IntakeReviews from "./pages/Admin/IntakeReviews";
+import Employees from "./pages/Admin/Employees";
+import Expirations from "./pages/Admin/Expirations";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
 
 const Home = () => (
@@ -121,6 +123,16 @@ const App = () => {
         <Route path="/admin/intake-reviews" element={
           <ProtectedRoute>
             <IntakeReviews />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin/employees" element={
+          <ProtectedRoute>
+            <Employees />
+          </ProtectedRoute>
+        } />
+        <Route path="/admin/expirations" element={
+          <ProtectedRoute>
+            <Expirations />
           </ProtectedRoute>
         } />
       </Routes>
