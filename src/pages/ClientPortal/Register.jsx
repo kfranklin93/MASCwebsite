@@ -160,23 +160,20 @@ const Register = () => {
       setSubmitting(true);
       setError(null);
 
-      // Convert services to array if checkboxes are used
-      const services = [];
-      if (data.service_aba) services.push('ABA Therapy');
-      if (data.service_speech) services.push('Speech Therapy');
-      if (data.service_ot) services.push('Occupational Therapy');
-      if (data.service_daycare) services.push('Daycare');
-      if (data.service_other) services.push('Other');
+      // Split parent name into first and last
+      const nameParts = data.parent_name.trim().split(' ');
+      const parentFirstName = nameParts[0] || '';
+      const parentLastName = nameParts.slice(1).join(' ') || nameParts[0] || '';
 
       const payload = {
-        parent_name: data.parent_name,
+        parentFirstName: parentFirstName,
+        parentLastName: parentLastName,
         email: data.email,
         phone: data.phone,
-        child_name: data.child_name,
-        child_age: parseInt(data.child_age),
-        services_interested: services,
-        message: data.message || '',
-        preferred_contact: data.preferred_contact
+        childName: data.child_name,
+        childAge: parseInt(data.child_age),
+        eventType: data.preferred_contact || 'General Inquiry',
+        notes: data.message || ''
       };
 
       const response = await clientAPI.submitRegistration(payload);
