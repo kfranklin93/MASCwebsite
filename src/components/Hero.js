@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
+// import heroImage from "../assets/Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png";
+import heroImage from "../assets/ABA Banner-t1.png";
+
 import backgroundImg from "../assets/Untitled-design-7-1-2.png";
 import img1 from "../assets/Angel-1.png";
 import img2 from "../assets/Angel-2.png";
@@ -26,7 +28,7 @@ const HeroContainer = styled.section`
   position: relative;
   min-height: 100dvh;
   width: 100%;
-  padding: 2rem 1rem 6rem;
+  // padding: 2rem 1rem 6rem;
   margin-top: calc(60px + 1rem);
   border: 20px solid #4a90e2;
   border-radius: 5px;
@@ -35,12 +37,12 @@ const HeroContainer = styled.section`
   transition: all 0.3s ease-in-out;
 
   background-color: rgba(255, 255, 255, 0.92);
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.6),
-      rgba(255, 255, 255, 0.6)
-    ),
-    url(${backgroundImg});
-  background-size: contain;
+  // background-image: linear-gradient(
+  //     rgba(255, 255, 255, 0.6),
+  //     rgba(255, 255, 255, 0.6)
+  //   ),
+  //   url(${backgroundImg});
+  // background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
@@ -141,7 +143,7 @@ const FloatingImagesContainer = styled.div`
   flex-wrap: wrap;
   gap: 2rem;
   z-index: 2;
-  margin: 2rem 0;
+  // margin: 2rem 0;
   position: relative;
   padding: 1rem;
 `;
@@ -276,13 +278,13 @@ const PuzzlePiece = styled.div`
 `;
 
 const HeroImage = styled(motion.img)`
-  width: clamp(300px, min(60vw, 800px), 800px);
+  // width: clamp(600px, min(60vw, 800px), 800px);
   height: auto;
-  max-width: 95%;
+  max-width: 100%;
   object-fit: contain;
   z-index: 2;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
-  margin: 1rem 0;
+  // filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+  // margin: 1rem 0;
   position: relative;
   
   @media (min-width: 2000px) {
