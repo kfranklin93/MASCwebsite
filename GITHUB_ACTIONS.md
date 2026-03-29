@@ -1,0 +1,296 @@
+# GitHub Actions CI/CD Workflow
+
+**Note:** Due to GitHub App permissions, this workflow file needs to be added manually by the repository owner.
+
+## Instructions
+
+1. Create `.github/workflows/ci.yml` in your repository
+2. Copy the content below
+3. Commit and push to enable automated testing
+
+## Workflow File Content
+
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ testing-implementation, automation-system, main ]
+  pull_request:
+    branches: [ testing-implementation, automation-system, main ]
+
+jobs:
+  # ================================================================
+  # BACKEND TESTS
+  # ================================================================
+  backend-tests:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: masc_test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm ci
+
+      - name: Run backend tests
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: masc_test_db
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          JWT_SECRET: test-secret-key
+        run: |
+          cd backend
+          npm test
+
+      - name: Generate coverage report
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: masc_test_db
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          JWT_SECRET: test-secret-key
+        run: |
+          cd backend
+          npm run test:coverage
+
+      - name: Upload backend coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./backend/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+
+  # ================================================================
+  # FRONTEND TESTS
+  # ================================================================
+  frontend-tests:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Run frontend unit tests
+        run: npm run test:ci
+
+      - name: Upload frontend coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+
+  # ================================================================
+  # E2E TESTS (CYPRESS)
+  # ================================================================
+  e2e-tests:
+    name: E2E Tests (Cypress)
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: masc_test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd backend && npm ci
+
+      - name: Start backend server
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: masc_test_db
+          DB_USER: postgres
+          DB_PASSWORD: postgres
+          JWT_SECRET: test-secret-key
+          PORT: 5000
+        run: |
+          cd backend
+          npm start &
+          sleep 10
+
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: false
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+  # ================================================================
+  # LINTING & CODE QUALITY
+  # ================================================================
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint --if-present
+
+  # ================================================================
+  # BUILD TEST
+  # ================================================================
+  build:
+    name: Build Test
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
+```
+
+## What This Workflow Does
+
+1. **Backend Tests** - Runs Mocha/Chai tests with PostgreSQL
+2. **Frontend Tests** - Runs Jest tests with React Testing Library
+3. **E2E Tests** - Runs Cypress tests with full app
+4. **Linting** - Checks code quality
+5. **Build** - Verifies production build works
+
+## Triggers
+
+- Runs on every push to `testing-implementation`, `automation-system`, or `main`
+- Runs on every pull request to these branches
+
+## Coverage Reporting
+
+The workflow uploads coverage reports to Codecov. To enable:
+
+1. Sign up at https://codecov.io/
+2. Add your repository
+3. No additional configuration needed - it will automatically track coverage
+
+## Troubleshooting
+
+If tests fail in CI but pass locally:
+
+1. Check environment variables match
+2. Verify PostgreSQL service is available
+3. Check node versions match
+4. Review test logs in GitHub Actions
+
+## Manual Setup
+
+To add this workflow manually:
+
+```bash
+mkdir -p .github/workflows
+cat > .github/workflows/ci.yml << 'EOF'
+# Paste the YAML content above
+EOF
+
+git add .github/workflows/ci.yml
+git commit -m "ci: Add GitHub Actions workflow"
+git push
+```
