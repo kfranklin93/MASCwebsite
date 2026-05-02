@@ -5,12 +5,14 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
+import Careers from "./components/Careers";
 import Footer from "./components/Footer";
 import WhatToExpect from "./components/WhatToExpect";
 import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
+import ReviewPortal from "./components/admin/ReviewPortal";
 // import VoteBanner from "./components/VoteBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
@@ -46,6 +48,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/aba" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/admin/careers" element={<ReviewPortal />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
         <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
         <Route path="/services/early-intervention" element={<EarlyIntervention />} />

@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import WhatToExpect from "./components/WhatToExpect";
 // import VoteBanner from "./components/VoteBanner";
 import { Helmet } from "react-helmet-async";
+import Careers from "./components/Careers"; // Import the new component
 
 const Home = () => (
   <>
@@ -16,6 +17,7 @@ const Home = () => (
     <section id="about"><About /></section>
     <section id="services"><Services /></section>
     <section id="contact"><Contact /></section>
+    <section id="careers"><Careers /></section>
   </>
 );
 
@@ -23,7 +25,7 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <title>Mommy Angels Specialty Care ABA Therapy Services in Georgia | Home</title>
+        <title>Mommy Angels Autism Center ABA Therapy Services in Georgia | Home</title>
         <meta name="description" content="Expert ABA therapy services for children in Georgia. Contact us today for a personalized intake." />
         <meta name="keywords" content="ABA therapy, autism, behavioral therapy, Georgia, child development" />
         <link rel="canonical" href="https://mommyangelsspecialtycare.com/" />
@@ -40,6 +42,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
+        <Route path="/careers" element={<Careers />} /> {/* 2. Add this route */}
       </Routes>
 
       <Footer />

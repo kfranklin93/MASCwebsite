@@ -456,6 +456,7 @@ const Navbar = () => {
         <ScrollLink to="#contact" color="#CD1B1B">
           Contact
         </ScrollLink>
+        <NavLink to="/careers" color="white">Careers</NavLink>
       </NavLinks>
 
       {/* Mobile Menu Button */}
@@ -558,7 +559,9 @@ const Navbar = () => {
               >
                   Mommy Angels Daycare 
               </MobileDirectExternalNavLink>
-
+              <MobileNavLink to="/careers" onClick={() => setMenuOpen(false)}>
+                Careers
+              </MobileNavLink>
               <MobileNavLink as={ScrollLink} to="#contact" onClick={() => setMenuOpen(false)}>
                 Contact
               </MobileNavLink>

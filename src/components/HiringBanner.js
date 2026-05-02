@@ -17,7 +17,7 @@ const HiringBanner = () => {
             </span>
             <Button 
                 className="banner-button"
-                onClick={() => window.location.href = "/careers"}
+                onClick={() => window.location.href = "/careers"} // Ensure this matches the route
             >
                 Apply Now
             </Button>

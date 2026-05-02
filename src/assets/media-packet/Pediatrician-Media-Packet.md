@@ -1,11 +1,11 @@
-# Mommy Angel's Autism Center
-## Professional Referral Information for Pediatric Healthcare Providers
+# Mommy Angel's Specialty Care & ABA Therapy
+## Professional Referral Information
 
 ---
 
 ### **Quick Reference Information**
 - **Phone:** (678) 353-6829
-- **Location:** Dunwoody, Georgia
+- **Location:** Dunwoody, Georgia & Stonecrest, Georgia
 - **Email:** management@mommyangelsspecialtycare.com
 - **Website:** https://mommyangelsspecialtycare.com
 
@@ -13,7 +13,7 @@
 
 ## **About Our Center**
 
-Mommy Angel's Autism Center is a premier ABA therapy and autism support facility in Dunwoody, GA, offering comprehensive behavioral, educational, and therapeutic services for children with autism spectrum disorders and developmental delays.
+Mommy Angel's Autism Center is a premier ABA therapy and autism support facility offering comprehensive behavioral, educational, and therapeutic services for children with autism spectrum disorders and developmental delays.
 
 **Mission:** To provide a nurturing and supportive environment where children with autism can thrive through evidence-based interventions, while building essential life skills in a social, inclusive setting.
 
@@ -88,8 +88,8 @@ Mommy Angel's Autism Center is a premier ABA therapy and autism support facility
 **Email:** management@mommyangelsspecialtycare.com  
 **Website:** https://mommyangelsspecialtycare.com
 
-**Location:** Dunwoody, Georgia  
-**Service Area:** Atlanta Metro Area
+**Location:** Dunwoody, Georgia  & Stonecrest, Georgia
+**Service Area:** Atlanta Metro  & Surrounding Areas
 
 ---
 
