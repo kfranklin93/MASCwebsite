@@ -10,8 +10,7 @@ import img2 from "../assets/Angel-2.png";
 import img3 from "../assets/Angel-3.png";
 import bk1 from "../assets/IMG_6881.png";
 import bk2 from "../assets/IMG_9520.png";
-// import rotatedpuzzleMask from "../assets/rotated-puzzle-mask.svg";
-import rotatedpuzzleMask from "../assets/puzzle-piece-mask.svg?url";
+import rotatedpuzzleMask from "../assets/puzzle-piece-mask.svg";
 
 import rightsidepuzzleImage from "../assets/right side puzzle pieces Background Removed.png";
 import leftsidepuzzleImage from "../assets/left side puzzle pieces Background Removed copy.png";
@@ -278,25 +277,26 @@ const PuzzlePiece = styled.div`
 `;
 
 const HeroImage = styled(motion.img)`
-  // width: clamp(600px, min(60vw, 800px), 800px);
+  width: 100%;
+  max-width: 800px;
   height: auto;
-  max-width: 100%;
   object-fit: contain;
   z-index: 2;
-  // filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
-  // margin: 1rem 0;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+  margin: 1rem auto;
   position: relative;
+  display: block;
   
   @media (min-width: 2000px) {
-    width: clamp(400px, 50vw, 1000px);
+    max-width: 1000px;
   }
   
   @media (max-width: 768px) {
-    width: clamp(280px, 70vw, 600px);
+    max-width: 600px;
   }
 
   @media (max-width: 480px) {
-    width: clamp(260px, 85vw, 400px);
+    max-width: 400px;
   }
 `;
 
