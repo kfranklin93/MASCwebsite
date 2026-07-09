@@ -412,7 +412,8 @@ const About = () => (
           </AboutText>
 
           <AboutText>
-            As a proud sister program of{" "}
+            {/* Mommy Angels Daycare sister program reference commented out */}
+            {/* As a proud sister program of{" "}
             <a
               href="https://mommyangelsdaycare.com"
               target="_blank"
@@ -429,16 +430,17 @@ const About = () => (
             >
               Mommy Angels Daycare
             </a>
-            , our center is uniquely positioned to support the whole family.
+            , our center is uniquely positioned to support the whole family. */}
+            Our center is uniquely positioned to support the whole family.
           </AboutText>
 
-          <AboutText>
+          {/* <AboutText>
             Picture this: while your child receives compassionate, individualized ABA care
             with us, their siblings are just next door at Mommy Angels Daycare—surrounded by
             the same loving values and joyful energy. With one drop-off and pick-up
             location, your mornings feel more manageable, your schedule feels lighter, and
             your heart feels at ease.
-          </AboutText>
+          </AboutText> */}
 
           <AboutText>
             We also offer a specialized Readiness Program, featuring classrooms designed just like a Pre-K

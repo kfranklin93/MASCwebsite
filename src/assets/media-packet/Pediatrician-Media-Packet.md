@@ -68,7 +68,7 @@ Mommy Angel's Autism Center is a premier ABA therapy and autism support facility
 - Individualized family service plans
 
 ### **Social Integration Focus**
-- Sister program to Mommy Angels Daycare
+<!-- - Sister program to Mommy Angels Daycare -->
 - Peer interaction opportunities
 - Inclusive environment
 - Community integration preparation

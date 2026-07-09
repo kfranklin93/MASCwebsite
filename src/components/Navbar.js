@@ -444,14 +444,14 @@ const Navbar = () => {
           </AnimatePresence>
         </DropdownContainer>
 
-        {/* Mommy Angels Daycare - Direct Link */}
-        <DirectExternalNavLink 
-            href="https://www.mommyangelsdaycare.com/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+        {/* Mommy Angels Daycare - Direct Link - COMMENTED OUT */}
+        {/* <DirectExternalNavLink
+            href="https://www.mommyangelsdaycare.com/"
+            target="_blank"
+            rel="noopener noreferrer"
         >
             Mommy Angels Daycare
-        </DirectExternalNavLink>
+        </DirectExternalNavLink> */}
 
         <ScrollLink to="#contact" color="#CD1B1B">
           Contact
@@ -549,15 +549,15 @@ const Navbar = () => {
                 </AnimatePresence>
               </DropdownContainer>
 
-              {/* Mommy Angels Daycare - Direct Link for Mobile */}
-              <MobileDirectExternalNavLink 
-                  href="https://www.mommyangelsdaycare.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+              {/* Mommy Angels Daycare - Direct Link for Mobile - COMMENTED OUT */}
+              {/* <MobileDirectExternalNavLink
+                  href="https://www.mommyangelsdaycare.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
               >
-                  Mommy Angels Daycare 
-              </MobileDirectExternalNavLink>
+                  Mommy Angels Daycare
+              </MobileDirectExternalNavLink> */}
 
               <MobileNavLink as={ScrollLink} to="#contact" onClick={() => setMenuOpen(false)}>
                 Contact

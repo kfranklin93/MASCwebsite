@@ -329,13 +329,14 @@ const Footer = () => (
             Connect & Explore
           </h4>
           <FooterLinks>
-            <ExternalLink 
-              href="https://mommyangelsdaycare.com" 
-              target="_blank" 
+            {/* Mommy Angels Daycare link commented out */}
+            {/* <ExternalLink
+              href="https://mommyangelsdaycare.com"
+              target="_blank"
               rel="noopener noreferrer"
             >
               🌈 Sister Site: Mommy Angels Daycare
-            </ExternalLink>
+            </ExternalLink> */}
             <ExternalLink 
               href="https://www.facebook.com/mommyangelsspecialtycare" 
               target="_blank" 

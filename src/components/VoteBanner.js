@@ -38,7 +38,8 @@ const Banner = styled.a`
 `;
 
 const VoteBanner = () => {
-  return (
+  return null; // Mommy Angels Daycare voting banner commented out
+  /* return (
     <Banner
       href="https://atlantabestmedia.com/my-dunwoody-best-of-2025/"
       target="_blank"
@@ -47,7 +48,7 @@ const VoteBanner = () => {
     >
       🎉 🌟 Vote for Mommy Angels Daycare in the 2025 Dunwoody Best Awards – Tap Here to Support! 🌟 🎉
     </Banner>
-  );
+  ); */
 };
 
 export default VoteBanner;
