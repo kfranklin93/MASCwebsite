@@ -395,15 +395,24 @@ const Button = styled(Link)`
 `;
 
 const About = () => (
-  <main>
-    <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid rgba(0, 128, 0, 0.5)">
+  <main id="main-content" role="main" aria-label="About Mommy Angel's Autism Center">
+    <Section
+      bg="rgba(240, 248, 255, 0.9)"
+      border="20px solid rgba(0, 128, 0, 0.5)"
+      as="section"
+      aria-labelledby="our-story-heading"
+    >
       <SplitLayout className="our-story">
         <OurStoryImageColumn>
-          <img src={placeholderImg} alt="Our story left" />
+          <img
+            src={placeholderImg}
+            alt="Children engaged in therapeutic activities at Mommy Angel's Autism Center"
+            loading="lazy"
+          />
         </OurStoryImageColumn>
         
         <TextColumn>
-          <SectionTitle>Our Story</SectionTitle>
+          <SectionTitle id="our-story-heading">Our Story</SectionTitle>
           <AboutText initial="hidden" animate="visible" variants={textAnimation}>
             At Mommy Angel's Autism Center, we provide a nurturing
             and supportive environment where children with autism can thrive. Our mission
@@ -450,15 +459,23 @@ const About = () => (
         </TextColumn>
 
         <RightImageColumn>
-          <img src={placeholderImg2} alt="Our story right" />
+          <img
+            src={placeholderImg2}
+            alt="Happy children learning and playing in our specialized Pre-K readiness classroom"
+            loading="lazy"
+          />
         </RightImageColumn>
       </SplitLayout>
     </Section>
 
-    <Section border="20px solid rgba(255, 255, 0, 0.5)">
+    <Section
+      border="20px solid rgba(255, 255, 0, 0.5)"
+      as="section"
+      aria-labelledby="aba-therapy-heading"
+    >
       <SplitLayout>
         <TextColumn>
-          <SectionTitle>What is ABA Therapy?</SectionTitle>
+          <SectionTitle id="aba-therapy-heading">What is ABA Therapy?</SectionTitle>
           <AboutText
             initial="hidden"
             animate="visible"
@@ -475,17 +492,28 @@ const About = () => (
             It is a structured and evidence-based approach tailored to each
             child's learning pace.
           </AboutText>
-          <ButtonContainer>
-            <Button to="/contact">
+          <ButtonContainer role="navigation" aria-label="ABA Therapy actions">
+            <Button
+              to="/contact"
+              aria-label="Contact us to learn more about our services"
+            >
               Contact Us
             </Button>
-            <Button to="/what-to-expect" secondary>
+            <Button
+              to="/what-to-expect"
+              secondary
+              aria-label="Learn what to expect during ABA therapy sessions"
+            >
               What to Expect in ABA Therapy
             </Button>
           </ButtonContainer>
         </TextColumn>
         <TextHeightImageColumn>
-          <img src={placeholderImg3} alt="ABA Therapy" />
+          <img
+            src={placeholderImg3}
+            alt="Child participating in ABA therapy session with therapist"
+            loading="lazy"
+          />
         </TextHeightImageColumn>
       </SplitLayout>
     </Section>

@@ -425,10 +425,10 @@ const Services = () => {
 
   return (
     <PageBackground>
-      <ServicesContainer>
+      <ServicesContainer as="main" role="main" aria-label="Our Services">
         <ContentWrapper>
           <SectionHeader>
-            <HeaderTitle>Our Services</HeaderTitle>
+            <HeaderTitle id="services-heading">Our Services</HeaderTitle>
             <HeaderDescription>
               Discover our comprehensive range of therapeutic and educational
               services designed to support your child's growth and development
@@ -439,20 +439,39 @@ const Services = () => {
             </HighlightedText>
           </SectionHeader>
 
-          <GeneralServicesSection id="general-services">
-            <GeneralServiceTitle onClick={() => toggleSection("general")}>
+          <GeneralServicesSection
+            id="general-services"
+            aria-labelledby="general-services-heading"
+          >
+            <GeneralServiceTitle
+              id="general-services-heading"
+              onClick={() => toggleSection("general")}
+              role="button"
+              aria-expanded={openSections.general}
+              aria-controls="general-services-content"
+              tabIndex={0}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleSection("general");
+                }
+              }}
+            >
               Behavioral & Educational Services{" "}
-              {openSections.general ? "▲" : "▼"}
+              <span aria-hidden="true">{openSections.general ? "▲" : "▼"}</span>
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.general && (
                 <motion.div
+                  id="general-services-content"
+                  role="region"
+                  aria-labelledby="general-services-heading"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <GeneralServiceList>
+                  <GeneralServiceList role="list">
                     <li>Assessments & Referrals</li>
                     <li>Occupational Therapy</li>
                     <li>
@@ -479,19 +498,38 @@ const Services = () => {
             </AnimatePresence>
           </GeneralServicesSection>
 
-          <GeneralServicesSection id="autism-diagnostic">
-            <GeneralServiceTitle onClick={() => toggleSection("autism")}>
-            Assessments & Referrals {openSections.autism ? "▲" : "▼"}
+          <GeneralServicesSection
+            id="autism-diagnostic"
+            aria-labelledby="autism-diagnostic-heading"
+          >
+            <GeneralServiceTitle
+              id="autism-diagnostic-heading"
+              onClick={() => toggleSection("autism")}
+              role="button"
+              aria-expanded={openSections.autism}
+              aria-controls="autism-diagnostic-content"
+              tabIndex={0}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleSection("autism");
+                }
+              }}
+            >
+              Assessments & Referrals <span aria-hidden="true">{openSections.autism ? "▲" : "▼"}</span>
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.autism && (
                 <motion.div
+                  id="autism-diagnostic-content"
+                  role="region"
+                  aria-labelledby="autism-diagnostic-heading"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <GeneralServiceList>
+                  <GeneralServiceList role="list">
                   <li>
   <strong>Compassionate Assessments:</strong> We provide in-depth, personalized 
   assessments in a supportive environment for children who have already received 
@@ -524,6 +562,8 @@ const Services = () => {
 
           <ServiceList
             className={isMobile ? "mobile-layout" : "desktop-layout"}
+            role="list"
+            aria-label="Therapeutic and educational services"
           >
             {[
               {
@@ -624,15 +664,28 @@ const Services = () => {
                 ],
               },
             ].map((service, index) => (
-              <ServiceCard key={index}>
+              <ServiceCard
+                key={index}
+                role="listitem"
+                aria-labelledby={`service-title-${index}`}
+              >
                 <ServiceImage
                   src={service.img}
-                  alt={service.title}
+                  alt={`${service.title} - Click to enlarge image`}
                   onClick={() => setSelectedImage(service.img)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedImage(service.img);
+                    }
+                  }}
+                  loading="lazy"
                 />
-                <ServiceTitle>{service.title}</ServiceTitle>
+                <ServiceTitle id={`service-title-${index}`}>{service.title}</ServiceTitle>
                 <ServiceDescription>
-                  <ul>
+                  <ul aria-label={`Benefits of ${service.title}`}>
                     {service.desc.map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}
@@ -646,11 +699,23 @@ const Services = () => {
             {selectedImage && (
               <EnlargedImageOverlay
                 onClick={() => setSelectedImage(null)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    setSelectedImage(null);
+                  }
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Enlarged image view"
+                tabIndex={-1}
               >
-                <EnlargedImage src={selectedImage} alt="Enlarged View" />
+                <EnlargedImage
+                  src={selectedImage}
+                  alt="Enlarged view of service image - Press Escape to close"
+                />
               </EnlargedImageOverlay>
             )}
           </AnimatePresence>

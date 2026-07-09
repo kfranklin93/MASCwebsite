@@ -127,6 +127,8 @@ const ErrorMessage = styled.span`
   font-size: 0.9rem;
   margin-top: 0.25rem;
   font-family: "Nunito", sans-serif;
+  role: alert;
+  aria-live: polite;
 `;
 
 const SubmitButton = styled.button`
@@ -284,9 +286,9 @@ const ContactForm = () => {
   if (state.succeeded) {
     return (
       <PageContainer>
-        <FormContainer>
+        <FormContainer role="alert" aria-live="polite">
           <FormHeader>
-            <FormTitle>Thank You!</FormTitle>
+            <FormTitle id="success-heading">Thank You!</FormTitle>
             <FormSubtitle>
               We've received your information and will contact you soon to
               discuss the next steps in your child's journey with us.
@@ -313,9 +315,13 @@ const ContactForm = () => {
         />
       </Helmet>
       <PageContainer>
-        <FormContainer>
+        <FormContainer
+          as="main"
+          role="main"
+          aria-labelledby="contact-form-heading"
+        >
           <FormHeader>
-            <FormTitle>Start Your Journey With Us</FormTitle>
+            <FormTitle id="contact-form-heading">Start Your Journey With Us</FormTitle>
             <FormSubtitle>
               We're here to support you every step of the way. Fill out this
               form to begin your child's journey toward growth and development
@@ -323,9 +329,11 @@ const ContactForm = () => {
             </FormSubtitle>
           </FormHeader>
 
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={onSubmit} noValidate>
             <FormGroup>
-              <Label htmlFor="parentName">Parent's Name</Label>
+              <Label htmlFor="parentName">
+                Parent's Name <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="text"
                 id="parentName"
@@ -334,14 +342,21 @@ const ContactForm = () => {
                 value={formData.parentName}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.parentName}
+                aria-describedby={formErrors.parentName ? "parentName-error" : undefined}
               />
               {formErrors.parentName && (
-                <ErrorMessage>{formErrors.parentName}</ErrorMessage>
+                <ErrorMessage id="parentName-error" role="alert">
+                  {formErrors.parentName}
+                </ErrorMessage>
               )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="childName">Child's Name</Label>
+              <Label htmlFor="childName">
+                Child's Name <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="text"
                 id="childName"
@@ -350,14 +365,21 @@ const ContactForm = () => {
                 value={formData.childName}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.childName}
+                aria-describedby={formErrors.childName ? "childName-error" : undefined}
               />
               {formErrors.childName && (
-                <ErrorMessage>{formErrors.childName}</ErrorMessage>
+                <ErrorMessage id="childName-error" role="alert">
+                  {formErrors.childName}
+                </ErrorMessage>
               )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="age">Child's Age</Label>
+              <Label htmlFor="age">
+                Child's Age <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="number"
                 id="age"
@@ -366,12 +388,23 @@ const ContactForm = () => {
                 value={formData.age}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.age}
+                aria-describedby={formErrors.age ? "age-error" : undefined}
+                min="0"
+                max="18"
               />
-              {formErrors.age && <ErrorMessage>{formErrors.age}</ErrorMessage>}
+              {formErrors.age && (
+                <ErrorMessage id="age-error" role="alert">
+                  {formErrors.age}
+                </ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="dob">Date of Birth</Label>
+              <Label htmlFor="dob">
+                Date of Birth <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="date"
                 id="dob"
@@ -379,12 +412,21 @@ const ContactForm = () => {
                 value={formData.dob}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.dob}
+                aria-describedby={formErrors.dob ? "dob-error" : undefined}
               />
-              {formErrors.dob && <ErrorMessage>{formErrors.dob}</ErrorMessage>}
+              {formErrors.dob && (
+                <ErrorMessage id="dob-error" role="alert">
+                  {formErrors.dob}
+                </ErrorMessage>
+              )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="email">Email Address</Label>
+              <Label htmlFor="email">
+                Email Address <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="email"
                 id="email"
@@ -393,14 +435,22 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.email}
+                aria-describedby={formErrors.email ? "email-error" : undefined}
+                autoComplete="email"
               />
               {formErrors.email && (
-                <ErrorMessage>{formErrors.email}</ErrorMessage>
+                <ErrorMessage id="email-error" role="alert">
+                  {formErrors.email}
+                </ErrorMessage>
               )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="phone">Phone Number</Label>
+              <Label htmlFor="phone">
+                Phone Number <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="tel"
                 id="phone"
@@ -409,14 +459,22 @@ const ContactForm = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.phone}
+                aria-describedby={formErrors.phone ? "phone-error" : undefined}
+                autoComplete="tel"
               />
               {formErrors.phone && (
-                <ErrorMessage>{formErrors.phone}</ErrorMessage>
+                <ErrorMessage id="phone-error" role="alert">
+                  {formErrors.phone}
+                </ErrorMessage>
               )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="dateOfLastEval">Date of Last Evaluation</Label>
+              <Label htmlFor="dateOfLastEval">
+                Date of Last Evaluation <span aria-label="required">*</span>
+              </Label>
               <InputField
                 type="date"
                 id="dateOfLastEval"
@@ -424,28 +482,36 @@ const ContactForm = () => {
                 value={formData.dateOfLastEval}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.dateOfLastEval}
+                aria-describedby={formErrors.dateOfLastEval ? "dateOfLastEval-error" : undefined}
               />
               {formErrors.dateOfLastEval && (
-                <ErrorMessage>{formErrors.dateOfLastEval}</ErrorMessage>
+                <ErrorMessage id="dateOfLastEval-error" role="alert">
+                  {formErrors.dateOfLastEval}
+                </ErrorMessage>
               )}
             </FormGroup>
 
             <FormGroup>
-              <Label htmlFor="insuranceProvider">Insurance Provider</Label>
+              <Label htmlFor="insuranceProvider">
+                Insurance Provider (Optional)
+              </Label>
               <Select
-                id="insuranceProvider"
+                inputId="insuranceProvider"
                 options={insuranceOptions}
                 value={formData.insuranceProvider}
                 onChange={handleSelectChange}
                 isSearchable
                 placeholder="Search or select insurance..."
                 styles={customSelectStyles}
+                aria-label="Select your insurance provider"
               />
             </FormGroup>
 
             <FullWidthGroup>
               <Label htmlFor="behaviorsOfConcern">
-                Current Behaviors of Concern
+                Current Behaviors of Concern <span aria-label="required">*</span>
               </Label>
               <TextAreaField
                 id="behaviorsOfConcern"
@@ -454,13 +520,22 @@ const ContactForm = () => {
                 value={formData.behaviorsOfConcern}
                 onChange={handleChange}
                 required
+                aria-required="true"
+                aria-invalid={!!formErrors.behaviorsOfConcern}
+                aria-describedby={formErrors.behaviorsOfConcern ? "behaviorsOfConcern-error" : undefined}
               />
               {formErrors.behaviorsOfConcern && (
-                <ErrorMessage>{formErrors.behaviorsOfConcern}</ErrorMessage>
+                <ErrorMessage id="behaviorsOfConcern-error" role="alert">
+                  {formErrors.behaviorsOfConcern}
+                </ErrorMessage>
               )}
             </FullWidthGroup>
 
-            <SubmitButton type="submit" disabled={state.submitting}>
+            <SubmitButton
+              type="submit"
+              disabled={state.submitting}
+              aria-label={state.submitting ? "Sending your application" : "Submit your application"}
+            >
               {state.submitting ? "Sending..." : "Submit Application"}
             </SubmitButton>
 

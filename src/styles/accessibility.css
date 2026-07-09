@@ -1,0 +1,167 @@
+/* ============================================
+   WCAG 2.1 AA Compliant Accessibility Styles
+   Mobile Browser Compatible
+   ============================================ */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced Focus States for Keyboard Navigation */
+*:focus {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 3px solid #4A90E2;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+}
+
+/* High Contrast Focus for Links and Buttons */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #CD1B1B;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(205, 27, 27, 0.15);
+}
+
+/* Skip to Main Content Link */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1rem 1.5rem;
+  background-color: #CD1B1B;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-to-main:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Touch Target Size (Mobile) - WCAG 2.5.5 */
+@media (pointer: coarse) {
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  [role="button"],
+  [role="link"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+}
+
+/* Improved Text Readability */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure Sufficient Color Contrast */
+::selection {
+  background-color: #4A90E2;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #4A90E2;
+  color: white;
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus Within for Container Elements */
+.focus-within:focus-within {
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+  border-color: #4A90E2;
+}
+
+/* Mobile-Specific Improvements */
+@media (max-width: 768px) {
+  /* Larger tap targets on mobile */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Better spacing for touch */
+  * {
+    -webkit-tap-highlight-color: rgba(74, 144, 226, 0.2);
+  }
+}
+
+/* Smooth Scroll with Accessibility */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Loading States */
+[aria-busy="true"] {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+/* Disabled States */
+[aria-disabled="true"],
+:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Error States */
+[aria-invalid="true"] {
+  border-color: #CD1B1B !important;
+  box-shadow: 0 0 0 3px rgba(205, 27, 27, 0.1);
+}
+
+/* Success States */
+[aria-invalid="false"] {
+  border-color: #00695c !important;
+}
+
+/* Made with Bob */

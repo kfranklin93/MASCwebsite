@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -15,18 +16,47 @@ import ABATherapy from "./components/ServicePages/ABATherapy";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
 
+// Skip to main content link for keyboard navigation
+const SkipLink = styled.a`
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #cd1b1b;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 10000;
+  border-radius: 0 0 4px 0;
+  
+  &:focus {
+    top: 0;
+  }
+`;
+
 const Home = () => (
-  <>
-    <section id="home"><Hero /></section>
-    <section id="about"><About /></section>
-    <section id="services"><Services /></section>
-    <section id="contact"><Contact /></section>
-  </>
+  <main id="main-content">
+    <section id="home" aria-label="Welcome to Mommy Angels Autism Center">
+      <Hero />
+    </section>
+    <section id="about" aria-label="About our center">
+      <About />
+    </section>
+    <section id="services" aria-label="Our services">
+      <Services />
+    </section>
+    <section id="contact" aria-label="Contact us">
+      <Contact />
+    </section>
+  </main>
 );
 
 const App = () => {
   return (
     <>
+      <SkipLink href="#main-content">
+        Skip to main content
+      </SkipLink>
       <Helmet>
         <title>Mommy Angels Autism Center ABA Therapy Services in Georgia | Home</title>
         <meta name="description" content="Expert ABA therapy services for children in Georgia. Contact us today for a personalized intake." />
