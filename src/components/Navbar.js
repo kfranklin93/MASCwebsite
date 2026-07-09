@@ -46,33 +46,31 @@ const NavLinks = styled.ul`
   }
 `;
 
-// Styled component for the new direct external link
-const DirectExternalNavLink = styled.a`
+// Styled component for the new direct external link - COMMENTED OUT (Mommy Angels Daycare)
+/* const DirectExternalNavLink = styled.a`
   font-size: 1.2rem;
-  font-weight: bold; /* Make sure it's bold */
+  font-weight: bold;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 8px;
   transition: background 0.3s ease, transform 0.3s ease;
-  // box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* A subtle shadow */
+  // box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
-  /* Apply the gradient text styling here */
   background: linear-gradient(135deg, #CD1B1B 0%, #4A90E2 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
   &:hover {
-    background-image: linear-gradient(135deg, #FF4444 0%, #7AC1FF 50%, #FFEA80 100%); /* Slightly lighter gradient on hover */
+    background-image: linear-gradient(135deg, #FF4444 0%, #7AC1FF 50%, #FFEA80 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    /* Remove background color on hover if it interferes with gradient */
-    background-color: transparent; 
+    background-color: transparent;
   }
-`;
+`; */
 
 const NavLink = styled(Link)`
   font-size: 1.2rem;
@@ -219,10 +217,10 @@ const MobileNavLink = styled(Link)`
   }
 `;
 
-// New Mobile Direct External Link style
-const MobileDirectExternalNavLink = styled.a`
+// New Mobile Direct External Link style - COMMENTED OUT (Mommy Angels Daycare)
+/* const MobileDirectExternalNavLink = styled.a`
   font-size: 1.1rem;
-  font-weight: bold; /* Ensure it's bold */
+  font-weight: bold;
   padding: 1rem 1.2rem;
   margin: 0.3rem 0;
   display: flex;
@@ -232,23 +230,21 @@ const MobileDirectExternalNavLink = styled.a`
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-  /* Apply the gradient text styling here */
   background: linear-gradient(135deg, #CD1B1B 0%, #4A90E2 50%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 
   &:hover {
-    background-image: linear-gradient(135deg, #FF4444 0%, #7AC1FF 50%, #FFEA80 100%); /* Slightly lighter gradient on hover */
+    background-image: linear-gradient(135deg, #FF4444 0%, #7AC1FF 50%, #FFEA80 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     transform: translateX(4px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* Remove background color on hover if it interferes with gradient */
-    background-color: transparent; 
+    background-color: transparent;
   }
-`;
+`; */
 
 const MobileDropdownItem = styled(Link)`
   padding: 0.8rem 1.2rem;
