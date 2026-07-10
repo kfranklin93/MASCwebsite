@@ -5,7 +5,7 @@ import abaImage from "../assets/IMG_8886 2.png";
 
 const AlignedSection = styled.section`
   padding: 4rem 2rem;
-  background: #fff;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f8ff 100%);
   position: relative;
   overflow: hidden;
 `;
@@ -27,6 +27,16 @@ const Container = styled.div`
 const ContentGroup = styled.div`
   flex: 1;
   text-align: left;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
 `;
 
 const Heading = styled.h2`
@@ -35,12 +45,23 @@ const Heading = styled.h2`
   margin-bottom: 1.5rem;
   font-family: "Nunito", sans-serif;
   line-height: 1.2;
+  position: relative;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #00695c, #4a90e2);
+    margin-top: 0.5rem;
+    border-radius: 2px;
+  }
 `;
 
 const BodyText = styled.div`
   font-size: 1rem;
   color: #4a4a4a;
-  line-height: 1.6;
+  line-height: 1.8;
   margin-bottom: 2rem;
 
   p {
@@ -89,7 +110,14 @@ const MediaContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
   }
 
   @media (max-width: 768px) {
