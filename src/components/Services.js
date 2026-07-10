@@ -488,14 +488,16 @@ const ServiceIcon = styled.span`
 
 // New styled component for highlighting the text
 const HighlightedText = styled.span`
-  background-color: #ffd700; /* Bright yellow/gold background */
-  padding: 2px 5px;
-  border-radius: 5px;
-  font-weight: 600; /* Extra bold */
-  color: #cd1b1b; /* Red text for contrast */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  display: inline-block; /* Allows padding and shadow */
-  line-height: 1.5; /* Ensures text aligns well within its line */
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(205, 27, 27, 0.08) 100%);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #cd1b1b;
+  border-left: 4px solid #4a90e2;
+  display: inline-block;
+  line-height: 1.6;
+  font-style: italic;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 `;
 
 const Services = () => {
