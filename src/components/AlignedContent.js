@@ -17,55 +17,16 @@ const Container = styled.div`
   gap: 4rem;
   align-items: center;
   position: relative;
-  z-index: 2;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -20%;
-    top: -20%;
-    width: 70%;
-    height: 140%;
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(255, 255, 255, 0.95) 40%,
-      rgba(255, 255, 255, 0.85) 60%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    z-index: 1;
-    pointer-events: none;
-  }
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     gap: 2rem;
-
-    &::before {
-      left: 0;
-      top: 30%;
-      width: 100%;
-      height: 70%;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.95) 20%,
-        rgba(255, 255, 255, 1) 40%
-      );
-    }
   }
 `;
 
 const ContentGroup = styled.div`
   flex: 1;
   text-align: left;
-  position: relative;
-  z-index: 2;
-  backdrop-filter: blur(5px);
-  padding: 2rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 `;
 
 const Heading = styled.h2`
@@ -74,8 +35,6 @@ const Heading = styled.h2`
   margin-bottom: 1.5rem;
   font-family: "Nunito", sans-serif;
   line-height: 1.2;
-  position: relative;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 `;
 
 const BodyText = styled.div`
@@ -83,12 +42,8 @@ const BodyText = styled.div`
   color: #4a4a4a;
   line-height: 1.6;
   margin-bottom: 2rem;
-  position: relative;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 
   p {
-    position: relative;
-    z-index: 2;
     margin-bottom: 1rem;
   }
 `;
@@ -97,22 +52,19 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 2;
 `;
 
 const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   padding: 0.875rem 1.5rem;
-  background: ${props => props.secondary ? 'rgba(74, 144, 226, 0.1)' : '#4a90e2'};
+  background: ${props => props.secondary ? '#fff' : '#4a90e2'};
   color: ${props => props.secondary ? '#4a90e2' : '#fff'};
   border: 2px solid #4a90e2;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
 
   &:hover {
     background: ${props => props.secondary ? '#4a90e2' : '#357abd'};
@@ -132,53 +84,17 @@ const MediaContainer = styled.div`
   flex: 1;
   min-height: 400px;
   position: relative;
-  z-index: 1;
-
-  &::after {
-    content: '';
-    position: absolute;
-    left: -10%;
-    top: -10%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(255, 255, 255, 0.2) 100%
-    );
-    pointer-events: none;
-  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
-    filter: contrast(1.05) brightness(1.02);
   }
 
   @media (max-width: 768px) {
     min-height: 300px;
   }
-`;
-
-const BlendOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.8) 25%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  z-index: 1;
-  mix-blend-mode: overlay;
-  pointer-events: none;
 `;
 
 const ArrowIcon = () => (
@@ -198,7 +114,6 @@ const ArrowIcon = () => (
 const AlignedContent = () => {
   return (
     <AlignedSection>
-      <BlendOverlay />
       <Container>
         <ContentGroup>
           <Heading>What is ABA Therapy?</Heading>
