@@ -78,26 +78,56 @@ const ButtonContainer = styled.div`
 const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
-  padding: 0.875rem 1.5rem;
-  background: ${props => props.secondary ? '#fff' : '#4a90e2'};
+  padding: 1rem 2rem;
+  background: ${props => props.secondary ? '#fff' : 'linear-gradient(135deg, #4a90e2 0%, #357abd 100%)'};
   color: ${props => props.secondary ? '#4a90e2' : '#fff'};
   border: 2px solid #4a90e2;
-  border-radius: 4px;
+  border-radius: 8px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.05rem;
   transition: all 0.3s ease;
+  box-shadow: ${props => props.secondary ? '0 2px 8px rgba(74, 144, 226, 0.2)' : '0 4px 15px rgba(74, 144, 226, 0.4)'};
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
 
   &:hover {
-    background: ${props => props.secondary ? '#4a90e2' : '#357abd'};
+    background: ${props => props.secondary ? 'linear-gradient(135deg, #4a90e2 0%, #357abd 100%)' : 'linear-gradient(135deg, #357abd 0%, #2868a8 100%)'};
     color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.5);
+    border-color: ${props => props.secondary ? '#357abd' : '#4a90e2'};
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(74, 144, 226, 0.4);
   }
 
   svg {
     margin-left: 0.5rem;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
   }
 `;
 

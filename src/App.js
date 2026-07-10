@@ -12,6 +12,7 @@ import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
+import QuickContactWidget from "./components/QuickContactWidget";
 // import VoteBanner from "./components/VoteBanner";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
@@ -72,6 +73,7 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
       {/* <VoteBanner /> */}
+      <QuickContactWidget />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aba" element={<Home />} />

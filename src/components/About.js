@@ -47,10 +47,34 @@ const AboutText = styled(motion.p)`
   color: #444;
   margin-bottom: 1.5rem;
   font-family: "Poppins", sans-serif;
-  line-height: 1.8;
+  line-height: 1.9;
   text-align: center;
   position: relative;
   z-index: 1;
+  padding: 0 1rem;
+  
+  strong {
+    color: #00695c;
+    font-weight: 700;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, #00695c, transparent);
+      opacity: 0.3;
+    }
+  }
+  
+  em {
+    color: #CD1B1B;
+    font-style: normal;
+    font-weight: 600;
+  }
 `;
 
 // Enhanced animation variants
@@ -115,9 +139,23 @@ const floatingAnimation = {
 const Section = styled.section`
   padding: 4rem 2rem;
   background-color: ${({ bg }) => bg || "transparent"};
+  background: ${({ bg }) => bg || "linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f0f8ff 100%)"};
   border: ${({ border }) => border || "transparent"};
   position: relative;
   overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(0, 105, 92, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(205, 27, 27, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
   
   @media (max-width: 768px) {
     padding: 3rem 1rem;
@@ -137,6 +175,8 @@ const SectionTitle = styled(motion.h2)`
   width: 100%;
   position: relative;
   z-index: 1;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   
   &::after {
     content: '';
@@ -146,6 +186,18 @@ const SectionTitle = styled(motion.h2)`
     background: linear-gradient(to right, #CD1B1B, #FFD700);
     margin: 1rem auto 0;
     border-radius: 2px;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scaleX(1.1);
+    }
   }
 `;
 
@@ -470,33 +522,73 @@ const Button = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 2rem;
-  background: ${props => props.secondary ? '#00695c' : '#CD1B1B'};
+  padding: 1.2rem 2.5rem;
+  background: ${props => props.secondary
+    ? 'linear-gradient(135deg, #00695c 0%, #008577 100%)'
+    : 'linear-gradient(135deg, #CD1B1B 0%, #e62020 100%)'};
   color: white;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
   border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: ${props => props.secondary
+    ? '0 6px 20px rgba(0, 105, 92, 0.4)'
+    : '0 6px 20px rgba(205, 27, 27, 0.4)'};
   font-family: "Nunito", sans-serif;
-  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
   text-align: center;
   white-space: normal;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  &::after {
+    content: '→';
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
 
   &:hover {
-    transform: translateY(-2px);
-    background: ${props => props.secondary ? '#008577' : '#e62020'};
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px) scale(1.02);
+    background: ${props => props.secondary
+      ? 'linear-gradient(135deg, #008577 0%, #00a389 100%)'
+      : 'linear-gradient(135deg, #e62020 0%, #ff3333 100%)'};
+    box-shadow: ${props => props.secondary
+      ? '0 8px 25px rgba(0, 105, 92, 0.5)'
+      : '0 8px 25px rgba(205, 27, 27, 0.5)'};
+
+    &::before {
+      left: 100%;
+    }
+
+    &::after {
+      transform: translateX(5px);
+    }
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1);
+    box-shadow: ${props => props.secondary
+      ? '0 4px 15px rgba(0, 105, 92, 0.4)'
+      : '0 4px 15px rgba(205, 27, 27, 0.4)'};
   }
 
   @media (max-width: 480px) {
     width: 100%;
-    padding: 1rem;
+    padding: 1.1rem 2rem;
   }
 `;
 
@@ -656,16 +748,16 @@ const About = () => {
           <ButtonContainer role="navigation" aria-label="ABA Therapy actions">
             <Button
               to="/contact"
-              aria-label="Contact us to learn more about our services"
+              aria-label="Schedule your free tour today"
             >
-              Contact Us
+              Schedule Your Free Tour Today
             </Button>
             <Button
               to="/what-to-expect"
               secondary
-              aria-label="Learn what to expect during ABA therapy sessions"
+              aria-label="See how ABA therapy works"
             >
-              What to Expect in ABA Therapy
+              See How ABA Therapy Works
             </Button>
           </ButtonContainer>
         </motion.div>
