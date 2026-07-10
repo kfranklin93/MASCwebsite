@@ -1,31 +1,123 @@
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from 'react-router-dom';
+import { useRef } from "react";
 import placeholderImg from "../assets/IMG_6867.png";
-import placeholderImg2 from "../assets/Screenshot 2025-06-12 at 11.13.58 PM 2.png";
+import placeholderImg2 from "../assets/Screenshot-2025-06-12-at-11.13.58-PM-2.png";
 import placeholderImg3 from "../assets/Dramatic play w shruthi.png";
 
 import Leadership from "../components/Leadership";
+
+// Decorative floating shapes
+const FloatingShape = styled(motion.div)`
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+`;
+
+const Circle1 = styled(FloatingShape)`
+  width: 200px;
+  height: 200px;
+  background: #00695c;
+  top: 10%;
+  right: 5%;
+`;
+
+const Circle2 = styled(FloatingShape)`
+  width: 150px;
+  height: 150px;
+  background: #CD1B1B;
+  bottom: 15%;
+  left: 8%;
+`;
+
+const Circle3 = styled(FloatingShape)`
+  width: 100px;
+  height: 100px;
+  background: #FFD700;
+  top: 50%;
+  left: 3%;
+`;
 
 const AboutText = styled(motion.p)`
   font-size: clamp(1rem, 1.3vw, 1.3rem);
   color: #444;
   margin-bottom: 1.5rem;
   font-family: "Poppins", sans-serif;
-  line-height: 1.6;
+  line-height: 1.8;
   text-align: center;
+  position: relative;
+  z-index: 1;
 `;
 
-const textAnimation = {
+// Enhanced animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const floatingAnimation = {
+  animate: {
+    y: [0, -20, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
 };
 
 const Section = styled.section`
   padding: 4rem 2rem;
   background-color: ${({ bg }) => bg || "transparent"};
   border: ${({ border }) => border || "transparent"};
+  position: relative;
+  overflow: hidden;
   
   @media (max-width: 768px) {
     padding: 3rem 1rem;
@@ -36,13 +128,25 @@ const Section = styled.section`
   }
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled(motion.h2)`
   font-size: clamp(2rem, 4vw, 2.5rem);
   color: #00695c;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   font-family: "Poppins", sans-serif;
   text-align: center;
   width: 100%;
+  position: relative;
+  z-index: 1;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #CD1B1B, #FFD700);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
 `;
 
 const TextColumn = styled.div`
@@ -124,7 +228,7 @@ const SplitLayout = styled.div`
   }
 `;
 
-const ImageColumn = styled.div`
+const ImageColumn = styled(motion.div)`
   flex: 1;
   display: flex;
   justify-content: center;
@@ -132,18 +236,20 @@ const ImageColumn = styled.div`
   width: 100%;
   height: auto;
   position: relative;
-  z-index: 0;
+  z-index: 1;
 
   img {
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
-      transform: scale(1.02);
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+      filter: brightness(1.05);
     }
   }
 
@@ -394,33 +500,77 @@ const Button = styled(Link)`
   }
 `;
 
-const About = () => (
-  <main id="main-content" role="main" aria-label="About Mommy Angel's Autism Center">
-    <Section
-      bg="rgba(240, 248, 255, 0.9)"
-      border="20px solid rgba(0, 128, 0, 0.5)"
-      as="section"
-      aria-labelledby="our-story-heading"
-    >
-      <SplitLayout className="our-story">
-        <OurStoryImageColumn>
-          <img
-            src={placeholderImg}
-            alt="Children engaged in therapeutic activities at Mommy Angel's Autism Center"
-            loading="lazy"
-          />
-        </OurStoryImageColumn>
-        
-        <TextColumn>
-          <SectionTitle id="our-story-heading">Our Story</SectionTitle>
-          <AboutText initial="hidden" animate="visible" variants={textAnimation}>
+const About = () => {
+  const storyRef = useRef(null);
+  const abaRef = useRef(null);
+  const storyInView = useInView(storyRef, { once: true, margin: "-100px" });
+  const abaInView = useInView(abaRef, { once: true, margin: "-100px" });
+
+  return (
+    <main id="main-content" role="main" aria-label="About Mommy Angel's Autism Center">
+      <Section
+        bg="rgba(240, 248, 255, 0.9)"
+        border="20px solid rgba(0, 128, 0, 0.5)"
+        as="section"
+        aria-labelledby="our-story-heading"
+        ref={storyRef}
+      >
+        {/* Floating decorative shapes */}
+        <Circle1 {...floatingAnimation} />
+        <Circle2
+          animate={{
+            y: [0, 20, 0],
+            transition: {
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        />
+        <Circle3
+          animate={{
+            y: [0, -15, 0],
+            transition: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        />
+
+        <SplitLayout className="our-story">
+          <OurStoryImageColumn
+            initial="hidden"
+            animate={storyInView ? "visible" : "hidden"}
+            variants={fadeInLeft}
+          >
+            <img
+              src={placeholderImg}
+              alt="Children engaged in therapeutic activities at Mommy Angel's Autism Center"
+              loading="lazy"
+            />
+          </OurStoryImageColumn>
+          
+          <motion.div
+            as={TextColumn}
+            initial="hidden"
+            animate={storyInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+          >
+            <SectionTitle
+              id="our-story-heading"
+              variants={fadeInUp}
+            >
+              Our Story
+            </SectionTitle>
+            <AboutText variants={fadeInUp}>
             At Mommy Angel's Autism Center, we provide a nurturing
             and supportive environment where children with autism can thrive. Our mission
             is to meet each child where they are, while offering the extra support needed
             to help them grow, learn, and feel confident in their progress.
           </AboutText>
 
-          <AboutText>
+          <AboutText variants={fadeInUp}>
             {/* Mommy Angels Daycare sister program reference commented out */}
             {/* As a proud sister program of{" "}
             <a
@@ -451,14 +601,18 @@ const About = () => (
             your heart feels at ease.
           </AboutText> */}
 
-          <AboutText>
+          <AboutText variants={fadeInUp}>
             We also offer a specialized Readiness Program, featuring classrooms designed just like a Pre-K
             setting. This helps prepare your child for a smooth and successful
             transition into a traditional Pre-K classroom.
           </AboutText>
-        </TextColumn>
+          </motion.div>
 
-        <RightImageColumn>
+        <RightImageColumn
+          initial="hidden"
+          animate={storyInView ? "visible" : "hidden"}
+          variants={fadeInRight}
+        >
           <img
             src={placeholderImg2}
             alt="Happy children learning and playing in our specialized Pre-K readiness classroom"
@@ -472,21 +626,28 @@ const About = () => (
       border="20px solid rgba(255, 255, 0, 0.5)"
       as="section"
       aria-labelledby="aba-therapy-heading"
+      ref={abaRef}
     >
       <SplitLayout>
-        <TextColumn>
-          <SectionTitle id="aba-therapy-heading">What is ABA Therapy?</SectionTitle>
-          <AboutText
-            initial="hidden"
-            animate="visible"
-            variants={textAnimation}
+        <motion.div
+          as={TextColumn}
+          initial="hidden"
+          animate={abaInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+        >
+          <SectionTitle
+            id="aba-therapy-heading"
+            variants={fadeInUp}
           >
+            What is ABA Therapy?
+          </SectionTitle>
+          <AboutText variants={fadeInUp}>
             Applied Behavior Analysis (ABA) therapy helps children with autism
             develop essential skills, improve behavior, and achieve their full
             potential. Our therapists create individualized plans that are
             engaging and tailored to each child's needs.
           </AboutText>
-          <AboutText>
+          <AboutText variants={fadeInUp}>
             ABA focuses on positive reinforcement to encourage desirable
             behaviors, helping children develop independence and social skills.
             It is a structured and evidence-based approach tailored to each
@@ -507,8 +668,12 @@ const About = () => (
               What to Expect in ABA Therapy
             </Button>
           </ButtonContainer>
-        </TextColumn>
-        <TextHeightImageColumn>
+        </motion.div>
+        <TextHeightImageColumn
+          initial="hidden"
+          animate={abaInView ? "visible" : "hidden"}
+          variants={fadeInRight}
+        >
           <img
             src={placeholderImg3}
             alt="Child participating in ABA therapy session with therapist"
@@ -519,6 +684,7 @@ const About = () => (
     </Section>
     <Leadership />
   </main>
-);
+  );
+};
 
 export default About;

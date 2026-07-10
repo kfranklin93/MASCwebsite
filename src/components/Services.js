@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import stimulationFavImg from "../assets/stimulationFav-6.jpg";
 import manipulativesImg from "../assets/manipulatives-final.jpg";
 import artsImg from "../assets/arts-5.jpg";
@@ -31,33 +31,60 @@ const ContentWrapper = styled.div`
   padding: 0 2rem;
 `;
 
-const SectionHeader = styled.div`
+const SectionHeader = styled(motion.div)`
   text-align: center;
   margin-bottom: 3rem;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
 `;
 
-const HeaderTitle = styled.h1`
+const HeaderTitle = styled(motion.h1)`
   font-size: 3.5rem;
   color: #cd1b1b;
   margin-bottom: 1rem;
   font-family: "Bubblegum Sans", sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, #cd1b1b, #ffd700);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
 `;
 
-const HeaderDescription = styled.p`
+const HeaderDescription = styled(motion.p)`
   font-size: 1.2rem;
   color: #00695c;
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.8;
   font-family: "Nunito", sans-serif;
 `;
 
-const ServiceList = styled.div`
+const ServiceList = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
@@ -68,19 +95,19 @@ const ServiceList = styled.div`
   }
 `;
 
-const ServiceCard = styled.div`
+const ServiceCard = styled(motion.div)`
   background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   padding: 25px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   height: 500px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   z-index: 1;
   border: 1px solid rgba(74, 144, 226, 0.1);
 
@@ -104,6 +131,32 @@ const ServiceCard = styled.div`
 
   &:hover::before {
     opacity: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.1), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    width: 500px;
+    height: 500px;
+  }
+  
+  /* Ensure child elements are above the ::after pseudo-element */
+  > * {
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 768px) {
@@ -184,12 +237,18 @@ const ServiceDescription = styled.div`
   flex-grow: 1;
   max-height: 200px;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
   font-family: "Nunito", sans-serif;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(74, 144, 226, 0.1);
+  position: relative;
+  z-index: 10;
+  
+  /* Ensure scrolling works on touch devices */
+  -webkit-overflow-scrolling: touch;
 
   ul {
     list-style: none;
@@ -316,7 +375,7 @@ const EnlargedImage = styled.img`
   border-radius: 10px;
 `;
 
-const GeneralServicesSection = styled.section`
+const GeneralServicesSection = styled(motion.section)`
   margin: 2rem 0;
   padding: 3rem 2rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
@@ -324,7 +383,7 @@ const GeneralServicesSection = styled.section`
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(74, 144, 226, 0.1);
   scroll-margin-top: 100px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     transform: translateY(-5px);
@@ -366,25 +425,64 @@ const GeneralServiceList = styled.ul`
   line-height: 1.8;
   color: #333;
   font-family: "Nunito", sans-serif;
+  display: grid;
+  gap: 1rem;
 
   li {
-    margin-bottom: 1.2rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
+    border-left: 5px solid #4a90e2;
+    position: relative;
 
     &:hover {
-      transform: translateX(5px);
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateX(8px);
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-left-color: #ffd700;
+    }
+
+    &:nth-child(even) {
+      border-left-color: #cd1b1b;
+
+      &:hover {
+        border-left-color: #4a90e2;
+      }
+    }
+
+    &:nth-child(3n) {
+      border-left-color: #ffd700;
+
+      &:hover {
+        border-left-color: #cd1b1b;
+      }
     }
 
     strong {
       color: #00695c;
       font-weight: 600;
     }
+
+    p {
+      margin: 0.5rem 0 0 0;
+      line-height: 1.7;
+    }
+  }
+`;
+
+const ServiceIcon = styled.span`
+  display: inline-block;
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+
+  li:hover & {
+    transform: scale(1.2) rotate(5deg);
   }
 `;
 
@@ -407,6 +505,11 @@ const Services = () => {
     autism: false,
   });
   const [isMobile, setIsMobile] = useState(false);
+  
+  const headerRef = useRef(null);
+  const servicesListRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const servicesInView = useInView(servicesListRef, { once: true, margin: "-50px" });
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -423,13 +526,65 @@ const Services = () => {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <PageBackground>
       <ServicesContainer as="main" role="main" aria-label="Our Services">
         <ContentWrapper>
-          <SectionHeader>
-            <HeaderTitle id="services-heading">Our Services</HeaderTitle>
-            <HeaderDescription>
+          <SectionHeader
+            ref={headerRef}
+            initial="hidden"
+            animate={headerInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+          >
+            <HeaderTitle
+              id="services-heading"
+              initial={{ opacity: 0, y: -20 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+              transition={{ delay: 0.2 }}
+            >
+              Our Services
+            </HeaderTitle>
+            <HeaderDescription
+              initial={{ opacity: 0, y: -20 }}
+              animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+              transition={{ delay: 0.3 }}
+            >
               Discover our comprehensive range of therapeutic and educational
               services designed to support your child's growth and development
               in a nurturing, engaging environment.
@@ -472,9 +627,16 @@ const Services = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <GeneralServiceList role="list">
-                    <li>Assessments & Referrals</li>
-                    <li>Occupational Therapy</li>
                     <li>
+                      <ServiceIcon aria-hidden="true">📋</ServiceIcon>
+                      <strong>Assessments & Referrals</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">🧩</ServiceIcon>
+                      <strong>Occupational Therapy</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">🔍</ServiceIcon>
                       <p>
                         <HighlightedText>
                           While we do not provide formal diagnostic evaluations,
@@ -482,16 +644,32 @@ const Services = () => {
                           have already received a diagnosis from a licensed
                           psychiatrist or psychologist.
                         </HighlightedText>
+                        <br /><br />
                         Our thorough assessments help us develop individualized
                         ABA therapy plans tailored to each child's unique
                         strengths, needs, and developmental goals.
                       </p>
                     </li>
-                    <li>1:1 Therapy Tailored to Your Child's Needs</li>
-                    <li>Center-Based ABA Therapy</li>
-                    <li>Parent Training</li>
-                    <li>Pre-K Readiness Programs</li>
-                    <li>Daily Progress Monitoring and Goal Tracking</li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">👥</ServiceIcon>
+                      <strong>1:1 Therapy Tailored to Your Child's Needs</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">🏢</ServiceIcon>
+                      <strong>Center-Based ABA Therapy</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">👨‍👩‍👧</ServiceIcon>
+                      <strong>Parent Training</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">🎓</ServiceIcon>
+                      <strong>Pre-K Readiness Programs</strong>
+                    </li>
+                    <li>
+                      <ServiceIcon aria-hidden="true">📊</ServiceIcon>
+                      <strong>Daily Progress Monitoring and Goal Tracking</strong>
+                    </li>
                   </GeneralServiceList>
                 </motion.div>
               )}
@@ -501,6 +679,10 @@ const Services = () => {
           <GeneralServicesSection
             id="autism-diagnostic"
             aria-labelledby="autism-diagnostic-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
           >
             <GeneralServiceTitle
               id="autism-diagnostic-heading"
@@ -561,9 +743,13 @@ const Services = () => {
           </GeneralServicesSection>
 
           <ServiceList
+            ref={servicesListRef}
             className={isMobile ? "mobile-layout" : "desktop-layout"}
             role="list"
             aria-label="Therapeutic and educational services"
+            initial="hidden"
+            animate={servicesInView ? "visible" : "hidden"}
+            variants={staggerContainer}
           >
             {[
               {
@@ -668,6 +854,11 @@ const Services = () => {
                 key={index}
                 role="listitem"
                 aria-labelledby={`service-title-${index}`}
+                variants={cardVariants}
+                whileHover={{
+                  y: -10,
+                  transition: { type: "spring", stiffness: 300 }
+                }}
               >
                 <ServiceImage
                   src={service.img}

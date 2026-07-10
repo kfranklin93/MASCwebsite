@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "@formspree/react";
 import styled from "styled-components";
+import { motion, useInView } from "framer-motion";
 import Select from "react-select";
 import { Helmet } from "react-helmet-async";
 
@@ -10,7 +11,7 @@ const PageContainer = styled.div`
   padding: 4rem 0;
 `;
 
-const FormContainer = styled.section`
+const FormContainer = styled(motion.section)`
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
@@ -36,20 +37,30 @@ const FormHeader = styled.div`
   margin-bottom: 2rem;
 `;
 
-const FormTitle = styled.h2`
+const FormTitle = styled(motion.h2)`
   font-size: 2.8rem;
   color: #cd1b1b;
   margin-bottom: 1rem;
   font-family: "Bubblegum Sans", sans-serif;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #cd1b1b, #ffd700);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
 `;
 
-const FormSubtitle = styled.p`
+const FormSubtitle = styled(motion.p)`
   font-size: 1.2rem;
   color: #00695c;
   max-width: 600px;
   margin: 0 auto 1.5rem;
-  line-height: 1.6;
+  line-height: 1.8;
   font-family: "Nunito", sans-serif;
 `;
 
@@ -63,44 +74,51 @@ const Form = styled.form`
   }
 `;
 
-const FormGroup = styled.div`
+const FormGroup = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 `;
 
 const FullWidthGroup = styled(FormGroup)`
   grid-column: 1 / -1;
 `;
 
-const Label = styled.label`
+const Label = styled(motion.label)`
   font-size: 1.1rem;
   color: #333;
   font-family: "Nunito", sans-serif;
   font-weight: 600;
+  transition: all 0.3s ease;
 `;
 
-const InputField = styled.input`
+const InputField = styled(motion.input)`
   padding: 1rem;
   border: 2px solid #e1e1e1;
   border-radius: 10px;
   font-size: 1rem;
   font-family: "Nunito", sans-serif;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: white;
 
   &:focus {
     border-color: #4a90e2;
     box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
     outline: none;
+    transform: translateY(-2px);
   }
 
   &:hover {
     border-color: #4a90e2;
   }
+
+  &:valid:not(:placeholder-shown) {
+    border-color: #00695c;
+  }
 `;
 
-const TextAreaField = styled.textarea`
+const TextAreaField = styled(motion.textarea)`
   padding: 1rem;
   border: 2px solid #e1e1e1;
   border-radius: 10px;
@@ -108,18 +126,31 @@ const TextAreaField = styled.textarea`
   font-family: "Nunito", sans-serif;
   min-height: 150px;
   resize: vertical;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: white;
 
   &:focus {
     border-color: #4a90e2;
     box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
     outline: none;
+    transform: translateY(-2px);
   }
 
   &:hover {
     border-color: #4a90e2;
   }
+
+  &:valid:not(:placeholder-shown) {
+    border-color: #00695c;
+  }
+`;
+
+const CharacterCount = styled(motion.span)`
+  font-size: 0.85rem;
+  color: #666;
+  text-align: right;
+  margin-top: 0.25rem;
+  font-family: "Nunito", sans-serif;
 `;
 
 const ErrorMessage = styled.span`
@@ -131,7 +162,7 @@ const ErrorMessage = styled.span`
   aria-live: polite;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(motion.button)`
   padding: 1rem 2rem;
   background: #cd1b1b;
   color: white;
@@ -141,19 +172,44 @@ const SubmitButton = styled.button`
   font-family: "Nunito", sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   grid-column: 1 / -1;
   margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
 
   &:hover {
     transform: translateY(-2px);
     background: #e62020;
-    box-shadow: 0 4px 12px rgba(205, 27, 27, 0.2);
+    box-shadow: 0 6px 20px rgba(205, 27, 27, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:disabled {
     background: #cccccc;
     cursor: not-allowed;
+    transform: none;
   }
 `;
 
@@ -197,8 +253,28 @@ const customSelectStyles = {
   }),
 };
 
+const SuccessCheckmark = styled(motion.div)`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #00695c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+
+  &::after {
+    content: '✓';
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+`;
+
 const ContactForm = () => {
   const [state, handleSubmit] = useForm("xkgjkjng");
+  const formRef = useRef(null);
+  const isInView = useInView(formRef, { once: true, margin: "-50px" });
   const [formData, setFormData] = useState({
     parentName: "",
     childName: "",
@@ -211,6 +287,8 @@ const ContactForm = () => {
     behaviorsOfConcern: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [charCount, setCharCount] = useState(0);
+  const maxChars = 500;
 
   const insuranceOptions = [
     { value: "aetna", label: "Aetna" },
@@ -228,10 +306,15 @@ const ContactForm = () => {
   ];
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    
+    if (name === 'behaviorsOfConcern') {
+      setCharCount(value.length);
+    }
   };
 
   const handleSelectChange = (selectedOption) => {
@@ -283,13 +366,75 @@ const ContactForm = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const fieldVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
   if (state.succeeded) {
     return (
       <PageContainer>
-        <FormContainer role="alert" aria-live="polite">
+        <FormContainer
+          role="alert"
+          aria-live="polite"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
           <FormHeader>
-            <FormTitle id="success-heading">Thank You!</FormTitle>
-            <FormSubtitle>
+            <SuccessCheckmark
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.2
+              }}
+            />
+            <FormTitle
+              id="success-heading"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              Thank You!
+            </FormTitle>
+            <FormSubtitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
               We've received your information and will contact you soon to
               discuss the next steps in your child's journey with us.
             </FormSubtitle>
@@ -316,21 +461,43 @@ const ContactForm = () => {
       </Helmet>
       <PageContainer>
         <FormContainer
+          ref={formRef}
           as="main"
           role="main"
           aria-labelledby="contact-form-heading"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
         >
           <FormHeader>
-            <FormTitle id="contact-form-heading">Start Your Journey With Us</FormTitle>
-            <FormSubtitle>
+            <FormTitle
+              id="contact-form-heading"
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+              transition={{ delay: 0.2 }}
+            >
+              Start Your Journey With Us
+            </FormTitle>
+            <FormSubtitle
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+              transition={{ delay: 0.3 }}
+            >
               We're here to support you every step of the way. Fill out this
               form to begin your child's journey toward growth and development
               in our nurturing environment.
             </FormSubtitle>
           </FormHeader>
 
-          <Form onSubmit={onSubmit} noValidate>
-            <FormGroup>
+          <Form
+            onSubmit={onSubmit}
+            noValidate
+            as={motion.form}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+          >
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="parentName">
                 Parent's Name <span aria-label="required">*</span>
               </Label>
@@ -353,7 +520,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="childName">
                 Child's Name <span aria-label="required">*</span>
               </Label>
@@ -376,7 +543,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="age">
                 Child's Age <span aria-label="required">*</span>
               </Label>
@@ -401,7 +568,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="dob">
                 Date of Birth <span aria-label="required">*</span>
               </Label>
@@ -423,7 +590,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="email">
                 Email Address <span aria-label="required">*</span>
               </Label>
@@ -447,7 +614,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="phone">
                 Phone Number <span aria-label="required">*</span>
               </Label>
@@ -471,7 +638,7 @@ const ContactForm = () => {
               )}
             </FormGroup>
 
-            <FormGroup>
+            <FormGroup variants={fieldVariants}>
               <Label htmlFor="dateOfLastEval">
                 Date of Last Evaluation <span aria-label="required">*</span>
               </Label>
@@ -523,7 +690,15 @@ const ContactForm = () => {
                 aria-required="true"
                 aria-invalid={!!formErrors.behaviorsOfConcern}
                 aria-describedby={formErrors.behaviorsOfConcern ? "behaviorsOfConcern-error" : undefined}
+                maxLength={maxChars}
               />
+              <CharacterCount
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                {charCount}/{maxChars} characters
+              </CharacterCount>
               {formErrors.behaviorsOfConcern && (
                 <ErrorMessage id="behaviorsOfConcern-error" role="alert">
                   {formErrors.behaviorsOfConcern}
@@ -535,6 +710,9 @@ const ContactForm = () => {
               type="submit"
               disabled={state.submitting}
               aria-label={state.submitting ? "Sending your application" : "Submit your application"}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              variants={fieldVariants}
             >
               {state.submitting ? "Sending..." : "Submit Application"}
             </SubmitButton>

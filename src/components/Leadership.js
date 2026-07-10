@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import { motion, useInView } from "framer-motion";
 import playgroundImg from "../assets/IMG_5236.png";
 import placeholderImage from "../assets/JTonos Background Removed.png";
 import anthony from "../assets/Anthony-edited Background Removed.png";
@@ -89,15 +90,28 @@ const LeadershipSection = styled.section`
   padding: 4rem 2rem;
   text-align: center;
   border: 20px solid rgba(255, 0, 0, 0.5);
+  position: relative;
+  overflow: hidden;
 `;
 
-const Title = styled.h2`
+const Title = styled(motion.h2)`
   font-family: "Bubblegum Sans";
   font-size: 2.5rem;
   color: #dc1b1b;
   margin-bottom: 1.5rem;
   text-align: center;
   width: 100%;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #dc1b1b, #FFD700);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
 
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -108,13 +122,13 @@ const Title = styled.h2`
   }
 `;
 
-const Description = styled.p`
+const Description = styled(motion.p)`
   font-size: 1.1rem;
   font-family: "Nunito", sans-serif;
   color: #333;
   margin: 1.5rem 0 0;
   padding: 0;
-  line-height: 1.6;
+  line-height: 1.8;
   text-align: left;
   width: 100%;
 
@@ -148,9 +162,11 @@ const LeadersGrid = styled.div`
   }
 `;
 
-const LeaderCard = styled.div`
+const LeaderCard = styled(motion.div)`
   width: 250px;
   text-align: center;
+  cursor: pointer;
+  position: relative;
 
   @media (max-width: 768px) {
     width: 200px;
@@ -161,18 +177,42 @@ const LeaderCard = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(motion.div)`
   width: 180px;
   height: 180px;
   border-radius: 50%;
   margin: 0 auto 1.5rem;
   position: relative;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #dc1b1b, #FFD700, #00695c);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+
+  ${LeaderCard}:hover & {
+    transform: scale(1.1) translateY(-10px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+
+    &::before {
+      opacity: 1;
+    }
+  }
 
   @media (max-width: 768px) {
     width: 150px;
@@ -195,13 +235,26 @@ const LeaderImage = styled.img`
   object-fit: contain;
   object-position: center;
   transform: scale(0.75);
+  transition: transform 0.4s ease;
+  filter: grayscale(0%);
+
+  ${LeaderCard}:hover & {
+    transform: scale(0.85);
+    filter: grayscale(0%) brightness(1.1);
+  }
 `;
 
-const LeaderName = styled.h3`
+const LeaderName = styled(motion.h3)`
   font-family: "Nunito", sans-serif;
   font-size: 1.1rem;
   margin-top: 0.75rem;
   color: #000;
+  font-weight: 700;
+  transition: color 0.3s ease;
+
+  ${LeaderCard}:hover & {
+    color: #dc1b1b;
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -212,10 +265,15 @@ const LeaderName = styled.h3`
   }
 `;
 
-const LeaderTitle = styled.p`
+const LeaderTitle = styled(motion.p)`
   font-family: "Nunito", sans-serif;
   font-size: 0.95rem;
   color: #555;
+  transition: color 0.3s ease;
+
+  ${LeaderCard}:hover & {
+    color: #00695c;
+  }
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -227,16 +285,65 @@ const LeaderTitle = styled.p`
 `;
 
 const Leadership = () => {
+  const leadershipRef = useRef(null);
+  const isInView = useInView(leadershipRef, { once: true, margin: "-100px" });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <LeadershipSection>
+    <LeadershipSection ref={leadershipRef}>
       <MainLayout>
         <AsideImageContainer>
           <AsideImage src={playgroundImg} alt="Team Leadership" />
         </AsideImageContainer>
         <MainContent>
           <TextSection>
-            <Title>Meet Our Team</Title>
-            <Description>
+            <Title
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+            >
+              Meet Our Team
+            </Title>
+            <Description
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={fadeInUp}
+            >
               At Mommy Angel's Specialty Care & Autism Center, our leadership is
               grounded in the heart of service. We believe in leading with empathy,
               compassion, and a deep commitment to our families, team members, and the
@@ -244,8 +351,17 @@ const Leadership = () => {
               every child can thrive.
             </Description>
           </TextSection>
-          <LeadersGrid>
-          <LeaderCard>
+          <LeadersGrid
+            as={motion.div}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+          <LeaderCard
+            variants={cardVariants}
+            whileHover={{ y: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
               <ImageWrapper>
                 <LeaderImage src={placeholderImage} alt="CEO Headshot" />
               </ImageWrapper>
@@ -253,7 +369,11 @@ const Leadership = () => {
               <LeaderTitle>Board Certified Behavior Analyst</LeaderTitle>
             </LeaderCard>
 
-            <LeaderCard>
+            <LeaderCard
+              variants={cardVariants}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <ImageWrapper>
                 <LeaderImage src={shruthi} alt="Program Manager Headshot" />
               </ImageWrapper>
@@ -261,7 +381,11 @@ const Leadership = () => {
               <LeaderTitle>Operations Manager</LeaderTitle>
             </LeaderCard>
 
-            <LeaderCard>
+            <LeaderCard
+              variants={cardVariants}
+              whileHover={{ y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <ImageWrapper>
                 <LeaderImage src={anthony} alt="Operations Headshot" />
               </ImageWrapper>
