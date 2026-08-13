@@ -206,6 +206,7 @@ const ContactForm = () => {
     phone: "",
     dateOfLastEval: "",
     insuranceProvider: null,
+    secondaryInsurance: null,
     behaviorsOfConcern: "",
   });
   const [formErrors, setFormErrors] = useState({});
@@ -225,6 +226,11 @@ const ContactForm = () => {
     { value: "other", label: "Other" },
   ];
 
+  const secondaryInsuranceOptions = [
+    { value: "na", label: "N/A" },
+    ...insuranceOptions,
+  ];
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -236,6 +242,13 @@ const ContactForm = () => {
     setFormData({
       ...formData,
       insuranceProvider: selectedOption,
+    });
+  };
+
+  const handleSecondaryInsuranceChange = (selectedOption) => {
+    setFormData({
+      ...formData,
+      secondaryInsurance: selectedOption,
     });
   };
 
@@ -277,7 +290,11 @@ const ContactForm = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      handleSubmit(event);
+      handleSubmit({
+        ...formData,
+        insuranceProvider: formData.insuranceProvider?.label ?? "",
+        secondaryInsurance: formData.secondaryInsurance?.label ?? "",
+      });
     }
   };
 
@@ -439,6 +456,20 @@ const ContactForm = () => {
                 onChange={handleSelectChange}
                 isSearchable
                 placeholder="Search or select insurance..."
+                styles={customSelectStyles}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="secondaryInsurance">Secondary Insurance <span style={{ fontWeight: 400, color: "#888" }}>(Optional)</span></Label>
+              <Select
+                id="secondaryInsurance"
+                options={secondaryInsuranceOptions}
+                value={formData.secondaryInsurance}
+                onChange={handleSecondaryInsuranceChange}
+                isSearchable
+                isClearable
+                placeholder="Search or select secondary insurance..."
                 styles={customSelectStyles}
               />
             </FormGroup>
