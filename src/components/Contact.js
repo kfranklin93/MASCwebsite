@@ -223,7 +223,7 @@ const ContactForm = () => {
     { value: "medicare", label: "Medicare" },
     // { value: "peachstate", label: "Peach State Health Plan" },
     { value: "unitedhealthcare", label: "UnitedHealthcare" },
-    { value: "other", label: "Other" },
+    // { value: "other", label: "Other" },
   ];
 
   const secondaryInsuranceOptions = [
