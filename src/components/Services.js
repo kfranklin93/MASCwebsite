@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FiChevronDown } from "react-icons/fi";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import stimulationFavImg from "../assets/stimulationFav-6.jpg";
@@ -50,7 +51,7 @@ const HeaderTitle = styled.h1`
 
 const HeaderDescription = styled.p`
   font-size: 1.2rem;
-  color: #00695c;
+  color: #555;
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
@@ -114,7 +115,7 @@ const ServiceCard = styled.div`
 
 const ServiceTitle = styled.h3`
   font-size: 1.8rem;
-  color: #00695c;
+  color: #cd1b1b;
   margin: 1rem 0;
   font-family: "Bubblegum Sans", sans-serif;
   text-align: center;
@@ -166,7 +167,7 @@ const ServiceImage = styled.img`
       border-color: #ffeb3b;
     }
     50% {
-      border-color: #4caf50;
+      border-color: #ffd700;
     }
     75% {
       border-color: #2196f3;
@@ -316,45 +317,67 @@ const EnlargedImage = styled.img`
   border-radius: 10px;
 `;
 
-const GeneralServicesSection = styled.section`
+const GeneralServicesSection = styled.div`
   margin: 2rem 0;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(74, 144, 226, 0.1);
+  padding: 2rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   scroll-margin-top: 100px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  }
+  text-align: left;
 
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 `;
 
-const GeneralServiceTitle = styled.h2`
-  font-size: 2.2rem;
-  font-family: "Bubblegum Sans", sans-serif;
-  color: #cd1b1b;
-  margin-bottom: 1.5rem;
+const GeneralServiceTitle = styled.button`
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
+  font-size: 1.4rem;
+  font-family: "Bubblegum Sans", sans-serif;
+  color: #cd1b1b;
+  text-align: left;
+  line-height: 1.3;
 
   &:hover {
-    color: #4a90e2;
-    transform: translateY(-2px);
+    color: #a01010;
+  }
+
+  &:hover .chevron {
+    background: #a01010;
   }
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
+  }
+`;
+
+const ChevronBadge = styled.span`
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #cd1b1b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.25s ease;
+  transform: ${({ open }) => (open ? "rotate(180deg)" : "rotate(0deg)")};
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
   }
 `;
 
@@ -382,7 +405,7 @@ const GeneralServiceList = styled.ul`
     }
 
     strong {
-      color: #00695c;
+      color: #cd1b1b;
       font-weight: 600;
     }
   }
@@ -428,11 +451,10 @@ const Services = () => {
       <ServicesContainer>
         <ContentWrapper>
           <SectionHeader>
-            <HeaderTitle>Our Services</HeaderTitle>
+            <HeaderTitle>What We Offer Your Angel</HeaderTitle>
             <HeaderDescription>
-              Discover our comprehensive range of therapeutic and educational
-              services designed to support your child's growth and development
-              in a nurturing, engaging environment.
+              Every Angel is different. We build individualized support plans
+              that meet your child exactly where they are.
             </HeaderDescription>
             <HighlightedText>
               We do not offer stand-alone speech therapy services.
@@ -441,8 +463,8 @@ const Services = () => {
 
           <GeneralServicesSection id="general-services">
             <GeneralServiceTitle onClick={() => toggleSection("general")}>
-              Behavioral & Educational Services{" "}
-              {openSections.general ? "▲" : "▼"}
+              Behavioral &amp; Educational Services
+              <ChevronBadge className="chevron" open={openSections.general}><FiChevronDown /></ChevronBadge>
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.general && (
@@ -481,7 +503,8 @@ const Services = () => {
 
           <GeneralServicesSection id="autism-diagnostic">
             <GeneralServiceTitle onClick={() => toggleSection("autism")}>
-            Assessments & Referrals {openSections.autism ? "▲" : "▼"}
+              Assessments &amp; Referrals
+              <ChevronBadge className="chevron" open={openSections.autism}><FiChevronDown /></ChevronBadge>
             </GeneralServiceTitle>
             <AnimatePresence>
               {openSections.autism && (
