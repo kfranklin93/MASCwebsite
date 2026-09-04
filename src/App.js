@@ -32,11 +32,20 @@ const App = () => {
         <meta name="description" content="Expert ABA therapy services for children in Georgia. Contact us today for a personalized intake." />
         <meta name="keywords" content="ABA therapy, autism, behavioral therapy, Georgia, child development" />
         <link rel="canonical" href="https://mommyangelsspecialtycare.com/" />
-        <meta property="og:title" content="Your ABA Therapy Services in Georgia" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Mommy Angels Specialty Care" />
+        <meta property="og:title" content="ABA Therapy & Autism Services in Dunwoody, Georgia" />
         <meta property="og:description" content="Supporting children and families with compassionate, evidence-based ABA therapy." />
-        <meta property="og:image" content="https://yourdomain.com/social-preview.jpg" />
-        <meta property="og:url" content="https://yourdomain.com/" />
+        <meta property="og:image" content="https://mommyangelsspecialtycare.com/social-preview.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Mommy Angels Specialty Care" />
+        <meta property="og:url" content="https://mommyangelsspecialtycare.com/" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ABA Therapy & Autism Services in Dunwoody, Georgia" />
+        <meta name="twitter:description" content="Supporting children and families with compassionate, evidence-based ABA therapy." />
+        <meta name="twitter:image" content="https://mommyangelsspecialtycare.com/social-preview.png" />
+        <meta name="twitter:image:alt" content="Mommy Angels Specialty Care" />
       </Helmet>
 
       <ScrollToTop />

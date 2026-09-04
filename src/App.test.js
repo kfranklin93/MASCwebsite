@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
@@ -45,6 +45,34 @@ describe('routing', () => {
     expect(
       within(main).queryByRole('heading', { name: /couldn't find that page/i })
     ).not.toBeInTheDocument();
+  });
+
+  it('emits social meta tags pointing at the real domain', async () => {
+    renderAt('/');
+    await screen.findByRole('main');
+
+    const content = (selector) =>
+      document.head.querySelector(selector)?.getAttribute('content');
+
+    await waitFor(() => {
+      expect(content('meta[property="og:url"]')).toBe(
+        'https://mommyangelsspecialtycare.com/'
+      );
+    });
+
+    expect(content('meta[property="og:image"]')).toBe(
+      'https://mommyangelsspecialtycare.com/social-preview.png'
+    );
+    expect(content('meta[name="twitter:image"]')).toBe(
+      'https://mommyangelsspecialtycare.com/social-preview.png'
+    );
+    expect(content('meta[property="og:type"]')).toBe('website');
+    expect(content('meta[property="og:site_name"]')).toBe(
+      'Mommy Angels Specialty Care'
+    );
+
+    // No placeholder domain may survive anywhere in the emitted head.
+    expect(document.head.innerHTML).not.toMatch(/yourdomain\.com/);
   });
 
   it('shows the 404 page for an unknown URL', async () => {
