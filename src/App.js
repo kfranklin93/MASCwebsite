@@ -1,27 +1,59 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import WhatToExpect from "./components/WhatToExpect";
-import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
-import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
-import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
-import ABATherapy from "./components/ServicePages/ABATherapy";
-import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import StructuredData from "./components/StructuredData";
 import { Helmet } from "react-helmet-async";
+
+// Navbar / Hero / About / Services / Footer stay eager: they are all part of
+// the landing page, so deferring them would only add a round trip.
+// Everything below is only reachable by navigation, so it ships as its own chunk.
+const Contact = lazy(() => import("./components/Contact"));
+const WhatToExpect = lazy(() => import("./components/WhatToExpect"));
+const SpeechTherapy = lazy(() => import("./components/ServicePages/SpeechTherapy"));
+const EarlyIntervention = lazy(() => import("./components/ServicePages/EarlyIntervention"));
+const AutismDiagnostic = lazy(() => import("./components/ServicePages/AutismDiagnostic"));
+const ABATherapy = lazy(() => import("./components/ServicePages/ABATherapy"));
+const NotFound = lazy(() => import("./components/NotFound"));
+
+// Reserves vertical space so swapping in the real page does not shift layout.
+const RouteFallback = styled.div`
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00695c;
+  font-size: 1.1rem;
+`;
+
+// Shorter boundary for a single section inside an already-rendered page.
+const SectionFallback = styled(RouteFallback)`
+  min-height: 40vh;
+`;
+
+const Loading = ({ as: As = RouteFallback, label = "Loading page" }) => (
+  <As role="status" aria-live="polite">
+    {label}&hellip;
+  </As>
+);
 
 const Home = () => (
   <>
     <section id="home"><Hero /></section>
     <section id="about"><About /></section>
     <section id="services"><Services /></section>
-    <section id="contact"><Contact /></section>
+    {/* Contact is lazy, so it gets its own boundary. Without this the outer
+        boundary would suspend the whole landing page while its chunk loads. */}
+    <section id="contact">
+      <Suspense fallback={<Loading as={SectionFallback} label="Loading contact form" />}>
+        <Contact />
+      </Suspense>
+    </section>
   </>
 );
 
@@ -54,19 +86,21 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
       <main id="main-content">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aba" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/what-to-expect" element={<WhatToExpect />} />
-        <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
-        <Route path="/services/early-intervention" element={<EarlyIntervention />} />
-        <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
-        <Route path="/services/aba-therapy" element={<ABATherapy />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/aba" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/what-to-expect" element={<WhatToExpect />} />
+            <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
+            <Route path="/services/early-intervention" element={<EarlyIntervention />} />
+            <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
+            <Route path="/services/aba-therapy" element={<ABATherapy />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>

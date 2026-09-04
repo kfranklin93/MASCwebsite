@@ -34,11 +34,12 @@ describe('routing', () => {
 
     const main = await screen.findByRole('main');
     expect(main).toBeInTheDocument();
-    expect(main.textContent.trim().length).toBeGreaterThan(0);
 
-    // A matched route renders at least one heading; a blank page renders none.
-    const headings = within(main).queryAllByRole('heading');
+    // Lazy routes arrive in a separate chunk, so wait for real content rather
+    // than asserting against the Suspense fallback.
+    const headings = await within(main).findAllByRole('heading');
     expect(headings.length).toBeGreaterThan(0);
+    expect(main.textContent.trim().length).toBeGreaterThan(0);
 
     // ...and it must be the real page, not the catch-all standing in for a
     // missing route. Without this the 404 heading would satisfy the check above.
@@ -112,7 +113,7 @@ describe('routing', () => {
 
     const main = await screen.findByRole('main');
     expect(
-      within(main).getByRole('heading', { name: /couldn't find that page/i })
+      await within(main).findByRole('heading', { name: /couldn't find that page/i })
     ).toBeInTheDocument();
     expect(within(main).getByRole('link', { name: /back to home/i })).toBeInTheDocument();
   });
