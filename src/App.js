@@ -11,7 +11,7 @@ import SpeechTherapy from "./components/ServicePages/SpeechTherapy";
 import EarlyIntervention from "./components/ServicePages/EarlyIntervention";
 import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
-// import VoteBanner from "./components/VoteBanner";
+import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import { Helmet } from "react-helmet-async";
 
@@ -41,17 +41,21 @@ const App = () => {
 
       <ScrollToTop />
       <Navbar />
-      {/* <VoteBanner /> */}
+      <main id="main-content">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aba" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/what-to-expect" element={<WhatToExpect />} />
         <Route path="/services/speech-therapy" element={<SpeechTherapy />} />
         <Route path="/services/early-intervention" element={<EarlyIntervention />} />
         <Route path="/services/autism-diagnostic" element={<AutismDiagnostic />} />
         <Route path="/services/aba-therapy" element={<ABATherapy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      </main>
       <Footer />
     </>
   );

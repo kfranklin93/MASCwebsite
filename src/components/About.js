@@ -395,7 +395,7 @@ const Button = styled(Link)`
 `;
 
 const About = () => (
-  <main>
+  <>
     <Section bg="rgba(240, 248, 255, 0.9)" border="20px solid rgba(0, 128, 0, 0.5)">
       <SplitLayout className="our-story">
         <OurStoryImageColumn>
@@ -490,7 +490,7 @@ const About = () => (
       </SplitLayout>
     </Section>
     <Leadership />
-  </main>
+  </>
 );
 
 export default About;
