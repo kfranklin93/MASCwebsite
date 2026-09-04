@@ -1,25 +1,33 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mommy Angels",
+  "name": "Mommy Angels Specialty Care",
+  "description": "ABA therapy, speech therapy, occupational therapy, and autism diagnostic services for children in Dunwoody, Georgia.",
   "icons": [
     {
-      "src": "apple-touch-icon.png",
+      "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png",
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "maskable"
+    },
+    {
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "Mommy-Angles-Specialty-Care-32-x-78-in_20240715_133946_0000.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#CD1B1B",
   "background_color": "#ffffff"
 }

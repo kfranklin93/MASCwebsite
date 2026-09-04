@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
-
+/* Bubblegum Sans is loaded via <link> in public/index.html so the browser can
+   start fetching it without waiting for this stylesheet to parse. */
 
 /* below this line is new */
 html, body {
