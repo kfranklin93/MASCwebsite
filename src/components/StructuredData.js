@@ -6,16 +6,18 @@ const StructuredData = () => {
     "@context": "https://schema.org",
     "@type": "MedicalBusiness",
     "name": "Mommy Angel's Specialty Care and Autism Center",
-    "image": "https://mommyangelsspecialtycare.com/images/hero-image.jpg",
+    "image": "https://mommyangelsspecialtycare.com/social-preview.png",
     "description": "Leading ABA therapy and autism center in Dunwoody, GA, offering comprehensive behavioral therapy, speech therapy, occupational therapy, and Pre-K readiness programs for children with autism spectrum disorders.",
+    // streetAddress is intentionally omitted: the real street address is not
+    // published anywhere in this codebase, and asserting a wrong one is worse
+    // for local search than leaving it out. Add it here when available.
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Dunwoody",
       "addressLocality": "Dunwoody",
       "addressRegion": "GA",
       "addressCountry": "US"
     },
-    "telephone": "(678) 353-6829",
+    "telephone": "+1-678-353-6829",
     "url": "https://mommyangelsspecialtycare.com",
     "openingHours": "Mo-Fr 08:00-18:00",
     "priceRange": "$$",

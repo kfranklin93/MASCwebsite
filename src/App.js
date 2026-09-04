@@ -13,6 +13,7 @@ import AutismDiagnostic from "./components/ServicePages/AutismDiagnostic";
 import ABATherapy from "./components/ServicePages/ABATherapy";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import StructuredData from "./components/StructuredData";
 import { Helmet } from "react-helmet-async";
 
 const Home = () => (
@@ -47,6 +48,8 @@ const App = () => {
         <meta name="twitter:image" content="https://mommyangelsspecialtycare.com/social-preview.png" />
         <meta name="twitter:image:alt" content="Mommy Angels Specialty Care" />
       </Helmet>
+
+      <StructuredData />
 
       <ScrollToTop />
       <Navbar />

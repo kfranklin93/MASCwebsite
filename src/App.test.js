@@ -75,6 +75,38 @@ describe('routing', () => {
     expect(document.head.innerHTML).not.toMatch(/yourdomain\.com/);
   });
 
+  it('emits valid LocalBusiness and FAQ JSON-LD', async () => {
+    renderAt('/');
+    await screen.findByRole('main');
+
+    let blocks = [];
+    await waitFor(() => {
+      blocks = Array.from(
+        document.head.querySelectorAll('script[type="application/ld+json"]')
+      );
+      expect(blocks.length).toBe(2);
+    });
+
+    // Must be parseable - a malformed block is silently ignored by crawlers.
+    const parsed = blocks.map((b) => JSON.parse(b.textContent));
+    const business = parsed.find((p) => p['@type'] === 'MedicalBusiness');
+    const faq = parsed.find((p) => p['@type'] === 'FAQPage');
+
+    expect(business).toBeDefined();
+    expect(faq).toBeDefined();
+    expect(business.telephone).toBe('+1-678-353-6829');
+    expect(business.address.addressLocality).toBe('Dunwoody');
+    expect(business.openingHours).toBe('Mo-Fr 08:00-18:00');
+    expect(faq.mainEntity.length).toBeGreaterThan(0);
+
+    // Every URL it advertises must be on the real domain, and the image it
+    // points at must be a file that actually ships in the build.
+    expect(business.url).toMatch(/^https:\/\/mommyangelsspecialtycare\.com/);
+    expect(business.image).toBe(
+      'https://mommyangelsspecialtycare.com/social-preview.png'
+    );
+  });
+
   it('shows the 404 page for an unknown URL', async () => {
     renderAt('/this-route-does-not-exist');
 
