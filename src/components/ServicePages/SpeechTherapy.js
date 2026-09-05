@@ -135,7 +135,7 @@ const FeatureCard = styled(motion.div)`
   }
 `;
 
-const FeatureTitle = styled.h3`
+const FeatureTitle = styled.h2`
   color: #00695c;
   font-size: 1.3rem;
   margin-bottom: 1rem;

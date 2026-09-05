@@ -113,7 +113,7 @@ const ServiceCard = styled.div`
   }
 `;
 
-const ServiceTitle = styled.h3`
+const ServiceTitle = styled.h2`
   font-size: 1.8rem;
   color: #cd1b1b;
   margin: 1rem 0;

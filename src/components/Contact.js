@@ -464,7 +464,9 @@ const ContactForm = () => {
             <FormGroup>
               <Label htmlFor="insuranceProvider">Insurance Provider</Label>
               <Select
-                id="insuranceProvider"
+                // inputId (not id) puts this on the inner <input>, which is what
+                // the <Label htmlFor="insuranceProvider"> needs to point at.
+                inputId="insuranceProvider"
                 options={insuranceOptions}
                 value={formData.insuranceProvider}
                 onChange={handleSelectChange}
@@ -477,7 +479,9 @@ const ContactForm = () => {
             <FormGroup>
               <Label htmlFor="secondaryInsurance">Secondary Insurance <span style={{ fontWeight: 400, color: "#888" }}>(Optional)</span></Label>
               <Select
-                id="secondaryInsurance"
+                // inputId (not id) puts this on the inner <input>, which is what
+                // the <Label htmlFor="secondaryInsurance"> needs to point at.
+                inputId="secondaryInsurance"
                 options={secondaryInsuranceOptions}
                 value={formData.secondaryInsurance}
                 onChange={handleSecondaryInsuranceChange}

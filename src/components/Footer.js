@@ -53,7 +53,7 @@ const FooterGrid = styled.div`
 `;
 
 const FooterSection = styled.div`
-  h4 {
+  h2 {
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
     color: #FFD700;
@@ -265,10 +265,10 @@ const Footer = () => (
       <FooterGrid>
         {/* Navigation Section */}
         <FooterSection>
-          <h4>
+          <h2>
             <FaHeart />
             Quick Links
-          </h4>
+          </h2>
           <FooterLinks style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
             <FooterLink to="/"><Emoji>🏠</Emoji> Home</FooterLink>
             <FooterLink to="/about"><Emoji>📖</Emoji> About Us</FooterLink>
@@ -280,10 +280,10 @@ const Footer = () => (
 
         {/* Services Section */}
         <FooterSection>
-          <h4>
+          <h2>
             <FaPuzzlePiece />
             Our Services
-          </h4>
+          </h2>
           <ServicesList>
             <ServiceItem>ABA Therapy</ServiceItem>
             <ServiceItem>Speech Therapy</ServiceItem>
@@ -298,10 +298,10 @@ const Footer = () => (
 
         {/* Contact Information */}
         <FooterSection>
-          <h4>
+          <h2>
             <FaPhone />
             Contact Info
-          </h4>
+          </h2>
           <ContactInfo>
             <ContactItem>
               <FaPhone />
@@ -328,10 +328,10 @@ const Footer = () => (
 
         {/* Social & Sister Site */}
         <FooterSection>
-          <h4>
+          <h2>
             <FaHeart />
             Connect & Explore
-          </h4>
+          </h2>
           <FooterLinks>
             {/* Mommy Angels Daycare link commented out */}
             {/* <ExternalLink

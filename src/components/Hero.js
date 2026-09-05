@@ -333,7 +333,10 @@ const HeroTitle = styled.h1`
   }
 `;
 
-const HeroTitle2 = styled.h2`
+// Emphasis inside the <h1>, not a heading of its own: an <h2> here is invalid
+// nesting and made screen readers announce a second heading mid-sentence.
+const HeroTitle2 = styled.span`
+  display: block;
   font-size: clamp(2.5rem, 6vw, 4.2rem);
   color: rgb(220, 27, 27);
   font-family: "Bubblegum Sans";
@@ -362,9 +365,12 @@ const HeroTitle2 = styled.h2`
   }
 `;
 
-const HeroTitle3 = styled.h2`
+// Contact details, not a heading.
+const HeroTitle3 = styled.span`
+  display: block;
   font-size: 1.4rem;
   margin-top: 1rem;
+  margin-bottom: 0.83em;
   color: rgb(220, 27, 27);
   font-family: "Bubblegum Sans";
   font-weight: bold;
@@ -383,9 +389,11 @@ const HeroTitle3 = styled.h2`
   }
 `;
 
-const HeroTitle4 = styled.h2`
+// Supporting copy, not a heading.
+const HeroTitle4 = styled.p`
   font-size: 1.3rem;
   margin-top: 1rem;
+  margin-bottom: 0.83em;
   color: #333;
   font-family: "Bubblegum Sans";
   line-height: 1.4;

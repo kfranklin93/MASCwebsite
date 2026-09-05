@@ -24,7 +24,9 @@ const NavbarContainer = styled(motion.nav)`
   z-index: 1000;
 `;
 
-const Logo = styled(motion.h1)`
+// The site name is branding, not the page heading. As an h1 it competed with
+// each page's real title and put a duplicate h1 on every route.
+const Logo = styled(motion.div)`
   font-size: 1.5rem;
   font-weight: bold;
   font-family: "Bubblegum Sans", sans-serif;
@@ -36,7 +38,10 @@ const Logo = styled(motion.h1)`
   }
 `;
 
-const NavLinks = styled.ul`
+// A div rather than a ul: its children are links and a dropdown wrapper, not
+// <li> elements, which axe flags as an invalid list. The parent is already a
+// <nav> landmark, so the list semantics add nothing.
+const NavLinks = styled.div`
   display: flex;
   list-style: none;
   gap: 1.5rem;

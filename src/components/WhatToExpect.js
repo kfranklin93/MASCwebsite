@@ -138,7 +138,7 @@ const TimelineLine = styled.div`
   }
 `;
 
-const Step = styled.h3`
+const Step = styled.h2`
   font-size: 1.4rem;
   color: ${props => props.$isEven ? '#4A90E2' : '#CD1B1B'};
   margin-bottom: 1rem;
