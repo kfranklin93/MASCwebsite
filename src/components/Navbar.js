@@ -119,11 +119,21 @@ const DropdownItem = styled(Link)`
   }
 `;
 
-const MobileMenuButton = styled.div`
+const MobileMenuButton = styled.button`
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
   color: white;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  line-height: 1;
+
+  &:focus-visible {
+    outline: 3px solid #ffd700;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 
   @media (max-width: 768px) {
     display: block;
@@ -155,7 +165,7 @@ const MobileMenu = styled(motion.div)`
   scrollbar-width: none;
 `;
 
-const CloseButton = styled.div`
+const CloseButton = styled.button`
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
@@ -163,6 +173,7 @@ const CloseButton = styled.div`
   color: #666;
   cursor: pointer;
   padding: 0.5rem;
+  border: none;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -170,6 +181,11 @@ const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:focus-visible {
+    outline: 3px solid #1c5f8a;
+    outline-offset: 2px;
+  }
   width: 40px;
   height: 40px;
 
@@ -405,15 +421,23 @@ const Navbar = () => {
           About Us
         </ScrollLink>
 
+        {/* Opens on focus as well as hover: with hover alone the four service
+            pages below were unreachable for keyboard users. */}
         <DropdownContainer
           onMouseEnter={() => setDropdownOpen("services")}
           onMouseLeave={() => setDropdownOpen(false)}
+          onFocus={() => setDropdownOpen("services")}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+              setDropdownOpen(false);
+            }
+          }}
         >
           <NavLinkWrapper>
             <ScrollLink to="#services" color="#3F00FF">
               Services
             </ScrollLink>
-            <DropdownIcon>▼</DropdownIcon>
+            <DropdownIcon aria-hidden="true">▼</DropdownIcon>
           </NavLinkWrapper>
 
           <AnimatePresence>
@@ -455,8 +479,14 @@ const Navbar = () => {
       </NavLinks>
 
       {/* Mobile Menu Button */}
-      <MobileMenuButton onClick={() => setMenuOpen(true)}>
-        <FaBars />
+      <MobileMenuButton
+        type="button"
+        onClick={() => setMenuOpen(true)}
+        aria-label="Open navigation menu"
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
+      >
+        <FaBars aria-hidden="true" />
       </MobileMenuButton>
 
       {/* Mobile Menu */}
@@ -471,13 +501,21 @@ const Navbar = () => {
               onClick={() => setMenuOpen(false)}
             />
             <MobileMenu
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site navigation"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <CloseButton onClick={() => setMenuOpen(false)}>
-                <FaTimes />
+              <CloseButton
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close navigation menu"
+              >
+                <FaTimes aria-hidden="true" />
               </CloseButton>
 
               <MobileLogo>

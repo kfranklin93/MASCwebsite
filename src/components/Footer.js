@@ -134,7 +134,7 @@ const ContactItem = styled.div`
   gap: 1rem;
   
   svg {
-    color: #4A90E2;
+    color: #6BA8E8;
     font-size: 1.2rem;
     min-width: 20px;
   }
@@ -240,7 +240,7 @@ const DeveloperCredit = styled.div`
   gap: 0.5rem;
   
   a {
-    color: #4A90E2;
+    color: #8CC0F0;
     text-decoration: none;
     transition: color 0.3s ease;
     
@@ -249,6 +249,10 @@ const DeveloperCredit = styled.div`
     }
   }
 `;
+
+// Decorative only: the adjacent text already carries the meaning, so the
+// emoji is hidden to keep the link's accessible name clean.
+const Emoji = ({ children }) => <span aria-hidden="true">{children}</span>;
 
 const PuzzleIcon = styled(FaPuzzlePiece)`
   color: #CD1B1B;
@@ -266,11 +270,11 @@ const Footer = () => (
             Quick Links
           </h4>
           <FooterLinks style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-            <FooterLink to="/">🏠 Home</FooterLink>
-            <FooterLink to="/about">📖 About Us</FooterLink>
-            <FooterLink to="/services">🎯 Our Services</FooterLink>
-            <FooterLink to="/contact">📞 Contact</FooterLink>
-            <FooterLink to="/what-to-expect">🌟 What to Expect</FooterLink>
+            <FooterLink to="/"><Emoji>🏠</Emoji> Home</FooterLink>
+            <FooterLink to="/about"><Emoji>📖</Emoji> About Us</FooterLink>
+            <FooterLink to="/services"><Emoji>🎯</Emoji> Our Services</FooterLink>
+            <FooterLink to="/contact"><Emoji>📞</Emoji> Contact</FooterLink>
+            <FooterLink to="/what-to-expect"><Emoji>🌟</Emoji> What to Expect</FooterLink>
           </FooterLinks>
         </FooterSection>
 
@@ -342,14 +346,14 @@ const Footer = () => (
               target="_blank" 
               rel="noopener noreferrer"
             >
-              📘 Follow on Facebook
+              <Emoji>📘</Emoji> Follow on Facebook
             </ExternalLink>
             <ExternalLink 
               href="https://www.instagram.com/mommyangelsspecialtycare" 
               target="_blank" 
               rel="noopener noreferrer"
             >
-              📷 Follow on Instagram
+              <Emoji>📷</Emoji> Follow on Instagram
             </ExternalLink>
           </FooterLinks>
           
@@ -377,7 +381,7 @@ const Footer = () => (
       <FooterBottom>
         <Copyright>
           <FaHeart color="#CD1B1B" />
-          &copy; 2026 Mommy Angel's Autism Center. All rights reserved.
+          &copy; {new Date().getFullYear()} Mommy Angel's Autism Center. All rights reserved.
           <PuzzleIcon />
         </Copyright>
         <Copyright>

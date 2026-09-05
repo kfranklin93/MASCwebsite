@@ -347,13 +347,15 @@ const ContactForm = () => {
                 type="text"
                 id="parentName"
                 name="parentName"
+                aria-invalid={formErrors.parentName ? "true" : "false"}
+                aria-describedby={formErrors.parentName ? "parentName-error" : undefined}
                 placeholder="Enter parent's name"
                 value={formData.parentName}
                 onChange={handleChange}
                 required
               />
               {formErrors.parentName && (
-                <ErrorMessage>{formErrors.parentName}</ErrorMessage>
+                <ErrorMessage id="parentName-error" role="alert">{formErrors.parentName}</ErrorMessage>
               )}
             </FormGroup>
 
@@ -363,13 +365,15 @@ const ContactForm = () => {
                 type="text"
                 id="childName"
                 name="childName"
+                aria-invalid={formErrors.childName ? "true" : "false"}
+                aria-describedby={formErrors.childName ? "childName-error" : undefined}
                 placeholder="Enter child's name"
                 value={formData.childName}
                 onChange={handleChange}
                 required
               />
               {formErrors.childName && (
-                <ErrorMessage>{formErrors.childName}</ErrorMessage>
+                <ErrorMessage id="childName-error" role="alert">{formErrors.childName}</ErrorMessage>
               )}
             </FormGroup>
 
@@ -379,12 +383,14 @@ const ContactForm = () => {
                 type="number"
                 id="age"
                 name="age"
+                aria-invalid={formErrors.age ? "true" : "false"}
+                aria-describedby={formErrors.age ? "age-error" : undefined}
                 placeholder="Enter age"
                 value={formData.age}
                 onChange={handleChange}
                 required
               />
-              {formErrors.age && <ErrorMessage>{formErrors.age}</ErrorMessage>}
+              {formErrors.age && <ErrorMessage id="age-error" role="alert">{formErrors.age}</ErrorMessage>}
             </FormGroup>
 
             <FormGroup>
@@ -393,11 +399,13 @@ const ContactForm = () => {
                 type="date"
                 id="dob"
                 name="dob"
+                aria-invalid={formErrors.dob ? "true" : "false"}
+                aria-describedby={formErrors.dob ? "dob-error" : undefined}
                 value={formData.dob}
                 onChange={handleChange}
                 required
               />
-              {formErrors.dob && <ErrorMessage>{formErrors.dob}</ErrorMessage>}
+              {formErrors.dob && <ErrorMessage id="dob-error" role="alert">{formErrors.dob}</ErrorMessage>}
             </FormGroup>
 
             <FormGroup>
@@ -406,13 +414,15 @@ const ContactForm = () => {
                 type="email"
                 id="email"
                 name="email"
+                aria-invalid={formErrors.email ? "true" : "false"}
+                aria-describedby={formErrors.email ? "email-error" : undefined}
                 placeholder="Enter email address"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
               {formErrors.email && (
-                <ErrorMessage>{formErrors.email}</ErrorMessage>
+                <ErrorMessage id="email-error" role="alert">{formErrors.email}</ErrorMessage>
               )}
             </FormGroup>
 
@@ -422,13 +432,15 @@ const ContactForm = () => {
                 type="tel"
                 id="phone"
                 name="phone"
+                aria-invalid={formErrors.phone ? "true" : "false"}
+                aria-describedby={formErrors.phone ? "phone-error" : undefined}
                 placeholder="Enter phone number"
                 value={formData.phone}
                 onChange={handleChange}
                 required
               />
               {formErrors.phone && (
-                <ErrorMessage>{formErrors.phone}</ErrorMessage>
+                <ErrorMessage id="phone-error" role="alert">{formErrors.phone}</ErrorMessage>
               )}
             </FormGroup>
 
@@ -438,12 +450,14 @@ const ContactForm = () => {
                 type="date"
                 id="dateOfLastEval"
                 name="dateOfLastEval"
+                aria-invalid={formErrors.dateOfLastEval ? "true" : "false"}
+                aria-describedby={formErrors.dateOfLastEval ? "dateOfLastEval-error" : undefined}
                 value={formData.dateOfLastEval}
                 onChange={handleChange}
                 required
               />
               {formErrors.dateOfLastEval && (
-                <ErrorMessage>{formErrors.dateOfLastEval}</ErrorMessage>
+                <ErrorMessage id="dateOfLastEval-error" role="alert">{formErrors.dateOfLastEval}</ErrorMessage>
               )}
             </FormGroup>
 
@@ -481,13 +495,15 @@ const ContactForm = () => {
               <TextAreaField
                 id="behaviorsOfConcern"
                 name="behaviorsOfConcern"
+                aria-invalid={formErrors.behaviorsOfConcern ? "true" : "false"}
+                aria-describedby={formErrors.behaviorsOfConcern ? "behaviorsOfConcern-error" : undefined}
                 placeholder="Please describe any behaviors or concerns you'd like to address..."
                 value={formData.behaviorsOfConcern}
                 onChange={handleChange}
                 required
               />
               {formErrors.behaviorsOfConcern && (
-                <ErrorMessage>{formErrors.behaviorsOfConcern}</ErrorMessage>
+                <ErrorMessage id="behaviorsOfConcern-error" role="alert">{formErrors.behaviorsOfConcern}</ErrorMessage>
               )}
             </FullWidthGroup>
 

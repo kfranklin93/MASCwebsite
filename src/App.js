@@ -21,6 +21,25 @@ const AutismDiagnostic = lazy(() => import("./components/ServicePages/AutismDiag
 const ABATherapy = lazy(() => import("./components/ServicePages/ABATherapy"));
 const NotFound = lazy(() => import("./components/NotFound"));
 
+// Visually hidden until focused, so keyboard users can jump past the nav.
+const SkipLink = styled.a`
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  color: #1c5f8a;
+  font-weight: 700;
+  text-decoration: none;
+  border: 3px solid #1c5f8a;
+  border-radius: 0 0 8px 0;
+
+  &:focus {
+    left: 0;
+  }
+`;
+
 // Reserves vertical space so swapping in the real page does not shift layout.
 const RouteFallback = styled.div`
   min-height: 70vh;
@@ -82,6 +101,8 @@ const App = () => {
       </Helmet>
 
       <StructuredData />
+
+      <SkipLink href="#main-content">Skip to main content</SkipLink>
 
       <ScrollToTop />
       <Navbar />

@@ -108,6 +108,52 @@ describe('routing', () => {
     );
   });
 
+  it('exposes a skip link targeting the main landmark', async () => {
+    renderAt('/');
+    const main = await screen.findByRole('main');
+
+    const skip = screen.getByRole('link', { name: /skip to main content/i });
+    expect(skip).toHaveAttribute('href', `#${main.id}`);
+    expect(main.id).toBe('main-content');
+  });
+
+  it('gives the mobile menu toggle an accessible name and state', async () => {
+    renderAt('/');
+    await screen.findByRole('main');
+
+    // Queried by attribute rather than by role+name: the toggle is display:none
+    // above 768px and jsdom reports a 1024px viewport, and the accessible-name
+    // algorithm returns an empty string for display:none nodes. The point here
+    // is the markup semantics, not whether it is visible at this width.
+    const toggle = document.querySelector('button[aria-controls="mobile-menu"]');
+
+    // Must be a real button, not a div with onClick, or keyboard users are stuck.
+    expect(toggle).not.toBeNull();
+    expect(toggle.tagName).toBe('BUTTON');
+    expect(toggle).toHaveAttribute('aria-label', 'Open navigation menu');
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('keeps decorative emoji out of footer link names', async () => {
+    renderAt('/');
+    await screen.findByRole('main');
+
+    // Scoped to the footer: the navbar also has an "About Us" link.
+    // Accessible name should be the label alone, with no emoji leaking in.
+    const footer = within(screen.getByRole('contentinfo'));
+    expect(footer.getByRole('link', { name: 'About Us' })).toBeInTheDocument();
+    expect(footer.getByRole('link', { name: 'What to Expect' })).toBeInTheDocument();
+    expect(footer.getByRole('link', { name: 'Follow on Facebook' })).toBeInTheDocument();
+  });
+
+  it('renders the current year in the footer', async () => {
+    renderAt('/');
+    await screen.findByRole('main');
+
+    const year = String(new Date().getFullYear());
+    expect(screen.getByText(new RegExp(`${year} Mommy Angel`))).toBeInTheDocument();
+  });
+
   it('shows the 404 page for an unknown URL', async () => {
     renderAt('/this-route-does-not-exist');
 
